@@ -1,0 +1,51 @@
+@import '@/scss/config';
+
+.block {
+  display: grid;
+  gap: var(--gap-4);
+
+  @include media-breakpoint-up(md) {
+    min-width: rem(320px);
+  }
+}
+
+.option {
+  @include flex($align-items: center);
+
+  min-height: rem(40px);
+  gap: var(--gap-8);
+
+  &:hover,
+  &.active {
+
+    .icon {
+      background-color: var(--color-primary);
+      border-color: var(--color-primary);
+
+      &::after {
+        @include size(rem(9px));
+        @include absolute-center;
+
+        background-color: var(--color-white);
+        border-radius: 50%;
+        content: '';
+      }
+    }
+
+    .text {
+      color: var(--color-primary);
+    }
+  }
+}
+
+.icon {
+  @include size(rem(20px));
+
+  position: relative;
+  border-radius: 50%;
+  border: rem(1px) solid var(--color-text);
+}
+
+.text {
+  font-weight: var(--typography-medium);
+}

@@ -1,0 +1,78 @@
+@import '@/scss/config';
+
+.block {
+  display: grid;
+  grid-template-columns: rem(277px) minmax(rem(277px), 1fr);
+  grid-template-rows: minmax(rem(208px), 1fr);
+  border-radius: rem(8px);
+  box-shadow: var(--box-shadow-4-8);
+  overflow: hidden;
+}
+
+.left,
+.right {
+  position: relative;
+}
+
+.meta {
+  @include flex(flex-end, center);
+}
+
+.favorite {
+  @include flex(center, center);
+
+  position: absolute;
+  top: rem(12px);
+  right: rem(12px);
+}
+
+.right {
+  @include make-spacer(px, 12px);
+  @include make-spacer(pt, 16px);
+  @include make-spacer(pb, 12px);
+
+  display: grid;
+  align-items: flex-start;
+  gap: var(--gap-12);
+  background-color: var(--color-white);
+}
+
+.icon {
+  color: var(--color-text);
+}
+
+.options,
+.tags {
+  @include flex($align-items: center, $wrap: wrap);
+}
+
+.options {
+  gap: var(--gap-16);
+}
+
+.option {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: center;
+  gap: var(--gap-8);
+  font-size: rem(12px);
+  font-weight: var(--typography-bold);
+}
+
+.tags {
+  gap: var(--gap-6);
+}
+
+.tag {
+  @include flex($align-items: center);
+  @include make-spacer(px, rem(8px));
+  @include make-spacer(py, rem(2px));
+
+  border-radius: var(--border-radius-4);
+  font-size: rem(12px);
+  font-weight: var(--typography-bold);
+  white-space: nowrap;
+  background-color: var(--color-secondary);
+  color: var(--color-primary-hover);
+  height: rem(24px);
+}

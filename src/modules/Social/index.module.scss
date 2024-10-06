@@ -1,0 +1,27 @@
+@import '@/scss/config';
+
+.block {
+  @include flex($align-items: center);
+
+  gap: rem(24px);
+}
+
+.link {
+  @include size(rem(24px));
+  @include flex(center, center);
+
+  background-color: var(--color-primary);
+  border-radius: rem(4px);
+  color: var(--color-white);
+
+  @include hover {
+
+    &:hover {
+      background-color: var(--color-primary-hover);
+    }
+  }
+}
+
+.icon {
+  @include size(rem(16px));
+}

@@ -1,0 +1,193 @@
+@import '@/scss/config';
+
+.block {
+  position: relative;
+
+  &.active {
+
+    .dropdown {
+      transform: translateX(0);
+
+      @include media-breakpoint-up(lg) {
+        display: block;
+      }
+    }
+
+    .toggle {
+      color: var(--color-primary-hover);
+    }
+
+    .arrow {
+      transform: rotateZ(180deg);
+    }
+  }
+
+  .close {
+    @include flex(center, center);
+    @include make-spacer(m, var(--gap-18));
+    @include make-spacer(p, 0);
+    @include size(rem(24px));
+
+    align-self: flex-end;
+    color: var(--color-primary);
+  
+    @include media-breakpoint-up(lg) {
+      display: none;
+    }
+  }
+}
+
+.toggle,
+.setting,
+.bottom,
+.center {
+  @include make-spacer(p, var(--gap-12));
+}
+
+.name,
+.email {
+  @include ellipsis;
+}
+
+.toggle {
+  @include flex(center, center);
+
+  gap: var(--gap-8);
+  flex-shrink: 0;
+  border-radius: var(--border-radius-4);
+
+  @include hover {
+
+    &:hover {
+      color: var(--color-primary-hover);
+      background-color: var(--color-grey-50);
+    }
+  }
+
+  * {
+    flex-shrink: 0;
+  }
+}
+
+.icon {
+  @include size(24px);
+}
+
+.arrow {
+  @include transition(transform);
+
+  font-size: rem(12px);
+}
+
+.dropdown {
+  @include flex($direction: column);
+  @include transition;
+
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  transform: translateX(100%);
+  width: rem(320px);
+  background-color: var(--color-white);
+  overflow-y: auto;
+  background-color: var(--color-white);
+  z-index: $z-index-10;
+
+  @include media-breakpoint-up(lg) {
+    display: none;
+    position: absolute;
+    top: calc(100% + var(--gap-4));
+    bottom: auto;
+    transform: translateX(0);
+    border-radius: var(--border-radius-4);
+    overflow-y: hidden;
+    border-width: rem(1px);
+    border-style: solid;
+  }
+}
+
+.hidden {
+  display: none;
+
+  @include media-breakpoint-up(lg) {
+    display: inline-flex;
+  }
+}
+
+.top {
+  @include make-spacer(px, var(--gap-12));
+  @include make-spacer(py, var(--gap-18));
+
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  grid-column-gap: var(--gap-12);
+  border-bottom-width: rem(1px);
+  border-bottom-style: solid;
+  position: relative;
+  overflow: hidden;
+}
+
+.center {
+  display: grid;
+  gap: var(--gap-4);
+}
+
+.bottom {
+  @include flex;
+
+  border-top-width: rem(1px);
+  border-top-style: solid;
+  flex-grow: 1;
+}
+
+.setting {
+  width: 100%;
+  align-self: flex-end;
+}
+
+.text {
+  @include make-spacer(pt, var(--gap-12));
+
+  text-align: center;
+  font-size: rem(14px)
+}
+
+.link {
+  @include make-spacer(mx, var(--gap-4));
+
+  color: var(--color-primary);
+  font-weight: var(--typography-medium);
+  text-decoration: underline;
+}
+
+.meta {
+  overflow: hidden;
+}
+
+.name {
+  font-weight: var(--typography-bold);
+}
+
+.language {
+  @include flex($align-items: center);
+  @include make-spacer(px, var(--gap-24));
+
+  min-height: rem(42px);
+  gap: var(--gap-8);
+  background-color: var(--color-grey-50);
+  border-top: rem(1px) solid var(--color-grey-200);
+  flex-shrink: 0;
+
+  @include media-breakpoint-up(lg) {
+    display: none;
+  }
+}
+
+.flag {
+  @include size(rem(20px));
+
+  border-radius: 50%;
+  border: rem(1px) solid var(--color-text);
+}

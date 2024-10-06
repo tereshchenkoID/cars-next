@@ -1,0 +1,104 @@
+@import '@/scss/config';
+
+.block {
+  @include make-spacer(pt, var(--gap-32));
+
+  position: relative;
+  border-top-width: rem(1px);
+  border-top-style: solid;
+  background-color: var(--color-grey-50);
+
+  @include media-breakpoint-up(lg) {
+    @include make-spacer(pt, var(--gap-80));
+  }
+}
+
+.top,
+.bottom,
+.column {
+  display: grid;
+}
+
+.transfer,
+.text {
+  color: var(--color-grey-500);
+}
+
+.top {
+  align-items: flex-start;
+  gap: var(--gap-32);
+
+  @include media-breakpoint-up(lg) {
+    grid-template-columns: 1.5fr 3fr;
+  }
+}
+
+.bottom {
+  @include make-spacer(mt, var(--gap-32));
+  @include make-spacer(py, var(--gap-32));
+
+  border-top-width: rem(1px);
+  border-top-style: solid;
+  align-items: center;
+  gap: var(--gap-32);
+
+  @include media-breakpoint-up(lg) {
+    @include make-spacer(mt, var(--gap-80));
+
+    grid-template-columns: 1fr auto;
+  }
+}
+
+.column {
+
+  &:first-child {
+    grid-row-gap: var(--gap-32);
+    font-size: rem(14px);
+  }
+
+  &:last-child {
+    --grid-count: 1;
+
+    grid-template-columns: repeat(var(--grid-count), 1fr);
+    align-items: flex-start;
+    gap: var(--gap-32);
+
+    @include media-breakpoint-up(md) {
+      --grid-count: 2;
+    }
+
+    @include media-breakpoint-up(lg) {
+      --grid-count: 3;
+    }
+  }
+}
+
+.transfer {
+  font-size: rem(12px);
+}
+
+.payments {
+  @include flex;
+
+  gap: var(--gap-12);
+}
+
+.payment {
+  @include size(rem(45px), auto);
+}
+
+.submenu {
+  display: grid;
+  gap: var(--gap-12);
+}
+
+.link {
+
+  @include hover {
+
+    &:hover {
+      transform: translateX(rem(10px));
+      color: var(--color-primary);
+    }
+  }
+}

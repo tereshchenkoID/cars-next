@@ -1,0 +1,12 @@
+@import '@/scss/config';
+
+.block {
+  @include size(100%, rem(40px));
+
+  position: relative;
+
+  &.disabled {
+    opacity: 0.5;
+    pointer-events: none;
+  }
+}

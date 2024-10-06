@@ -1,0 +1,41 @@
+@import '@/scss/config';
+
+.block {
+  display: grid;
+  grid-gap: var(--gap-24);
+  font-size: rem(14px);
+
+  @include media-breakpoint-up(md) {
+    min-width: rem(488px);
+  }
+}
+
+.title,
+.subtitle {
+
+  @include media-breakpoint-up(md) {
+    text-align: center;
+  }
+}
+
+.text {
+  @include make-spacer(mx, -24px);
+  @include make-spacer(mb, -24px);
+  @include make-spacer(p, var(--gap-24));
+
+  text-align: center;
+  font-size: rem(14px);
+  background-color: #edf1f8;
+}
+
+.link {
+  @include make-spacer(mx, var(--gap-4));
+
+  color: var(--color-primary);
+  font-weight: var(--typography-medium);
+}
+
+.form {
+  display: grid;
+  gap: var(--gap-16);
+}

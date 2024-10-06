@@ -1,0 +1,39 @@
+@import '@/scss/config';
+
+.block {
+  position: relative;
+
+  &.disabled {
+    pointer-events: none;
+  }
+}
+
+.eye {
+  @include flex(center, center);
+  @include absolute-center-right(0);
+  @include size(rem(40px), 100%);
+
+  opacity: 0.6;
+  overflow: hidden;
+
+  @include hover {
+
+    &:hover {
+      opacity: 1;
+    }
+  }
+
+  &.active {
+
+    &::after {
+      @include size(rem(24px), rem(1px));
+      
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) rotateZ(45deg);
+      background-color: currentColor;
+      content: ''
+    }
+  }
+}

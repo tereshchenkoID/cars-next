@@ -1,0 +1,84 @@
+@import '@/scss/config';
+
+.block {
+  @include flex;
+  @include size(100%, rem(40px));
+
+  position: relative;
+
+  &.disabled {
+    opacity: 0.5;
+    pointer-events: none;
+  }
+
+  @include hover {
+
+    &:hover {
+
+      .input {
+        border-color: var(--color-primary);
+      }
+    }
+  }
+}
+
+.input {
+  @include make-spacer(px, 12px);
+  @include transition(border-color);
+  @include size(100%);
+
+  border: rem(1px) solid var(--color-grey-400);
+  font-size: rem(14px);
+  overflow: hidden;
+  background-color: transparent;
+  text-align: left;
+  white-space: nowrap;
+  border-radius: var(--border-radius-4);
+
+  &::placeholder {
+    color: var(--color-text);
+  }
+
+  &[type='datetime-local'],
+  &[type='date'] {
+    @include make-spacer(pr, 44px);
+
+    appearance: none;
+
+    &::-ms-clear,
+    &::-moz-clear,
+    &::-ms-inner-spin-button,
+    &::-moz-inner-spin-button {
+      display: none;
+    }
+
+    &::-webkit-clear-button,
+    &::-webkit-inner-spin-button,
+    &::-webkit-outer-spin-button,
+    &::-webkit-calendar-picker-indicator {
+      @include size(rem(40px), 100%);
+
+      cursor: pointer;
+      position: absolute;
+      right: 0;
+      top: 0;
+      opacity: 0;
+      color: transparent;
+      z-index: 1;
+    }
+  }
+
+  &:focus {
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 4px rgba(62, 71, 221, 0.16);
+  }
+}
+
+.icon {
+  @include size(rem(40px), 100%);
+  @include absolute-center-right(0);
+
+  cursor: pointer;
+  pointer-events: none;
+  opacity: 0.7;
+}

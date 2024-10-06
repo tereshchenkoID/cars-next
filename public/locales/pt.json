@@ -1,0 +1,114 @@
+{
+  "navigation": {
+    "home": "Home PT",
+    "buy": "Buy PT",
+    "new_auto": "New auto PT",
+    "how_it_works": "How it works PT",
+    "reviews": "Reviews PT",
+    "services": "Services PT",
+    "about_us": "About us PT",
+    "profile": "Profile PT",
+    "sale": "Sale PT",
+    "favorite": "Favorite PT"
+  },
+  "modal": {
+    "login": "Welcome back PT",
+    "registration": "Registration PT",
+    "language": "Language PT",
+    "restore": "Forgot your password?"
+  },
+  "notification": {
+    "login": "Don’t have an account? PT",
+    "registration": "Have an account? PT",
+    "restore": "No worries. We'll send you a link to reset your password. PT",
+    "via_email": "Or via e-mail PT",
+    "forgot_password": "Forgot your password? PT",
+    "terms": "I agree to the processing of personal data PT",
+    "payement": "We accept online card payments as well as wire transfers. PT"
+  },
+  "detailed_search": "Detailed search PT",
+  "username": "Username PT",
+  "menu": "Menu PT",
+  "profile": "Profile PT",
+  "register": "Register PT",
+  "services": "Services PT",
+  "company": "Company PT",
+  "email": "Email PT",
+  "password": "Password PT",
+  "login": "Login PT",
+  "restore": "Restore PT",
+  "personal_data": "Personal data PT",
+  "name": "Name PT",
+  "surname": "Surname PT",
+  "postal_code": "Postal code PT",
+  "phone_number": "Phone number PT",
+  "select_countries": "Select countries PT",
+  "select_values": "Select values PT",
+  "all": "All PT",
+  "saved": "Saved PT",
+  "history": "History PT",
+  "from": "From PT",
+  "to": "To PT",
+  "filter": "Filter PT",
+  "filters": {
+    "category": {
+      "0": "Category PT",
+      "1": "Passenger cars PT",
+      "2": "Moto PT",
+      "3": "Trucks PT"
+    },
+    "body": {
+      "0": "Body PT",
+      "1": "Sedan PT",
+      "2": "SUV / Offroad PT",
+      "3": "Coupe PT",
+      "4": "Van PT"
+    },
+    "brand": {
+      "0": "Brand PT"
+    },
+    "model": {
+      "0": "Model PT"
+    },
+    "year": {
+      "0": "Year PT"
+    },
+    "price": {
+      "0": "Price PT"
+    },
+    "mileage": {
+      "0": "mileage PT"
+    },
+    "fuel": {
+      "0": "Fuel PT",
+      "1": "Gas PT",
+      "2": "Electro PT",
+      "3": "Diesel PT"
+    },
+    "eco": {
+      "0": "Eco standart PT",
+      "1": "EURO-6 PT",
+      "2": "EURO-5 PT",
+      "3": "EURO-4 PT",
+      "4": "EURO-3 PT"
+    },
+    "state": {
+      "0": "State PT",
+      "1": "Used PT",
+      "2": "New PT"
+    },
+    "country": {
+      "0": "Country PT"
+    },
+    "region": {
+      "0": "Region PT"
+    },
+    "color": {
+      "0": "Colors PT",
+      "1": "white PT",
+      "2": "black PT",
+      "3": "green PT",
+      "4": "red PT"
+    }
+  }
+}

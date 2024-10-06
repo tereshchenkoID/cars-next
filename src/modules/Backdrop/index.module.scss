@@ -1,0 +1,13 @@
+@import '@/scss/config';
+
+.block {
+  position: fixed;
+  inset: 0;
+  background: var(--color-grey-800);
+  opacity: 0.5;
+  z-index: $z-index-10;
+
+  @include media-breakpoint-up(lg) {
+    display: none;
+  }
+}

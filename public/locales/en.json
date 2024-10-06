@@ -1,0 +1,114 @@
+{
+  "navigation": {
+    "home": "Home",
+    "buy": "Buy",
+    "new_auto": "New auto",
+    "how_it_works": "How it works",
+    "reviews": "Reviews",
+    "services": "Services",
+    "about_us": "About us",
+    "profile": "Profile",
+    "sale": "Sale",
+    "favorite": "Favorite"
+  },
+  "modal": {
+    "login": "Welcome back",
+    "registration": "Registration",
+    "language": "Language",
+    "restore": "Forgot your password?"
+  },
+  "notification": {
+    "login": "Don’t have an account?",
+    "registration": "Have an account?",
+    "restore": "No worries. We'll send you a link to reset your password.",
+    "via_email": "Or via e-mail",
+    "forgot_password": "Forgot your password?",
+    "terms": "I agree to the processing of personal data",
+    "payement": "We accept online card payments as well as wire transfers."
+  },
+  "detailed_search": "Detailed search",
+  "username": "Username",
+  "menu": "Menu",
+  "profile": "Profile",
+  "register": "Register",
+  "services": "Services",
+  "company": "Company",
+  "email": "Email",
+  "password": "Password",
+  "login": "Login",
+  "restore": "Restore",
+  "personal_data": "Personal data",
+  "name": "Name",
+  "surname": "Surname",
+  "postal_code": "Postal code",
+  "phone_number": "Phone number",
+  "select_countries": "Select countries",
+  "select_values": "Select values",
+  "all": "All",
+  "saved": "Saved",
+  "history": "History",
+  "from": "From",
+  "to": "To",
+  "filter": "Filter",
+  "filters": {
+    "category": {
+      "0": "Category",
+      "1": "Passenger cars",
+      "2": "Moto",
+      "3": "Trucks"
+    },
+    "body": {
+      "0": "Body",
+      "1": "Sedan",
+      "2": "SUV / Offroad",
+      "3": "Coupe",
+      "4": "Van"
+    },
+    "brand": {
+      "0": "Brand"
+    },
+    "model": {
+      "0": "Model"
+    },
+    "year": {
+      "0": "Year"
+    },
+    "price": {
+      "0": "Price"
+    },
+    "mileage": {
+      "0": "mileage"
+    },
+    "fuel": {
+      "0": "Fuel",
+      "1": "Gas",
+      "2": "Electro",
+      "3": "Diesel"
+    },
+    "eco": {
+      "0": "Eco standart",
+      "1": "EURO-6",
+      "2": "EURO-5",
+      "3": "EURO-4",
+      "4": "EURO-3"
+    },
+    "state": {
+      "0": "State",
+      "1": "Used",
+      "2": "New"
+    },
+    "country": {
+      "0": "Country"
+    },
+    "region": {
+      "0": "Region"
+    },
+    "color": {
+      "0": "Colors",
+      "1": "white",
+      "2": "black",
+      "3": "green",
+      "4": "red"
+    }
+  }
+}

@@ -1,0 +1,14 @@
+@import '@/scss/config';
+
+.block {
+  --avatar-size: 48px;
+
+  @include size(var(rem(--avatar-size)));
+
+  border-radius: 50%;
+  background-color: var(--color-grey-400);
+
+  &.sm {
+    --avatar-size: 24px;
+  }
+}

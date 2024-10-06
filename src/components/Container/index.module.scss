@@ -1,0 +1,10 @@
+@import '@/scss/config';
+
+.block {
+  @include make-spacer(mx, auto);
+  @include make-spacer(px, var(--outer-gap));
+  
+  overflow-x: hidden;
+  width: 100%;
+  max-width: var(--max-width);
+}

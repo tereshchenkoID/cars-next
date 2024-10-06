@@ -1,0 +1,19 @@
+@import '@/scss/config';
+
+.block {
+  position: relative;
+  flex-shrink: 0;
+}
+
+.count {
+  @include make-spacer(py, var(--gap-2));
+  @include make-spacer(px, var(--gap-4));
+
+  position: absolute;
+  top: var(--gap-4);
+  right: var(--gap-4);
+  border-radius: var(--border-radius-4);
+  font-size: rem(10px);
+  color: var(--color-white);
+  background-color: var(--color-primary);
+}

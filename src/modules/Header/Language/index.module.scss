@@ -1,0 +1,78 @@
+@import '@/scss/config';
+
+.block {
+  position: relative;
+  flex-shrink: 0;
+  display: none;
+
+  @include media-breakpoint-up(lg) {
+    display: block;
+  }
+}
+
+.toggle {
+  @include flex(center, center);
+  @include size(48px);
+
+  position: relative;
+  flex-shrink: 0;
+  border-radius: var(--border-radius-4);
+
+  @include hover {
+
+    &:hover {
+      background-color: var(--color-grey-50);
+    }
+  }
+}
+
+.icon {
+  @include size(22px);
+
+  display: block;
+  border-radius: 50%;
+  border: rem(2px) solid var(--color-text);
+}
+
+.dropdown {
+  @include make-spacer(p, var(--gap-12));
+
+  position: absolute;
+  top: calc(100% + var(--gap-4));
+  right: 0;
+  min-width: rem(180px);
+  border-width: rem(1px);
+  border-style: solid;
+  background-color: var(--color-white);
+  border-radius: var(--border-radius-4);
+}
+
+.option {
+  @include make-spacer(py, var(--gap-8));
+  @include make-spacer(px, var(--gap-12));
+
+  display: grid;
+  grid-template-columns: auto 1fr;
+  grid-column-gap: var(--gap-8);
+  align-items: center;
+  border-radius: var(--border-radius-4);
+  width: 100%;
+  overflow: hidden;
+  font-size: rem(14px);
+  text-align: left;
+
+  @include hover {
+
+    &:hover {
+      background-color: var(--color-grey-50);
+    }
+  }
+
+  &:not(:last-child) {
+    @include make-spacer(mb, var(--gap-4));
+  }
+}
+
+.text {
+  font-size: rem(14px);
+}

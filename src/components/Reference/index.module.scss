@@ -1,0 +1,10 @@
+@import '@/scss/config';
+@import '@/scss/modules/button';
+
+.block {
+  @include button;
+}
+
+.icon {
+  @include size(var(--icon-size));
+}

@@ -1,0 +1,73 @@
+@import '@/scss/config';
+
+.block {
+  @include make-spacer(px, var(--outer-gap));
+  @include flex(space-between, center);
+
+  position: sticky;
+  top: 0;
+  z-index: $z-index-10;
+  height: var(--header-height);
+  background-color: var(--color-white);
+  gap: var(--gap-32);
+  border-bottom-width: rem(1px);
+  border-bottom-style: solid;
+  box-shadow: var(--box-shadow-4-16);
+
+  @include media-breakpoint-up(lg) {
+    justify-content: flex-start;
+  }
+}
+
+.button {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: center;
+  gap: var(--gap-6);
+
+  @include media-breakpoint-up(lg) {
+    display: none;
+  }
+}
+
+.toggle {
+  @include size(rem(24px));
+  @include flex(center, center, column);
+
+  &.active {
+
+    .line {
+
+      &:nth-child(1) {
+        transform: translateY(rem(6px)) rotateZ(45deg);
+      }
+
+      &:nth-child(2) {
+        transform: translateX(100%);
+        opacity: 0;
+      }
+
+      &:nth-child(3) {
+        transform: translateY(rem(-6px)) rotateZ(-45deg);
+      }
+    }
+  }
+}
+
+.line {
+  @include make-spacer(my, var(--gap-2));
+  @include transition;
+  @include size(100%, rem(2px));
+
+  background-color: var(--color-text);
+}
+
+.text {
+  font-size: rem(14px);
+}
+
+.wrapper {
+  @include flex($align-items: center);
+
+  flex-shrink: 0;
+}

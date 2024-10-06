@@ -1,0 +1,166 @@
+@import '@/scss/config';
+
+.menu {
+  @include transition;
+  @include make-spacer(m, 0);
+  @include make-spacer(p, var(--gap-18));
+  @include size(rem(320px), 100%);
+  @include flex($direction: column);
+
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  transform: translateX(-100%);
+  background-color: var(--color-white);
+  overflow-y: auto;
+  font-weight: var(--typography-medium);
+  z-index: $z-index-10;
+
+  @include media-breakpoint-up(lg) {
+    @include size(100%);
+    @include make-spacer(p, 0);
+
+    flex-direction: row;
+    position: static;
+    gap: var(--gap-12);
+    background-color: transparent;
+    transform: translateX(0);
+    background-color: transparent;
+    overflow-y: unset;
+  }
+
+  @include media-breakpoint-up(xl) {
+    gap: var(--gap-24);
+  }
+
+  &.active {
+    transform: translateX(0);
+  }
+}
+
+.item {
+  position: relative;
+
+  @include media-breakpoint-up(lg) {
+    height: 100%;
+  }
+}
+
+.meta {
+  @include make-spacer(mb, var(--gap-18));
+
+  display: grid;
+  gap: var(--gap-18);
+
+  @include media-breakpoint-up(lg) {
+    display: none;
+  }
+}
+
+.close {
+  @include make-spacer(p, 0);
+  @include size(rem(24px));
+
+  color: var(--color-primary);
+}
+
+.link {
+  @include flex($align-items: center);
+  @include make-spacer(mx, -18px);
+  @include make-spacer(px, var(--gap-18));
+  @include transition;
+
+  position: relative;
+  cursor: pointer;
+  gap: var(--gap-4);
+  height: rem(48px);
+  font-size: rem(18px);
+
+  @include media-breakpoint-up(lg) {
+    @include make-spacer(px, 0);
+    @include make-spacer(mx, 0);
+
+    font-size: rem(14px);
+    height: 100%;
+
+    @include hover {
+
+      &:hover {
+        color: var(--color-primary-hover);
+  
+        &::after {
+          width: 100%;
+        }
+      }
+    }
+  }
+
+  &::after {
+    @include transition;
+
+    position: absolute;
+    left: 0px;
+    top: 0;
+    bottom: 0;
+    background-color: var(--color-primary-hover);
+    content: '';
+
+    @include media-breakpoint-up(lg) {
+      height: rem(3px);
+      width: 0;
+      top: auto;
+    }
+  }
+
+  &.inner {
+
+    &::after {
+      display: none;
+    }
+  }
+
+  &.active {
+    color: var(--color-primary-hover);
+
+    &::after {
+      width: rem(3px);
+
+      @include media-breakpoint-up(lg) {
+        width: 100%;
+      }
+    }
+
+    .icon {
+      transform: rotateZ(180deg);
+    }
+  }
+}
+
+.icon {
+  @include transition(transform);
+
+  font-size: rem(12px);
+}
+
+.dropdown {
+  @include flex($direction: column);
+
+  border-radius: var(--border-radius-4);
+  background-color: var(--color-grey-50);
+  z-index: $z-index-1;
+
+  @include media-breakpoint-up(lg) {
+    @include make-spacer(p, var(--gap-12));
+
+    position: absolute;
+    top: calc(100% - var(--gap-8));
+    left: 50%;
+    transform: translateX(-50%);
+    min-width: rem(148px);
+    border-width: rem(1px);
+    border-style: solid;
+    background-color: var(--color-white);
+    gap: var(--gap-4);
+  }
+}
