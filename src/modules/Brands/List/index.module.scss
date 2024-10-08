@@ -1,0 +1,45 @@
+@import '@/scss/config';
+
+.block {
+  @include make-spacer(mb, var(--gap-12));
+  @include flex($direction: column);
+
+  gap: var(--gap-6);
+}
+
+.item {
+  @include make-spacer(p, var(--gap-12));
+
+  display: grid;
+  grid-template-columns: auto 1fr rem(20px);
+  align-items: center;
+  gap: var(--gap-12);
+  border-radius: var(--border-radius-4);
+  background-color: var(--color-grey-200);
+  color: var(--color-primary);
+}
+
+.close {
+  transform: rotateZ(45deg);
+  color: var(--color-primary);
+  opacity: 0.8;
+}
+
+.meta {
+  overflow: hidden;
+}
+
+.title {
+  color: var(--color-primary);
+  font-size: rem(16px);
+}
+
+.model {
+  @include ellipsis;
+
+  font-size: rem(12px);
+}
+
+.img {
+  @include size(rem(32px));
+}

@@ -3,6 +3,7 @@
 .block {
   display: grid;
   grid-template-columns: rem(320px) 1fr;
+  align-items: flex-start;
   gap: var(--gap-32);
 }
 
@@ -30,7 +31,7 @@
   box-shadow: var(--box-shadow-4-16);
 }
 
-.subtitle {
+.title {
   @include flex(space-between, center);
 
   min-height: rem(38px);

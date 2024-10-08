@@ -1,9 +1,9 @@
 "use client"
 
 import { useRouter } from '@/i18n/routing'
-import { usePathname, useSearchParams } from 'next/navigation'
-import { Fragment, useEffect, useState } from 'react'
 import { useTranslations } from 'next-intl'
+import { useSearchParams } from 'next/navigation'
+import { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 
 import classNames from 'classnames'
@@ -18,6 +18,7 @@ import Select from '@/components/Select'
 import Checkbox from '@/components/Checkbox'
 import Reference from '@/components/Reference'
 import Icon from '@/components/Icon'
+import Brands from '@/modules/Brands'
 
 import style from './index.module.scss'
 
@@ -35,7 +36,6 @@ const Cars = () => {
   const filters = useSelector((state) => state.filters)
   const search = useSelector((state) => state.search)
   const router = useRouter()
-  const pathname = usePathname()
   const searchParams = useSearchParams()
 
   const [active, setActive] = useState(0)
@@ -43,7 +43,7 @@ const Cars = () => {
   const groupedFilters = {}
   const currentYear = new Date().getFullYear()
   const years = Array.from({ length: currentYear - 1900 + 1 }, (_, i) => (currentYear - i).toString())
-  years.unshift("0") 
+  years.unshift(DEFAULT) 
 
   Object.keys(filters).forEach((key) => {
     const group = filters[key].group || key
@@ -73,7 +73,7 @@ const Cars = () => {
     for (const [key, value] of Object.entries(filters)) {
       const queryValue = paramsObject[key]
       date[key] = {
-        value: queryValue ? queryValue.split(';') : value.default || ["0"]
+        value: queryValue ? queryValue.split(';') : value.default || [DEFAULT]
       };
     }
   
@@ -138,7 +138,7 @@ const Cars = () => {
     <div className={style.block}>
       <div className={style.filter}>
         <div className={style.header}>
-          <div className={style.subtitle}>
+          <div className={style.title}>
             <h6>{t('filter')}</h6>
             {
               searchParams.size > 0 &&
@@ -171,6 +171,10 @@ const Cars = () => {
           </div>
         </div>
         <div className={style.content}>
+          <div className={style.section}>
+            <h6 className={style.subtitle}>Model</h6>
+            <Brands />
+          </div>
           {
             Object.keys(groupedFilters).map((group) => (
               <div
@@ -208,8 +212,8 @@ const Cars = () => {
                                     }))
                                   : 
                                     Object.entries(filter.options).map(([optionKey, optionValue]) => ({
-                                        value: optionKey === DEFAULT ? t('all') : optionKey,
-                                        label: optionValue,
+                                        value: optionKey,
+                                        label: optionKey === DEFAULT ? t('all') : optionValue,
                                       })
                                     )
                               }
@@ -227,7 +231,7 @@ const Cars = () => {
                               data={
                                 search[key]?.value?.[search[key]?.value?.length - 1] === DEFAULT
                                   ? ''
-                                  : search[key]?.value?.[search[key]?.value?.length - 1]
+                                  : search[key]?.value?.[search[key]?.value?.length - 1] || ''
                               }
                               onChange={(value) => handleChange(filter.type, key, value)}
                             />

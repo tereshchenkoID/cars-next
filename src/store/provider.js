@@ -9,6 +9,7 @@ import settingsReducer from './reducers/settingsReducer'
 import toastifyReducer from './reducers/toastifyReducer'
 import filtersReducer from './reducers/filtersReducer'
 import searchReducer from './reducers/searchReducer'
+import brandsReducer from './reducers/brandsReducer'
 
 const StoreProvider = ({ children, preloadedState = {} }) => {
   const store = useMemo(() => configureStore({
@@ -18,6 +19,7 @@ const StoreProvider = ({ children, preloadedState = {} }) => {
       toastify: toastifyReducer,
       filters: filtersReducer,
       search: searchReducer,
+      brands: brandsReducer,
     },
     preloadedState,
   }), [preloadedState])

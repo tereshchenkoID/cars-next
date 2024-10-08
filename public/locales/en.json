@@ -26,6 +26,11 @@
     "terms": "I agree to the processing of personal data",
     "payement": "We accept online card payments as well as wire transfers."
   },
+  "offers": "Offers",
+  "select_make": "Select make",
+  "most_searched_tags": "Most searched tags",
+  "all_brands": "All brands",
+  "make_or_model": "Make or model",
   "detailed_search": "Detailed search",
   "username": "Username",
   "menu": "Menu",

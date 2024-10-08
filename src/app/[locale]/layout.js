@@ -31,17 +31,17 @@ export const metadata = {
 
 const API_BASE_URL = 'https://api.oddsbit.io/auto'
 
-export function generateSearchFromFilters(filters) {
-  const search = {}
+// export function generateSearchFromFilters(filters) {
+//   const search = {}
 
-  for (const [key] of Object.entries(filters)) {
-    search[key] = {
-      value: ['0']
-    }
-  }
+//   for (const [key] of Object.entries(filters)) {
+//     search[key] = {
+//       value: ['0']
+//     }
+//   }
 
-  return search
-}
+//   return search
+// }
 
 async function fetchData(endpoint) {
   try {
@@ -63,31 +63,34 @@ async function fetchData(endpoint) {
 
 async function fetchInitialData() {
   try {
-    const [settings, filters ] = await Promise.all([
+    const [settings, filters, brands ] = await Promise.all([
       fetchData('/settings/'),
       fetchData('/filters/'),
+      fetchData('/filters/brands/')
       // fetchData('/filters/search/')
     ])
 
-    const search = generateSearchFromFilters(filters)
+    // const search = generateSearchFromFilters(filters)
 
-    return { settings, filters, search}
+    return { settings, filters, brands }
   } catch (error) {
     console.error('Error fetching initial data:', error)
-    return { settings: null,  filters: null, search: null }
+    return { settings: null, filters: null, brands: null }
+    // return { settings: null,  filters: null, search: null }
   }
 }
 
 export default async function RootLayout({ children, params }) {
   const { locale } = params
   const messages = await getMessages(locale)
-  const { settings, filters, search } = await fetchInitialData()
+  const { settings, filters, brands } = await fetchInitialData()
+  // const { settings, filters, search } = await fetchInitialData()
 
   return (
     <html lang={locale} className={poppins.className}>
       <body>
         <NextIntlClientProvider messages={messages}>
-          <StoreProvider preloadedState={{ settings, filters }}>
+          <StoreProvider preloadedState={{ settings, filters, brands }}>
             <AppProviders>
               <NextTopLoader
                 color="#3e47dd"

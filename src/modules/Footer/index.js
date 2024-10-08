@@ -95,7 +95,7 @@ const Footer = () => {
                   width={43}
                   height={28}
                   className={style.payment}
-                  src={`/images/${el}.svg`}
+                  src={`/images/payements/${el}.svg`}
                   priority={false}
                   alt={el}
                 />

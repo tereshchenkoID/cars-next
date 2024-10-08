@@ -2,7 +2,6 @@
 
 import { useState } from 'react'
 import { useTranslations } from 'next-intl'
-import { useRouter } from 'nextjs-toploader/app';
 import { useDispatch } from 'react-redux'
 import { useModal } from '@/context/ModalContext'
 
@@ -21,7 +20,6 @@ import style from './index.module.scss'
 const LoginModal = () => {
   const t = useTranslations()
   const dispatch = useDispatch()
-  const router = useRouter()
   const { showModal, closeModal } = useModal()
   const [filter, setFilter] = useState({
     username: '',
@@ -51,9 +49,6 @@ const LoginModal = () => {
       if (json.id) {
         dispatch(setAuth(json)).then(() => {
           closeModal()
-          router.push('/')
-
-
           // i18n.changeLanguage(json?.account?.language?.code)
         })
       } else {
