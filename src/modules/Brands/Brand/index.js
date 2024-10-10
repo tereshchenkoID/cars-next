@@ -5,7 +5,7 @@ import Icon from '@/components/Icon'
 
 import style from './index.module.scss'
 
-const Brand = ({ data, active, onChange, isWide = false }) => {
+const Brand = ({ data, onChange, isWide = false }) => {
   const length = data?.options.length
   const counts = data?.options.filter(option => option.selected === "1").length
 

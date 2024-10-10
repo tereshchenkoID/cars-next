@@ -58,6 +58,7 @@
   "from": "From",
   "to": "To",
   "filter": "Filter",
+  "remove": "Remove",
   "filters": {
     "category": {
       "0": "Category",

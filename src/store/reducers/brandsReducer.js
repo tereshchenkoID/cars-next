@@ -80,7 +80,6 @@ const brandsReducer = (state = initialState, action) => {
         return { ...brand, options: updatedOptions }
       });
     }
-
     case types.SELECT_BRANDS: {
       return state.map(brand => {
         if (action.payload === null) {
@@ -92,6 +91,21 @@ const brandsReducer = (state = initialState, action) => {
           active: brand.id === action.payload
         }
       })
+    }
+    case types.DELETE_BRANDS: {
+      return state.map(brand => {
+        if (brand.id === action.payload) {
+          return { 
+            ...brand, 
+            active: false,
+            options: brand.options.map(option => ({
+              ...option,
+              selected: "0"
+            }))
+          }
+        }
+        return brand
+      });
     }
     default:
       return state

@@ -17,7 +17,10 @@ const Brand = () => {
 
   return (
     <div className={style.block}>
-      <List />
+      <List 
+        show={show} 
+        setShow={setShow}
+      />
       <Toggle 
         show={show} 
         setShow={setShow}

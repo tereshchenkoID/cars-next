@@ -58,6 +58,7 @@
   "from": "From PT",
   "to": "To PT",
   "filter": "Filter PT",
+  "remove": "Remove PT",
   "filters": {
     "category": {
       "0": "Category PT",

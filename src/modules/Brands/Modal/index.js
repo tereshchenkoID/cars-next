@@ -57,7 +57,7 @@ const Modal = ({ show, setShow }) => {
           <Button
             icon={'xmark'}
             classes={['primary', 'square', style.close]}
-            onClick={handleClose}
+            onChange={handleClose}
           />
           <div className={style.header}>
             <h6 className={style.title}>

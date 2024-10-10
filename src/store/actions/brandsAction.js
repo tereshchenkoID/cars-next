@@ -32,3 +32,10 @@ export const selectBrands = (brandId) => {
     payload: brandId
   }
 }
+
+export const deleteBrands = (brandId) => {
+  return {
+    type: types.DELETE_BRANDS,
+    payload: brandId
+  }
+}

@@ -1,33 +1,35 @@
-import { useState, useEffect } from 'react'
-import { useSelector } from 'react-redux'
+import { useMemo } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import { useTranslations } from 'next-intl'
+
+import { selectBrands, deleteBrands } from '@/store/actions/brandsAction'
 
 import Image from 'next/image'
 import Icon from '@/components/Icon'
 
 import style from './index.module.scss'
 
-const List = () => {
+const List = ({ show, setShow }) => {
   const t = useTranslations()
+  const dispatch = useDispatch()
   const brands = useSelector((state) => state.brands)
-  const [selected, setSelected] = useState([])
 
-  const getSelected = (brands) => {
+  const selected = useMemo(() => {
     const selectedOptions = []
-  
+
     brands.forEach((brand) => {
       const options = brand.options.filter(option => brand.visible === "1" && option.selected === "1")
       if (options.length > 0) {
         const optionNames = options.map(option => option.name).join(', ')
-        selectedOptions.push({id: brand.id, name: brand?.name, options: options[0].id === '0' ? t('all_models') : optionNames})
+        selectedOptions.push({
+          id: brand.id,
+          name: brand?.name,
+          options: options[0].id === '0' ? t('all_models') : optionNames
+        })
       }
     })
-  
-    return selectedOptions
-  }
 
-  useEffect(() => {
-    setSelected(getSelected(brands))
+    return selectedOptions
   }, [brands])
 
   return (
@@ -37,6 +39,10 @@ const List = () => {
           <li
             key={idx}
             className={style.item}
+            onClick={() => {
+              dispatch(selectBrands(el.id))
+              setShow(true)
+            }}
           >
             <Image
               width={32}
@@ -53,8 +59,12 @@ const List = () => {
             <button
               type="button"
               className={style.remove}
-              aria-label={'Remove'}
-              title={'Remove'}
+              aria-label={t('remove')}
+              title={t('remove')}
+              onClick={(e) => {
+                e.stopPropagation()
+                dispatch(deleteBrands(el.id))
+              }}
             >
               <Icon
                 iconName={'circle-plus'}
