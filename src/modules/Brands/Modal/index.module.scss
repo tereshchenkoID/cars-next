@@ -78,6 +78,7 @@
   overflow-y: auto;
   color: var(--color-grey-700);
   font-weight: var(--typography-bold);
+  flex-grow: 1;
 }
 
 .footer {
@@ -99,10 +100,6 @@
   }
 }
 
-.list {
-  height: 1500px;
-}
-
 .grid {
   @include make-spacer(mb, 16px);
 
@@ -120,48 +117,13 @@
   text-transform: uppercase;
 }
 
-.button {
-  @include make-spacer(px, 10px);
-  @include make-spacer(py, 2px);
-  @include flex($align-items: center);
-
-  gap: var(--gap-16);
-  border-radius: var(--border-radius-4);
-  width: 100%;
-  font-size: rem(14px);
-  font-weight: var(--typography-medium);
-  border: rem(1px) solid transparent;
-
-  @include hover {
-
-    &:hover {
-      background-color: var(--color-grey-100);
-      border-color: var(--color-grey-100);
-    }
-  }
-
-  &.square {
-    @include size(rem(48px));
-
-    justify-content: center;
-    background-color: var(--color-grey-100);
-    border-color: var(--color-grey-100);
-    color: var(--color-grey-700);
-
-    @include hover {
-
-      &:hover {
-        background-color: var(--color-grey-200);
-        border-color: var(--color-grey-200);
-      }
-    }
-  }
-
-  &.active {
-    border-color: var(--color-primary);
-    background-color: var(--color-grey-200);
-    color: var(--color-primary);
-  }
+.model {
+  @include make-spacer(py, 12px);
+  @include make-spacer(px, 8px);
+  
+  border-bottom-width: rem(1px);
+  border-bottom-style: solid;
+  font-weight: var(--typography-regular);
 }
 
 .img {

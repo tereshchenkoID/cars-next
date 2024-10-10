@@ -18,3 +18,17 @@ export const setBrands = () => async dispatch => {
     console.log(e)
   }
 }
+
+export const updateBrands = (brandId, optionId, selected) => {
+  return {
+    type: types.UPDATE_BRANDS,
+    payload: { brandId, optionId, selected }
+  }
+}
+
+export const selectBrands = (brandId) => {
+  return {
+    type: types.SELECT_BRANDS,
+    payload: brandId
+  }
+}

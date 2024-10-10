@@ -245,7 +245,7 @@ const Cars = () => {
                                 <Checkbox
                                   key={optionKey}
                                   placeholder={optionKey === DEFAULT ? t('all') : optionValue}
-                                  data={search[key]?.value?.includes(optionKey) ? 1 : 0}
+                                  data={search[key]?.value?.includes(optionKey) ? "1" : "0"}
                                   onChange={() => handleChange(filter.type, key, optionKey)}
                                 />
                               ))

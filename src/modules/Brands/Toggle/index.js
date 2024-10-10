@@ -1,3 +1,5 @@
+import { useTranslations } from 'next-intl'
+
 import classNames from 'classnames'
 
 import Icon from '@/components/Icon'
@@ -5,6 +7,8 @@ import Icon from '@/components/Icon'
 import style from './index.module.scss'
 
 const Toggle = ({ show, setShow }) => {
+  const t = useTranslations()
+  
   return (
     <button
       type={'button'}
@@ -14,7 +18,7 @@ const Toggle = ({ show, setShow }) => {
           show && style.active
         )
       }
-      aria-label={'Add a car'}
+      aria-label={t('add_car')}
       onClick={() => setShow(!show)}
     >
       <Icon
@@ -23,7 +27,7 @@ const Toggle = ({ show, setShow }) => {
         height={16}
         className={style.plus}
       />
-      <span>Add a car</span>
+      <span>{t('add_car')}</span>
       <Icon
         iconName={'angle-down'}
         width={16}

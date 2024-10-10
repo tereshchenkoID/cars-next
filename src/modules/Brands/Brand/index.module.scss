@@ -1,0 +1,80 @@
+@import '@/scss/config';
+
+.block {
+  @include flex(center, center);
+  @include size(rem(48px));
+
+  position: relative;
+  gap: var(--gap-16);
+  border-radius: var(--border-radius-4);
+  font-size: rem(14px);
+  font-weight: var(--typography-medium);
+  border: rem(1px) solid transparent;
+
+  background-color: var(--color-grey-100);
+  border-color: var(--color-grey-100);
+  color: var(--color-grey-700);
+
+  @include hover {
+
+    &:not(.active) {
+      &:hover {
+        background-color: var(--color-grey-200);
+        border-color: var(--color-grey-200);
+      }
+    }
+  }
+
+  &.wide {
+    @include make-spacer(px, 10px);
+    @include make-spacer(py, 2px);
+    @include size(100%, auto);
+
+    background-color: transparent;
+    justify-content: flex-start;
+    border-color: transparent;
+
+    @include hover {
+
+      &:not(.active) {
+        &:hover {
+          background-color: var(--color-grey-100);
+          border-color: var(--color-grey-100);
+        }
+      }
+    }
+
+    .count {
+      position: static;
+    }
+  }
+
+  &.active {
+    border-color: var(--color-primary);
+    background-color: var(--color-grey-200);
+    color: var(--color-primary);
+  }
+}
+
+.count {
+  @include flex(center, center);
+  @include size(rem(16px));
+
+  position: absolute;
+  top: rem(-8px);
+  right: rem(-8px);
+  border-radius: 50%;
+  background-color: var(--color-primary);
+  color: var(--color-white);
+  font-size: rem(9px);
+  font-weight: var(--typography-bold);
+  overflow: hidden;
+}
+
+.icon {
+  background-color: var(--color-success);
+}
+
+.img {
+  @include size(rem(32px));
+}

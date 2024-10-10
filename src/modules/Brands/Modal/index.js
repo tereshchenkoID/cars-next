@@ -1,146 +1,166 @@
-import { useState, useMemo } from 'react'
-import { useSelector } from 'react-redux'
+import { useMemo } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import { useTranslations } from 'next-intl'
 
-import classNames from 'classnames'
+import { selectBrands, updateBrands } from '@/store/actions/brandsAction'
 
 import Image from 'next/image'
 import Button from '@/components/Button'
 import Field from '@/components/Field'
+import Checkbox from '@/components/Checkbox'
+import Brand from '../Brand'
 
 import style from './index.module.scss'
 
 const Modal = ({ show, setShow }) => {
   const t = useTranslations()
+  const dispatch = useDispatch()
   const brands = useSelector((state) => state.brands)
-  const [active, setActive] = useState(null)
 
   const mostBrands = useMemo(
     () => brands.filter(brand => brand.recent === "1"),
     [brands]
   )
 
-  const activeBrands = useMemo(() => {
-    return brands.find(brand => brand.id === active)
-  }, [active, brands]) 
+  const activeBrand = useMemo(
+    () => brands?.find(brand => brand.active) || null,
+    [brands]
+  )
+  
+  const activeModels = useMemo(
+    () => activeBrand?.options?.find(model => model.selected === "1") || null,
+    [activeBrand]
+  )
+
+  const handleChecked = (model) => {
+    const newSelected = model.selected === "1" ? "0" : "1"
+    dispatch(updateBrands(activeBrand.id, model.id, newSelected))
+  }
+
+  const handleSelectBrand = (id) => {
+    dispatch(selectBrands(id))
+  }
+
+  const handleClose = () => {
+    setShow(!show)
+    handleSelectBrand(null)
+  }
 
   return (
     <div className={style.block}>
-      <div 
-        className={style.backdrop} 
-        onClick={() => setShow(!show)}
+      <div
+        className={style.backdrop}
+        onClick={handleClose}
       />
       <div className={style.content}>
         <div className={style.wrapper}>
           <Button
             icon={'xmark'}
             classes={['primary', 'square', style.close]}
-            onChange={() => setShow(!show)}
+            onClick={handleClose}
           />
           <div className={style.header}>
             <h6 className={style.title}>
               {
-                active &&
+                activeBrand &&
                 <>
-                  <Button 
+                  <Button
                     icon={'angle-down'}
                     classes={['secondary', 'square', 'sm', style.arrow]}
-                    onChange={() => setActive(null)}
+                    onChange={() => handleSelectBrand(null)}
                   />
                   <Image
                     width={32}
                     height={32}
                     className={style.img}
-                    src={`/images/brands/${activeBrands.id}.webp`}
+                    src={`/images/brands/${activeBrand.id}.webp`}
                     priority={true}
                     alt={"Make"}
                   />
                 </>
               }
-              <span>{active ? activeBrands.name : t('select_make')}</span>
+              <span>{activeBrand ? activeBrand.name : t('select_make')}</span>
             </h6>
-            <Field 
+            <Field
               type={"text"}
               placeholder={t('make_or_model')}
-              onChange={() => {}}
+              onChange={() => { }}
             />
           </div>
           <div className={style.body}>
-            <p className={style.subtitle}>{t('most_searched_tags')}</p>
-            <ul className={style.grid}>
-              {
-                mostBrands.map((el, idx) => 
-                  el.visible === "1" &&
-                  <li 
-                    key={idx}
-                    className={style.item}
-                  >
-                    <button
-                      type="button"
-                      className={
-                        classNames(
-                          style.button,
-                          style.square,
-                          active === el.id && style.active
+            {
+              activeBrand
+                ?
+                  <>
+                    <ul className={style.models}>
+                      {
+                        activeBrand.options?.map((el, idx) =>
+                          el.visible === "1" &&
+                          <li
+                            key={idx}
+                            className={style.model}
+                          >
+                            <Checkbox
+                              placeholder={el.name}
+                              data={el.selected}
+                              onChange={() => handleChecked(el)}
+                            />
+                          </li>
                         )
                       }
-                      aria-label={el.name}
-                      onClick={() => setActive(el.id)}
-                    >
-                      <Image
-                        width={32}
-                        height={32}
-                        className={style.img}
-                        src={`/images/brands/${el.id}.webp`}
-                        priority={true}
-                        alt={el.name}
-                      />
-                    </button>
-                  </li>
-                )
-              }
-            </ul>
-            <p className={style.subtitle}>{t('all_brands')}</p>
-            <ul className={style.list}>
-              {
-                brands.map((el, idx) => 
-                  el.visible === "1" &&
-                  <li 
-                    key={idx}
-                    className={style.item}
-                  >
-                    <button
-                      type="button"
-                      className={
-                        classNames(
-                          style.button,
-                          active === el.id && style.active
+                    </ul>
+                  </>
+                :
+                  <>
+                    <p className={style.subtitle}>{t('most_searched_tags')}</p>
+                    <ul className={style.grid}>
+                      {
+                        mostBrands.map((el, idx) =>
+                          el.visible === "1" &&
+                          <li
+                            key={idx}
+                            className={style.item}
+                          >
+                            <Brand 
+                              data={el} 
+                              onChange={handleSelectBrand}
+                            />
+                          </li>
                         )
                       }
-                      aria-label={el.name}
-                      onClick={() => setActive(el.id)}
-                    >
-                      <Image
-                        width={32}
-                        height={32}
-                        className={style.img}
-                        src={`/images/brands/${el.id}.webp`}
-                        priority={true}
-                        alt={el.name}
-                      />
-                      <span>{el.name}</span>
-                    </button>
-                  </li>
-                )
-              }
-            </ul>
+                    </ul>
+                    <p className={style.subtitle}>{t('all_brands')}</p>
+                    <ul className={style.list}>
+                      {
+                        brands.map((el, idx) =>
+                          el.visible === "1" &&
+                          <li
+                            key={idx}
+                            className={style.item}
+                          >
+                            <Brand 
+                              data={el} 
+                              isWide={true}
+                              onChange={handleSelectBrand}
+                            />
+                          </li>
+                        )
+                      }
+                    </ul>
+                  </>
+            }
           </div>
-          {/* <div className={style.footer}>
-            <Button 
-              placeholder={`138 ${t('offers')}`}
-              classes={['primary', 'wide']}
-            />
-          </div> */}
+          <div className={style.footer}>
+            {
+              activeBrand &&
+              <Button
+                placeholder={t('select_model')}
+                classes={['primary', 'wide']}
+                isDisabled={!activeModels}
+                onChange={() => handleSelectBrand(null)}
+              />
+            }
+          </div>
         </div>
       </div>
     </div>

@@ -22,9 +22,9 @@ const Checkbox = ({
       <input
         type={'checkbox'}
         className={style.input}
-        checked={data === 1}
+        checked={data === "1"}
         onChange={() => {
-          onChange(data === 1 ? 0 : 1)
+          onChange(data === "1" ? "0" : "1")
         }}
       />
       <span className={style.item} />

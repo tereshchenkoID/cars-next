@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import { useTranslations } from 'next-intl'
 
@@ -9,12 +10,30 @@ import style from './index.module.scss'
 const List = () => {
   const t = useTranslations()
   const brands = useSelector((state) => state.brands)
+  const [selected, setSelected] = useState([])
+
+  const getSelected = (brands) => {
+    const selectedOptions = []
+  
+    brands.forEach((brand) => {
+      const options = brand.options.filter(option => brand.visible === "1" && option.selected === "1")
+      if (options.length > 0) {
+        const optionNames = options.map(option => option.name).join(', ')
+        selectedOptions.push({id: brand.id, name: brand?.name, options: options[0].id === '0' ? t('all_models') : optionNames})
+      }
+    })
+  
+    return selectedOptions
+  }
+
+  useEffect(() => {
+    setSelected(getSelected(brands))
+  }, [brands])
 
   return (
     <ul className={style.block}>
       {
-        brands.map((el, idx) =>
-          (idx < 3 && el.visible === "1") &&
+        selected.map((el, idx) =>
           <li
             key={idx}
             className={style.item}
@@ -29,7 +48,7 @@ const List = () => {
             />
             <span className={style.meta}>
               <h6 className={style.title}>{el.name}</h6>
-              <p className={style.model}>Model</p>
+              <p className={style.model}>{el.options}</p>
             </span>
             <button
               type="button"

@@ -9,7 +9,7 @@ import List from './List'
 import style from './index.module.scss'
 
 const Brand = () => {
-  const [show, setShow] = useState(false)
+  const [show, setShow] = useState(true)
 
   useEffect(() => {
     overflowBody(show)
