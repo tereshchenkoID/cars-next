@@ -39,6 +39,10 @@
     @include make-spacer(m, 0);
   }
 
+  .react-select__single-value {
+    font-size: rem(14px);
+  }
+
   .react-select__indicator-separator {
     display: none;
   }

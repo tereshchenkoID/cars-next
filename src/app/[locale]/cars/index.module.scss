@@ -26,10 +26,21 @@
 }
 
 .filter {
+  // @include flex($direction: column);
+  
+  // position: sticky;
+  // top: calc(var(--header-height) + rem(36px));
+  // max-height: calc(100dvh - var(--header-height) - rem(72px));
+  // overflow-y: hidden;
   border-radius: var(--border-radius-8);
   background-color: var(--color-white);
   box-shadow: var(--box-shadow-4-16);
 }
+
+// .content {
+//   flex-grow: 1;
+//   overflow-y: auto
+// }
 
 .title {
   @include flex(space-between, center);
@@ -44,10 +55,12 @@
 }
 
 .footer {
+  @include flex($direction: column);
   @include make-spacer(pb, var(--gap-16));
 
   border-top-width: rem(1px);
   border-top-style: solid;
+  gap: var(--gap-16);
 }
 
 .content {

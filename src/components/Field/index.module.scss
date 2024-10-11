@@ -23,7 +23,8 @@
 }
 
 .input {
-  @include make-spacer(px, 12px);
+  @include make-spacer(pl, 12px);
+  @include make-spacer(pr, 40px);
   @include transition(border-color);
   @include size(100%);
 
@@ -41,8 +42,6 @@
 
   &[type='datetime-local'],
   &[type='date'] {
-    @include make-spacer(pr, 44px);
-
     appearance: none;
 
     &::-ms-clear,
@@ -74,11 +73,16 @@
   }
 }
 
+.close,
 .icon {
+  @include flex(center, center);
   @include size(rem(40px), 100%);
   @include absolute-center-right(0);
 
   cursor: pointer;
-  pointer-events: none;
   opacity: 0.7;
+}
+
+.icon {
+  pointer-events: none;
 }

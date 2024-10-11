@@ -24,11 +24,14 @@
     "via_email": "Or via e-mail",
     "forgot_password": "Forgot your password?",
     "terms": "I agree to the processing of personal data",
-    "payement": "We accept online card payments as well as wire transfers."
+    "payement": "We accept online card payments as well as wire transfers.",
+    "not_found": "No matching results..."
   },
+  "search": "Search",
   "offers": "Offers",
   "select_make": "Select make",
   "select_model": "Select model",
+  "found_brands": "Found brands",
   "most_searched_tags": "Most searched tags",
   "add_car": "Add a car",
   "all_brands": "All brands",

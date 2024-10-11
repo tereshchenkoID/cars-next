@@ -34,6 +34,7 @@ const Password = ({
         onChange={onChange}
         isRequired={isRequired}
         isDisabled={isDisabled}
+        isClear={false}
       />
       <button
         type={'button'}

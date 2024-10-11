@@ -7,13 +7,13 @@
   position: relative;
   gap: var(--gap-16);
   border-radius: var(--border-radius-4);
-  font-size: rem(14px);
-  font-weight: var(--typography-medium);
   border: rem(1px) solid transparent;
-
   background-color: var(--color-grey-100);
   border-color: var(--color-grey-100);
   color: var(--color-grey-700);
+  font-size: rem(14px);
+  font-weight: var(--typography-medium);
+  cursor: pointer;
 
   @include hover {
 
@@ -77,4 +77,13 @@
 
 .img {
   @include size(rem(32px));
+}
+
+.remove {
+  @include size(rem(32px));
+  @include flex(center, center);
+  @include make-spacer(ml, auto);
+  @include make-spacer(mr, 0);
+
+  color: var(--color-primary);
 }

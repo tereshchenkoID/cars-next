@@ -41,8 +41,9 @@ const List = ({ show, setShow }) => {
             className={style.item}
             onClick={() => {
               dispatch(selectBrands(el.id))
-              setShow(true)
+              setShow(!show)
             }}
+            title={el.options}
           >
             <Image
               width={32}

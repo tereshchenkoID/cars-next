@@ -12,6 +12,7 @@ const Field = ({
   classes = null,
   isRequired = false,
   isDisabled = false,
+  isClear = true,
   min = null,
   max = null,
 }) => {
@@ -39,18 +40,33 @@ const Field = ({
         min={min}
         max={max}
       />
-      {(type === 'datetime-local' || type === 'date') && (
-        <button
-          type={'button'}
-          className={style.icon}
-        >
-          <Icon
-            iconName={'calendar-days'}
-            width={18}
-            height={18}
-          />
-        </button>
-      )}
+      {
+        (type === 'datetime-local' || type === 'date')
+        ?
+          <button
+            type={'button'}
+            className={style.icon}
+          >
+            <Icon
+              iconName={'calendar-days'}
+              width={18}
+              height={18}
+            />
+          </button>
+        :
+          (isClear && data.length > 0) &&
+            <button
+              type={'button'}
+              className={style.close}
+              onClick={() => onChange('')}
+            >
+              <Icon
+                iconName={'xmark'}
+                width={18}
+                height={18}
+              />
+            </button>
+      }
     </div>
   )
 }

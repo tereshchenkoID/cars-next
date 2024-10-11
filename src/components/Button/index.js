@@ -12,6 +12,7 @@ const Button = ({
   icon = false,
   isDisabled = false,
   isActive = false,
+  title = false
 }) => {
 
   return (
@@ -26,14 +27,15 @@ const Button = ({
       }
       disabled={isDisabled}
       onClick={onChange}
-      aria-label={placeholder || 'Button'}
+      aria-label={title || placeholder || icon}
+      title={title || placeholder || icon}
     >
        {
         icon &&
-        <Icon
-          iconName={icon}
-          className={style.icon}
-        />
+          <Icon
+            iconName={icon}
+            className={style.icon}
+          />
       }
       {placeholder && placeholder}
     </button>

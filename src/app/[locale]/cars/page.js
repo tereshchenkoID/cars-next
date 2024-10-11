@@ -50,7 +50,7 @@ const Cars = () => {
     if (!groupedFilters[group]) {
       groupedFilters[group] = []
     }
-    groupedFilters[group].push({ key, filter: filters[key] })
+    groupedFilters[group].push({ key, filter: filters[key].visible === "1" ? filters[key] : null })
   })
 
   const generateParams = () => {
@@ -61,7 +61,7 @@ const Cars = () => {
       if (filterValue && filterValue.length > 0 && filterValue[0] !== DEFAULT) {
         params.append(key, filterValue.join(';'))
       }
-    });
+    })
   
     return params.toString()
   }
@@ -131,7 +131,7 @@ const Cars = () => {
   }, [])
 
   useEffect(() => {
-    router.push(`?${generateParams().toString()}`, { scroll: false })
+    router.push(`?${generateParams()}`, { scroll: false })
   }, [search])
 
   return (
@@ -146,6 +146,7 @@ const Cars = () => {
                 icon={'trash'}
                 classes={['secondary', 'square', 'sm']}
                 onChange={handleReset}
+                title={t('remove')}
               />
             }
           </div>
@@ -156,6 +157,7 @@ const Cars = () => {
                   key={idx}
                   type="button"
                   aria-label={t(el.text)}
+                  title={t(el.text)}
                   className={classNames(style.option, active === idx && style.active)}
                   onClick={() => setActive(idx)}
                 >
@@ -190,6 +192,7 @@ const Cars = () => {
                 >
                   {
                     groupedFilters[group].map(({ key, filter }) => (
+                      filter &&
                       <div
                         key={key}
                         className={style.wrapper}
@@ -284,6 +287,10 @@ const Cars = () => {
           }
         </div>
         <div className={style.footer}>
+          <Button 
+            classes={['primary', 'wide']} 
+            placeholder={t('search')} 
+          />
           <Reference 
             link={NAVIGATION.buy.link} 
             classes={['alt', 'wide']} 

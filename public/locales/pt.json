@@ -24,11 +24,14 @@
     "via_email": "Or via e-mail PT",
     "forgot_password": "Forgot your password? PT",
     "terms": "I agree to the processing of personal data PT",
-    "payement": "We accept online card payments as well as wire transfers. PT"
+    "payement": "We accept online card payments as well as wire transfers. PT",
+    "not_found": "No matching results... PT"
   },
+  "search": "Search PT",
   "offers": "Offers PT",
   "select_make": "Select make PT",
   "select_model": "Select model PT",
+  "found_brands": "Found brands PT",
   "most_searched_tags": "Most searched tags PT",
   "add_car": "Add a car PT",
   "all_brands": "All brands PT",
