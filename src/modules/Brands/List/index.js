@@ -2,6 +2,8 @@ import { useMemo } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useTranslations } from 'next-intl'
 
+import { ACTIVE, DEFAULT } from '@/constant/config'
+
 import { selectBrands, deleteBrands } from '@/store/actions/brandsAction'
 
 import Image from 'next/image'
@@ -18,13 +20,13 @@ const List = ({ show, setShow }) => {
     const selectedOptions = []
 
     brands.forEach((brand) => {
-      const options = brand.options.filter(option => brand.visible === "1" && option.selected === "1")
+      const options = brand.options.filter(option => brand.visible === ACTIVE && option.selected === ACTIVE)
       if (options.length > 0) {
         const optionNames = options.map(option => option.name).join(', ')
         selectedOptions.push({
           id: brand.id,
           name: brand?.name,
-          options: options[0].id === '0' ? t('all_models') : optionNames
+          options: options[0].id === DEFAULT ? t('all_models') : optionNames
         })
       }
     })

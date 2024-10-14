@@ -6,13 +6,12 @@ const initialState = {
 
 const brandsReducer = (state = initialState, action) => {
   switch (action.type) {
-    case types.GET_BRANDS:
+    case types.GET_BRANDS: {
       return state
-    case types.SET_BRANDS:
-      return {
-        ...state,
-        brands: action.payload,
-      }
+    }
+    case types.SET_BRANDS: {
+      return action.payload
+    }
     case types.UPDATE_BRANDS: {
       return state.map(brand => {
         if (brand.id !== action.payload.brandId) {
@@ -96,7 +95,7 @@ const brandsReducer = (state = initialState, action) => {
       return state.map(brand => {
         if (brand.id === action.payload) {
           return { 
-            ...brand, 
+            ...brand,
             active: false,
             options: brand.options.map(option => ({
               ...option,
@@ -105,10 +104,11 @@ const brandsReducer = (state = initialState, action) => {
           }
         }
         return brand
-      });
+      })
     }
-    default:
+    default: {
       return state
+    }
   }
 }
 

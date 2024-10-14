@@ -31,18 +31,6 @@ export const metadata = {
 
 const API_BASE_URL = 'https://api.oddsbit.io/auto'
 
-// export function generateSearchFromFilters(filters) {
-//   const search = {}
-
-//   for (const [key] of Object.entries(filters)) {
-//     search[key] = {
-//       value: ['0']
-//     }
-//   }
-
-//   return search
-// }
-
 async function fetchData(endpoint) {
   try {
     const res = await fetch(`${API_BASE_URL}${endpoint}`, {

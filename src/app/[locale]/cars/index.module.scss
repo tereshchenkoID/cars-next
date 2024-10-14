@@ -67,7 +67,7 @@
   @include make-spacer(pb, var(--gap-16));
 
   display: grid;
-  gap: rem(--gap-16);
+  gap: var(--gap-16);
   align-self: flex-start;
 }
 
@@ -192,6 +192,12 @@
   }
 }
 
+.meta {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  align-items: center;
+}
+
 .searches {
   @include flex($align-items: center, $wrap: wrap);
 
@@ -212,8 +218,12 @@
   height: rem(32px);
   font-size: rem(14px);
   font-weight: var(--typography-medium);
-  text-transform: capitalize;
   white-space: nowrap;
+
+  &.gold {
+    background: var(--gradient-gold);
+    color: var(--color-white);
+  }
 
   @include hover {
 

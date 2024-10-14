@@ -60,8 +60,13 @@
   "history": "History",
   "from": "From",
   "to": "To",
+  "model": "Model",
   "filter": "Filter",
   "remove": "Remove",
+  "save_search": "Save search",
+  "newest_ad": "Newest ad",
+  "lowest_price": "Lowest price",
+  "highest_price": "Highest price",
   "filters": {
     "category": {
       "0": "Category",
@@ -75,12 +80,6 @@
       "2": "SUV / Offroad",
       "3": "Coupe",
       "4": "Van"
-    },
-    "brand": {
-      "0": "Brand"
-    },
-    "model": {
-      "0": "Model"
     },
     "year": {
       "0": "Year"

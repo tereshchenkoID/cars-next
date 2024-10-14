@@ -81,7 +81,10 @@ const Menu = ({ setShow, show }) => {
         }
         {
           MENU.map((el, idx) =>
-            <div key={idx} className={style.item}>
+            <div 
+              key={idx} 
+              className={style.item}
+            >
               {
                 el.submenu
                   ?
@@ -124,7 +127,10 @@ const Menu = ({ setShow, show }) => {
               }
               {
                 (active === idx && el.submenu) &&
-                <div ref={blockRef} className={style.dropdown}>
+                <div 
+                  ref={blockRef} 
+                  className={style.dropdown}
+                >
                   {
                     el.submenu.map((s_el, s_idx) => (
                       <Reference

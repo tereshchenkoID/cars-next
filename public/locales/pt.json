@@ -60,8 +60,13 @@
   "history": "History PT",
   "from": "From PT",
   "to": "To PT",
+  "model": "Model PT",
   "filter": "Filter PT",
   "remove": "Remove PT",
+  "save_search": "Save search PT",
+  "newest_ad": "Newest ad PT",
+  "lowest_price": "Lowest price PT",
+  "highest_price": "Highest price PT",
   "filters": {
     "category": {
       "0": "Category PT",
@@ -78,9 +83,6 @@
     },
     "brand": {
       "0": "Brand PT"
-    },
-    "model": {
-      "0": "Model PT"
     },
     "year": {
       "0": "Year PT"

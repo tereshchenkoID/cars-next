@@ -1,0 +1,28 @@
+@import '@/scss/config';
+
+.block {
+  @include flex(flex-end, center);
+
+  gap: var(--gap-4);
+
+  .prev {
+    transform: rotateZ(90deg);
+  }
+
+  .next {
+    transform: rotateZ(-90deg);
+  }
+
+  .option {
+    @include make-spacer(px, 4px);
+
+    background-color: transparent;
+    border-color: transparent;
+    color: var(--color-text);
+
+    &.active {
+      border-color: var(--color-primary);
+      color: var(--color-primary);
+    }
+  }
+}

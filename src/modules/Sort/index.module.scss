@@ -1,0 +1,73 @@
+@import '@/scss/config';
+
+.block {
+  @include flex($align-items: center);
+
+  gap: var(--gap-4);
+  font-size: rem(12px);
+}
+
+.arrow,
+.item {
+  @include transition;
+}
+
+.counts,
+.toggle {
+  @include flex($align-items: center);
+
+  gap: var(--gap-4);
+}
+
+.hr {
+  @include make-spacer(mx, var(--gap-12));
+  @include size(rem(1px), rem(20px));
+
+  background-color: var(--color-text);
+}
+
+.dropdown {
+  position: relative;
+}
+
+.toggle {
+  font-weight: var(--typography-bold);
+
+  &.active {
+
+    .arrow {
+      transform: rotateZ(180deg);
+    }
+  }
+}
+
+.list {
+  @include make-spacer(p, 8px);
+
+  position: absolute;
+  top: calc(100% + var(--gap-8));
+  border-radius: var(--border-radius-4);
+  background-color: var(--color-white);
+  z-index: $z-index-1;
+  min-width: rem(130px);
+}
+
+.item {
+  @include make-spacer(px, 8px);
+  @include make-spacer(py, 4px);
+
+  border-radius: var(--border-radius-4);
+  cursor: pointer;
+  white-space: nowrap;
+
+  @include hover {
+
+    &:hover {
+      background-color: var(--color-grey-50);
+    }
+  }
+
+  &.active {
+    color: var(--color-primary);
+  }
+}

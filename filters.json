@@ -1,0 +1,243 @@
+{
+  "category": {
+    "options": {
+      "0": "All",
+      "1": "Passenger cars",
+      "2": "Moto",
+      "3": "Trucks"
+    },
+    "type": "checkbox",
+    "flag": "0",
+    "visible": "1",
+    "group": "0"
+  },
+  "body": {
+    "options": {
+      "0": "All",
+      "1": "Sedan",
+      "2": "SUV / Offroad",
+      "3": "Coupe",
+      "4": "Van"
+    },
+    "type": "checkbox",
+    "flag": "0",
+    "visible": "1",
+    "group": "1"
+  },
+  "year_from": {
+    "options": null,
+    "type": "select",
+    "flag": "0",
+    "visible": "1",
+    "group": "2"
+  },
+  "year_to": {
+    "options": null,
+    "type": "select",
+    "flag": "0",
+    "visible": "1",
+    "group": "2"
+  },
+  "price_from": {
+    "options": null,
+    "type": "field",
+    "flag": "0",
+    "visible": "1",
+    "group": "3"
+  },
+  "price_to": {
+    "options": null,
+    "type": "field",
+    "flag": "0",
+    "visible": "1",
+    "group": "3"
+  },
+  "mileage_from": {
+    "options": null,
+    "type": "field",
+    "flag": "0",
+    "visible": "1",
+    "group": "4"
+  },
+  "mileage_to": {
+    "options": null,
+    "type": "field",
+    "flag": "0",
+    "visible": "1",
+    "group": "4"
+  },
+  "fuel": {
+    "options": {
+      "0": "All",
+      "1": "Gas",
+      "2": "Electro",
+      "3": "Diesel"
+    },
+    "type": "checkbox",
+    "flag": "0",
+    "visible": "1",
+    "group": "5"
+  },
+  "eco": {
+    "options": {
+      "0": "All",
+      "1": "EURO-6",
+      "2": "EURO-5",
+      "3": "EURO-4",
+      "4": "EURO-3"
+    },
+    "type": "checkbox",
+    "flag": "0",
+    "visible": "1",
+    "group": "6"
+  },
+  "state": {
+    "options": {
+      "0": "All",
+      "1": "Used",
+      "2": "New"
+    },
+    "type": "select",
+    "flag": "0",
+    "visible": "1",
+    "group": "7"
+  },
+  "country": {
+    "type": "select",
+    "child": "region",
+    "options": {
+      "0": "All",
+      "AU": "Australia",
+      "AT": "Austria",
+      "AZ": "Azerbaijan",
+      "AL": "Albania",
+      "DZ": "Algeria",
+      "AO": "Angola",
+      "AG": "Antigua and Barbuda",
+      "MO": "Macau",
+      "AR": "Argentina",
+      "BB": "Barbados",
+      "BH": "Bahrain",
+      "BY": "Belarus",
+      "BE": "Belgium",
+      "BG": "Bulgaria",
+      "BO": "Bolivia",
+      "BR": "Brazil",
+      "GB": "England",
+      "HU": "Hungary",
+      "VE": "Venezuela",
+      "VN": "Viet Nam",
+      "GH": "Ghana",
+      "GP": "Guadeloupe",
+      "GT": "Guatemala",
+      "DE": "Germany",
+      "GI": "Gibraltar",
+      "HN": "Honduras",
+      "HK": "Hong Kong",
+      "GR": "Greece",
+      "GE": "Georgia",
+      "DK": "Denmark",
+      "DO": "Dominican Republic",
+      "EG": "Egypt",
+      "IL": "Israel",
+      "IN": "India",
+      "ID": "Indonesia",
+      "JO": "Jordan",
+      "IR": "Iran",
+      "IS": "Iceland",
+      "ES": "Spain",
+      "IT": "Italy",
+      "KZ": "Kazakhstan",
+      "CA": "Canada",
+      "QA": "Qatar",
+      "CY": "Cyprus",
+      "CN": "China",
+      "CO": "Colombia",
+      "CG": "Congo",
+      "CD": "The Democratic Republic of Congo",
+      "KR": "Korea Republic",
+      "CR": "Costa Rica",
+      "KW": "Kuwait",
+      "LV": "Latvia",
+      "LB": "Lebanon",
+      "LT": "Lithuania",
+      "MK": "Macedonia",
+      "MY": "Malaysia",
+      "MT": "Malta",
+      "MA": "Morocco",
+      "MX": "Mexico",
+      "MD": "Moldova",
+      "MM": "Myanmar",
+      "NL": "Netherlands",
+      "NI": "Nicaragua",
+      "NZ": "New Zealand",
+      "NO": "Norway",
+      "AE": "United Arab Emirates",
+      "OM": "Oman",
+      "PK": "Pakistan",
+      "PA": "Panama",
+      "PY": "Paraguay",
+      "PE": "Peru",
+      "PL": "Poland",
+      "PT": "Portugal",
+      "RU": "Russian Federation",
+      "RO": "Romania",
+      "SV": "El Salvador",
+      "SA": "Saudi Arabia",
+      "SN": "Senegal",
+      "RS": "Serbia",
+      "SG": "Singapore",
+      "SK": "Slovakia",
+      "SI": "Slovenia",
+      "US": "USA",
+      "TH": "Thailand",
+      "TW": "Taiwan",
+      "TN": "Tunisia",
+      "TR": "Turkey",
+      "UA": "Ukraine",
+      "UY": "Uruguay",
+      "PH": "Philippines",
+      "FI": "Finland",
+      "FR": "France",
+      "HR": "Croatia",
+      "CZ": "Czech Republic",
+      "CL": "Chile",
+      "CH": "Switzerland",
+      "SE": "Sweden",
+      "EC": "Ecuador",
+      "EE": "Estonia",
+      "ZA": "South Africa",
+      "JM": "Jamaica",
+      "JP": "Japan",
+      "IE": "Ireland",
+      "NG": "Nigeria",
+      "MZ": "Mozambique"
+    },
+    "flag": "1",
+    "visible": "1",
+    "group": "8"
+  },
+  "region": {
+    "type": "select",
+    "child": "region",
+    "options": [
+      "All"
+    ],
+    "flag": "0",
+    "visible": "1",
+    "group": "9"
+  },
+  "color": {
+    "options": {
+      "0": "All",
+      "1": "white",
+      "2": "black",
+      "3": "green",
+      "4": "red"
+    },
+    "type": "color",
+    "flag": "0",
+    "visible": "1",
+    "group": "10"
+  }
+}

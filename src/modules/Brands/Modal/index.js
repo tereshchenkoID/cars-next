@@ -1,7 +1,8 @@
-import { useEffect, useMemo, useState } from 'react'
+import { useMemo, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useTranslations } from 'next-intl'
-import { useRouter } from '@/i18n/routing'
+
+import { ACTIVE, DEFAULT } from '@/constant/config'
 
 import { selectBrands, updateBrands } from '@/store/actions/brandsAction'
 
@@ -16,36 +17,11 @@ import style from './index.module.scss'
 const Modal = ({ show, setShow }) => {
   const t = useTranslations()
   const dispatch = useDispatch()
-  const router = useRouter()
   const brands = useSelector((state) => state.brands)
   const [query, setQuery] = useState('')
 
-  const buildQueryParams = () => {
-    const params = new URLSearchParams()
-  
-    brands.forEach((brand) => {
-      let selectedOptions = brand.options
-        .filter(option => option.selected === "1")
-        .map(option => option.id)
-  
-      if (selectedOptions.includes("0")) {
-        selectedOptions = ["0"]
-      }
-  
-      if (selectedOptions.length > 0) {
-        params.append(`make_${brand.id}`, JSON.stringify(selectedOptions))
-      }
-    })
-  
-    return params.toString()
-      .replace(/%5B/g, '[')
-      .replace(/%5D/g, ']')
-      .replace(/%2C/g, ',')
-      .replace(/%22/g, '')
-  }
-
   const mostBrands = useMemo(
-    () => brands.filter(brand => brand.recent === "1"),
+    () => brands.filter(brand => brand.recent === ACTIVE),
     [brands]
   )
 
@@ -55,7 +31,7 @@ const Modal = ({ show, setShow }) => {
   )
   
   const activeModels = useMemo(
-    () => activeBrand?.options?.find(model => model.selected === "1") || null,
+    () => activeBrand?.options?.find(model => model.selected === ACTIVE) || null,
     [activeBrand]
   )
 
@@ -71,8 +47,7 @@ const Modal = ({ show, setShow }) => {
   )
 
   const handleChecked = (model) => {
-    const newSelected = model.selected === "1" ? "0" : "1"
-    dispatch(updateBrands(activeBrand.id, model.id, newSelected))
+    dispatch(updateBrands(activeBrand.id, model.id, model.selected === ACTIVE ? DEFAULT : ACTIVE))
   }
 
   const handleSelectBrand = (id) => {
@@ -85,11 +60,6 @@ const Modal = ({ show, setShow }) => {
     setQuery('')
     handleSelectBrand(null)
   }
-
-  useEffect(() => {
-    // console.log(buildQueryParams())
-    router.push(`?${buildQueryParams()}`, { scroll: false })
-  }, [brands])
 
   return (
     <div className={style.block}>
@@ -144,7 +114,7 @@ const Modal = ({ show, setShow }) => {
                         searchBrands.length > 0 
                           ?
                             searchBrands.map((el, idx) =>
-                              el.visible === "1" &&
+                              el.visible === ACTIVE &&
                               <li
                                 key={idx}
                                 className={style.model}
@@ -162,7 +132,7 @@ const Modal = ({ show, setShow }) => {
                             </li>
                       :
                         activeBrand.options?.map((el, idx) =>
-                          el.visible === "1" &&
+                          el.visible === ACTIVE &&
                           <li
                             key={idx}
                             className={style.model}

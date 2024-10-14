@@ -1,4 +1,6 @@
 export const LOADING = 500
+export const DEFAULT = "0"
+export const ACTIVE = "1"
 
 export const NAVIGATION = {
   home: {

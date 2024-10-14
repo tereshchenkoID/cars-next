@@ -3,6 +3,8 @@ import { useTranslations } from 'next-intl'
 
 import classNames from 'classnames'
 
+import { ACTIVE } from '@/constant/config'
+
 import { deleteBrands } from '@/store/actions/brandsAction'
 
 import Image from 'next/image'
@@ -14,7 +16,7 @@ const Brand = ({ data, onChange, isWide = false }) => {
   const t = useTranslations()
   const dispatch = useDispatch()
   const length = data?.options.length
-  const counts = data?.options.filter(option => option.selected === "1").length
+  const counts = data?.options.filter(option => option.selected === ACTIVE).length
 
   return (
     <div
