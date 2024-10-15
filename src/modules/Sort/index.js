@@ -44,7 +44,7 @@ const Sort = () => {
     <div className={style.block}>
       <p className={style.counts}>
         <strong>1 113 386</strong>
-        <span>results</span>
+        <span>{t('results')}</span>
       </p>
       <hr className={style.hr} />
       <div className={style.dropdown}>

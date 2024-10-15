@@ -22,7 +22,8 @@
     "react-select": "^5.8.1",
     "react-toastify": "^10.0.5",
     "sas": "^3.0.4",
-    "sass": "^1.79.4"
+    "sass": "^1.79.4",
+    "swiper": "^11.1.14"
   },
   "devDependencies": {
     "eslint": "^8",

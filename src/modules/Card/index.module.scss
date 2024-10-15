@@ -4,9 +4,11 @@
   display: grid;
   grid-template-columns: rem(277px) minmax(rem(277px), 1fr);
   grid-template-rows: minmax(rem(208px), 1fr);
-  border-radius: rem(8px);
+  align-items: flex-start;
+  border-radius: var(--border-radius-8);
   box-shadow: var(--box-shadow-4-8);
   overflow: hidden;
+  background-color: var(--color-white);
 }
 
 .left,
@@ -14,16 +16,36 @@
   position: relative;
 }
 
+.favorite,
+.count {
+  @include flex(center, center);
+
+  position: absolute;
+  right: rem(12px);
+  z-index: $z-index-1;
+}
+
+.options,
+.tags {
+  @include flex($align-items: center, $wrap: wrap);
+}
+
 .meta {
+  @include make-spacer(mt, auto);
+  @include make-spacer(mb, 0);
   @include flex(flex-end, center);
 }
 
 .favorite {
-  @include flex(center, center);
-
-  position: absolute;
   top: rem(12px);
-  right: rem(12px);
+  color: var(--color-grey-500);
+
+  @include hover {
+
+    &:hover {
+      transform: scale(1.2);
+    }
+  }
 }
 
 .right {
@@ -34,16 +56,11 @@
   display: grid;
   align-items: flex-start;
   gap: var(--gap-12);
-  background-color: var(--color-white);
+  height: 100%;
 }
 
 .icon {
   color: var(--color-text);
-}
-
-.options,
-.tags {
-  @include flex($align-items: center, $wrap: wrap);
 }
 
 .options {
@@ -64,6 +81,7 @@
 }
 
 .tag {
+  @include transition;
   @include flex($align-items: center);
   @include make-spacer(px, rem(8px));
   @include make-spacer(py, rem(2px));
@@ -75,4 +93,91 @@
   background-color: var(--color-secondary);
   color: var(--color-primary-hover);
   height: rem(24px);
+
+  &.alt {
+    cursor: pointer;
+    background-color: transparent;
+    border: rem(1px) solid transparent;
+
+    @include hover {
+
+      &:hover {
+        border-color: var(--color-primary);
+      }
+    }
+  }
+}
+
+.count {
+  @include make-spacer(px, rem(8px));
+  @include transition;
+  @include size(fit-content, rem(32px));
+
+  bottom: var(--gap-12);
+  gap: var(--gap-8);
+  border-radius: var(--border-radius-4);
+  background-color: rgba(19, 28, 74, 0.48);
+  min-width: rem(66px);
+  cursor: pointer;
+  color: var(--color-white);
+
+  @include hover {
+
+    &:hover {
+      background-color: rgba(19, 28, 74, 0.9);
+      transform: scale(1.06);
+    }
+  }
+}
+
+.slider {
+  @include size(100%);
+
+  position: relative;
+
+  :global {
+
+    .swiper-button-prev,
+    .swiper-button-next {
+      @include transition;
+      @include size(rem(32px), 96px);
+      @include make-spacer(mt, 0);
+
+      top: 50%;
+      transform: translateY(-50%);
+      background-color: rgba(19, 28, 74, 0.56);
+
+      &::after {
+        font-size: rem(12px);
+        color: var(--color-white);
+      }
+
+      @include hover {
+
+        &:hover {
+          background-color: rgba(19, 28, 74, 0.8);
+        }
+      }
+    }
+
+    .swiper-button-prev {
+      left: 0;
+      border-radius: 0 var(--border-radius-4) var(--border-radius-4) 0;
+    }
+
+    .swiper-button-next {
+      right: 0;
+      border-radius: var(--border-radius-4) 0 0 var(--border-radius-4);
+    }
+
+    .swiper-pagination-bullet {
+      background-color: var(--color-grey-400);
+      border: rem(1px) solid var(--color-grey-400);
+      opacity: 1;
+
+      &.swiper-pagination-bullet-active {
+        background-color: transparent;
+      }
+    }
+  }
 }

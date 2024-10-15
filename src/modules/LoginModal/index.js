@@ -101,7 +101,7 @@ const LoginModal = () => {
         <label className={style.label}>{t('login')}</label>
         <Field
           placeholder={t('username')}
-          data={filter.login}
+          data={filter.username}
           onChange={(value) => handlePropsChange('username', value)}
         />
         <Password

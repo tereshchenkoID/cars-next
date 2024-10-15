@@ -22,6 +22,7 @@ import Icon from '@/components/Icon'
 import Brands from '@/modules/Brands'
 import Card from '@/modules/Card'
 import Sort from '@/modules/Sort'
+import SavedCard from '@/modules/SavedCard'
 import Pagination from '@/modules/Pagination'
 
 import style from './index.module.scss'
@@ -219,130 +220,148 @@ const Cars = () => {
           </div>
         </div>
         <div className={style.content}>
-          <div className={style.section}>
-            <h6 className={style.subtitle}>{t('model')}</h6>
-            <Brands />
-          </div>
           {
-            Object.keys(groupedFilters).map((group) => (
-              <div
-                key={group}
-                className={style.section}
-              >
-                <h6 className={style.subtitle}>{t(`filters.${groupedFilters[group][0].key.split('_')[0]}.0`)}</h6>
-                <div 
-                  className={style.wrapper}
-                  style={{
-                    gridTemplateColumns: `repeat(${groupedFilters[group].length}, 1fr)`,
-                  }}
-                >
-                  {
-                    groupedFilters[group].map(({ key, filter }) => (
-                      filter &&
-                      <div
-                        key={key}
-                        className={style.wrapper}
-                      >
-                        {
-                          key.split('_').length > 1 &&
-                          <p className={style.label}>{t(key.split('_')[1])}:</p>
-                        }
-
-                        {filter.type === "select" && (
-                          <div className={style.list}>
-                            <Select
-                              id={`select_${key}`}
-                              options={
-                                key.includes('year')
-                                  ? 
-                                    years.map(year => ({
-                                      value: year === DEFAULT ? DEFAULT : year,
-                                      label: year === DEFAULT ? t('all') : year,
-                                    }))
-                                  : 
-                                    Object.entries(filter.options).map(([optionKey, optionValue]) => ({
-                                        value: optionKey,
-                                        label: optionKey === DEFAULT ? t('all') : (filter.translation === DEFAULT ? optionValue : t(`filters.${key}.${optionKey}`)),
-                                      })
-                                    )
-                              }
-                              data={search[key]?.value?.[search[key]?.value?.length - 1] || DEFAULT}
-                              onChange={(value) => handleChange(filter.type, key, value)}
-                            />
-                          </div>
-                        )}
-
-                        {filter.type === "field" && (
-                          <div className={style.grid}>
-                            <Field
-                              type="number"
-                              placeholder={t('all')}
-                              data={
-                                search[key]?.value?.[search[key]?.value?.length - 1] === DEFAULT
-                                  ? ''
-                                  : search[key]?.value?.[search[key]?.value?.length - 1] || ''
-                              }
-                              onChange={(value) => handleChange(filter.type, key, value)}
-                            />
-                          </div>
-                        )}
-
-                        {filter.type === "checkbox" && (
-                          <div className={style.list}>
-                            {
-                              Object.entries(filter.options).map(([optionKey, optionValue]) => (
-                                <Checkbox
-                                  key={optionKey}
-                                  placeholder={optionKey === DEFAULT ? t('all') : t(`filters.${key}.${optionKey}`)}
-                                  data={search[key]?.value?.includes(optionKey) ? ACTIVE : DEFAULT}
-                                  onChange={() => handleChange(filter.type, key, optionKey)}
-                                />
-                              ))
-                            }
-                          </div>
-                        )}
-
-                        {filter.type === "color" && (
-                          <div className={style.colors}>
-                            {
-                              Object.entries(filter.options).map(([optionKey, optionValue]) => (
-                                <button
-                                  key={optionKey}
-                                  type="button"
-                                  aria-label={t(`filters.${key}.${optionKey}`)}
-                                  style={{ backgroundColor: optionValue }}
-                                  title={optionKey === DEFAULT ? t('all') : t(`filters.${key}.${optionKey}`)}
-                                  className={
-                                    classNames(
-                                      style.color,
-                                      search[key]?.value?.includes(optionKey) && style.active
-                                    )
-                                  }
-                                  onClick={() => handleChange(filter.type, key, optionKey)}
-                                />
-                              ))
-                            }
-                          </div>
-                        )}
-                      </div>
-                    ))
-                  }
-                </div>
+            active === 0 &&
+            <>
+              <div className={style.section}>
+                <h6 className={style.subtitle}>{t('model')}</h6>
+                <Brands />
               </div>
-            ))
+              {
+                Object.keys(groupedFilters).map((group) => (
+                  <div
+                    key={group}
+                    className={style.section}
+                  >
+                    <h6 className={style.subtitle}>{t(`filters.${groupedFilters[group][0].key.split('_')[0]}.0`)}</h6>
+                    <div 
+                      className={style.wrapper}
+                      style={{
+                        gridTemplateColumns: `repeat(${groupedFilters[group].length}, 1fr)`,
+                      }}
+                    >
+                      {
+                        groupedFilters[group].map(({ key, filter }) => (
+                          filter &&
+                          <div
+                            key={key}
+                            className={style.wrapper}
+                          >
+                            {
+                              key.split('_').length > 1 &&
+                              <p className={style.label}>{t(key.split('_')[1])}:</p>
+                            }
+
+                            {filter.type === "select" && (
+                              <div className={style.list}>
+                                <Select
+                                  id={`select_${key}`}
+                                  options={
+                                    key.includes('year')
+                                      ? 
+                                        years.map(year => ({
+                                          value: year === DEFAULT ? DEFAULT : year,
+                                          label: year === DEFAULT ? t('all') : year,
+                                        }))
+                                      : 
+                                        Object.entries(filter.options).map(([optionKey, optionValue]) => ({
+                                            value: optionKey,
+                                            label: optionKey === DEFAULT ? t('all') : (filter.translation === DEFAULT ? optionValue : t(`filters.${key}.${optionKey}`)),
+                                          })
+                                        )
+                                  }
+                                  data={search[key]?.value?.[search[key]?.value?.length - 1] || DEFAULT}
+                                  onChange={(value) => handleChange(filter.type, key, value)}
+                                />
+                              </div>
+                            )}
+
+                            {filter.type === "field" && (
+                              <div className={style.grid}>
+                                <Field
+                                  type="number"
+                                  placeholder={t('all')}
+                                  data={
+                                    search[key]?.value?.[search[key]?.value?.length - 1] === DEFAULT
+                                      ? ''
+                                      : search[key]?.value?.[search[key]?.value?.length - 1] || ''
+                                  }
+                                  onChange={(value) => handleChange(filter.type, key, value)}
+                                />
+                              </div>
+                            )}
+
+                            {filter.type === "checkbox" && (
+                              <div className={style.list}>
+                                {
+                                  Object.entries(filter.options).map(([optionKey, optionValue]) => (
+                                    <Checkbox
+                                      key={optionKey}
+                                      placeholder={optionKey === DEFAULT ? t('all') : t(`filters.${key}.${optionKey}`)}
+                                      data={search[key]?.value?.includes(optionKey) ? ACTIVE : DEFAULT}
+                                      onChange={() => handleChange(filter.type, key, optionKey)}
+                                    />
+                                  ))
+                                }
+                              </div>
+                            )}
+
+                            {filter.type === "color" && (
+                              <div className={style.colors}>
+                                {
+                                  Object.entries(filter.options).map(([optionKey, optionValue]) => (
+                                    <button
+                                      key={optionKey}
+                                      type="button"
+                                      aria-label={t(`filters.${key}.${optionKey}`)}
+                                      style={{ backgroundColor: optionValue }}
+                                      title={optionKey === DEFAULT ? t('all') : t(`filters.${key}.${optionKey}`)}
+                                      className={
+                                        classNames(
+                                          style.color,
+                                          search[key]?.value?.includes(optionKey) && style.active
+                                        )
+                                      }
+                                      onClick={() => handleChange(filter.type, key, optionKey)}
+                                    />
+                                  ))
+                                }
+                              </div>
+                            )}
+                          </div>
+                        ))
+                      }
+                    </div>
+                  </div>
+                ))
+              }
+            </>
+          }
+
+          {
+            active === 1 &&
+            <SavedCard isExists={true} />
+          }
+
+          {
+            active === 2 &&
+            <SavedCard isExists={false} />
           }
         </div>
-        <div className={style.footer}>
-          <Button 
-            classes={['primary', 'wide']} 
-            placeholder={t('search')} 
-          />
-          <Reference 
-            link={NAVIGATION.buy.link} 
-            classes={['alt', 'wide']} 
-            placeholder={t('detailed_search')} 
-          />
-        </div>
+        {
+          active === 0 &&
+          <div className={style.footer}>
+            <Button 
+              classes={['primary', 'wide']} 
+              placeholder={t('search')} 
+            />
+            <Reference 
+              link={NAVIGATION.advanced_search.link} 
+              classes={['alt', 'wide']} 
+              placeholder={t(NAVIGATION.advanced_search.text)} 
+            />
+          </div>
+        }
       </div>
 
       <div className={style.content}>

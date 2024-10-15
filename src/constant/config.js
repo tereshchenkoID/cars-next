@@ -31,6 +31,10 @@ export const NAVIGATION = {
     link: 'about-us',
     text: 'navigation.about_us',
   },
+  advanced_search: {
+    link: 'advanced-search',
+    text: 'navigation.advanced_search'
+  }
 }
 
 export const ROUTES_USER = {

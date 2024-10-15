@@ -1,0 +1,52 @@
+@import '@/scss/config';
+
+.block {
+  @include transition;
+  @include make-spacer(p, 12px);
+
+  display: grid;
+  gap: var(--gap-8);
+  border-radius: var(--border-radius-8);
+  border-style: solid;
+  border-width: rem(1px);
+  overflow: hidden;
+  cursor: pointer;
+
+  @include hover {
+
+    &:hover {
+      border-color: var(--color-primary);
+    }
+  }
+}
+
+.options,
+.tags {
+  @include flex($align-items: center, $wrap: wrap);
+}
+
+.head {
+  @include flex(space-between, center);
+}
+
+.title {
+  font-size: rem(16px);
+}
+
+.tags {
+  gap: var(--gap-6);
+}
+
+.tag {
+  @include flex($align-items: center);
+  @include make-spacer(px, rem(8px));
+  @include make-spacer(py, rem(2px));
+
+  border-radius: var(--border-radius-4);
+  font-size: rem(12px);
+  font-weight: var(--typography-bold);
+  white-space: nowrap;
+  background-color: var(--color-secondary);
+  color: var(--color-primary-hover);
+  height: rem(24px);
+}

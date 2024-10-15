@@ -8,6 +8,17 @@ const withNextIntl = createNextIntlPlugin()
  
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  // For test remove after
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'storage.alpha-analytics.cz',
+        port: '',
+        pathname: '/resize/**',
+      },
+    ],
+  },
   webpack(config, options) {
     // if (!options.isServer) {
     //   if (options.dev) {

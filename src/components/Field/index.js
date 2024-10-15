@@ -54,7 +54,7 @@ const Field = ({
             />
           </button>
         :
-          (isClear && data.length > 0) &&
+          (isClear && data?.length > 0) &&
             <button
               type={'button'}
               className={style.close}

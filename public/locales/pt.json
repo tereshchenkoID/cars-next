@@ -9,7 +9,8 @@
     "about_us": "About us PT",
     "profile": "Profile PT",
     "sale": "Sale PT",
-    "favorite": "Favorite PT"
+    "favorite": "Favorite PT",
+    "advanced_search": "Detailed search PT"
   },
   "modal": {
     "login": "Welcome back PT",
@@ -27,6 +28,9 @@
     "payement": "We accept online card payments as well as wire transfers. PT",
     "not_found": "No matching results... PT"
   },
+  "hide": "Hide PT",
+  "more": "More PT",
+  "favorite": "Favorite PT",
   "search": "Search PT",
   "offers": "Offers PT",
   "select_make": "Select make PT",
@@ -37,7 +41,6 @@
   "all_brands": "All brands PT",
   "all_models": "All models PT",
   "make_or_model": "Make or model PT",
-  "detailed_search": "Detailed search PT",
   "username": "Username PT",
   "menu": "Menu PT",
   "profile": "Profile PT",
@@ -67,6 +70,7 @@
   "newest_ad": "Newest ad PT",
   "lowest_price": "Lowest price PT",
   "highest_price": "Highest price PT",
+  "results": "Results PT",
   "filters": {
     "category": {
       "0": "Category PT",
