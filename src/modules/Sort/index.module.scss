@@ -1,10 +1,16 @@
 @import '@/scss/config';
 
 .block {
-  @include flex($align-items: center);
+  @include flex(space-between, center);
 
+  position: relative;
   gap: var(--gap-4);
   font-size: rem(12px);
+  z-index: $z-index-2;
+
+  @include media-breakpoint-up(lg) {
+    justify-content: flex-start;
+  }
 }
 
 .arrow,
@@ -23,7 +29,12 @@
   @include make-spacer(mx, var(--gap-12));
   @include size(rem(1px), rem(20px));
 
+  display: none;
   background-color: var(--color-text);
+
+  @include media-breakpoint-up(lg) {
+    display: block;
+  }
 }
 
 .dropdown {
@@ -46,10 +57,16 @@
 
   position: absolute;
   top: calc(100% + var(--gap-8));
+  right: 0;
   border-radius: var(--border-radius-4);
   background-color: var(--color-white);
   z-index: $z-index-1;
   min-width: rem(130px);
+
+  @include media-breakpoint-up(md) {
+    right: auto;
+    left: 0;
+  }
 }
 
 .item {

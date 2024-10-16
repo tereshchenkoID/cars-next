@@ -2,10 +2,12 @@ import { useState } from 'react'
 import { useSelector } from 'react-redux'
 import { useTranslations } from 'next-intl'
 import { Swiper, SwiperSlide } from 'swiper/react'
-import { Pagination, Navigation } from 'swiper/modules'
+import { Pagination, Navigation, Mousewheel } from 'swiper/modules'
+import { Fancybox } from '@fancyapps/ui'
 
 import classNames from 'classnames'
 
+import '@fancyapps/ui/dist/fancybox/fancybox.css';
 import 'swiper/css'
 import 'swiper/css/pagination'
 import 'swiper/css/navigation'
@@ -42,14 +44,15 @@ const data = {
   ]
 }
 
+const COUNT = 4
+
 const Card = () => {
   const t = useTranslations()
   const { auth } = useSelector((state) => state.auth)
   const filters = useSelector((state) => state.filters)
   const [show, setShow] = useState(false)
-  const visibleCount = 4
   const totalItems = data.options.length
-  const hiddenItemsCount = totalItems - visibleCount
+  const hiddenItemsCount = totalItems - COUNT
 
   return (
     <div className={style.block}>
@@ -57,29 +60,46 @@ const Card = () => {
         <Swiper
           className={style.slider}
           slidesPerView={1}
-          // onSlideChange={() => console.log('slide change')}
-          // onSwiper={(swiper) => console.log(swiper)}
-          pagination={true} 
+          loop={true}
+          pagination={{
+            dynamicBullets: true,
+            clickable: true,
+          }} 
           navigation={true}
-          modules={[Pagination, Navigation]}
+          // mousewheel={true}
+          modules={[Pagination, Mousewheel, Navigation]}
         >
           {
             data.images.map((el, idx) =>
               <SwiperSlide key={idx}>
                 <Image
+                  src={el}
                   width={277}
                   height={207}
                   className={style.image}
-                  src={el}
-                  priority={false}
-                  alt={`Image ${idx}}`}
+                  priority={true}
+                  alt={`${t('image')} ${idx}`}
                 />
               </SwiperSlide>
             )
           }
         </Swiper>
 
-        <div className={style.count}>
+        <div 
+          className={style.count}
+          onClick={() => {
+            Fancybox.show(
+              data.images.map((src, index) => ({
+                src,
+                type: 'image',
+                caption: `${t('image')} ${index + 1}`,
+              })),
+              {
+                groupAll: true,
+              }
+            );
+          }}
+        >
           <Icon 
             iconName={'image'}
             width={24}
@@ -154,8 +174,7 @@ const Card = () => {
 
         <ul className={style.tags}>
           {
-            (show ? data.options : data.options.slice(0, visibleCount)).map((el, idx) =>
-            // data.options.map((el, idx) =>
+            data.options.slice(0, show ? data.options.length : COUNT).map((el, idx) =>
               <li 
                 key={idx}
                 className={style.tag}

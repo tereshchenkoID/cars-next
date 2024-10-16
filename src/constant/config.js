@@ -1,6 +1,15 @@
 export const LOADING = 500
 export const DEFAULT = "0"
 export const ACTIVE = "1"
+export const TYPES = ["checkbox", "color"]
+
+export const BREAKPOINTS = {
+  xs: 0,
+  sm: 576,
+  md: 768,
+  lg: 992,
+  xl: 1280
+}
 
 export const NAVIGATION = {
   home: {

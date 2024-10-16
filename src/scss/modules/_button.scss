@@ -70,6 +70,13 @@
 		}
 	}
 
+	&.xs {
+		--icon-size: 16px;
+
+		height: rem(32px);
+		font-size: rem(12px);
+	}
+
 	&.sm {
 		--icon-size: 20px;
 

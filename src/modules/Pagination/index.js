@@ -8,24 +8,24 @@ const Pagination = () => {
     <div className={style.block}>
       <Button 
         icon={"angle-down"}
-        classes={['primary', 'square', 'sm', style.prev]}
+        classes={['primary', 'square', 'xs', style.prev]}
         isDisabled={true}
       />
       <Button 
         placeholder={'1'}
-        classes={['alt', 'square', 'sm', style.option, style.active]}
+        classes={['alt', 'square', 'xs', style.option, style.active]}
       />
       <Button 
         placeholder={'2'}
-        classes={['alt', 'square', 'sm', style.option]}
+        classes={['alt', 'square', 'xs', style.option]}
       />
       <Button 
         placeholder={'50670'}
-        classes={['alt', 'square', 'sm', style.option]}
+        classes={['alt', 'square', 'xs', style.option]}
       />
       <Button 
         icon={"angle-down"}
-        classes={['primary', 'square', 'sm', style.next]}
+        classes={['primary', 'square', 'xs', style.next]}
       />
     </div>
   )

@@ -1,0 +1,201 @@
+@import '@/scss/config';
+
+.block {
+  @include transition;
+  @include flex($direction: column);
+
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: rem(320px);
+  z-index: $z-index-11;
+  background-color: var(--color-white);
+  box-shadow: var(--box-shadow-4-16);
+  transform: translateX(-100%);
+  overflow-y: hidden;
+  max-height: 100%;
+
+  @include media-breakpoint-up(lg) {
+    position: static;
+    border-radius: var(--border-radius-8);
+    z-index: $z-index-1;
+    transform: translateX(0);
+  }
+  
+  &.active {
+    transform: translateX(0)
+  }
+}
+
+.header,
+.content,
+.footer {
+  @include make-spacer(px, var(--gap-16));
+  @include make-spacer(pt, var(--gap-16));
+}
+
+.section,
+.wrapper,
+.list {
+  display: grid;
+}
+
+.section,
+.wrapper {
+  gap: var(--gap-8);
+}
+
+.title {
+  @include flex(space-between, center);
+
+  min-height: rem(38px);
+}
+
+.header {
+  box-shadow: var(--box-shadow-4-16);
+  border-bottom-width: rem(1px);
+  border-bottom-style: solid;
+}
+
+.footer {
+  @include flex($direction: column);
+  @include make-spacer(pb, var(--gap-16));
+
+  border-top-width: rem(1px);
+  border-top-style: solid;
+  gap: var(--gap-16);
+}
+
+.content {
+  @include make-spacer(pb, var(--gap-8));
+
+  display: grid;
+  gap: var(--gap-8);
+  flex-grow: 1;
+  overflow-y: auto;
+}
+
+.tab {
+  @include make-spacer(mx, -16px);
+
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  height: rem(68px);
+
+  @include media-breakpoint-up(lg) {
+    @include make-spacer(mt, var(--gap-16));
+  }
+}
+
+.option {
+  @include flex(center, center, column);
+
+  position: relative;
+  gap: var(--gap-8);
+  border-radius: var(--border-radius-4) var(--border-radius-4) 0 0;
+
+  &::after {
+    @include transition;
+    @include size(0, rem(2px));
+
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: var(--color-primary);
+    content: '';
+  }
+
+  @include hover {
+
+    &:hover {
+      color: var(--color-primary);
+      background-color: var(--color-grey-100);
+    }
+  }
+
+  &.active {
+    color: var(--color-primary);
+
+    &::after {
+      width: 100%;
+    }
+  }
+}
+
+.label {
+  font-size: rem(12px);
+}
+
+.icon {
+  @include size(rem(24px));
+}
+
+.subtitle {
+  font-size: rem(13px);
+  text-transform: uppercase;
+}
+
+.list {
+  gap: var(--gap-12);
+}
+
+.section {
+  @include make-spacer(py, var(--gap-8));
+}
+
+.colors {
+  @include flex($align-items: center, $wrap: wrap);
+
+  gap: var(--gap-10);
+}
+
+.color {
+  @include transition;
+  @include size(rem(20px));
+
+  position: relative;
+  border-radius: 50%;
+  overflow: hidden;
+  overflow: visible;
+  opacity: 0.8;
+
+  &::before,
+  &::after {
+    position: absolute;
+    border-radius: 50%;
+    content: '';
+  }
+
+  &::before {
+    @include transition;
+
+    inset: rem(-3px);
+    background-color: var(--color-white);
+    border: rem(1px) solid var(--color-primary);
+    opacity: 0;
+    content: '';
+  }
+
+  &::after {
+    position: absolute;
+    inset: 0;
+    background-color: inherit;
+    border: rem(1px) solid var(--color-grey-400);
+  }
+
+  @include hover {
+
+    &:hover {
+      opacity: 1;
+    }
+  }
+
+  &.active {
+
+    &::before {
+      opacity: 1;
+    }
+  }
+}
