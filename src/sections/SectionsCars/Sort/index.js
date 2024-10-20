@@ -3,7 +3,6 @@ import { useTranslations } from 'next-intl'
 import { useSelector, useDispatch } from 'react-redux'
 import { DEFAULT } from '@/constant/config'
 
-
 import { useOutsideClick } from '@/hooks/useOutsideClick'
 import { setSearch } from '@/store/actions/searchAction'
 
