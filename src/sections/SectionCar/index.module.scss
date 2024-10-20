@@ -1,0 +1,117 @@
+@import '@/scss/config';
+
+.block {
+  @include make-spacer(py, var(--gap-24));
+}
+
+.title {
+  @include make-spacer(mb, var(--gap-16));
+}
+
+.grid,
+.options {
+  gap: var(--gap-16);
+}
+
+.options {
+  @include flex($align-items: center, $wrap: wrap);
+
+  .option {
+    gap: var(--gap-8);
+  }
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  align-items: center;
+
+  .option {
+    gap: var(--gap-16);
+  }
+}
+
+.option {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: center;
+  font-size: rem(14px);
+  font-weight: var(--typography-bold);
+}
+
+.label {
+  font-size: rem(11px);
+  text-transform: uppercase;
+}
+
+.text {
+  font-size: rem(16px);
+}
+
+.icon {
+  color: var(--color-grey-600);
+}
+
+.slider {
+  @include make-spacer(my, var(--gap-24));
+
+  position: relative;
+  height: rem(320px);
+
+  :global {
+
+    .swiper-button-prev,
+    .swiper-button-next {
+      @include transition;
+
+      @include size(rem(42px));
+      @include make-spacer(mt, 0);
+
+      top: 50%;
+      transform: translateY(-50%);
+      background-color: var(--color-white);
+      border-radius: var(--border-radius-4);
+
+      &::after {
+        font-size: rem(18px);
+        color: var(--color-primary);
+      }
+
+      @include hover {
+
+        &:hover {
+          background-color: var(--color-grey-100);
+        }
+      }
+    }
+
+    .swiper-button-prev {
+      left: var(--gap-12); 
+    }
+
+    .swiper-button-next {
+      right: var(--gap-12);
+    }
+
+    .swiper-pagination-bullet {
+      @include size(rem(12px));
+      
+      background-color: var(--color-white);
+      border: rem(1px) solid var(--color-white);
+      opacity: 1;
+
+      &.swiper-pagination-bullet-active {
+        background-color: transparent;
+      }
+    }
+  
+    .swiper-slide  {
+      overflow: hidden;
+      border-radius: var(--border-radius-8);
+    }
+  }
+}
+
+.image {
+  cursor: pointer;
+}

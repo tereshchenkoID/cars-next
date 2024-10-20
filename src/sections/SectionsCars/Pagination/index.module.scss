@@ -1,0 +1,15 @@
+@import '@/scss/config';
+
+.block {
+  @include flex(flex-end, center);
+
+  gap: var(--gap-16);
+
+  .prev {
+    transform: rotateZ(90deg);
+  }
+
+  .next {
+    transform: rotateZ(-90deg);
+  }
+}

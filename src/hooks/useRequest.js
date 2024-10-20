@@ -1,10 +1,10 @@
 import axios from 'axios'
 
-// import { getHostName } from 'helpers/getHostName'
+import { API_BASE_URL } from '@/constant/config';
 
 export const useRequest = (link, data, headers) => {
   const server = axios.create({
-    baseURL: `https://api.oddsbit.io/auto/${link}`,
+    baseURL: `${API_BASE_URL}/${link}`,
     withCredentials: true,
   })
 

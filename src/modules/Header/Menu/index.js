@@ -39,7 +39,7 @@ const Menu = ({ setShow, show }) => {
 
   const isActiveLink = (link) => {
     const url = pathname.split('/')
-    return url.includes(link)
+    return url.includes(link.replace("/", ""))
   }
 
   const blockRef = useRef(null)

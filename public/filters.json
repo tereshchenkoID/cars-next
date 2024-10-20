@@ -1,4 +1,12 @@
 {
+  "page": {
+    "options": null,
+    "type": "select",
+    "flag": "0",
+    "visible": "0",
+    "group": "0",
+    "translation": "0"
+  },
   "sort": {
     "options": {
       "0": "Recommended",

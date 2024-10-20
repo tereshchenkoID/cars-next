@@ -2,6 +2,7 @@
   "navigation": {
     "home": "Home",
     "buy": "Buy",
+    "car": "Car",
     "new_auto": "New auto",
     "how_it_works": "How it works",
     "reviews": "Reviews",
@@ -28,6 +29,7 @@
     "payement": "We accept online card payments as well as wire transfers.",
     "not_found": "No matching results..."
   },
+  "close": "Close",
   "image": "Image",
   "hide": "Hide",
   "more": "More",
@@ -68,11 +70,22 @@
   "filter": "Filter",
   "remove": "Remove",
   "save_search": "Save search",
-  "newest_ad": "Newest ad",
-  "lowest_price": "Lowest price",
-  "highest_price": "Highest price",
   "results": "Results",
   "filters": {
+    "page": {
+      "0": "Page"
+    },
+    "sort": {
+      "0": "Sort",
+      "1": "Recommended",
+      "2": "From cheap to expensive",
+      "3": "From expensive to cheap",
+      "4": "Date added",
+      "5": "Year of graduation, in ascending order",
+      "6": "Year of issue, in descending order",
+      "7": "Mileage, by growth",
+      "8": "Mileage, in descending order"
+    },
     "category": {
       "0": "Category",
       "1": "Passenger cars",
@@ -107,6 +120,13 @@
       "2": "EURO-5",
       "3": "EURO-4",
       "4": "EURO-3"
+    },
+    "transmission": {
+      "0": "Manual / Mechanics",
+      "1": "Automaton",
+      "2": "Tiptronic",
+      "3": "Robot",
+      "4": "Variator"
     },
     "state": {
       "0": "State",

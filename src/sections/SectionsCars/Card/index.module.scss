@@ -75,6 +75,18 @@
   color: var(--color-text);
 }
 
+.link {
+  font-size: rem(18px);
+  font-weight: var(--typography-bold);
+
+  @include hover {
+
+    &:hover {
+      color: var(--color-primary-hover);
+    }
+  }
+}
+
 .options {
   gap: var(--gap-16);
 }
@@ -194,6 +206,6 @@
   }
 }
 
-.image {
+.image {  
   object-fit: cover;
 }

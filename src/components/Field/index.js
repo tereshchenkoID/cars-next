@@ -1,3 +1,5 @@
+import { useTranslations } from 'next-intl'
+
 import classNames from 'classnames'
 
 import Icon from '@/components/Icon'
@@ -16,6 +18,7 @@ const Field = ({
   min = null,
   max = null,
 }) => {
+  const t = useTranslations()
 
   return (
     <div
@@ -59,6 +62,8 @@ const Field = ({
               type={'button'}
               className={style.close}
               onClick={() => onChange('')}
+              aria-label={t('close')}
+              title={t('close')}
             >
               <Icon
                 iconName={'xmark'}

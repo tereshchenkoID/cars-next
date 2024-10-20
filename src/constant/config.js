@@ -1,3 +1,10 @@
+export const BASE_URL = 'https://api.oddsbit.io/'
+export const API_BASE_URL = 'https://api.oddsbit.io/auto'
+export const ORGANIZATION = {
+  name: 'Company Name',
+  logo: 'https://example.com/images/logo.png'
+}
+
 export const LOADING = 500
 export const DEFAULT = "0"
 export const ACTIVE = "1"
@@ -17,31 +24,35 @@ export const NAVIGATION = {
     text: 'navigation.home',
   },
   buy: {
-    link: 'cars',
+    link: '/cars',
     text: 'navigation.buy',
   },
+  car: {
+    link: '/car/',
+    text: 'navigation.car',
+  },
   new_auto: {
-    link: 'new-auto',
+    link: '/new-auto',
     text: 'navigation.new_auto',
   },
   how_it_works: {
-    link: 'how-it-works',
+    link: '/how-it-works',
     text: 'navigation.how_it_works',
   },
   reviews: {
-    link: 'reviews',
+    link: '/reviews',
     text: 'navigation.reviews',
   },
   services: {
-    link: 'services',
+    link: '/services',
     text: 'navigation.services',
   },
   about_us: {
-    link: 'about-us',
+    link: '/about-us',
     text: 'navigation.about_us',
   },
   advanced_search: {
-    link: 'advanced-search',
+    link: '/advanced-search',
     text: 'navigation.advanced_search'
   }
 }

@@ -34,6 +34,9 @@ const List = ({ show, setShow }) => {
     return selectedOptions
   }, [brands])
 
+  if (selected.length === 0)
+    return
+
   return (
     <ul className={style.block}>
       {

@@ -23,9 +23,9 @@ import Field from '@/components/Field'
 import Select from '@/components/Select'
 import Checkbox from '@/components/Checkbox'
 import Reference from '@/components/Reference'
-import Brands from '@/modules/Brands'
-import SavedCard from '@/modules/SavedCard'
 import Backdrop from '@/modules/Backdrop'
+import SavedCard from './SavedCard'
+import Brands from './Brands'
 
 import style from './index.module.scss'
 
@@ -35,7 +35,7 @@ const TABS = [
   { icon: "history", text: "history" }
 ]
 
-const Filters = ({ show, setShow }) => {
+const Filters = ({ show, setShow, handleLoad }) => {
   const t = useTranslations()
   const dispatch = useDispatch()
   const router = useRouter()
@@ -51,11 +51,14 @@ const Filters = ({ show, setShow }) => {
   years.unshift(DEFAULT)
 
   Object.keys(filters).forEach((key) => {
-    const group = filters[key].group || key
-    if (!groupedFilters[group]) {
-      groupedFilters[group] = []
+    if(filters[key].visible === ACTIVE) {
+      const group = filters[key].group || key
+      if (!groupedFilters[group]) {
+        groupedFilters[group] = []
+      }
+
+      groupedFilters[group].push({ key, filter: filters[key] })
     }
-    groupedFilters[group].push({ key, filter: filters[key].visible === ACTIVE ? filters[key] : null })
   })
 
   const generateParams = () => {
@@ -122,10 +125,11 @@ const Filters = ({ show, setShow }) => {
     dispatch(setBrands(makes))  
 
     for (const [key, value] of Object.entries(filters)) {
-      const queryValue = paramsObject[key]
-
+      const queryValue = paramsObject[key] || DEFAULT
+      const queryArray = queryValue?.split(';')
+      
       date[key] = {
-        value: queryValue ? queryValue.split(';') : value.default || [DEFAULT]
+        value: queryArray
       }
     }
   
@@ -158,7 +162,11 @@ const Filters = ({ show, setShow }) => {
         show &&
         <Backdrop onChange={() => setShow(false)} />
       }
-      <div 
+      <form 
+        onSubmit={(e) => {
+          e.preventDefault()
+          handleLoad()
+        }}
         className={
           classNames(
             style.block,
@@ -334,6 +342,7 @@ const Filters = ({ show, setShow }) => {
           active === 0 &&
           <div className={style.footer}>
             <Button
+              type={"submit"}
               classes={['primary', 'wide']}
               placeholder={t('search')}
             />
@@ -344,7 +353,7 @@ const Filters = ({ show, setShow }) => {
             />
           </div>
         }
-      </div>
+      </form>
     </>
   )
 }

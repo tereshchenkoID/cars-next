@@ -5,6 +5,8 @@ import { Swiper, SwiperSlide } from 'swiper/react'
 import { Pagination, Navigation, Mousewheel } from 'swiper/modules'
 import { Fancybox } from '@fancyapps/ui'
 
+import { NAVIGATION } from '@/constant/config'
+
 import classNames from 'classnames'
 
 import '@fancyapps/ui/dist/fancybox/fancybox.css';
@@ -12,41 +14,15 @@ import 'swiper/css'
 import 'swiper/css/pagination'
 import 'swiper/css/navigation'
 
+import Link from 'next/link'
 import Image from 'next/image'
 import Icon from '@/components/Icon'
 
 import style from './index.module.scss'
 
-const data = {
-  name: 'Mercedes-Benz E 300 e T 230 kW',
-  price: '66 045',
-  mileage: '11 993 km',
-  year: '2023',
-  power: '240 kW',
-  transmission: '0',
-  fuel: '3',
-  options: [
-    'Parking assist system self-steering',
-    'Keyless entry',
-    'Heated steering wheel',
-    'Apple CarPlay',
-    'Navigation system',
-    'Heated front seats',
-    'Alarm',
-    'Parking assist system self-steering',
-    'Keyless entry',
-  ],
-  images: [
-    'https://storage.alpha-analytics.cz/resize/bd4c4be7-5df3-4551-a023-84a0a8b10b9d?ts=1726662108&width=554&height=416&fit=cover&withoutEnlargement=false',
-    'https://storage.alpha-analytics.cz/resize/bc49015c-e818-4b7e-b49a-bc2c91acb977?ts=1724252105&width=554&height=416&fit=cover&withoutEnlargement=false',
-    'https://storage.alpha-analytics.cz/resize/9f49cb11-fcb5-4e4c-9f6b-a3fe596f213b?ts=1724252083&width=554&height=416&fit=cover&withoutEnlargement=false',
-    'https://storage.alpha-analytics.cz/resize/c39c8ad7-283c-487a-908a-14a77dfb3117?ts=1724252017&width=554&height=416&fit=cover&withoutEnlargement=false'
-  ]
-}
-
 const COUNT = 4
 
-const Card = () => {
+const Card = ({data}) => {
   const t = useTranslations()
   const { auth } = useSelector((state) => state.auth)
   const filters = useSelector((state) => state.filters)
@@ -66,7 +42,7 @@ const Card = () => {
             clickable: true,
           }} 
           navigation={true}
-          // mousewheel={true}
+          mousewheel={true}
           modules={[Pagination, Mousewheel, Navigation]}
         >
           {
@@ -123,7 +99,12 @@ const Card = () => {
         </button>
       </div>
       <div className={style.right}>
-        <h6 className={style.title}>{data.name}</h6>
+        <Link 
+          href={`${NAVIGATION.car.link}/${data.id}`}
+          className={style.link}
+        >
+          {data.name}
+        </Link>
         <ul className={style.options}>
           <li className={style.option}>
             <Icon 
@@ -159,7 +140,7 @@ const Card = () => {
               height={18}
               className={style.icon}
             />
-            <p>{data.transmission}</p>
+            <p>{filters['transmission'].options[data.transmission]}</p>
           </li>
           <li className={style.option}>
             <Icon 

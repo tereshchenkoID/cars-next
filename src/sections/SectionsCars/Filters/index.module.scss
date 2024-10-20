@@ -19,8 +19,8 @@
   @include media-breakpoint-up(lg) {
     position: static;
     border-radius: var(--border-radius-8);
-    z-index: $z-index-1;
-    transform: translateX(0);
+    z-index: unset;
+    transform: none;
   }
   
   &.active {
@@ -74,6 +74,10 @@
   gap: var(--gap-8);
   flex-grow: 1;
   overflow-y: auto;
+
+  @include media-breakpoint-up(lg) {
+    overflow-y: initial;
+  }
 }
 
 .tab {

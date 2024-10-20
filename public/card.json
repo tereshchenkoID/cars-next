@@ -1,0 +1,32 @@
+{
+  "id": 802359,
+  "make": "52",
+  "model": "528f5035c50572b662eaf9c1f6a61841",
+  "name": "Mercedes-Benz E 300 e T 230 kW",
+  "description": "Europe's leading online marketplace for buying and selling used cars with warranty and delivery to your home.",
+  "images": [
+    "https://storage.alpha-analytics.cz/resize/bd4c4be7-5df3-4551-a023-84a0a8b10b9d?ts=1726662108&width=554&height=416&fit=cover&withoutEnlargement=false",
+    "https://storage.alpha-analytics.cz/resize/bc49015c-e818-4b7e-b49a-bc2c91acb977?ts=1724252105&width=554&height=416&fit=cover&withoutEnlargement=false",
+    "https://storage.alpha-analytics.cz/resize/9f49cb11-fcb5-4e4c-9f6b-a3fe596f213b?ts=1724252083&width=554&height=416&fit=cover&withoutEnlargement=false",
+    "https://storage.alpha-analytics.cz/resize/c39c8ad7-283c-487a-908a-14a77dfb3117?ts=1724252017&width=554&height=416&fit=cover&withoutEnlargement=false"
+  ],
+  "price": "66045",
+  "year": "2023",
+  "power": "240 kW",
+  "mileage": "11993",
+  "transmission": "0",
+  "fuel": "3",
+  "color": "1",
+  "body_type": "1",
+  "options": [
+    "Parking assist system self-steering",
+    "Keyless entry",
+    "Heated steering wheel",
+    "Apple CarPlay",
+    "Navigation system",
+    "Heated front seats",
+    "Alarm",
+    "Parking assist system self-steering",
+    "Keyless entry"
+  ]
+}

@@ -118,7 +118,7 @@ const LoginModal = () => {
           {t('notification.forgot_password')}
         </button>
         <Button
-          type="submit"
+          type={'submit'}
           classes={['primary', 'wide']}
           aria-label={t('login')}
           placeholder={t('login')}
