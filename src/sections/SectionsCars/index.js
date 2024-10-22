@@ -2,7 +2,7 @@
 
 import { useTranslations } from 'next-intl'
 import { useSearchParams } from 'next/navigation'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 
 import classNames from 'classnames'

@@ -34,9 +34,17 @@
   z-index: $z-index-1;
 }
 
-.options,
-.tags {
-  @include flex($align-items: center, $wrap: wrap);
+.right {
+  @include make-spacer(px, 12px);
+  @include make-spacer(pt, 16px);
+  @include make-spacer(pb, 12px);
+  @include flex($direction: column);
+
+  gap: var(--gap-12);
+
+  @include media-breakpoint-up(lg) {
+    height: 100%;
+  }
 }
 
 .meta {
@@ -57,20 +65,6 @@
   }
 }
 
-.right {
-  @include make-spacer(px, 12px);
-  @include make-spacer(pt, 16px);
-  @include make-spacer(pb, 12px);
-
-  display: grid;
-  align-items: flex-start;
-  gap: var(--gap-12);
-
-  @include media-breakpoint-up(lg) {
-    height: 100%;
-  }
-}
-
 .icon {
   color: var(--color-text);
 }
@@ -88,6 +82,8 @@
 }
 
 .options {
+  @include flex($align-items: center, $wrap: wrap);
+
   gap: var(--gap-16);
 }
 
@@ -98,38 +94,6 @@
   gap: var(--gap-8);
   font-size: rem(12px);
   font-weight: var(--typography-bold);
-}
-
-.tags {
-  gap: var(--gap-6);
-}
-
-.tag {
-  @include transition;
-  @include flex($align-items: center);
-  @include make-spacer(px, rem(8px));
-  @include make-spacer(py, rem(2px));
-
-  border-radius: var(--border-radius-4);
-  font-size: rem(12px);
-  font-weight: var(--typography-bold);
-  white-space: nowrap;
-  background-color: var(--color-secondary);
-  color: var(--color-primary-hover);
-  height: rem(24px);
-
-  &.alt {
-    cursor: pointer;
-    background-color: transparent;
-    border: rem(1px) solid transparent;
-
-    @include hover {
-
-      &:hover {
-        border-color: var(--color-primary);
-      }
-    }
-  }
 }
 
 .count {

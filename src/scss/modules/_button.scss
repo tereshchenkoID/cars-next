@@ -44,7 +44,7 @@
 		@include hover {
 
 			&:hover {
-				color: var(--color-grey-700);
+				color: var(--color-primary-hover);
 				background-color: var(--color-grey-50);
 			}
 		}
@@ -74,6 +74,7 @@
 		--icon-size: 16px;
 
 		height: rem(32px);
+		gap: var(--gap-6);
 		font-size: rem(12px);
 	}
 
@@ -81,6 +82,7 @@
 		--icon-size: 20px;
 
 		height: rem(38px);
+		gap: var(--gap-8);
 		font-size: rem(14px);
 	}
 

@@ -4,17 +4,44 @@
   @include make-spacer(py, var(--gap-24));
 }
 
-.title {
-  @include make-spacer(mb, var(--gap-16));
-}
-
+.header,
+.body,
 .grid,
 .options {
   gap: var(--gap-16);
 }
 
+.tags,
 .options {
   @include flex($align-items: center, $wrap: wrap);
+}
+
+.header,
+.body {
+  @include flex($direction: column);
+}
+
+.main {
+  display: grid;
+  grid-template-columns: 1fr rem(416px);
+  align-items: flex-end;
+}
+
+.details {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+}
+
+.title {
+  line-height: 1;
+}
+
+.link {
+  color: var(--color-primary);
+}
+
+.options {
 
   .option {
     gap: var(--gap-8);
@@ -114,4 +141,5 @@
 
 .image {
   cursor: pointer;
+  object-fit: cover;
 }

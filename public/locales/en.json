@@ -71,6 +71,8 @@
   "remove": "Remove",
   "save_search": "Save search",
   "results": "Results",
+  "buy": "Buy",
+  "favorites": "Favorites",
   "filters": {
     "page": {
       "0": "Page"

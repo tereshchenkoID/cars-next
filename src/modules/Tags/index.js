@@ -1,0 +1,47 @@
+import { useState } from 'react'
+import { useTranslations } from 'next-intl'
+
+import classNames from 'classnames'
+
+import style from './index.module.scss'
+
+const COUNT = 4
+
+const Tags = ({ data }) => {
+  const t = useTranslations()
+  const [show, setShow] = useState(false)
+  const totalItems = data.length
+  const hiddenItemsCount = totalItems - COUNT
+
+  return (
+    <ul className={style.block}>
+      {
+        data.slice(0, show ? data.length : COUNT).map((el, idx) =>
+          <li
+            key={idx}
+            className={style.tag}
+          >
+            {el}
+          </li>
+        )
+      }
+      {
+        hiddenItemsCount > 0 && (
+          <li
+            className={
+              classNames(
+                style.tag,
+                style.alt
+              )
+            }
+            onClick={() => setShow(!show)}
+          >
+            {show ? `- ${t('hide')}` : `+ ${hiddenItemsCount} ${t('more')}`}
+          </li>
+        )
+      }
+    </ul>
+  )
+}
+
+export default Tags

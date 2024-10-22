@@ -10,6 +10,11 @@ import StoreProvider from '@/store/provider'
 import AppProviders from '@/context/AppProviders'
 import { fetchData } from "@/utils/fetchData"
 
+import '@fancyapps/ui/dist/fancybox/fancybox.css';
+import 'swiper/css'
+import 'swiper/css/pagination'
+import 'swiper/css/navigation'
+
 import Header from '@/modules/Header'
 import Footer from '@/modules/Footer'
 import Fetch from './fetch'

@@ -8,8 +8,13 @@ const withNextIntl = createNextIntlPlugin()
  
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  experimental: { 
+    nextScriptWorkers: true,
+  },
   // For test remove after
   images: {
+    formats: ['image/avif', 'image/webp'], 
+
     remotePatterns: [
       {
         protocol: 'https',
@@ -19,6 +24,7 @@ const nextConfig = {
       },
     ],
   },
+  // next.config.js 
   webpack(config, options) {
     // if (!options.isServer) {
     //   if (options.dev) {

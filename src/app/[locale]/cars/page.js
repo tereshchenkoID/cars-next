@@ -74,7 +74,7 @@ const Cars = async ({ searchParams }) => {
         },
         "offers": {
           "@type": "Offer",
-          "priceCurrency": car.price || "USD",
+          "priceCurrency": "USD",
           "price": car.price,
           "itemCondition": "https://schema.org/UsedCondition",
           "availability": "https://schema.org/InStock",

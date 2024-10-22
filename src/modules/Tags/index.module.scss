@@ -1,0 +1,35 @@
+@import '@/scss/config';
+
+.block {
+  @include flex($align-items: center, $wrap: wrap);
+
+  gap: var(--gap-6);
+}
+
+.tag {
+  @include transition;
+  @include flex($align-items: center);
+  @include make-spacer(px, rem(8px));
+  @include make-spacer(py, rem(2px));
+
+  border-radius: var(--border-radius-4);
+  font-size: rem(12px);
+  font-weight: var(--typography-bold);
+  white-space: nowrap;
+  background-color: var(--color-secondary);
+  color: var(--color-primary-hover);
+  height: rem(24px);
+
+  &.alt {
+    cursor: pointer;
+    background-color: transparent;
+    border: rem(1px) solid transparent;
+
+    @include hover {
+
+      &:hover {
+        border-color: var(--color-primary);
+      }
+    }
+  }
+}

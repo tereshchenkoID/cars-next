@@ -14,6 +14,7 @@ const Reference = ({
   icon = false,
   isDisabled = false,
   isActive = false,
+  title = false
 }) => {
   return (
     <Link
@@ -27,7 +28,8 @@ const Reference = ({
           classes && classes.map(el => style[el] || el),
         )
       }
-      aria-label={placeholder || icon}
+      aria-label={title || placeholder || icon}
+      title={title || placeholder || icon}
       onClick={onChange}
     >
       {

@@ -1,34 +1,25 @@
-import { useState } from 'react'
-import { useSelector } from 'react-redux'
 import { useTranslations } from 'next-intl'
+import { useSelector } from 'react-redux'
+
+import { NAVIGATION } from '@/constant/config'
+
+import { getFormatPrice } from '@/helpers/getFormatPrice'
+
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { Pagination, Navigation, Mousewheel } from 'swiper/modules'
 import { Fancybox } from '@fancyapps/ui'
 
-import { NAVIGATION } from '@/constant/config'
-
-import classNames from 'classnames'
-
-import '@fancyapps/ui/dist/fancybox/fancybox.css';
-import 'swiper/css'
-import 'swiper/css/pagination'
-import 'swiper/css/navigation'
-
 import Link from 'next/link'
 import Image from 'next/image'
 import Icon from '@/components/Icon'
+import Tags from '@/modules/Tags'
 
 import style from './index.module.scss'
 
-const COUNT = 4
-
-const Card = ({data}) => {
+const Card = ({ data }) => {
   const t = useTranslations()
   const { auth } = useSelector((state) => state.auth)
   const filters = useSelector((state) => state.filters)
-  const [show, setShow] = useState(false)
-  const totalItems = data.options.length
-  const hiddenItemsCount = totalItems - COUNT
 
   return (
     <div className={style.block}>
@@ -37,6 +28,7 @@ const Card = ({data}) => {
           className={style.slider}
           slidesPerView={1}
           loop={true}
+          lazy={true}
           pagination={{
             dynamicBullets: true,
             clickable: true,
@@ -152,38 +144,11 @@ const Card = ({data}) => {
             <p>{filters['fuel'].options[data.fuel]}</p>
           </li>
         </ul>
-
-        <ul className={style.tags}>
-          {
-            data.options.slice(0, show ? data.options.length : COUNT).map((el, idx) =>
-              <li 
-                key={idx}
-                className={style.tag}
-              >
-                {el}
-              </li>
-            )
-          }
-
-          {
-            hiddenItemsCount > 0 && (
-              <li 
-                className={
-                  classNames(
-                    style.tag,
-                    style.alt
-                  )
-                }
-                onClick={() => setShow(!show)}
-              >
-                {show ? `- ${t('hide')}` : `+ ${hiddenItemsCount} ${t('more')}`}
-              </li>
-            )
-          }
-        </ul>
+        
+        <Tags data={data.options} />
 
         <div className={style.meta}>
-          <h5>{data.price} {auth?.account.currency.symbol}</h5>
+          <h5>{getFormatPrice(auth?.account?.language?.code, auth?.account?.currency?.code, data.price)}</h5>
         </div>
       </div>
     </div>

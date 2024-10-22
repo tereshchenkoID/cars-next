@@ -71,6 +71,8 @@
   "remove": "Remove PT",
   "save_search": "Save search PT",
   "results": "Results PT",
+  "buy": "Buy PT",
+  "favorites": "Favorites PT",
   "filters": {
     "page": {
       "0": "Page PT"
