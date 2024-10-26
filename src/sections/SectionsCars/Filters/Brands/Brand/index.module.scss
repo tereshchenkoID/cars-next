@@ -26,8 +26,8 @@
   }
 
   &.wide {
-    @include make-spacer(px, 10px);
-    @include make-spacer(py, 2px);
+    @include make-spacer(px, var(--gap-12));
+    @include make-spacer(py, var(--gap-2));
     @include size(100%, auto);
 
     background-color: transparent;

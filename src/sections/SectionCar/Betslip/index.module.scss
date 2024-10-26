@@ -1,16 +1,18 @@
 @import '@/scss/config';
 
 .block {
+  @include make-spacer(mt, -150px);
   @include make-spacer(px, var(--gap-24));
   @include make-spacer(py, var(--gap-16));
 
   position: sticky;
-  top: calc(var(--header-height) + var(--gap-24));
+  top: calc(var(--header-height) + var(--gap-24) + rem(72px));
   border-style: solid;
   border-width: rem(1px);
   border-radius: var(--border-radius-8);
   box-shadow: var(--box-shadow-16-24);
   background-color: var(--color-white);
+  z-index: $z-index-10;
 }
 
 .body {

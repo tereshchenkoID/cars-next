@@ -11,7 +11,12 @@
     "profile": "Profile",
     "sale": "Sale",
     "favorite": "Favorite",
-    "advanced_search": "Detailed search"
+    "advanced_search": "Detailed search",
+    "not_found": "Not found",
+    "settings": "Settings",
+    "saved": "Saved search",
+    "last": "Last search",
+    "orders": "Orders in progress"
   },
   "modal": {
     "login": "Welcome back",
@@ -27,7 +32,10 @@
     "forgot_password": "Forgot your password?",
     "terms": "I agree to the processing of personal data",
     "payement": "We accept online card payments as well as wire transfers.",
-    "not_found": "No matching results..."
+    "not_found": "No matching results...",
+    "404_title": "Oops! There was an accident",
+    "404_text": "This page may have wandered around somewhere. We'll look after it as soon as possible.",
+    "404_error": "Error 404"
   },
   "close": "Close",
   "image": "Image",
@@ -73,6 +81,8 @@
   "results": "Results",
   "buy": "Buy",
   "favorites": "Favorites",
+  "share": "Share",
+  "back": "Back",
   "filters": {
     "page": {
       "0": "Page"

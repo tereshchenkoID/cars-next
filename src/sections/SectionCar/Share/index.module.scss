@@ -1,0 +1,27 @@
+@import '@/scss/config';
+
+.block {
+  @include flex;
+
+  position: relative;
+
+  svg {
+    display: block;
+  }
+}
+
+.dropdown {
+  @include make-spacer(p, var(--gap-12));
+  @include flex($align-items: center);
+
+  position: absolute;
+  top: calc(100% + var(--gap-8));
+  right: 0;
+  gap: var(--gap-8);
+  overflow-y: auto;
+  background-color: var(--color-white);
+  border-radius: var(--border-radius-4);
+  border-width: rem(1px);
+  border-style: solid;
+  box-shadow: var(--box-shadow-4-16);
+}

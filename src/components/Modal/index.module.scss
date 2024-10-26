@@ -9,7 +9,7 @@
   background-color: rgba(0, 0, 0, 0.15);
 
   @include media-breakpoint-up(md) {
-    @include make-spacer(p, 52px);
+    @include make-spacer(p, var(--gap-52));
 
     align-items: center;
   }
@@ -56,20 +56,20 @@
 }
 
 .header {
-  @include make-spacer(px, 16px);
-  @include make-spacer(py, 12px);
+  @include make-spacer(px, var(--gap-16));
+  @include make-spacer(py, var(--gap-12));
 
   gap: rem(16px);
 
   @include media-breakpoint-up(md) {
-    @include make-spacer(px, 24px);
+    @include make-spacer(px, var(--gap-24));
   }
 }
 
 .body {
-  @include make-spacer(p, 16px);
+  @include make-spacer(p, var(--gap-16));
 
   @include media-breakpoint-up(md) {
-    @include make-spacer(p, 24px);
+    @include make-spacer(p, var(--gap-24));
   }
 }

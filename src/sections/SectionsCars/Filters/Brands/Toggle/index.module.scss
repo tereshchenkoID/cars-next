@@ -1,8 +1,8 @@
 @import '@/scss/config';
 
 .block {
-  @include make-spacer(py, 8px);
-  @include make-spacer(px, 12px);
+  @include make-spacer(py, var(--gap-8));
+  @include make-spacer(px, var(--gap-12));
   @include transition(all);
   @include size(100%, rem(42px));
 

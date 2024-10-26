@@ -40,8 +40,6 @@ async function postData(endpoint, searchParams) {
       body: formData,
     })
 
-    console.log(res)
-
     if (!res.ok) {
       throw new Error(`Failed to fetch data from ${endpoint}: ${res.statusText}`)
     }

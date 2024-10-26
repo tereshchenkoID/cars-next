@@ -1,0 +1,97 @@
+@import '@/scss/config';
+
+.block {
+  @include make-spacer(py, var(--gap-24));
+
+  @include media-breakpoint-up(xl) {
+    @include make-spacer(py, var(--gap-48));
+
+    max-width: 70%;
+  }
+}
+
+.code,
+.arrow,
+.icon {
+  color: var(--color-primary);
+}
+
+.info,
+.links {
+  display: grid;
+}
+
+.info {
+  @include make-spacer(mb, var(--gap-56));
+  
+  gap: var(--gap-32);
+  text-align: center;
+
+  @include media-breakpoint-up(xl) {
+    grid-template-columns: 1fr 1.5fr;
+    gap: var(--gap-64);
+    text-align: left
+  }
+}
+
+.title {
+  @include make-spacer(my, var(--gap-8));
+
+  @include media-breakpoint-up(xl) {
+    @include make-spacer(mt, var(--gap-16));
+    @include make-spacer(mb, var(--gap-32));
+  }
+}
+
+.code {
+  text-transform: uppercase;
+  font-weight: var(--typography-bold);
+  font-size: rem(14px);
+}
+
+.text {
+  font-size: rem(18px);
+
+  @include media-breakpoint-up(xl) {
+    line-height: 2;
+  }
+}
+
+.links {
+  gap: var(--gap-16);
+
+  @include media-breakpoint-up(xl) {
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--gap-32);
+  }
+}
+
+.link {
+  @include make-spacer(py, var(--gap-24));
+  @include make-spacer(pl, var(--gap-24));
+  @include make-spacer(pr, var(--gap-32));
+  
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: var(--gap-16);
+  border-radius: var(--border-radius-4);
+  background-color: var(--color-white);
+  box-shadow: var(--box-shadow-4-16);
+  font-weight: var(--typography-bold);
+
+  @include hover {
+
+    &:hover {
+      box-shadow: var(--box-shadow-16-24);
+      
+      .arrow {
+        transform: translateX(var(--gap-8));
+      }
+    }
+  }
+}
+
+.arrow {
+  @include transition;
+}

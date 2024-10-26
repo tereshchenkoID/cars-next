@@ -53,7 +53,7 @@
 }
 
 .list {
-  @include make-spacer(p, 8px);
+  @include make-spacer(p, var(--gap-8));
 
   position: absolute;
   top: calc(100% + var(--gap-8));
@@ -70,8 +70,8 @@
 }
 
 .item {
-  @include make-spacer(px, 8px);
-  @include make-spacer(py, 4px);
+  @include make-spacer(px, var(--gap-8));
+  @include make-spacer(py, var(--gap-4));
 
   border-radius: var(--border-radius-4);
   cursor: pointer;

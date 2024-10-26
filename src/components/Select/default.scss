@@ -6,7 +6,7 @@
   cursor: pointer;
 
   .react-select__control {
-    @include make-spacer(pl, 12px);
+    @include make-spacer(pl, var(--gap-12));
 
     height: 100%;
     border-radius: var(--border-radius-4);
@@ -72,7 +72,7 @@
 
   .react-select__option {
     @include transition;
-    @include make-spacer(px, 12px);
+    @include make-spacer(px, var(--gap-12));
 
     cursor: pointer;
 

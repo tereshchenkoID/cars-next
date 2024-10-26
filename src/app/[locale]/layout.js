@@ -67,7 +67,7 @@ export default async function RootLayout({ children, params }) {
                 <use href="/images/icons.svg" />
               </svg>
               <Header />
-              <main className="main">
+              <main>
                 {children}
               </main>
               <Footer />

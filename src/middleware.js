@@ -1,8 +1,8 @@
-import createMiddleware from 'next-intl/middleware';
-import { NextResponse } from 'next/server';
-import { routing } from './i18n/routing';
+import createMiddleware from 'next-intl/middleware'
+import { NextResponse } from 'next/server'
+import { routing } from './i18n/routing'
 
-const intlMiddleware = createMiddleware(routing);
+const intlMiddleware = createMiddleware(routing)
 
 function isAuthenticated(req) {
   console.log(req.cookies.getAll())
@@ -12,17 +12,18 @@ function isAuthenticated(req) {
 }
 
 export default function middleware(req) {
-  const { pathname } = req.nextUrl;
-  const response = intlMiddleware(req);
-  const localizedProfileRoute = /^\/[a-z]{2}\/profile/;
-  const isProfileRoute = pathname === '/profile' || localizedProfileRoute.test(pathname);
+  const { pathname } = req.nextUrl
+  const response = intlMiddleware(req)
 
-  if (isProfileRoute && !isAuthenticated(req)) {
-    const loginUrl = new URL('/', req.url);
-    return NextResponse.redirect(loginUrl);
-  }
+  // const localizedProfileRoute = /^\/[a-z]{2}\/profile/;
+  // const isProfileRoute = pathname === '/profile' || localizedProfileRoute.test(pathname);
 
-  return response;
+  // if (isProfileRoute && !isAuthenticated(req)) {
+  //   const loginUrl = new URL('/', req.url)
+  //   return NextResponse.redirect(loginUrl)
+  // }
+
+  return response
 }
 
 export const config = {

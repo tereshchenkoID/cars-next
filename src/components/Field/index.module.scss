@@ -23,8 +23,8 @@
 }
 
 .input {
-  @include make-spacer(pl, 12px);
-  @include make-spacer(pr, 40px);
+  @include make-spacer(pl, var(--gap-12));
+  @include make-spacer(pr, var(--gap-40));
   @include transition(border-color);
   @include size(100%);
 

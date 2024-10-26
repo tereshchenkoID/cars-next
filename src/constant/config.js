@@ -5,7 +5,6 @@ export const ORGANIZATION = {
   logo: 'https://example.com/images/logo.png'
 }
 
-export const LOADING = 500
 export const DEFAULT = "0"
 export const ACTIVE = "1"
 export const TYPES = ["checkbox", "color"]
@@ -28,7 +27,7 @@ export const NAVIGATION = {
     text: 'navigation.buy',
   },
   car: {
-    link: '/car/',
+    link: '/car',
     text: 'navigation.car',
   },
   new_auto: {
@@ -54,6 +53,15 @@ export const NAVIGATION = {
   advanced_search: {
     link: '/advanced-search',
     text: 'navigation.advanced_search'
+  },
+  not_found: {
+    link: '/not-found',
+    text: 'navigation.not_found'
+  },
+  settings: {
+    link: '/settings',
+    text: 'navigation.settings',
+    icon: 'settings'
   }
 }
 
@@ -63,12 +71,27 @@ export const ROUTES_USER = {
     text: 'navigation.profile',
   },
   sale: {
-    link: 'profile/sale',
+    link: '/profile/sale',
     text: 'navigation.sale',
   },
   favorite: {
-    link: 'profile/favorite',
+    link: '/profile/favorite',
     text: 'navigation.favorite',
     icon: 'heart'
+  },
+  saved: {
+    link: '/profile/saved',
+    text: 'navigation.saved',
+    icon: 'bookmark'
+  },
+  last: {
+    link: '/profile/last-search',
+    text: 'navigation.last',
+    icon: 'history'
+  },
+  orders: {
+    link: '/profile/orders',
+    text: 'navigation.orders',
+    icon: 'order'
   }
 }

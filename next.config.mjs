@@ -22,6 +22,12 @@ const nextConfig = {
         port: '',
         pathname: '/resize/**',
       },
+      {
+        protocol: 'https',
+        hostname: 'carvago.com',
+        port: '',
+        pathname: '/_next/**',
+      },
     ],
   },
   // next.config.js 

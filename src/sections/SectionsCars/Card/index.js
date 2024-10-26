@@ -27,8 +27,7 @@ const Card = ({ data }) => {
         <Swiper
           className={style.slider}
           slidesPerView={1}
-          loop={true}
-          lazy={true}
+          // lazy={true}
           pagination={{
             dynamicBullets: true,
             clickable: true,
@@ -45,7 +44,7 @@ const Card = ({ data }) => {
                   width={277}
                   height={207}
                   className={style.image}
-                  priority={true}
+                  // priority={true}
                   alt={`${t('image')} ${idx}`}
                 />
               </SwiperSlide>
@@ -92,7 +91,7 @@ const Card = ({ data }) => {
       </div>
       <div className={style.right}>
         <Link 
-          href={`${NAVIGATION.car.link}/${data.id}`}
+          href={`${NAVIGATION.car.link}/${data.id}/test`}
           className={style.link}
         >
           {data.name}

@@ -77,8 +77,8 @@
 }
 
 .search {
-  @include make-spacer(px, 12px);
-  @include make-spacer(py, 2px);
+  @include make-spacer(px, var(--gap-12));
+  @include make-spacer(py, var(--gap-2));
   
   display: grid;
   grid-template-columns: 1fr auto;

@@ -2,7 +2,7 @@
 
 .block {
   @include transition;
-  @include make-spacer(p, 12px);
+  @include make-spacer(p, var(--gap-12));
 
   display: grid;
   gap: var(--gap-8);
@@ -39,8 +39,8 @@
 
 .tag {
   @include flex($align-items: center);
-  @include make-spacer(px, rem(8px));
-  @include make-spacer(py, rem(2px));
+  @include make-spacer(px, var(--gap-8));
+  @include make-spacer(py, var(--gap-2));
 
   border-radius: var(--border-radius-4);
   font-size: rem(12px);

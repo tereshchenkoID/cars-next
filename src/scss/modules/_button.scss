@@ -70,6 +70,21 @@
 		}
 	}
 
+	&.reference {
+		height: auto!important;
+		color: var(--color-primary-hover);
+		font-weight: var(--typography-bold);
+		text-decoration: underline;
+		box-shadow: none;
+
+		@include hover {
+
+			&:hover {
+				text-decoration: none;
+			}
+		}
+	}
+
 	&.xs {
 		--icon-size: 16px;
 

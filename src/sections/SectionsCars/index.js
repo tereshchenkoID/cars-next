@@ -14,6 +14,7 @@ import { setToastify } from '@/store/actions/toastifyAction'
 
 import { DEFAULT, TYPES } from '@/constant/config'
 
+import Container from '@/components/Container'
 import Icon from '@/components/Icon'
 import Pagination from './Pagination'
 import Filters from './Filters'
@@ -75,7 +76,20 @@ const SectionsCars = ({ initialData }) => {
   const handlePrev = () => {
     const prev = pagination.page > 0 ? pagination.page - 1 : 0
     handlePagination('page', prev)
-    dispatch(setSearch(getSearch(JSON.parse(JSON.stringify(search)), null, 'page', prev === 1 ? "0" : prev)))
+    // dispatch(setSearch(getSearch(JSON.parse(JSON.stringify(search)), null, 'page', prev === 1 ? "0" : prev)))
+
+    let a = JSON.parse(JSON.stringify(search))
+    a = {
+      ...a,
+      page: {
+        value: [
+          prev
+        ]
+      }
+    }
+
+    dispatch(setSearch(a))
+    handlePagination('page', prev)
   }
 
   const handleNext = () => {
@@ -83,8 +97,20 @@ const SectionsCars = ({ initialData }) => {
       pagination.page < pagination.pages
         ? pagination.page + 1
         : pagination.pages
+    // dispatch(setSearch(getSearch(JSON.parse(JSON.stringify(search)), null, 'page', next)))
+
+    let a = JSON.parse(JSON.stringify(search))
+    a = {
+      ...a,
+      page: {
+        value: [
+          next
+        ]
+      }
+    }
+
+    dispatch(setSearch(a))
     handlePagination('page', next)
-    dispatch(setSearch(getSearch(JSON.parse(JSON.stringify(search)), null, 'page', next)))
   }
 
   const handleRemove = (type, key, value) => {
@@ -92,122 +118,124 @@ const SectionsCars = ({ initialData }) => {
   }
 
   return (
-    <div className={style.block}>
-      <Filters
-        show={show}
-        setShow={setShow}
-        handleLoad={handleLoad}
-      />
-      <div className={style.content}>
-        <div className={style.searches}>
-          <button
-            type="button"
-            className={
-              classNames(
-                style.search,
-                style.blue
-              )
-            }
-            onClick={() => setShow(!show)}
-            aria-label={t('filter')}
-            title={t('filter')}
-          >
-            <Icon
-              iconName="filters"
-              width={14}
-              height={14}
-            />
-            <span>{t('filter')}</span>
-          </button>
-          {
-            searchParams.size > 0 &&
-            <div className={style.list}>
-              <button
-                type="button"
-                className={
-                  classNames(
-                    style.search,
-                    style.gold
-                  )
-                }
-                aria-label={t('save_search')}
-                title={t('save_search')}
-              >
-                <Icon
-                  iconName="bell"
-                  width={16}
-                  height={16}
-                />
-                <span>{t('save_search')}</span>
-              </button>
-              {
-                Object.keys(search)?.map((key) =>
-                  !key.includes('make') &&
-                  search[key]?.value?.map((el, idx) =>
-                    el !== DEFAULT && (
-                      <button
-                        key={idx}
-                        type="button"
-                        className={style.search}
-                        aria-label={key}
-                        title={t('remove')}
-                        onClick={() => handleRemove(filters[key].type, key, el)}
-                      >
-                        <span>
-                          {
-                            key.indexOf('to') !== -1 || key.indexOf('from') !== -1
-                              ?
-                                <>{t(`filters.${key.split('_')[0]}.0`)} {t(key.split('_')[1])}</>
-                              :
-                                t(`filters.${key}.0`)
-                          }
-                          : <strong>{filters[key].options?.[el] || el}</strong>
-                        </span>
-                        <Icon
-                          iconName="xmark"
-                          className={style.close}
-                          width={12}
-                          height={12}
-                        />
-                      </button>
-                    )
-                  )
+    <Container>
+      <div className={style.block}>
+        <Filters
+          show={show}
+          setShow={setShow}
+          handleLoad={handleLoad}
+        />
+        <div className={style.content}>
+          <div className={style.searches}>
+            <button
+              type="button"
+              className={
+                classNames(
+                  style.search,
+                  style.blue
                 )
               }
-            </div>
-          }
-        </div>
-
-        <h4>Verified cars</h4>
-        {/* <pre className={style.pre}>{JSON.stringify(search, null, 2)}</pre> */}
-
-        <div className={style.meta}>
-          <Sort 
-            pagination={pagination} 
-            handleLoad={() => handleLoad()}
-          />
-          {
-            data?.data?.length > 0 &&
-            <Pagination
-              pagination={pagination}
-              handlePrev={() => handlePrev()}
-              handleNext={() => handleNext()}
-            />
-          }
-        </div>
-
-        <div className={style.cards}>
-          {
-            data?.data?.map((el, idx) =>
-              <Card
-                key={idx}
-                data={el}
+              onClick={() => setShow(!show)}
+              aria-label={t('filter')}
+              title={t('filter')}
+            >
+              <Icon
+                iconName="filters"
+                width={14}
+                height={14}
               />
-            )
-          }
+              <span>{t('filter')}</span>
+            </button>
+            {
+              searchParams.size > 0 &&
+              <div className={style.list}>
+                <button
+                  type="button"
+                  className={
+                    classNames(
+                      style.search,
+                      style.gold
+                    )
+                  }
+                  aria-label={t('save_search')}
+                  title={t('save_search')}
+                >
+                  <Icon
+                    iconName="bell"
+                    width={16}
+                    height={16}
+                  />
+                  <span>{t('save_search')}</span>
+                </button>
+                {
+                  Object.keys(search)?.map((key) =>
+                    !key.includes('make') &&
+                    search[key]?.value?.map((el, idx) =>
+                      el !== DEFAULT && (
+                        <button
+                          key={idx}
+                          type="button"
+                          className={style.search}
+                          aria-label={key}
+                          title={t('remove')}
+                          onClick={() => handleRemove(filters[key].type, key, el)}
+                        >
+                          <span>
+                            {
+                              key.indexOf('to') !== -1 || key.indexOf('from') !== -1
+                                ?
+                                  <>{t(`filters.${key.split('_')[0]}.0`)} {t(key.split('_')[1])}</>
+                                :
+                                  t(`filters.${key}.0`)
+                            }
+                            : <strong>{filters[key].options?.[el] || el}</strong>
+                          </span>
+                          <Icon
+                            iconName="xmark"
+                            className={style.close}
+                            width={12}
+                            height={12}
+                          />
+                        </button>
+                      )
+                    )
+                  )
+                }
+              </div>
+            }
+          </div>
+
+          <h4>Verified cars</h4>
+          {/* <pre className={style.pre}>{JSON.stringify(search, null, 2)}</pre> */}
+
+          <div className={style.meta}>
+            <Sort 
+              pagination={pagination} 
+              handleLoad={() => handleLoad()}
+            />
+            {
+              data?.data?.length > 0 &&
+              <Pagination
+                pagination={pagination}
+                handlePrev={() => handlePrev()}
+                handleNext={() => handleNext()}
+              />
+            }
+          </div>
+
+          <div className={style.cards}>
+            {
+              data?.data?.map((el, idx) =>
+                <Card
+                  key={idx}
+                  data={el}
+                />
+              )
+            }
+          </div>
         </div>
       </div>
-    </div>
+    </Container>
   )
 }
 

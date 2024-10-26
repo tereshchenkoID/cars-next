@@ -1,147 +1,203 @@
 "use client"
 
+import dynamic from 'next/dynamic'
 import { useSelector } from 'react-redux'
+import { useRouter } from 'next/navigation'
 import { useTranslations } from 'next-intl'
 
-import { BREAKPOINTS } from '@/constant/config'
-
 import { Swiper, SwiperSlide } from 'swiper/react'
-import { Pagination, Navigation, Mousewheel } from 'swiper/modules'
+import { Navigation, Mousewheel } from 'swiper/modules'
 import { Fancybox } from '@fancyapps/ui'
 
 import Image from 'next/image'
 import Tags from '@/modules/Tags'
 import Icon from '@/components/Icon'
+import Button from '@/components/Button'
+import Container from '@/components/Container'
 import Betslip from './Betslip'
 
+const Share = dynamic(() => import('./Share'), {
+  ssr: false,
+})
+
+const Favorites = dynamic(() => import('./Favorites'), {
+  ssr: false,
+})
+
 import style from './index.module.scss'
-import Button from '@/components/Button'
+
+const TABS = [
+  {
+    id: 0,
+    text: 'details'
+  },
+  {
+    id: 1,
+    text: 'features'
+  },
+  {
+    id: 2,
+    text: 'car audit'
+  },
+  {
+    id: 3,
+    text: 'price history'
+  },
+  {
+    id: 4,
+    text: 'price map'
+  },
+  {
+    id: 5,
+    text: 'comparison'
+  }
+]
 
 const SectionCar = ({ data }) => {
   const t = useTranslations()
+  const router = useRouter()
   const filters = useSelector((state) => state.filters)
 
   return (
     <article className={style.block}>
-      <header className={style.header}>
-        <div className={style.details}>
-          <h2 className={style.title}>{data.name}</h2>
-          <Button 
-            icon={'heart'}
-            classes={['secondary', 'sm', style.link]}
-            placeholder={(t('favorites'))}
+      <div className={style.head}>
+        <Container classes={style.header}>
+          <Button
+            icon={'angle-left'}
+            classes={['reference', 'sm']}
+            placeholder={(t('back'))}
+            onChange={() => router.back()}
           />
-        </div>
+          <div className={style.meta}>
+            <div className={style.details}>
+              <h2 className={style.title}>{data.name}</h2>
+              <Favorites data={data} />
+              <Share data={data} />
+            </div>
 
-        <ul className={style.options}>
-          <li className={style.option}>
-            <Icon
-              iconName={'road'}
-              width={24}
-              height={24}
-              className={style.icon}
-            />
-            <p>{data.mileage}</p>
-          </li>
-          <li className={style.option}>
-            <Icon
-              iconName={'calendar'}
-              width={24}
-              height={24}
-              className={style.icon}
-            />
-            <p>{data.year}</p>
-          </li>
-          <li className={style.option}>
-            <Icon
-              iconName={'engine'}
-              width={24}
-              height={24}
-              className={style.icon}
-            />
-            <p>{data.power}</p>
-          </li>
-          <li className={style.option}>
-            <Icon
-              iconName={'transmission'}
-              width={24}
-              height={24}
-              className={style.icon}
-            />
-            <p>{filters['transmission'].options[data.transmission]}</p>
-          </li>
-          <li className={style.option}>
-            <Icon
-              iconName={'hybrid'}
-              width={24}
-              height={24}
-              className={style.icon}
-            />
-            <p>{filters['fuel'].options[data.fuel]}</p>
-          </li>
-        </ul>
-
-        <Tags data={data.options} />
-      </header>
-
-
-      <div className={style.slider}>
-        <Swiper
-          className={style.slider}
-          slidesPerView={3}
-          loop={true}
-          pagination={{
-            dynamicBullets: true,
-            clickable: true,
-          }}
-          spaceBetween={24}
-          navigation={true}
-          breakpoints={{
-            [BREAKPOINTS.sm]: {
-              slidesPerView: 1,
-              spaceBetween: 12,
-            },
-            [BREAKPOINTS.md]: {
-              slidesPerView: 2,
-              spaceBetween: 16,
-            },
-            [BREAKPOINTS.lg]: {
-              slidesPerView: 3,
-              spaceBetween: 24,
-            },
-          }}
-          modules={[Pagination, Mousewheel, Navigation]}
-        >
-          {
-            data.images.map((el, idx) =>
-              <SwiperSlide key={idx}>
-                <Image
-                  src={el}
-                  width={300}
-                  height={300}
-                  className={style.image}
-                  priority={false}
-                  alt={`${t('image')} ${idx}`}
-                  onClick={() => {
-                    Fancybox.show(
-                      data.images.map((src, index) => ({
-                        src,
-                        type: 'image',
-                        caption: `${t('image')} ${index + 1}`,
-                      })),
-                      {
-                        groupAll: true,
-                      }
-                    );
-                  }}
+            <ul className={style.options}>
+              <li className={style.option}>
+                <Icon
+                  iconName={'road'}
+                  width={24}
+                  height={24}
+                  className={style.icon}
                 />
-              </SwiperSlide>
-            )
-          }
-        </Swiper>
+                <p>{data.mileage}</p>
+              </li>
+              <li className={style.option}>
+                <Icon
+                  iconName={'calendar'}
+                  width={24}
+                  height={24}
+                  className={style.icon}
+                />
+                <p>{data.year}</p>
+              </li>
+              <li className={style.option}>
+                <Icon
+                  iconName={'engine'}
+                  width={24}
+                  height={24}
+                  className={style.icon}
+                />
+                <p>{data.power}</p>
+              </li>
+              <li className={style.option}>
+                <Icon
+                  iconName={'transmission'}
+                  width={24}
+                  height={24}
+                  className={style.icon}
+                />
+                <p>{filters['transmission'].options[data.transmission]}</p>
+              </li>
+              <li className={style.option}>
+                <Icon
+                  iconName={'hybrid'}
+                  width={24}
+                  height={24}
+                  className={style.icon}
+                />
+                <p>{filters['fuel'].options[data.fuel]}</p>
+              </li>
+            </ul>
+
+            <Tags data={data.options} />
+          </div>
+        </Container>
+
+        <div className={style.slider}>
+          <Swiper
+            className={style.slider}
+            slidesPerView={'auto'}
+            mousewheel={true}
+            keyboard={{
+              enabled: true,
+            }}
+            pagination={{
+              dynamicBullets: true,
+              clickable: true,
+            }}
+            navigation={true}
+            modules={[Mousewheel, Navigation]}
+          >
+            {
+              data.images.map((el, idx) =>
+                <SwiperSlide key={idx}>
+                  <Image
+                    src={el}
+                    width={300}
+                    height={300}
+                    className={style.image}
+                    priority={false}
+                    alt={`${t('image')} ${idx}`}
+                  />
+                  <div 
+                    className={style.show}
+                    onClick={() => {
+                      Fancybox.show(
+                        data.images.map((src, index) => ({
+                          src,
+                          type: 'image',
+                          caption: `${t('image')} ${index + 1}`,
+                        })),
+                        {
+                          groupAll: true,
+                        }
+                      );
+                    }}
+                  >
+                    <Icon 
+                      width={32}
+                      height={32}
+                      iconName={'arrows'}
+                    />
+                  </div>
+                </SwiperSlide>
+              )
+            }
+          </Swiper>
+        </div>
       </div>
 
-      <div className={style.main}>
+      <div className={style.tabs}>
+        <Container classes={style.scroll}>
+          {
+            TABS.map((el, idx) =>
+              <p
+                key={idx}
+                className={style.tab}
+              >
+                {el.text}
+              </p>
+            )
+          }
+        </Container>
+      </div>
+
+
+      <Container classes={style.main}>
         <div className={style.body}>
           <h3 className={style.title}>Details</h3>
           <ul className={style.grid}>
@@ -255,10 +311,14 @@ const SectionCar = ({ data }) => {
             </li>
           </ul>
         </div>
-        <div>
-          <Betslip data={data} />
+        <Betslip data={data} />
+      </Container>
+
+      <Container>
+        <div className={style.body}>
+          <h3 className={style.title}>features</h3>
         </div>
-      </div>
+      </Container>
     </article>
   )
 }

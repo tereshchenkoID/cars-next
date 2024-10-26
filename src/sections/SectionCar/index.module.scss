@@ -1,11 +1,10 @@
 @import '@/scss/config';
 
 .block {
-  @include make-spacer(py, var(--gap-24));
+  @include make-spacer(pb, var(--gap-24));
 }
 
-.header,
-.body,
+.meta,
 .grid,
 .options {
   gap: var(--gap-16);
@@ -16,29 +15,44 @@
   @include flex($align-items: center, $wrap: wrap);
 }
 
-.header,
+.meta,
 .body {
   @include flex($direction: column);
+}
+
+.head {
+  @include make-spacer(pt, var(--gap-24));
+
+  background-color: var(--color-white);
+}
+
+.header {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: baseline;
+  gap: var(--gap-32);
 }
 
 .main {
   display: grid;
   grid-template-columns: 1fr rem(416px);
-  align-items: flex-end;
+  align-items: flex-start;
+}
+
+.body {
+  @include make-spacer(py, var(--gap-40));
+
+  gap: var(--gap-32);
 }
 
 .details {
   display: grid;
-  grid-template-columns: 1fr auto;
+  grid-template-columns: 1fr auto auto;
   align-items: center;
 }
 
 .title {
   line-height: 1;
-}
-
-.link {
-  color: var(--color-primary);
 }
 
 .options {
@@ -79,11 +93,72 @@
   color: var(--color-grey-600);
 }
 
-.slider {
-  @include make-spacer(my, var(--gap-24));
+.tabs {
+  position: sticky;
+  top: var(--header-height);
+  box-shadow: var(--box-shadow-4-16);
+  background-color: var(--color-white);
+  z-index: $z-index-10;
+}
+
+.scroll {
+  @include make-spacer(pr, 416px);
+  @include flex;
+
+  gap: var(--gap-12);
+  height: rem(73px);
+}
+
+.tab {
+  @include flex(center, center);
 
   position: relative;
-  height: rem(320px);
+  cursor: pointer;
+
+  &::after {
+    @include size(0, rem(3px));
+    @include transition;
+
+    position: absolute;
+    left: 0px;
+    right: 0;
+    bottom: 0;
+    background-color: var(--color-primary-hover);
+    content: '';
+  }
+
+  @include hover {
+
+    &:hover {
+
+      &::after {
+        width: rem(3px);
+  
+        @include media-breakpoint-up(lg) {
+          width: 100%;
+        }
+      }    
+    }
+  }
+
+  &.active {
+    color: var(--color-primary-hover);
+
+    &::after {
+      width: rem(3px);
+
+      @include media-breakpoint-up(lg) {
+        width: 100%;
+      }
+    }
+  }
+}
+
+.slider {
+  @include make-spacer(mt, var(--gap-24));
+
+  position: relative;
+  height: rem(600px);
 
   :global {
 
@@ -91,7 +166,7 @@
     .swiper-button-next {
       @include transition;
 
-      @include size(rem(42px));
+      @include size(rem(56px));
       @include make-spacer(mt, 0);
 
       top: 50%;
@@ -100,7 +175,7 @@
       border-radius: var(--border-radius-4);
 
       &::after {
-        font-size: rem(18px);
+        font-size: rem(24px);
         color: var(--color-primary);
       }
 
@@ -110,14 +185,18 @@
           background-color: var(--color-grey-100);
         }
       }
+
+      &.swiper-button-disabled {
+        display: none;
+      }
     }
 
     .swiper-button-prev {
-      left: var(--gap-12); 
+      left: var(--gap-24); 
     }
 
     .swiper-button-next {
-      right: var(--gap-12);
+      right: var(--gap-24);
     }
 
     .swiper-pagination-bullet {
@@ -131,15 +210,52 @@
         background-color: transparent;
       }
     }
-  
-    .swiper-slide  {
-      overflow: hidden;
-      border-radius: var(--border-radius-8);
+
+    .swiper-slide {
+      position: relative;
+      width: fit-content;
+
+      @include hover {
+
+        &:hover {
+    
+          div {
+            opacity: 1
+          }  
+        }
+      }
     }
   }
 }
 
-.image {
+.show {
+  @include transition;
+  @include flex(center, center);
+  @include absolute-filled;
+  
+  color: var(--color-white);
   cursor: pointer;
+  opacity: 0;
+
+
+  &::before {
+    @include absolute-center;
+    @include size(rem(32px));
+
+    background-color: var(--color-grey-900);
+    opacity: 0.48;
+    border-radius: var(--border-radius-4);
+    z-index: 0;
+    content: '';
+  }
+
+  svg {
+    position: relative;
+  }
+}
+
+.image {
   object-fit: cover;
+  border-left: rem(2px) solid var(--color-white);
+  border-right: rem(2px) solid var(--color-white);
 }

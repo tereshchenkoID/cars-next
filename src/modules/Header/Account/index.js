@@ -5,7 +5,7 @@ import { useOutsideClick } from '@/hooks/useOutsideClick'
 import { useAuth } from '@/context/AuthContext'
 import { useModal } from '@/context/ModalContext'
 
-import { NAVIGATION } from '@/constant/config'
+import { NAVIGATION, ROUTES_USER } from '@/constant/config'
 
 import classNames from 'classnames'
 
@@ -30,10 +30,10 @@ const Account = () => {
   const [ show, setShow ] = useState(false)
 
   const MENU = [
-    // NAVIGATION.searches,
-    // NAVIGATION.last,
-    // NAVIGATION.favorite,
-    // NAVIGATION.orders
+    ROUTES_USER.saved,
+    ROUTES_USER.last,
+    ROUTES_USER.favorite,
+    ROUTES_USER.orders
   ]
 
   const blockRef = useRef(null)
@@ -164,14 +164,13 @@ const Account = () => {
             {
               isAuth
                 ?
-                  <>1</>
-                  // <Reference
-                  //   link={NAVIGATION.settings.link}
-                  //   icon={NAVIGATION.settings.icon}
-                  //   classes={['secondary', 'left', 'wide', 'sm']}
-                  //   placeholder={t(NAVIGATION.settings.text)}
-                  //   onChange={() => setShow(false)}
-                  // />
+                  <Reference
+                    link={NAVIGATION.settings.link}
+                    icon={NAVIGATION.settings.icon}
+                    classes={['secondary', 'left', 'wide', 'sm']}
+                    placeholder={t(NAVIGATION.settings.text)}
+                    onChange={() => setShow(false)}
+                  />
                 :
                   <div className={style.setting}>
                     <Button

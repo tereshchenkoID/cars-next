@@ -30,6 +30,9 @@
   --gap-24: 24px;
   --gap-32: 32px;
   --gap-40: 40px;
+  --gap-48: 48px;
+  --gap-52: 52px;
+  --gap-56: 56px;
   --gap-64: 64px;
   --gap-80: 80px;
 
@@ -220,10 +223,6 @@ hr {
   background-color: var(--color-grey-300);
 }
 
-.main {
-  @include make-spacer(mx, auto);
-  @include make-spacer(px, var(--outer-gap));
-
+main {
   position: relative;
-  max-width: var(--max-width);
 }

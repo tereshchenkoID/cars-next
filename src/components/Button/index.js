@@ -1,10 +1,12 @@
+import React from 'react'
+
 import classNames from 'classnames'
 
 import Icon from '@/components/Icon'
 
 import style from './index.module.scss'
 
-const Button = ({
+const Button = React.forwardRef(({
   type = 'button',
   placeholder,
   classes = ['primary'],
@@ -12,11 +14,12 @@ const Button = ({
   icon = false,
   isDisabled = false,
   isActive = false,
-  title = false
-}) => {
+  title = false,
+}, ref) => {
 
   return (
     <button
+      ref={ref}
       type={type}
       className={
         classNames(
@@ -40,6 +43,6 @@ const Button = ({
       {placeholder && placeholder}
     </button>
   )
-}
+})
 
 export default Button

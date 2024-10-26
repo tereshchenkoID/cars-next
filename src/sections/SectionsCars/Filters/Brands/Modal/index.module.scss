@@ -17,7 +17,7 @@
 
 .content {
   @include flex(center, center);
-  @include make-spacer(py, 32px);
+  @include make-spacer(py, var(--gap-32));
 
   position: relative;
   height: 100dvh;
@@ -59,12 +59,12 @@
 .header,
 .footer,
 .body {
-  @include make-spacer(px, 32px);
+  @include make-spacer(px, var(--gap-32));
 }
 
 .header,
 .body {
-  @include make-spacer(py, 16px);
+  @include make-spacer(py, var(--gap-16));
 }
 
 .header {
@@ -82,7 +82,7 @@
 }
 
 .footer {
-  @include make-spacer(pb, 16px);
+  @include make-spacer(pb, var(--gap-16));
 
   position: relative;
   z-index: 1;
@@ -101,7 +101,7 @@
 }
 
 .grid {
-  @include make-spacer(mb, 16px);
+  @include make-spacer(mb, var(--gap-16));
 
   display: grid;
   grid-template-columns: repeat(6, auto);
@@ -118,8 +118,8 @@
 }
 
 .model {
-  @include make-spacer(py, 12px);
-  @include make-spacer(px, 8px);
+  @include make-spacer(py, var(--gap-12));
+  @include make-spacer(px, var(--gap-8));
   
   border-bottom-width: rem(1px);
   border-bottom-style: solid;
