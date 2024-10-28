@@ -75,8 +75,7 @@ const SectionsCars = ({ initialData }) => {
 
   const handlePrev = () => {
     const prev = pagination.page > 0 ? pagination.page - 1 : 0
-    handlePagination('page', prev)
-    // dispatch(setSearch(getSearch(JSON.parse(JSON.stringify(search)), null, 'page', prev === 1 ? "0" : prev)))
+    // handlePagination('page', prev)
 
     let a = JSON.parse(JSON.stringify(search))
     a = {
@@ -93,11 +92,7 @@ const SectionsCars = ({ initialData }) => {
   }
 
   const handleNext = () => {
-    const next =
-      pagination.page < pagination.pages
-        ? pagination.page + 1
-        : pagination.pages
-    // dispatch(setSearch(getSearch(JSON.parse(JSON.stringify(search)), null, 'page', next)))
+    const next = pagination.page < pagination.pages ? pagination.page + 1 : pagination.pages
 
     let a = JSON.parse(JSON.stringify(search))
     a = {
@@ -115,6 +110,11 @@ const SectionsCars = ({ initialData }) => {
 
   const handleRemove = (type, key, value) => {
     dispatch(setSearch(getSearch(JSON.parse(JSON.stringify(search)), type, key, TYPES.includes(type) ? value : DEFAULT)))
+
+    if(key === 'page') {
+      console.log(value)
+      handlePagination('page', 0)
+    }
   }
 
   return (
