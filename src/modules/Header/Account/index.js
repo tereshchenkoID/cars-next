@@ -45,8 +45,6 @@ const Account = () => {
     { buttonRef }
   )
 
-  // console.log(isAuth, auth)
-
   const openModal = (type) => {
     setShow(false)
     switch (type) {

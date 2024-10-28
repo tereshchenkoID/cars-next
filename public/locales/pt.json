@@ -88,15 +88,14 @@
       "0": "Page PT"
     },
     "sort": {
-      "0": "Sort PT",
-      "1": "Recommended PT",
-      "2": "From cheap to expensive PT",
-      "3": "From expensive to cheap PT",
-      "4": "Date added PT",
-      "5": "Year of graduation, in ascending order PT",
-      "6": "Year of issue, in descending order PT",
-      "7": "Mileage, by growth PT",
-      "8": "Mileage, in descending order PT"
+      "0": "Recommended PT",
+      "1": "From cheap to expensive PT",
+      "2": "From expensive to cheap PT",
+      "3": "Date added PT",
+      "4": "Year of graduation, in ascending order PT",
+      "5": "Year of issue, in descending order PT",
+      "6": "Mileage, by growth PT",
+      "7": "Mileage, in descending order PT"
     },
     "category": {
       "0": "Category PT",

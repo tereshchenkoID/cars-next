@@ -15,28 +15,63 @@
   @include flex($align-items: center, $wrap: wrap);
 }
 
+.head,
 .meta,
 .body {
   @include flex($direction: column);
 }
 
 .head {
-  @include make-spacer(pt, var(--gap-24));
+  @include make-spacer(pb, var(--gap-24));
 
   background-color: var(--color-white);
+  gap: var(--gap-24);
+
+  @include media-breakpoint-up(lg) {
+    @include make-spacer(pt, var(--gap-24));
+    @include make-spacer(pb, 0);
+  }
 }
 
 .header {
+  order: 2;
   display: grid;
-  grid-template-columns: auto 1fr;
   align-items: baseline;
   gap: var(--gap-32);
+
+  @include media-breakpoint-up(lg) {
+    grid-template-columns: auto 1fr;
+    order: 1;
+  }
+}
+
+.hide {
+  display: none;
+
+  @include media-breakpoint-up(lg) {
+    display: inline-flex;
+  }
+}
+
+.back {
+  position: absolute;
+  top: var(--gap-12);
+  left: var(--gap-12);
+  background-color: rgba(0, 0, 0, 0.48);
+  z-index: $z-index-2;
+
+  @include media-breakpoint-up(lg) {
+    display: none;
+  }
 }
 
 .main {
   display: grid;
-  grid-template-columns: 1fr rem(416px);
   align-items: flex-start;
+
+  @include media-breakpoint-up(lg) {
+    grid-template-columns: 1fr rem(416px);
+  }
 }
 
 .body {
@@ -46,12 +81,18 @@
 }
 
 .details {
-  display: grid;
-  grid-template-columns: 1fr auto auto;
-  align-items: center;
+  @include flex($align-items: baseline, $wrap: wrap);
+
+  gap: var(--gap-16);
+
+  @include media-breakpoint-up(lg) {
+    flex-wrap: nowrap;
+    gap: var(--gap-24);
+  }
 }
 
 .title {
+  width: 100%;
   line-height: 1;
 }
 
@@ -64,8 +105,12 @@
 
 .grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   align-items: center;
+
+  @include media-breakpoint-up(md) {
+    grid-template-columns: repeat(3, 1fr);
+  }
 
   .option {
     gap: var(--gap-16);
@@ -102,11 +147,14 @@
 }
 
 .scroll {
-  @include make-spacer(pr, 416px);
   @include flex;
 
   gap: var(--gap-12);
   height: rem(73px);
+
+  @include media-breakpoint-up(lg) {
+    @include make-spacer(pr, 416px);
+  }
 }
 
 .tab {
@@ -114,6 +162,7 @@
 
   position: relative;
   cursor: pointer;
+  flex-shrink: 0;
 
   &::after {
     @include size(0, rem(3px));
@@ -155,20 +204,28 @@
 }
 
 .slider {
-  @include make-spacer(mt, var(--gap-24));
-
+  order: 1;
   position: relative;
-  height: rem(600px);
+  height: rem(300px);
+
+  @include media-breakpoint-up(md) {
+    height: rem(420px);
+  }
+
+  @include media-breakpoint-up(lg) {
+    order: 2;
+    height: rem(600px);
+  }
 
   :global {
 
     .swiper-button-prev,
     .swiper-button-next {
       @include transition;
-
       @include size(rem(56px));
       @include make-spacer(mt, 0);
 
+      display: none;
       top: 50%;
       transform: translateY(-50%);
       background-color: var(--color-white);
@@ -177,6 +234,10 @@
       &::after {
         font-size: rem(24px);
         color: var(--color-primary);
+      }
+
+      @include media-breakpoint-up(md) {
+        display: inline-flex;
       }
 
       @include hover {
@@ -199,15 +260,21 @@
       right: var(--gap-24);
     }
 
-    .swiper-pagination-bullet {
-      @include size(rem(12px));
-      
-      background-color: var(--color-white);
-      border: rem(1px) solid var(--color-white);
-      opacity: 1;
+    .swiper-pagination {
+      @include make-spacer(px, var(--gap-8));
 
-      &.swiper-pagination-bullet-active {
-        background-color: transparent;
+      position: absolute;
+      left: auto;
+      right: var(--gap-12);
+      bottom: var(--gap-12);
+      width: fit-content;
+      background-color: rgba(0, 0, 0, 0.48);
+      border-radius: var(--border-radius-4);
+      font-weight: var(--typography-medium);
+      color: var(--color-white);
+
+      @include media-breakpoint-up(md) {
+        display: none;
       }
     }
 

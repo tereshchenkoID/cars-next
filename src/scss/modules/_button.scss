@@ -71,6 +71,8 @@
 	}
 
 	&.reference {
+		@include make-spacer(px, 0);
+
 		height: auto!important;
 		color: var(--color-primary-hover);
 		font-weight: var(--typography-bold);

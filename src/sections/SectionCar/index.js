@@ -6,7 +6,7 @@ import { useRouter } from 'next/navigation'
 import { useTranslations } from 'next-intl'
 
 import { Swiper, SwiperSlide } from 'swiper/react'
-import { Navigation, Mousewheel } from 'swiper/modules'
+import { Navigation, Pagination, Mousewheel } from 'swiper/modules'
 import { Fancybox } from '@fancyapps/ui'
 
 import Image from 'next/image'
@@ -42,14 +42,6 @@ const TABS = [
   {
     id: 3,
     text: 'price history'
-  },
-  {
-    id: 4,
-    text: 'price map'
-  },
-  {
-    id: 5,
-    text: 'comparison'
   }
 ]
 
@@ -64,7 +56,7 @@ const SectionCar = ({ data }) => {
         <Container classes={style.header}>
           <Button
             icon={'angle-left'}
-            classes={['reference', 'sm']}
+            classes={['reference', 'sm', style.hide]}
             placeholder={(t('back'))}
             onChange={() => router.back()}
           />
@@ -128,6 +120,11 @@ const SectionCar = ({ data }) => {
         </Container>
 
         <div className={style.slider}>
+          <Button
+            icon={'angle-left'}
+            classes={['sm', 'square', style.back]}
+            onChange={() => router.back()}
+          />
           <Swiper
             className={style.slider}
             slidesPerView={'auto'}
@@ -136,11 +133,10 @@ const SectionCar = ({ data }) => {
               enabled: true,
             }}
             pagination={{
-              dynamicBullets: true,
-              clickable: true,
+              type: 'fraction',
             }}
             navigation={true}
-            modules={[Mousewheel, Navigation]}
+            modules={[Mousewheel, Pagination, Navigation]}
           >
             {
               data.images.map((el, idx) =>
