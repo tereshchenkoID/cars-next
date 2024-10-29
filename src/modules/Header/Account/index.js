@@ -1,9 +1,8 @@
 import { useState, useRef } from 'react'
-import { useSelector } from 'react-redux'
 import { useTranslations } from 'next-intl'
 import { useOutsideClick } from '@/hooks/useOutsideClick'
-import { useAuth } from '@/context/AuthContext'
 import { useModal } from '@/context/ModalContext'
+import { useSelector } from 'react-redux'
 
 import { NAVIGATION, ROUTES_USER } from '@/constant/config'
 
@@ -24,10 +23,10 @@ import style from './index.module.scss'
 
 const Account = () => {
   const t = useTranslations()
-  const { isAuth } = useAuth()
   const { showModal } = useModal()
-  const { auth } = useSelector((state) => state.auth)
-  const [ show, setShow ] = useState(false)
+  const [show, setShow] = useState(false)
+  const auth = useSelector((state) => state.auth)
+  const isAuth = auth?.id
 
   const MENU = [
     ROUTES_USER.saved,
@@ -61,7 +60,7 @@ const Account = () => {
         break
     }
   }
-
+  
   return (
     <div ref={blockRef}>
       {
@@ -86,7 +85,11 @@ const Account = () => {
           {
             isAuth
               ?
-                <Avatar size="sm" />
+                <Avatar
+                  size="sm"
+                  src={auth.image}
+                  alt={auth.name || auth.username}
+                />
               :
                 <Icon
                   className={style.icon}
@@ -124,12 +127,15 @@ const Account = () => {
             onChange={() => setShow(false)}
           />
           {
-            isAuth &&
+            auth?.user &&
             <div className={style.top}>
-              <Avatar />
+              <Avatar
+                src={auth.image}
+                alt={auth.name || auth.username}
+              />
               <div className={style.meta}>
-                <p className={style.name}>{auth.username}</p>
-                <p className={style.email}>tereschenko23041991@gmail.com</p>
+                <p className={style.name}>{auth.name || auth.username}</p>
+                <p className={style.email}>{auth.email}</p>
               </div>
               <Logout setShow={setShow} />
             </div>

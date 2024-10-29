@@ -1,18 +1,17 @@
+import { signOut } from 'next-auth/react'
 import { useDispatch } from 'react-redux'
 
 import { setAuth } from '@/store/actions/authAction'
-import { getData } from '@/helpers/api'
 
 import Button from '@/components/Button'
 
 const Logout = ({ setShow }) => {
   const dispatch = useDispatch()
 
-  const handleLogout = () => {
-    getData('logout/').then(json => {
-      dispatch(setAuth(json))
-      setShow(false)
-    })
+  const handleLogout = async () => {
+    await signOut({ redirect: false })
+    setShow(false)
+    dispatch(setAuth(null))
   }
 
   return (

@@ -10,7 +10,7 @@ export const AuthProvider = ({ children }) => {
   const [isAuth, setIsAuth] = useState(false)
 
   useEffect(() => {
-    setIsAuth(auth?.id)
+    setIsAuth(auth !== null)
   }, [auth])
 
   return (

@@ -1,17 +1,17 @@
 "use client"
 
 import React from 'react'
-import { AuthProvider } from './AuthContext'
-import { ModalProvider } from './ModalContext'
-// import { WindowWidthProvider } from './WindowWidthContext'
 
-const AppProviders = ({ children }) => {
+import { SessionProvider } from 'next-auth/react'
+import { ModalProvider } from './ModalContext'
+
+const AppProviders = ({ children, session }) => {
   return (
-    <AuthProvider>
+    <SessionProvider session={session}>
       <ModalProvider>
         {children}
       </ModalProvider>
-    </AuthProvider>
+    </SessionProvider>
   )
 }
 

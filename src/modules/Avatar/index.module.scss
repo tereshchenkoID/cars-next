@@ -2,13 +2,26 @@
 
 .block {
   --avatar-size: 48px;
+  --avatar-label: 22px;
 
   @include size(var(rem(--avatar-size)));
 
   border-radius: 50%;
-  background-color: var(--color-grey-400);
+  background-color: #ccf8ff;
+  overflow: hidden;
 
   &.sm {
-    --avatar-size: 24px;
+    --avatar-size: 26px;
+    --avatar-label: 12px;
   }
+}
+
+.label {
+  @include size(100%);
+  @include flex(center, center);
+
+  text-transform: uppercase;
+  font-size: var(--avatar-label);
+  font-weight: var(--typography-bold);
+  line-height: 1;
 }

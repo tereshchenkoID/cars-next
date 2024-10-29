@@ -1,4 +1,4 @@
-import { useAuth } from '@/context/AuthContext'
+// import { useAuth } from '@/context/AuthContext'
 import { useTranslations } from 'next-intl'
 
 import { ROUTES_USER } from '@/constant/config'
@@ -8,7 +8,7 @@ import Reference from '@/components/Reference'
 import style from './index.module.scss'
 
 const Favorite = () => {
-  const { isAuth } = useAuth()
+  // const { isAuth } = useAuth()
   const t = useTranslations()
 
   return (
@@ -19,9 +19,9 @@ const Favorite = () => {
         classes={['secondary', 'square']}
         title={(t('favorites'))}
       />
-      {
+      {/* {
         isAuth && <span className={style.count}>1</span>
-      }
+      } */}
     </div>
   )
 }
