@@ -5,13 +5,13 @@ import { useModal } from '@/context/ModalContext'
 
 // import { getData } from 'helpers/api'
 
-// import Phone from '@/components/Phone'
+import Phone from '@/components/Phone'
 import Field from '@/components/Field'
 import Button from '@/components/Button'
-// import Select from '@/components/Select'
 import Password from '@/components/Password'
 import Checkbox from '@/components/Checkbox'
 import LoginModal from '@/modules/LoginModal'
+import Select from '@/components/Select'
 
 import style from './index.module.scss'
 
@@ -72,7 +72,7 @@ const RegistrationModal = () => {
         <button
           type={'button'}
           className={style.link}
-          aria-label={'Registration'}
+          aria-label={t('login')}
           onClick={openModal}
         >
           {t('login')}
@@ -117,13 +117,12 @@ const RegistrationModal = () => {
             onChange={(value) => handleChange('surname', value)}
           />
         </div>
-        {/* <Phone
+        <Phone
           data={formData.phone}
           onChange={value => handleChange('phone', value)}
-          isRequired={true}
-        /> */}
+        />
         <div className={style.grid}>
-          {/* <Select
+          <Select
             placeholder={t('select_countries')}
             options={countries.map(item => ({
               value: item.alpha_2,
@@ -132,8 +131,9 @@ const RegistrationModal = () => {
             data={formData.country}
             isRequired={true}
             onChange={(value) => handleChange('country', value)}
-          /> */}
+          />
           <Field
+            type={'number'}
             placeholder={t('postal_code')}
             data={formData.postal}
             onChange={(value) => handleChange('postal', value)}

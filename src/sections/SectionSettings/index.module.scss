@@ -1,0 +1,113 @@
+@import '@/scss/config';
+
+.block {
+  @include make-spacer(py, var(--gap-24));
+
+  display: grid;
+  gap: var(--gap-24);
+  max-width: rem(800px);
+
+  @include media-breakpoint-up(md) {
+    @include make-spacer(p, var(--gap-32));
+
+    gap: var(--gap-32);
+  }
+}
+
+.arrow,
+.body {
+  @include transition;
+}
+
+.icon,
+.arrow {
+  color: var(--color-primary);
+}
+
+.tab {
+  border-radius: var(--border-radius-8);
+  background-color: var(--color-white);
+  overflow: hidden;
+
+  &.active {
+    
+    .body {
+      height: fit-content;
+    }
+
+    .arrow {
+      transform: rotateZ(180deg)
+    }
+  }
+}
+
+.head {
+  @include make-spacer(px, var(--gap-16));
+  @include make-spacer(py, var(--gap-20));
+
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: var(--gap-12);
+  font-weight: var(--typography-bold);
+  cursor: pointer;
+
+  @include media-breakpoint-up(md) {
+    @include make-spacer(py, var(--gap-24));
+    @include make-spacer(p, var(--gap-32));
+
+    gap: var(--gap-16);
+    font-size: rem(18px);
+  }
+}
+
+.body {
+  height: 0;
+  overflow: hidden;
+}
+
+.content {
+  @include make-spacer(py, var(--gap-24));
+  @include make-spacer(px, var(--gap-16));
+
+  border-top-width: rem(1px);
+  border-top-style: solid;
+
+  @include media-breakpoint-up(md) {
+    @include make-spacer(p, var(--gap-32));
+  }
+}
+
+.grid {
+  @include make-spacer(mb, var(--gap-16));
+
+  display: grid;
+  align-items: start;
+  gap: var(--gap-16);
+
+  @include media-breakpoint-up(md) {
+    @include make-spacer(mb, var(--gap-32));
+
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--gap-32);
+  }
+
+  &:last-child {
+    @include make-spacer(mb, 0);
+  }
+
+  &.lg {
+
+    @include media-breakpoint-up(md) {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+}
+
+.submit {
+  grid-column-start: 1;
+
+  @include media-breakpoint-up(md) {
+    grid-column-start: 3;
+  }
+}

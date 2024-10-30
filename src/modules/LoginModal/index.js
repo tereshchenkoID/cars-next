@@ -209,7 +209,6 @@ const LoginModal = () => {
         <Button
           type={'submit'}
           classes={['primary', 'wide']}
-          aria-label={t('login')}
           placeholder={t('login')}
           isDisabled={!isFormValid()}
         />

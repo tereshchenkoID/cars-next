@@ -83,6 +83,10 @@
   "favorites": "Favorites PT",
   "share": "Share PT",
   "back": "Back PT",
+  "save": "Save PT",
+  "current_password": "Current password PT",
+  "new_password": "New password PT",
+  "phone": "Phone PT",
   "filters": {
     "page": {
       "0": "Page PT"

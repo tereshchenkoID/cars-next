@@ -32,7 +32,7 @@ const Field = ({
     >
       <input
         className={style.input}
-        type={type}
+        type={type || 'text'}
         value={data === null || undefined ? "" : data}
         onChange={e => {
           onChange(e.currentTarget.value)
@@ -45,32 +45,32 @@ const Field = ({
       />
       {
         (type === 'datetime-local' || type === 'date')
-        ?
-          <button
-            type={'button'}
-            className={style.icon}
-          >
-            <Icon
-              iconName={'calendar-days'}
-              width={18}
-              height={18}
-            />
-          </button>
-        :
-          (isClear && data?.length > 0) &&
+          ?
             <button
               type={'button'}
-              className={style.close}
-              onClick={() => onChange('')}
-              aria-label={t('close')}
-              title={t('close')}
+              className={style.icon}
             >
               <Icon
-                iconName={'xmark'}
+                iconName={'calendar-days'}
                 width={18}
                 height={18}
               />
             </button>
+          :
+            (isClear && data?.length > 0) &&
+              <button
+                type={'button'}
+                className={style.close}
+                onClick={() => onChange('')}
+                aria-label={t('close')}
+                title={t('close')}
+              >
+                <Icon
+                  iconName={'xmark'}
+                  width={16}
+                  height={16}
+                />
+              </button>
       }
     </div>
   )

@@ -58,11 +58,6 @@ export const NAVIGATION = {
     link: '/not-found',
     text: 'navigation.not_found'
   },
-  settings: {
-    link: '/settings',
-    text: 'navigation.settings',
-    icon: 'settings'
-  }
 }
 
 export const ROUTES_USER = {
@@ -93,5 +88,10 @@ export const ROUTES_USER = {
     link: '/profile/orders',
     text: 'navigation.orders',
     icon: 'order'
+  },
+  settings: {
+    link: '/profile/settings',
+    text: 'navigation.settings',
+    icon: 'settings'
   }
 }

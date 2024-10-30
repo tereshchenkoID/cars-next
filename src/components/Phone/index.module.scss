@@ -1,0 +1,100 @@
+@import '@/scss/config';
+
+.block {
+
+  :global {
+
+    .react-international-phone-input-container {
+      --react-international-phone-height: 40px;
+      --react-international-phone-border-color: var(--color-grey-400);
+
+      position: relative;
+
+      .react-international-phone-input {
+        --react-international-phone-text-color: var(--color-text);
+
+        @include make-spacer(px, rem(12px));
+
+        flex-grow: 1;
+        font-size: rem(14px);
+
+        &:focus {
+
+          + .react-international-phone-input-container {
+            border-color: var(--color-primary);
+            box-shadow: 0 0 0 4px rgba(62, 71, 221, 0.16);
+          }
+        }
+      }
+
+      .react-international-phone-flag-emoji {
+        --react-international-phone-flag-width: 22px;
+        --react-international-phone-flag-height: auto;
+   
+        display: block;
+        object-fit: cover;
+      }
+
+      .react-international-phone-country-selector {
+        position: static;
+      }
+
+      .react-international-phone-country-selector-button {
+        --react-international-phone-country-selector-background-color-hover: var(--color-grey-200);
+
+        width: rem(40px);
+       
+        &__flag-emoji {
+          @include make-spacer(mx, 0);
+        }
+
+        &__button-content {
+          @include size(rem(22px), auto);
+  
+          border-radius: var(--border-radius-4);
+          overflow: hidden;
+        }
+
+        &__dropdown-arrow {
+          display: none;
+        }
+      }
+
+      .react-international-phone-country-selector-dropdown {
+        --react-international-phone-dropdown-shadow: none;
+        --react-international-phone-dropdown-item-text-color: var(--color-text);
+        --react-international-phone-dropdown-item-background-color: var(--color-white);
+
+        @include make-spacer(py, 0);
+
+        border-radius: var(--border-radius-4);
+        right: 0;
+        border: rem(1px) solid var(--react-international-phone-border-color);
+        max-height: rem(160px);
+        width: auto;
+
+        &__list-item {
+          --react-international-phone-dropdown-item-height: 40px;
+          --react-international-phone-selected-dropdown-item-background-color: var(--color-grey-300);
+
+          @include transition;
+
+          &--focused {
+            --react-international-phone-selected-dropdown-item-background-color: var(--color-grey-200);
+            --react-international-phone-selected-dropdown-item-text-color: var(--color-text);
+          }
+        }
+
+        &__list-item-country-name {
+          color: var(--color-text);
+        }
+
+        &__list-item-dial-code {
+          --react-international-phone-dropdown-item-dial-code-color: var(--color-text);
+          
+          font-weight: var(--typography-bold);
+        }
+      }
+    }
+  }
+}

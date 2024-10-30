@@ -3,15 +3,13 @@ import "./globals.scss"
 import React from "react"
 import { Poppins } from 'next/font/google'
 import { getMessages } from 'next-intl/server'
-import { getServerSession } from 'next-auth';
+import { getServerSession } from 'next-auth'
 import { NextIntlClientProvider } from 'next-intl'
-
-import { authOptions } from '@/app/api/auth/[...nextauth]/route'
-
 import NextTopLoader from "nextjs-toploader"
 
 import StoreProvider from '@/store/provider'
 import AppProviders from '@/context/AppProviders'
+import { authOptions } from '@/app/api/auth/[...nextauth]/route'
 import { fetchData } from "@/utils/fetchData"
 
 import '@fancyapps/ui/dist/fancybox/fancybox.css';
@@ -21,7 +19,6 @@ import 'swiper/css/navigation'
 
 import Header from '@/modules/Header'
 import Footer from '@/modules/Footer'
-
 
 const poppins = Poppins({
   weight: ['400', '500', '700'],

@@ -69,10 +69,6 @@
   }
 }
 
-.icon {
-  @include size(24px);
-}
-
 .arrow {
   @include transition(transform);
 

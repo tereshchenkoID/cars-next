@@ -92,10 +92,9 @@ const Account = () => {
                 />
               :
                 <Icon
-                  className={style.icon}
                   iconName={'circle-user'}
-                  width={24}
-                  height={24}
+                  width={28}
+                  height={28}
                 />
           }
           <span className={style.hidden}>
@@ -169,10 +168,10 @@ const Account = () => {
               isAuth
                 ?
                   <Reference
-                    link={NAVIGATION.settings.link}
-                    icon={NAVIGATION.settings.icon}
+                    link={ROUTES_USER.settings.link}
+                    icon={ROUTES_USER.settings.icon}
                     classes={['secondary', 'left', 'wide', 'sm']}
-                    placeholder={t(NAVIGATION.settings.text)}
+                    placeholder={t(ROUTES_USER.settings.text)}
                     onChange={() => setShow(false)}
                   />
                 :
