@@ -1,9 +1,5 @@
 export const BASE_URL = 'https://api.oddsbit.io/'
 export const API_BASE_URL = 'https://api.oddsbit.io/auto'
-export const ORGANIZATION = {
-  name: 'Company Name',
-  logo: 'https://example.com/images/logo.png'
-}
 
 export const DEFAULT = "0"
 export const ACTIVE = "1"

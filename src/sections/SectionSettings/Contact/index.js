@@ -23,6 +23,10 @@ const Contact = () => {
       value: '',
       isValid: false
     },
+    email: {
+      value: '',
+      isValid: false
+    },
     phone: {
       value: '',
       isValid: false
@@ -84,6 +88,25 @@ const Contact = () => {
             placeholder={t('surname')}
             data={filter.surname.value}
             onChange={(value) => handleChange('surname', { value, isValid: filter.surname.isValid })}
+          />
+        </InputGroup>
+
+        <InputGroup
+          label={t('email')}
+          value={filter.email.value}
+          rules={[
+            validationRules.required,
+            validationRules.email,
+          ]}
+          onValidationChange={(isValid) =>
+            handleChange('email', { value: filter.email.value, isValid })
+          }
+        >
+          <Field
+            type={'email'}
+            placeholder={t('email')}
+            data={filter.email.value}
+            onChange={(value) => handleChange('email', { value, isValid: filter.email.isValid })}
           />
         </InputGroup>
 

@@ -18,7 +18,7 @@ import style from './index.module.scss'
 
 const Card = ({ data }) => {
   const t = useTranslations()
-  const { auth } = useSelector((state) => state.auth)
+  const auth = useSelector((state) => state.auth)
   const filters = useSelector((state) => state.filters)
 
   return (

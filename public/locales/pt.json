@@ -37,6 +37,11 @@
     "404_text": "This page may have wandered around somewhere. We'll look after it as soon as possible. PT",
     "404_error": "Error 404 PT"
   },
+  "my_profile": "My profile PT",
+  "contact_information": "Contact information PT",
+  "billing_information": "Billing information PT",
+  "change_password": "Change password PT",
+  "notification_settings": "Notification settings PT",
   "close": "Close",
   "image": "Image PT",
   "hide": "Hide PT",
@@ -58,6 +63,7 @@
   "register": "Register PT",
   "services": "Services PT",
   "company": "Company PT",
+  "consumer": "Consumer PT",
   "email": "Email PT",
   "password": "Password PT",
   "login": "Login PT",
@@ -66,6 +72,12 @@
   "name": "Name PT",
   "surname": "Surname PT",
   "postal_code": "Postal code PT",
+  "city": "City PT",
+  "billing_address": "Billing address PT",
+  "company_id": "Company ID PT",
+  "company_name": "Company name PT",
+  "house_number": "House number PT",
+  "street": "Street PT",
   "phone_number": "Phone number PT",
   "select_countries": "Select countries PT",
   "select_values": "Select values PT",
@@ -87,6 +99,9 @@
   "current_password": "Current password PT",
   "new_password": "New password PT",
   "phone": "Phone PT",
+  "vat_id": "VAT ID PT",
+  "vat_player": "I'm a VAT payer PT",
+  "country": "Country PT",
   "filters": {
     "page": {
       "0": "Page PT"

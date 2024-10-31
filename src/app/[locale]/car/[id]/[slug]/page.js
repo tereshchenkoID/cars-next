@@ -1,9 +1,4 @@
-import { 
-  BASE_URL, 
-  DEFAULT, 
-  ORGANIZATION 
-} from '@/constant/config'
-
+import { DEFAULT } from '@/constant/config'
 import { fetchMetaTags } from '@/utils/fetchMetaTags'
 import { fetchData } from '@/utils/fetchData'
 
@@ -40,11 +35,11 @@ const Car = async ({ params: { id } }) => {
       "price": data.price || DEFAULT,
       "itemCondition": "https://schema.org/UsedCondition",
       "availability": "https://schema.org/InStock",
-      "url": `${BASE_URL}/car/${id}`,
+      "url": `${process.env.BASE_URL}/car/${id}`,
       "seller": {
         "@type": "Organization",
-        "name": ORGANIZATION.name,
-        "url": BASE_URL,
+        "name": process.env.ORGANIZATION_NAME,
+        "url": process.env.BASE_URL,
       },
     },
     "mpn": data.id || "N/A",

@@ -9,7 +9,7 @@ import style from './index.module.scss'
 
 const Betslip = ({ data }) => {
   const t = useTranslations()
-  const { auth } = useSelector((state) => state.auth)
+  const auth = useSelector((state) => state.auth)
 
   return (
     <div className={style.block}>

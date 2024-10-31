@@ -11,4 +11,9 @@ export const validationRules = {
     if (value.length > max) return `Maximum length is ${max} characters.`
     return ''
   },
+  email: (value) => {
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+    if (!emailPattern.test(value)) return 'Please enter a valid email address.'
+    return ''
+  }
 }

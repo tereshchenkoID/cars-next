@@ -9,6 +9,8 @@ import Icon from '@/components/Icon'
 import Container from "@/components/Container"
 import Contact from './Contact'
 import Security from './Security'
+import Notification from './Notification'
+import Billing from './Billing'
 
 import style from './index.module.scss'
 
@@ -25,7 +27,7 @@ const SectionSettings = () => {
 
   return (
     <Container classes={style.block}>
-      <h2>My Profile</h2>
+      <h2>{t('my_profile')}</h2>
       <div
         className={
           classNames(
@@ -43,7 +45,7 @@ const SectionSettings = () => {
             className={style.icon}
             iconName={'user'}
           />
-          <span>Contact information</span>
+          <span>{t('contact_information')}</span>
           <Icon
             className={style.arrow}
             iconName={'angle-down'}
@@ -75,7 +77,7 @@ const SectionSettings = () => {
             className={style.icon}
             iconName={'file'}
           />
-          <span>Billing information</span>
+          <span>{t('billing_information')}</span>
           <Icon
             className={style.arrow}
             iconName={'angle-down'}
@@ -85,7 +87,7 @@ const SectionSettings = () => {
         </div>
         <div className={style.body}>
           <div className={style.content}>
-            <p>1</p>
+            <Billing />
           </div>
         </div>
       </div>
@@ -107,7 +109,7 @@ const SectionSettings = () => {
             className={style.icon}
             iconName={'unlock'}
           />
-          <span>Change password</span>
+          <span>{t('change_password')}</span>
           <Icon
             className={style.arrow}
             iconName={'angle-down'}
@@ -139,7 +141,7 @@ const SectionSettings = () => {
             className={style.icon}
             iconName={'bell'}
           />
-          <span>Notification settings</span>
+          <span>{t('notification_settings')}</span>
           <Icon
             className={style.arrow}
             iconName={'angle-down'}
@@ -149,7 +151,7 @@ const SectionSettings = () => {
         </div>
         <div className={style.body}>
           <div className={style.content}>
-            <p>1</p>
+            <Notification />
           </div>
         </div>
       </div>

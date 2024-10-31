@@ -21,7 +21,7 @@
 	}
 
 	&.primary {
-		background: linear-gradient(111deg, var(--color-primary) 14%, hwb(238 15% 40%) 85%);
+		background: linear-gradient(111deg, var(--color-primary) 14%, rgb(38, 42, 153) 85%);
 		background-color: var(--color-primary);
 
 		&:active,

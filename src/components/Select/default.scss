@@ -63,7 +63,8 @@
     overflow: hidden;
     border-radius: var(--border-radius-4);
     border: 1px solid var(--color-grey-400);
-    box-shadow: unset
+    box-shadow: unset;
+    z-index: $z-index-2;
   }
 
   .react-select__menu-list {

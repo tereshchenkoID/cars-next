@@ -1,47 +1,84 @@
 import { useTranslations } from 'next-intl'
-import { useState } from 'react'
+import { useState, useMemo } from 'react'
 
 import classNames from 'classnames'
 
+import { validationRules } from '@/utils/validationRules'
+
 import Button from '@/components/Button'
 import Password from '@/components/Password'
+import InputGroup from '@/modules/InputGroup'
 
 import style from '../index.module.scss'
 
 const Security = () => {
   const t = useTranslations()
   const [filter, setFilter] = useState({
-    old: '',
-    new: '',
+    old: {
+      value: '',
+      isValid: false
+    },
+    new: {
+      value: '',
+      isValid: false
+    }
   })
 
-  const handleChange = (field, value) => {
+  const handleChange = (field, { value, isValid }) => {
     setFilter((prevData) => ({
       ...prevData,
-      [field]: value,
+      [field]: { value, isValid },
     }))
   }
 
+  const isFormValid = useMemo(() => {
+    return Object.values(filter).every((field) => field.isValid)
+  }, [filter])
+
+  const handleSubmit = (e) => {
+    e.preventDefault()
+
+    alert("Send")
+  }
+
   return (
-    <form className={style.form}>
+    <form className={style.form} onSubmit={handleSubmit}>
       {/* <pre className={style.pre}>{JSON.stringify(filter, null, 2)}</pre> */}
       <div className={style.grid}>
-        <div>
-          <span className={style.label}>{t('current_password')}</span>
+        <InputGroup
+          label={t('current_password')}
+          value={filter.old.value}
+          rules={[
+            validationRules.required,
+            validationRules.minLength(5),
+          ]}
+          onValidationChange={(isValid) =>
+            handleChange('old', { value: filter.old.value, isValid })
+          }
+        >
           <Password
             placeholder={t('current_password')}
-            data={filter.old}
-            onChange={(value) => handleChange('old', value)}
+            data={filter.old.value}
+            onChange={(value) => handleChange('old', { value, isValid: filter.old.isValid })}
           />
-        </div>
-        <div>
-          <span className={style.label}>{t('new_password')}</span>
+        </InputGroup>
+        <InputGroup
+          label={t('new_password')}
+          value={filter.new.value}
+          rules={[
+            validationRules.required,
+            validationRules.minLength(5),
+          ]}
+          onValidationChange={(isValid) =>
+            handleChange('new', { value: filter.new.value, isValid })
+          }
+        >
           <Password
             placeholder={t('new_password')}
-            data={filter.new}
-            onChange={(value) => handleChange('new', value)}
+            data={filter.new.value}
+            onChange={(value) => handleChange('new', { value, isValid: filter.new.isValid })}
           />
-        </div>
+        </InputGroup>
       </div>
       <div 
         className={
@@ -55,6 +92,7 @@ const Security = () => {
           type="submit"
           classes={['primary', 'wide', style.submit]}
           placeholder={t('save')}
+          isDisabled={!isFormValid}
         />
       </div>
     </form>

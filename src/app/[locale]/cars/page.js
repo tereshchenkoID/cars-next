@@ -1,8 +1,3 @@
-import { 
-  API_BASE_URL, 
-  BASE_URL 
-} from '@/constant/config'
-
 import { fetchMetaTags } from '@/utils/fetchMetaTags'
 
 import SectionsCars from "@/sections/SectionsCars"
@@ -35,7 +30,7 @@ async function postData(endpoint, searchParams) {
   formData.append('page', Number(searchParams.page) || 0);
 
   try {
-    const res = await fetch(`${API_BASE_URL}/${endpoint}`, {
+    const res = await fetch(`${process.env.API_BASE_URL}/${endpoint}`, {
       method: 'POST',
       body: formData,
     })
@@ -76,7 +71,7 @@ const Cars = async ({ searchParams }) => {
           "price": car.price,
           "itemCondition": "https://schema.org/UsedCondition",
           "availability": "https://schema.org/InStock",
-          "url": `${BASE_URL}/car/${car.id}`,
+          "url": `${process.env.BASE_URL}/car/${car.id}`,
         },
       },
     }))

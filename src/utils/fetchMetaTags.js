@@ -1,8 +1,6 @@
-import { API_BASE_URL } from '@/constant/config'
-
 export async function fetchMetaTags(url) {
   try {
-    const res = await fetch(`${API_BASE_URL}/metatags/${url}`)
+    const res = await fetch(`${process.env.API_BASE_URL}/metatags/${url}`)
     if (!res.ok) {
       throw new Error(`Failed to fetch meta tags from ${url}`)
     }
