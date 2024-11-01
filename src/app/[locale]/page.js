@@ -1,6 +1,8 @@
 import { NAVIGATION } from '@/constant/config'
 import { fetchMetaTags } from '@/utils/fetchMetaTags'
 
+import SectionHome from '@/sections/SectionHome'
+
 export async function generateMetadata() {
   return await fetchMetaTags('home')
 }
@@ -33,7 +35,7 @@ const Home = async () => {
 
   return (
     <>
-      Home
+      <SectionHome />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}

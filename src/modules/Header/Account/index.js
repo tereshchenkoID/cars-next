@@ -1,5 +1,6 @@
 import { useState, useRef } from 'react'
 import { useTranslations } from 'next-intl'
+import { useParams } from 'next/navigation'
 import { useOutsideClick } from '@/hooks/useOutsideClick'
 import { useModal } from '@/context/ModalContext'
 import { useSelector } from 'react-redux'
@@ -8,6 +9,7 @@ import { NAVIGATION, ROUTES_USER } from '@/constant/config'
 
 import classNames from 'classnames'
 
+import Image from 'next/image'
 import Reference from '@/components/Reference'
 import Button from '@/components/Button'
 import Icon from '@/components/Icon'
@@ -23,10 +25,12 @@ import style from './index.module.scss'
 
 const Account = () => {
   const t = useTranslations()
+  const params = useParams()
   const { showModal } = useModal()
   const [show, setShow] = useState(false)
   const auth = useSelector((state) => state.auth)
   const isAuth = auth?.id
+  const language = params.locale
 
   const MENU = [
     ROUTES_USER.saved,
@@ -202,8 +206,17 @@ const Account = () => {
             className={style.language}
             onClick={() => openModal(2)}
           >
-            <span className={style.flag}></span>
-            <span>En (English)</span>
+            <span className={style.flag}>
+              <Image
+                width={24}
+                height={24}
+                className={style.image}
+                src={`/images/countries/${language}.svg`}
+                priority={true}
+                alt={language}
+              />
+            </span>
+            <span>{language}</span>
           </button>
         </div>
       </div>

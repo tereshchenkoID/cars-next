@@ -50,20 +50,12 @@
   }
 }
 
-.label {
-  font-weight: var(--typography-bold);
-  text-transform: uppercase;
-  font-size: rem(12px);
-}
-
 .form {
   display: grid;
   gap: var(--gap-16);
 }
 
 .restore {
-  @include make-spacer(mb, var(--gap-24));
-
   text-align: right;
   color: var(--color-primary);
   font-weight: var(--typography-medium);

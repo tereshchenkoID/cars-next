@@ -1,10 +1,10 @@
-"use client"
-
-import { useState } from 'react'
+import { useState, useMemo } from 'react'
 import { useTranslations } from 'next-intl'
 import { useModal } from '@/context/ModalContext'
 import { useDispatch } from 'react-redux'
 import { signIn } from 'next-auth/react'
+
+import { validationRules } from '@/utils/validationRules'
 
 import { setToastify } from '@/store/actions/toastifyAction'
 import { setAuth } from '@/store/actions/authAction'
@@ -13,6 +13,7 @@ import { getSession } from 'next-auth/react'
 import Field from '@/components/Field'
 import Button from '@/components/Button'
 import Password from '@/components/Password'
+import InputGroup from '@/modules/InputGroup'
 import RegistrationModal from '@/modules/RegistrationModal'
 import RestoreModal from '@/modules/RestoreModal'
 
@@ -23,16 +24,15 @@ const LoginModal = () => {
   const dispatch = useDispatch()
   const { showModal, closeModal } = useModal()
   const [filter, setFilter] = useState({
-    username: '',
-    password: '',
+    username: {
+      value: '',
+      isValid: false
+    },
+    password: {
+      value: '',
+      isValid: false
+    },
   })
-
-  const handlePropsChange = (fieldName, fieldValue) => {
-    setFilter((prevData) => ({
-      ...prevData,
-      [fieldName]: fieldValue,
-    }))
-  }
 
   const openModal = (type) => {
     const ModalComponent = type === 0 ? RegistrationModal : RestoreModal
@@ -45,8 +45,8 @@ const LoginModal = () => {
     try {
       const result = await signIn('login', {
         redirect: false,
-        username: filter.username,
-        password: filter.password,
+        username: filter.username.value,
+        password: filter.password.value,
       })
 
       if (result?.ok) {
@@ -56,7 +56,7 @@ const LoginModal = () => {
         dispatch(
           setToastify({
             type: 'success',
-            text: `${t('modal.login')} ${filter.username}`,
+            text: `${t('modal.login')} ${filter.username.value}`,
           }),
         )
         closeModal()
@@ -79,13 +79,16 @@ const LoginModal = () => {
     }
   }
 
-  const isFormValid = () => {
-    const { ...requiredFields } = filter
-
-    return (
-      Object.values(requiredFields).every(field => field.trim() !== '' && field.length > 3)
-    )
+  const handleChange = (field, { value, isValid }) => {
+    setFilter((prevData) => ({
+      ...prevData,
+      [field]: { value, isValid },
+    }))
   }
+
+  const isFormValid = useMemo(() => {
+    return Object.values(filter).every((field) => field.isValid)
+  }, [filter])
 
   const handleSignIn = async (provider) => {
     // const oauth2Endpoint = 'https://accounts.google.com/o/oauth2/v2/auth';
@@ -186,18 +189,43 @@ const LoginModal = () => {
         </button>
       </p>
       <div className={style.divider}>{t('notification.via_email')}</div>
-      <form onSubmit={handleSubmit} className={style.form}>
-        <label className={style.label}>{t('login')}</label>
-        <Field
-          placeholder={t('username')}
-          data={filter.username}
-          onChange={(value) => handlePropsChange('username', value)}
-        />
-        <Password
-          placeholder={t('password')}
-          data={filter.password}
-          onChange={(value) => handlePropsChange('password', value)}
-        />
+      <form onSubmit={handleSubmit} className={style.form}>        
+        <InputGroup
+          label={t('username')}
+          value={filter.username.value}
+          rules={[
+            validationRules.required,
+            validationRules.minLength(5),
+          ]}
+          onValidationChange={(isValid) =>
+            handleChange('username', { value: filter.username.value, isValid })
+          }
+        >
+          <Field
+            placeholder={t('username')}
+            data={filter.username.value}
+            onChange={(value) => handleChange('username', { value, isValid: filter.username.isValid })}
+          />
+        </InputGroup>
+
+        <InputGroup
+          label={t('password')}
+          value={filter.password.value}
+          rules={[
+            validationRules.required,
+            validationRules.minLength(5),
+          ]}
+          onValidationChange={(isValid) =>
+            handleChange('password', { value: filter.password.value, isValid })
+          }
+        >
+          <Password
+            placeholder={t('password')}
+            data={filter.password.value}
+            onChange={(value) => handleChange('password', { value, isValid: filter.password.isValid })}
+          />
+        </InputGroup>
+        
         <button
           type="button"
           className={style.restore}
@@ -210,7 +238,7 @@ const LoginModal = () => {
           type={'submit'}
           classes={['primary', 'wide']}
           placeholder={t('login')}
-          isDisabled={!isFormValid()}
+          isDisabled={!isFormValid}
         />
       </form>
     </div>

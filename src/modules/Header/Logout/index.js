@@ -9,7 +9,7 @@ const Logout = ({ setShow }) => {
   const dispatch = useDispatch()
 
   const handleLogout = async () => {
-    await signOut({ redirect: false })
+    await signOut({ redirect: window.location.href })
     setShow(false)
     dispatch(setAuth(null))
   }

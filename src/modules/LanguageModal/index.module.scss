@@ -14,28 +14,6 @@
 
   min-height: rem(40px);
   gap: var(--gap-8);
-
-  &:hover,
-  &.active {
-
-    .icon {
-      background-color: var(--color-primary);
-      border-color: var(--color-primary);
-
-      &::after {
-        @include size(rem(9px));
-        @include absolute-center;
-
-        background-color: var(--color-white);
-        border-radius: 50%;
-        content: '';
-      }
-    }
-
-    .text {
-      color: var(--color-primary);
-    }
-  }
 }
 
 .icon {
@@ -43,7 +21,13 @@
 
   position: relative;
   border-radius: 50%;
-  border: rem(1px) solid var(--color-text);
+  border: rem(1px) solid var(--color-grey-200);
+  overflow: hidden
+}
+
+.image {
+  @include size(rem(24px));
+  @include absolute-center;
 }
 
 .text {

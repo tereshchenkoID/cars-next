@@ -27,11 +27,18 @@
 }
 
 .icon {
-  @include size(22px);
+  @include size(24px);
 
   display: block;
+  position: relative;
   border-radius: 50%;
-  border: rem(2px) solid var(--color-text);
+  border: rem(2px) solid var(--color-grey-200);
+  overflow: hidden
+}
+
+.image {
+  @include size(rem(28px));
+  @include absolute-center;
 }
 
 .dropdown {

@@ -1,5 +1,7 @@
 import { useTranslations } from 'next-intl'
-import { useState } from 'react'
+import { useState, useMemo } from 'react'
+
+import { validationRules } from '@/utils/validationRules'
 
 import { useModal } from '@/context/ModalContext'
 
@@ -10,8 +12,9 @@ import Field from '@/components/Field'
 import Button from '@/components/Button'
 import Password from '@/components/Password'
 import Checkbox from '@/components/Checkbox'
-import LoginModal from '@/modules/LoginModal'
 import Select from '@/components/Select'
+import LoginModal from '@/modules/LoginModal'
+import InputGroup from '@/modules/InputGroup'
 
 import style from './index.module.scss'
 
@@ -33,26 +36,54 @@ const RegistrationModal = () => {
       "alpha_2": "UA",
       "alpha_3": "UKR",
       "name": "Ukraine"
-    }
+    },
   ])
 
-  const [formData, setFormData] = useState({
-    login: '',
-    password: '',
-    name: '',
-    surname: '',
-    postal: '',
-    country: '',
-    phone: '',
-    terms: false,
+  const [filter, setFilter] = useState({
+    email: {
+      value: '',
+      isValid: false
+    },
+    password: {
+      value: '',
+      isValid: false
+    },
+    name: {
+      value: '',
+      isValid: false
+    },
+    surname: {
+      value: '',
+      isValid: false
+    },
+    postal_code: {
+      value: '',
+      isValid: false
+    },
+    country: {
+      value: '',
+      isValid: false
+    },
+    phone: {
+      value: '',
+      isValid: false
+    },
+    terms: {
+      value: false,
+      isValid: false
+    },
   })
 
-  const handleChange = (field, value) => {
-    setFormData((prevData) => ({
+  const handleChange = (field, { value, isValid }) => {
+    setFilter((prevData) => ({
       ...prevData,
-      [field]: value,
+      [field]: { value, isValid },
     }))
   }
+
+  const isFormValid = useMemo(() => {
+    return Object.values(filter).every((field) => field.isValid)
+  }, [filter])
 
   // useEffect(() => {
   //   getData('countries/').then(json => {
@@ -92,62 +123,145 @@ const RegistrationModal = () => {
       </div>
       <div className={style.divider}>{t('notification.via_email')}</div>
       <form className={style.form}>
-        <label className={style.label}>{t('login')}</label>
-        <Field
-          type="email"
-          placeholder={t('email')}
-          data={formData.login}
-          onChange={(value) => handleChange('login', value)}
-        />
-        <Password
-          placeholder={t('password')}
-          data={formData.password}
-          onChange={(value) => handleChange('password', value)}
-        />
-        <label className={style.label}>{t('personal_data')}</label>
+        {/* <label className={style.label}>{t('login')}</label> */}
+        <InputGroup
+          label={t('email')}
+          value={filter.email.value}
+          rules={[
+            validationRules.required,
+            validationRules.email,
+          ]}
+          onValidationChange={(isValid) =>
+            handleChange('email', { value: filter.email.value, isValid })
+          }
+        >
+          <Field
+            type={'email'}
+            placeholder={t('email')}
+            data={filter.email.value}
+            onChange={(value) => handleChange('email', { value, isValid: filter.email.isValid })}
+          />
+        </InputGroup>
+
+        <InputGroup
+          label={t('password')}
+          value={filter.password.value}
+          rules={[
+            validationRules.required,
+            validationRules.minLength(5),
+          ]}
+          onValidationChange={(isValid) =>
+            handleChange('password', { value: filter.password.value, isValid })
+          }
+        >
+          <Password
+            placeholder={t('password')}
+            data={filter.password.value}
+            onChange={(value) => handleChange('password', { value, isValid: filter.password.isValid })}
+          />
+        </InputGroup>
+
         <div className={style.grid}>
-          <Field
-            placeholder={t('name')}
-            data={formData.name}
-            onChange={(value) => handleChange('name', value)}
-          />
-          <Field
-            placeholder={t('surname')}
-            data={formData.surname}
-            onChange={(value) => handleChange('surname', value)}
-          />
+          <InputGroup
+            label={t('name')}
+            value={filter.name.value}
+            rules={[
+              validationRules.required,
+            ]}
+            onValidationChange={(isValid) =>
+              handleChange('name', { value: filter.name.value, isValid })
+            }
+          >
+            <Field
+              placeholder={t('name')}
+              data={filter.name.value}
+              onChange={(value) => handleChange('name', { value, isValid: filter.name.isValid })}
+            />
+          </InputGroup>
+
+          <InputGroup
+            label={t('surname')}
+            value={filter.surname.value}
+            rules={[
+              validationRules.required,
+            ]}
+            onValidationChange={(isValid) =>
+              handleChange('surname', { value: filter.surname.value, isValid })
+            }
+          >
+            <Field
+              placeholder={t('surname')}
+              data={filter.surname.value}
+              onChange={(value) => handleChange('surname', { value, isValid: filter.surname.isValid })}
+            />
+          </InputGroup>
         </div>
-        <Phone
-          data={formData.phone}
-          onChange={value => handleChange('phone', value)}
-        />
+
+        <InputGroup
+          label={t('phone')}
+          value={filter.phone.value}
+          rules={[
+            validationRules.required,
+          ]}
+          onValidationChange={(isValid) =>
+            handleChange('phone', { value: filter.phone.value, isValid })
+          }
+        >
+          <Phone
+            data={filter.phone.value}
+            onChange={(value) => handleChange('phone', { value, isValid: filter.phone.isValid })}
+          />
+        </InputGroup>
+
         <div className={style.grid}>
-          <Select
-            placeholder={t('select_countries')}
-            options={countries.map(item => ({
-              value: item.alpha_2,
-              label: item.name,
-            }))}
-            data={formData.country}
-            isRequired={true}
-            onChange={(value) => handleChange('country', value)}
-          />
-          <Field
-            type={'number'}
-            placeholder={t('postal_code')}
-            data={formData.postal}
-            onChange={(value) => handleChange('postal', value)}
-          />
+          <InputGroup
+            label={t('country')}
+            value={filter.country.value}
+            rules={[
+              validationRules.required,
+            ]}
+            onValidationChange={(isValid) =>
+              handleChange('country', { value: filter.country.value, isValid })
+            }
+          >
+            <Select
+              placeholder={t('select_countries')}
+              options={countries.map(item => ({
+                value: item.alpha_2,
+                label: item.name,
+              }))}
+              data={filter.country.value}
+              onChange={(value) => handleChange('country', { value, isValid: filter.country.isValid })}
+            />
+          </InputGroup>
+
+          <InputGroup
+            label={t('postal_code')}
+            value={filter.postal_code.value}
+            rules={[
+              validationRules.required,
+            ]}
+            onValidationChange={(isValid) =>
+              handleChange('postal_code', { value: filter.postal_code.value, isValid })
+            }
+          >
+            <Field
+              placeholder={t('postal_code')}
+              data={filter.postal_code.value}
+              onChange={(value) => handleChange('postal_code', { value, isValid: filter.postal_code.isValid })}
+            />
+          </InputGroup>
         </div>
         <Checkbox
           placeholder={t('notification.terms')}
-          data={formData.terms}
-          onChange={(value) => handleChange('terms', value)}
+          data={filter.terms.value}
+          onChange={(value) => handleChange('terms', { value, isValid: filter.terms.isValid })}
         />
         <Button
           type="submit"
           classes={['primary', 'wide']}
           placeholder={t('register')}
+          isDisabled={!isFormValid}
         />
       </form>
     </div>

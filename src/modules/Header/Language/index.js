@@ -6,6 +6,8 @@ import { useState, useRef, useTransition } from 'react'
 import { useSelector } from 'react-redux'
 import { useOutsideClick } from '@/hooks/useOutsideClick'
 
+import Image from 'next/image'
+
 import style from './index.module.scss'
 
 const Language = () => {
@@ -52,7 +54,16 @@ const Language = () => {
         onClick={() => setShow(!show)}
         disabled={isPending}
       >
-        <span className={style.icon}></span>
+        <span className={style.icon}>
+          <Image
+            width={28}
+            height={28}
+            className={style.image}
+            src={`/images/countries/${active}.svg`}
+            priority={true}
+            alt={active}
+          />
+        </span>
       </button>
       {
         show &&
@@ -70,7 +81,16 @@ const Language = () => {
                   className={style.option}
                   aria-label={el.text}
                 >
-                  <span className={style.icon}></span>
+                  <span className={style.icon}>
+                    <Image
+                      width={28}
+                      height={28}
+                      className={style.image}
+                      src={`/images/countries/${el.code}.svg`}
+                      priority={true}
+                      alt={el.code}
+                    />
+                  </span>
                   <span className={style.text}>{el.text}</span>
                 </button>
               </li>

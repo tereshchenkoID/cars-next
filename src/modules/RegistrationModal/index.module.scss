@@ -50,12 +50,6 @@
   }
 }
 
-.label {
-  font-weight: var(--typography-bold);
-  text-transform: uppercase;
-  font-size: rem(12px);
-}
-
 .form {
   display: grid;
   gap: var(--gap-16);
@@ -64,6 +58,7 @@
 .grid {
   display: grid;
   gap: var(--gap-16);
+  align-items: flex-start;
 
   @include media-breakpoint-up(md) {
     grid-template-columns: repeat(2, 1fr);
