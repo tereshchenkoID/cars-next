@@ -40,7 +40,7 @@ const Sort = ({ pagination, handleLoad }) => {
       },
       page: {
         value: [
-          DEFAULT
+          1
         ]
       }
     }

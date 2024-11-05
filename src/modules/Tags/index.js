@@ -1,8 +1,6 @@
 import { useState } from 'react'
 import { useTranslations } from 'next-intl'
-
 import classNames from 'classnames'
-
 import style from './index.module.scss'
 
 const COUNT = 4
@@ -15,31 +13,19 @@ const Tags = ({ data }) => {
 
   return (
     <ul className={style.block}>
-      {
-        data.slice(0, show ? data.length : COUNT).map((el, idx) =>
-          <li
-            key={idx}
-            className={style.tag}
-          >
-            {el}
-          </li>
-        )
-      }
-      {
-        hiddenItemsCount > 0 && (
-          <li
-            className={
-              classNames(
-                style.tag,
-                style.alt
-              )
-            }
-            onClick={() => setShow(!show)}
-          >
-            {show ? `- ${t('hide')}` : `+ ${hiddenItemsCount} ${t('more')}`}
-          </li>
-        )
-      }
+      {data.slice(0, show ? totalItems : COUNT).map((item, idx) => (
+        <li key={item.id} className={style.tag}>
+          {item.name}
+        </li>
+      ))}
+      {hiddenItemsCount > 0 && (
+        <li
+          className={classNames(style.tag, style.alt)}
+          onClick={() => setShow(!show)}
+        >
+          {show ? `- ${t('hide')}` : `+ ${hiddenItemsCount} ${t('more')}`}
+        </li>
+      )}
     </ul>
   )
 }

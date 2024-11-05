@@ -11,7 +11,7 @@ const InputGroup = ({
   value,
   rules = [],
   label,
-  onValidationChange
+  onValidationChange,
 }) => {
   const [error, setError] = useState('')
 
@@ -33,7 +33,7 @@ const InputGroup = ({
   }, [value])
 
   return (
-    <div 
+    <div
       className={
         classNames(
           style.block,
@@ -43,7 +43,7 @@ const InputGroup = ({
     >
       {label && <label className={style.label}>{label}</label>}
       <div className={style.field}>
-        <Icon 
+        <Icon
           className={style.status}
           iconName={error ? 'warning' : 'success'}
           width={16}

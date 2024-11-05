@@ -12,7 +12,7 @@ import List from './List'
 
 import style from './index.module.scss'
 
-const Brands = () => {
+const Brands = ({ isWide = false }) => {
   const dispatch = useDispatch()
   const brands = useSelector((state) => state.brands)
   const search = useSelector((state) => state.search)
@@ -31,11 +31,11 @@ const Brands = () => {
       let selectedOptions = brand.options
         .filter(option => option.selected === ACTIVE)
         .map(option => option.id)
-  
+
       if (selectedOptions.includes(DEFAULT)) {
         selectedOptions = [ACTIVE]
       }
-  
+
       if (selectedOptions.length > 0) {
         updatedFilters[`make_${brand.id}`] = {
           value: selectedOptions
@@ -52,18 +52,20 @@ const Brands = () => {
 
   return (
     <div className={style.block}>
-      <List 
-        show={show} 
+      <List
+        show={show}
         setShow={setShow}
+        isWide={isWide}
       />
-      <Toggle 
-        show={show} 
+      <Toggle
+        show={show}
         setShow={setShow}
+        isWide={isWide}
       />
       {
-        show && 
-        <Modal 
-          show={show} 
+        show &&
+        <Modal
+          show={show}
           setShow={setShow}
         />
       }

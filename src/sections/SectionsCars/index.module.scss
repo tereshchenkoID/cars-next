@@ -1,6 +1,8 @@
 @import '@/scss/config';
 
 .block {
+  @include make-spacer(pb, var(--gap-16));
+
   position: relative;
 
   @include media-breakpoint-up(lg) {
@@ -125,5 +127,44 @@
 
   @include media-breakpoint-up(lg) {
     grid-template-columns: 1fr;
+  }
+}
+
+.empty {
+  @include make-spacer(py, var(--gap-64));
+  @include make-spacer(mx, auto);
+
+  max-width: rem(300px);
+  text-align: center;
+  line-height: 1.5;
+  letter-spacing: rem(1px);
+
+  h6, 
+  button {
+    color: var(--color-primary);
+    letter-spacing: rem(1px);
+  }
+
+  h6 {
+    font-size: rem(16px);
+    text-transform: uppercase;
+  }
+
+  button {
+    font-weight: var(--typography-bold);
+
+
+    @include hover {
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+
+  p {
+    @include make-spacer(py, var(--gap-6));
+
+    font-size: rem(14px);
   }
 }

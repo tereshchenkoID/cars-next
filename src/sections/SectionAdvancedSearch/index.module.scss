@@ -1,0 +1,160 @@
+@import '@/scss/config';
+
+.block {
+  @include make-spacer(py, var(--gap-24));
+
+  gap: var(--gap-24);
+
+  @include media-breakpoint-up(xl) {
+    @include make-spacer(py, var(--gap-32));
+  }
+}
+
+.block,
+.header,
+.wrapper {
+  @include flex($direction: column);
+}
+
+.subtitle,
+.section {
+  @include make-spacer(mb, var(--gap-16));
+}
+
+.header {
+  align-items: flex-start;
+  gap: var(--gap-16);
+}
+
+.wrapper {
+  @include make-spacer(p, var(--gap-24));
+
+  gap: var(--gap-24);
+  border-radius: var(--border-radius-8);
+  background-color: var(--color-white);
+
+  @include media-breakpoint-up(xl) {
+    @include make-spacer(p, var(--gap-32));
+  }
+}
+
+.head {
+  @include make-spacer(pb, var(--gap-12));
+
+  border-bottom-width: rem(1px);
+  border-bottom-style: solid;
+}
+
+.subtitle {
+  font-size: rem(12px);
+  text-transform: uppercase;
+}
+
+.section {
+  // border: 1px solid red;
+
+  &:last-child {
+    @include make-spacer(mb, 0);
+  }
+}
+
+.options {
+  display: grid;
+  align-items: flex-start;
+  column-gap: var(--gap-32);
+  row-gap: var(--gap-16);
+
+  @include media-breakpoint-up(md) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @include media-breakpoint-up(lg) {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  &.center {
+    align-items: center;
+  }
+
+  &.end {
+    align-items: flex-end;
+  }
+}
+
+.list {
+  @include flex($align-items: center, $wrap: wrap);
+
+  column-gap: var(--gap-32);
+  row-gap: var(--gap-16);
+}
+
+.colors {
+  @include flex($align-items: center, $wrap: wrap);
+
+  gap: var(--gap-10);
+}
+
+.color {
+  @include transition;
+  @include size(rem(20px));
+
+  position: relative;
+  border-radius: 50%;
+  overflow: hidden;
+  overflow: visible;
+  opacity: 0.8;
+
+  &::before,
+  &::after {
+    position: absolute;
+    border-radius: 50%;
+    content: '';
+  }
+
+  &::before {
+    @include transition;
+
+    inset: rem(-3px);
+    background-color: var(--color-white);
+    border: rem(1px) solid var(--color-primary);
+    opacity: 0;
+    content: '';
+  }
+
+  &::after {
+    position: absolute;
+    inset: 0;
+    background-color: inherit;
+    border: rem(1px) solid var(--color-grey-400);
+  }
+
+  @include hover {
+
+    &:hover {
+      opacity: 1;
+    }
+  }
+
+  &.active {
+
+    &::before {
+      opacity: 1;
+    }
+  }
+}
+
+.footer {
+  @include make-spacer(p, var(--gap-16));
+
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: var(--color-white);
+  z-index: $z-index-9;
+  box-shadow: var(--box-shadow-4-16);
+}
+
+.container {
+  @include flex(space-between, center);
+}

@@ -5,7 +5,6 @@ const initialState = {
 }
 
 const searchReducer = (state = initialState, action) => {
-
   switch (action.type) {
     case types.GET_SEARCH:
       return {

@@ -2,9 +2,13 @@
 
 .block {
   @include make-spacer(mb, var(--gap-12));
-  @include flex($direction: column);
+  @include flex($wrap: wrap);
 
   gap: var(--gap-6);
+
+  &.wide {
+    @include flex($direction: column);
+  }
 }
 
 .item {

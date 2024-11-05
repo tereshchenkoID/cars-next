@@ -16,6 +16,17 @@ import Tags from '@/modules/Tags'
 
 import style from './index.module.scss'
 
+const getFuelIcon = (data) => {
+  switch (data) {
+    case '2':
+      return 'electric'
+    case '3':
+      return 'hybrid'    
+    default:
+      return 'petrol'
+  }
+}
+
 const Card = ({ data }) => {
   const t = useTranslations()
   const auth = useSelector((state) => state.auth)
@@ -24,56 +35,62 @@ const Card = ({ data }) => {
   return (
     <div className={style.block}>
       <div className={style.left}>
-        <Swiper
-          className={style.slider}
-          slidesPerView={1}
-          // lazy={true}
-          pagination={{
-            dynamicBullets: true,
-            clickable: true,
-          }} 
-          navigation={true}
-          mousewheel={true}
-          modules={[Pagination, Mousewheel, Navigation]}
-        >
-          {
-            data.images.map((el, idx) =>
-              <SwiperSlide key={idx}>
-                <Image
-                  src={el}
-                  width={277}
-                  height={207}
-                  className={style.image}
-                  // priority={true}
-                  alt={`${t('image')} ${idx}`}
-                />
-              </SwiperSlide>
-            )
-          }
-        </Swiper>
-
-        <div 
-          className={style.count}
-          onClick={() => {
-            Fancybox.show(
-              data.images.map((src, index) => ({
-                src,
-                type: 'image',
-                caption: `${t('image')} ${index + 1}`,
-              })),
+        {
+          data.images.length > 0 &&
+          <>
+            {/* <Swiper
+              className={style.slider}
+              slidesPerView={1}
+              pagination={{
+                dynamicBullets: true,
+                clickable: true,
+              }} 
+              navigation={true}
+              // mousewheel={true}
+              modules={[Pagination, Mousewheel, Navigation]}
+            >
               {
-                groupAll: true,
+                data.images?.map((el, idx) =>
+                  <SwiperSlide key={idx}>
+                    <Image
+                      src={el}
+                      width={277}
+                      height={207}
+                      className={style.image}
+                      priority={idx === 0}
+                      style={{aspectRatio: 277 / 207 }}
+                      alt={`${data.slug} ${idx}`}
+                    />
+                  </SwiperSlide>
+                )
               }
-            );
-          }}
-        >
-          <Icon 
-            iconName={'image'}
-            width={24}
-            height={24}
-          />
-          {data.images.length}
-        </div>
+            </Swiper> */}
+
+            <div 
+              className={style.count}
+              onClick={() => {
+                Fancybox.show(
+                  data.images.map((src, index) => ({
+                    src,
+                    type: 'image',
+                    caption: `${t('image')} ${index + 1}`,
+                  })),
+                  {
+                    groupAll: true,
+                  }
+                );
+              }}
+            >
+              <Icon 
+                iconName={'image'}
+                width={24}
+                height={24}
+              />
+              {data.images?.length}
+            </div>
+          </>
+        }
+
         <button
           type={'button'}
           className={style.favorite}
@@ -91,7 +108,7 @@ const Card = ({ data }) => {
       </div>
       <div className={style.right}>
         <Link 
-          href={`${NAVIGATION.car.link}/${data.id}/test`}
+          href={`${NAVIGATION.car.link}/${data.id}/${data.slug}`}
           className={style.link}
         >
           {data.name}
@@ -104,7 +121,7 @@ const Card = ({ data }) => {
               height={18}
               className={style.icon}
             />
-            <p>{data.mileage}</p>
+            <p>{data.mileage_data.mileage} {data.mileage_data.mileage_unit}</p>
           </li>
           <li className={style.option}>
             <Icon 
@@ -113,7 +130,7 @@ const Card = ({ data }) => {
               height={18}
               className={style.icon}
             />
-            <p>{data.year}</p>
+            <p>{data.first_registration_date || data.manufacture_date}</p>
           </li>
           <li className={style.option}>
             <Icon 
@@ -122,7 +139,7 @@ const Card = ({ data }) => {
               height={18}
               className={style.icon}
             />
-            <p>{data.power}</p>
+            <p>{data.power_data.power} ({data.power_data.power_unit})</p>
           </li>
           <li className={style.option}>
             <Icon 
@@ -131,23 +148,30 @@ const Card = ({ data }) => {
               height={18}
               className={style.icon}
             />
-            <p>{filters['transmission'].options[data.transmission]}</p>
+            <p>{filters['transmission'].options[data.transmission.id]}</p>
           </li>
           <li className={style.option}>
             <Icon 
-              iconName={'hybrid'}
+              iconName={getFuelIcon(data.fuel_type.id)}
               width={18}
               height={18}
               className={style.icon}
             />
-            <p>{filters['fuel'].options[data.fuel]}</p>
+            <p>{filters['fuel_type'].options[data.fuel_type.id]}</p>
           </li>
         </ul>
         
-        <Tags data={data.options} />
+        {
+          data.featured_tags &&
+          <Tags data={Object.values(data.featured_tags)} />
+        }
 
         <div className={style.meta}>
-          <h5>{getFormatPrice(auth?.account?.language?.code, auth?.account?.currency?.code, data.price)}</h5>
+          <h5>{getFormatPrice(auth?.account?.language?.code, auth?.account?.currency?.code, data?.price_data?.price)}</h5>
+          {
+            data.price_data.price_without_vat &&
+            <p>{getFormatPrice(auth?.account?.language?.code, auth?.account?.currency?.code, data.price_data.price_without_vat)}</p>
+          }
         </div>
       </div>
     </div>

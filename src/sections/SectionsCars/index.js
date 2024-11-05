@@ -39,10 +39,21 @@ const SectionsCars = ({ initialData }) => {
   })
 
   const handleLoad = (page) => {
+    let a = search
+    a = {
+      ...a,
+      page: {
+        value: [
+          page
+        ]
+      }
+    }
+
     setShow(false)
 
     const formData = new FormData()
-    formData.append('data', JSON.stringify(search))
+    // formData.append('data', JSON.stringify(search))
+    formData.append('data', JSON.stringify(a))
     formData.append('page', page)
 
     postData('filters/search/', formData).then(json => {
@@ -66,53 +77,39 @@ const SectionsCars = ({ initialData }) => {
   }
 
   const handlePagination = (fieldName, fieldValue) => {
-    setPagination(prevPagination => ({
-      ...prevPagination,
-      [fieldName]: fieldValue,
-    }))
-    handleLoad(fieldValue)
-  }
-
-  const handlePrev = () => {
-    const prev = pagination.page > 0 ? pagination.page - 1 : 0
-    // handlePagination('page', prev)
-
-    let a = JSON.parse(JSON.stringify(search))
+    let a = search
     a = {
       ...a,
       page: {
         value: [
-          prev
+          fieldValue === 1 ? "0" : fieldValue.toString()
         ]
       }
     }
 
+    setPagination(prevPagination => ({
+      ...prevPagination,
+      [fieldName]: fieldValue,
+    }))
+
     dispatch(setSearch(a))
+    handleLoad(fieldValue.toString())
+  }
+
+  const handlePrev = () => {
+    const prev = pagination.page > 0 ? pagination.page - 1 : 0
     handlePagination('page', prev)
   }
 
   const handleNext = () => {
     const next = pagination.page < pagination.pages ? pagination.page + 1 : pagination.pages
-
-    let a = JSON.parse(JSON.stringify(search))
-    a = {
-      ...a,
-      page: {
-        value: [
-          next
-        ]
-      }
-    }
-
-    dispatch(setSearch(a))
     handlePagination('page', next)
   }
 
   const handleRemove = (type, key, value) => {
     dispatch(setSearch(getSearch(JSON.parse(JSON.stringify(search)), type, key, TYPES.includes(type) ? value : DEFAULT)))
 
-    if(key === 'page') {
-      console.log(value)
+    if (key === 'page') {
       handlePagination('page', 0)
     }
   }
@@ -123,7 +120,7 @@ const SectionsCars = ({ initialData }) => {
         <Filters
           show={show}
           setShow={setShow}
-          handleLoad={handleLoad}
+          handleLoad={() => handleLoad(0)}
         />
         <div className={style.content}>
           <div className={style.searches}>
@@ -184,9 +181,9 @@ const SectionsCars = ({ initialData }) => {
                             {
                               key.indexOf('to') !== -1 || key.indexOf('from') !== -1
                                 ?
-                                  <>{t(`filters.${key.split('_')[0]}.0`)} {t(key.split('_')[1])}</>
+                                <>{t(`filters.${key.split('_')[0]}.0`)} {t(key.split('_')[1])}</>
                                 :
-                                  t(`filters.${key}.0`)
+                                t(`filters.${key}.0`)
                             }
                             : <strong>{filters[key].options?.[el] || el}</strong>
                           </span>
@@ -209,8 +206,8 @@ const SectionsCars = ({ initialData }) => {
           {/* <pre className={style.pre}>{JSON.stringify(search, null, 2)}</pre> */}
 
           <div className={style.meta}>
-            <Sort 
-              pagination={pagination} 
+            <Sort
+              pagination={pagination}
               handleLoad={() => handleLoad()}
             />
             {
@@ -222,17 +219,40 @@ const SectionsCars = ({ initialData }) => {
               />
             }
           </div>
+          {
+            data.data
+              ?
+                <>
+                  <div className={style.cards}>
+                    {
+                      data?.data?.map((el, idx) =>
+                        <Card
+                          key={idx}
+                          data={el}
+                        />
+                      )
+                    }
+                  </div>
+                  <Pagination
+                    pagination={pagination}
+                    handlePrev={() => handlePrev()}
+                    handleNext={() => handleNext()}
+                  />
+                </>
+              :
+                <div className={style.empty}>
+                  <h6>Whoops!</h6>
+                  <p>None of our cars matches your search parameters.</p>
+                  {/* <button
+                    type={"button"}
+                    title={t('remove')}
+                    aria-label={t('remove')}
+                  >
+                    Cancel filters
+                  </button> */}
+                </div>
+          }
 
-          <div className={style.cards}>
-            {
-              data?.data?.map((el, idx) =>
-                <Card
-                  key={idx}
-                  data={el}
-                />
-              )
-            }
-          </div>
         </div>
       </div>
     </Container>

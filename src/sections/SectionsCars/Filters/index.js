@@ -24,8 +24,8 @@ import Select from '@/components/Select'
 import Checkbox from '@/components/Checkbox'
 import Reference from '@/components/Reference'
 import Backdrop from '@/modules/Backdrop'
+import Brands from '@/modules/Brands'
 import SavedCard from './SavedCard'
-import Brands from './Brands'
 
 import style from './index.module.scss'
 
@@ -142,6 +142,7 @@ const Filters = ({ show, setShow, handleLoad }) => {
 
   const handleReset = () => {
     dispatch(setSearch(generateSearchFromFilters(filters, null)))
+    handleLoad(0)
   }
 
   useEffect(() => {
@@ -165,7 +166,7 @@ const Filters = ({ show, setShow, handleLoad }) => {
       <form 
         onSubmit={(e) => {
           e.preventDefault()
-          handleLoad()
+          handleLoad(0)
         }}
         className={
           classNames(
@@ -215,7 +216,7 @@ const Filters = ({ show, setShow, handleLoad }) => {
             <>
               <div className={style.section}>
                 <h6 className={style.subtitle}>{t('model')}</h6>
-                <Brands />
+                <Brands isWide={true} />
               </div>
               {
                 Object.keys(groupedFilters).map((group) => (
@@ -223,7 +224,15 @@ const Filters = ({ show, setShow, handleLoad }) => {
                     key={group}
                     className={style.section}
                   >
-                    <h6 className={style.subtitle}>{t(`filters.${groupedFilters[group][0].key.split('_')[0]}.0`)}</h6>
+                    <h6 className={style.subtitle}>
+                      {
+                        (groupedFilters[group][0].key.indexOf('from') !== -1 || groupedFilters[group][0].key.indexOf('to') !== -1) 
+                        ?
+                          t(`filters.${groupedFilters[group][0].key.split('_')[0]}.0`)
+                        :
+                          t(`filters.${groupedFilters[group][0].key}.0`)
+                      }
+                    </h6>
                     <div
                       className={style.wrapper}
                       style={{
@@ -238,7 +247,7 @@ const Filters = ({ show, setShow, handleLoad }) => {
                             className={style.wrapper}
                           >
                             {
-                              key.split('_').length > 1 &&
+                              (key.indexOf('from') !== -1 || key.indexOf('to') !== -1) &&
                               <p className={style.label}>{t(key.split('_')[1])}:</p>
                             }
 
@@ -249,16 +258,15 @@ const Filters = ({ show, setShow, handleLoad }) => {
                                   options={
                                     key.includes('year')
                                       ?
-                                      years.map(year => ({
-                                        value: year === DEFAULT ? DEFAULT : year,
-                                        label: year === DEFAULT ? t('all') : year,
-                                      }))
+                                        years.map(year => ({
+                                          value: year === DEFAULT ? DEFAULT : year,
+                                          label: year === DEFAULT ? t('all') : year,
+                                        }))
                                       :
-                                      Object.entries(filter.options).map(([optionKey, optionValue]) => ({
-                                        value: optionKey,
-                                        label: optionKey === DEFAULT ? t('all') : (filter.translation === DEFAULT ? optionValue : t(`filters.${key}.${optionKey}`)),
-                                      })
-                                      )
+                                        Object.entries(filter.options).map(([optionKey, optionValue]) => ({
+                                          value: optionKey,
+                                          label: optionKey === DEFAULT ? t('all') : (filter.translation === DEFAULT ? optionValue : t(`filters.${key}.${optionKey}`)),
+                                        }))
                                   }
                                   data={search[key]?.value?.[search[key]?.value?.length - 1] || DEFAULT}
                                   onChange={(value) => handleChange(filter.type, key, value)}

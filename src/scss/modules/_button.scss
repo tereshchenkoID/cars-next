@@ -78,13 +78,17 @@
 		height: auto!important;
 		color: var(--color-primary-hover);
 		font-weight: var(--typography-bold);
-		text-decoration: underline;
+		text-decoration-color: var(--color-primary-hover);
+    text-decoration-line: underline;
+    text-decoration-thickness: rem(1.5px);
+    text-underline-offset: rem(1.75px);
+
 		box-shadow: none;
 
 		@include hover {
 
 			&:hover {
-				text-decoration: none;
+				text-decoration-color: transparent;
 			}
 		}
 	}

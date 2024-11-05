@@ -20,6 +20,12 @@ const nextConfig = {
         protocol: 'https',
         hostname: 'storage.alpha-analytics.cz',
         port: '',
+        pathname: '/get/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'storage.alpha-analytics.cz',
+        port: '',
         pathname: '/resize/**',
       },
       {

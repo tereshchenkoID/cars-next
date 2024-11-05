@@ -1,16 +1,19 @@
 import classNames from 'classnames'
 
+import Image from 'next/image'
+
 import style from './index.module.scss'
 
-const Checkbox = ({ 
-  data, 
-  placeholder, 
+const Checkbox = ({
+  image = false,
+  data,
+  placeholder,
   classes = null,
   isDisabled = false,
   onChange,
 }) => {
   return (
-    <label 
+    <label
       className={
         classNames(
           style.block,
@@ -28,7 +31,20 @@ const Checkbox = ({
         }}
       />
       <span className={style.item} />
-      <span>{placeholder}</span>
+      <span className={style.wrapper}>
+        {
+          image &&
+          <Image
+            src={image.url}
+            width={image.width}
+            height={image.height}
+            alt={image.alt}
+            className={style.image}
+            priority={true}
+          />
+        }  
+        <span>{placeholder}</span>
+      </span>
     </label>
   )
 }

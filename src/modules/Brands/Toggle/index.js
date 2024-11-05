@@ -6,7 +6,7 @@ import Icon from '@/components/Icon'
 
 import style from './index.module.scss'
 
-const Toggle = ({ show, setShow }) => {
+const Toggle = ({ show, setShow, isWide }) => {
   const t = useTranslations()
   
   return (
@@ -15,6 +15,7 @@ const Toggle = ({ show, setShow }) => {
       className={
         classNames(
           style.block,
+          isWide && style.wide,
           show && style.active
         )
       }

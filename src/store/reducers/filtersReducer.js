@@ -11,10 +11,7 @@ const settingsReducer = (state = initialState, action) => {
         ...state,
       }
     case types.SET_FILTERS:
-      return {
-        ...state,
-        filters: action.payload,
-      }
+      return action.payload
     default:
       return state
   }

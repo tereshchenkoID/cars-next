@@ -2,6 +2,8 @@ import { useMemo } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useTranslations } from 'next-intl'
 
+import classNames from 'classnames'
+
 import { ACTIVE, DEFAULT } from '@/constant/config'
 
 import { selectBrands, deleteBrands } from '@/store/actions/brandsAction'
@@ -11,7 +13,7 @@ import Icon from '@/components/Icon'
 
 import style from './index.module.scss'
 
-const List = ({ show, setShow }) => {
+const List = ({ show, setShow, isWide }) => {
   const t = useTranslations()
   const dispatch = useDispatch()
   const brands = useSelector((state) => state.brands)
@@ -38,7 +40,14 @@ const List = ({ show, setShow }) => {
     return
 
   return (
-    <ul className={style.block}>
+    <ul 
+      className={
+        classNames(
+          style.block,
+          isWide && style.wide
+        )
+      }
+    >
       {
         selected.map((el, idx) =>
           <li

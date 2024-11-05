@@ -96,6 +96,7 @@ body {
   -webkit-text-size-adjust: 100%;
   -webkit-overflow-scrolling: touch;
   min-width: var(--min-width);
+  scroll-behavior: smooth;
 }
 
 h1,
