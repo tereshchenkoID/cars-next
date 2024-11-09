@@ -50,7 +50,7 @@
 .meta {
   @include make-spacer(mt, auto);
   @include make-spacer(mb, 0);
-  @include flex(flex-end, center);
+  @include flex($align-items: flex-end, $direction: column);
 }
 
 .favorite {
@@ -176,4 +176,9 @@
 
 .image {  
   object-fit: cover;
+}
+
+.vat {
+  font-size: rem(12px);
+  color: var(--color-grey-600);
 }

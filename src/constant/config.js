@@ -3,6 +3,7 @@ export const API_BASE_URL = 'https://api.oddsbit.io/auto'
 
 export const DEFAULT = "0"
 export const ACTIVE = "1"
+export const NA = "n/a"
 export const TYPES = ["checkbox", "color"]
 
 export const NAVIGATION = {

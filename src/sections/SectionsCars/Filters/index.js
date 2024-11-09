@@ -68,7 +68,7 @@ const Filters = ({ show, setShow, handleLoad }) => {
       let selectedOptions = brand.options
         .filter(option => option.selected === ACTIVE)
         .map(option => option.id)
-  
+
       if (selectedOptions.includes(DEFAULT)) {
         selectedOptions = [DEFAULT]
       }

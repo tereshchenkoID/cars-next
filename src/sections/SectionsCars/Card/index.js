@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux'
 import { NAVIGATION } from '@/constant/config'
 
 import { getFormatPrice } from '@/helpers/getFormatPrice'
+import { getFuelIcon } from '@/helpers/getFuelIcon'
 
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { Pagination, Navigation, Mousewheel } from 'swiper/modules'
@@ -15,17 +16,6 @@ import Icon from '@/components/Icon'
 import Tags from '@/modules/Tags'
 
 import style from './index.module.scss'
-
-const getFuelIcon = (data) => {
-  switch (data) {
-    case '2':
-      return 'electric'
-    case '3':
-      return 'hybrid'    
-    default:
-      return 'petrol'
-  }
-}
 
 const Card = ({ data }) => {
   const t = useTranslations()
@@ -163,15 +153,20 @@ const Card = ({ data }) => {
         
         {
           data.featured_tags &&
-          <Tags data={Object.values(data.featured_tags)} />
+          <Tags data={data.featured_tags} />
         }
 
         <div className={style.meta}>
           <h5>{getFormatPrice(auth?.account?.language?.code, auth?.account?.currency?.code, data?.price_data?.price)}</h5>
+          <p className={style.vat}>
           {
-            data.price_data.price_without_vat &&
-            <p>{getFormatPrice(auth?.account?.language?.code, auth?.account?.currency?.code, data.price_data.price_without_vat)}</p>
+            data.price_data.price_without_vat 
+            ?
+              <><strong>{getFormatPrice(auth?.account?.language?.code, auth?.account?.currency?.code, data.price_data.price_without_vat)}</strong> {t('without_vat')}</>
+            :
+              <span>{t('not_deductible')}</span>
           }
+          </p>
         </div>
       </div>
     </div>

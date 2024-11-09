@@ -1,7 +1,7 @@
 "use client"
 
 import { useTranslations } from 'next-intl'
-import { useSearchParams } from 'next/navigation'
+import { useSearchParams, useRouter } from 'next/navigation'
 import { useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 
@@ -12,7 +12,7 @@ import { getSearch } from '@/helpers/getSearch'
 import { setSearch } from '@/store/actions/searchAction'
 import { setToastify } from '@/store/actions/toastifyAction'
 
-import { DEFAULT, TYPES } from '@/constant/config'
+import { DEFAULT, NAVIGATION, TYPES } from '@/constant/config'
 
 import Container from '@/components/Container'
 import Icon from '@/components/Icon'
@@ -26,6 +26,7 @@ import style from './index.module.scss'
 const SectionsCars = ({ initialData }) => {
   const t = useTranslations()
   const dispatch = useDispatch()
+  const router = useRouter()
   const searchParams = useSearchParams()
   const filters = useSelector((state) => state.filters)
   const search = useSelector((state) => state.search)
@@ -247,6 +248,9 @@ const SectionsCars = ({ initialData }) => {
                     type={"button"}
                     title={t('remove')}
                     aria-label={t('remove')}
+                    onClick={() => {
+                      router.push(NAVIGATION.buy.link, { scroll: false })
+                    }}
                   >
                     Cancel filters
                   </button> */}

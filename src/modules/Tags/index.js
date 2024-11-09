@@ -13,9 +13,12 @@ const Tags = ({ data }) => {
 
   return (
     <ul className={style.block}>
-      {data.slice(0, show ? totalItems : COUNT).map((item, idx) => (
-        <li key={item.id} className={style.tag}>
-          {item.name}
+      {data.slice(0, show ? totalItems : COUNT).map((el, idx) => (
+        <li 
+          key={idx} 
+          className={style.tag}
+        >
+          {t(`features.${el.parentId}.${el.id}`)}
         </li>
       ))}
       {hiddenItemsCount > 0 && (

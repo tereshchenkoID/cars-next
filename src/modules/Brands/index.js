@@ -33,7 +33,7 @@ const Brands = ({ isWide = false }) => {
         .map(option => option.id)
 
       if (selectedOptions.includes(DEFAULT)) {
-        selectedOptions = [ACTIVE]
+        selectedOptions = [DEFAULT]
       }
 
       if (selectedOptions.length > 0) {

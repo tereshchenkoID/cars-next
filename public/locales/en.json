@@ -103,6 +103,12 @@
   "vat_player": "I'm a VAT payer",
   "country": "Country",
   "reset_filters": "Reset filters",
+  "without_vat": "without VAT",
+  "not_deductible": "Not deductible",
+  "details": "Details",
+  "feature": "Features",
+  "price_history": "Price history",
+  "price_map": "Price map",
   "features": {
     "1": {
       "0": "Other",
@@ -291,11 +297,10 @@
     },
     "vehicle_type": {
       "0": "Vehicle type",
-      "1": "Sedan",
-      "2": "Sedan",
+      "1": "Estate car",
+      "2": "Sedans / saloons",
       "3": "Station Wagon",
       "4": "SUV / Offroad",
-      "5": "Cargo VAN",
       "6": "Coupe",
       "7": "Cabriolet",
       "8": "MPV/VAN",
@@ -314,9 +319,13 @@
     },
     "fuel_type": {
       "0": "Fuel",
-      "1": "Gas",
-      "2": "Electro",
-      "3": "Diesel"
+      "1": "Petrol",
+      "2": "Diesel",
+      "3": "Electric",
+      "4": "LPG",
+      "5": "CNG",
+      "6": "Hybrid",
+      "8": "Hydrogen"
     },
     "eco": {
       "0": "Eco standart",
@@ -344,12 +353,16 @@
     "region": {
       "0": "Region"
     },
+    "drive": {
+      "0": "Drive type"
+    },
     "color": {
       "0": "Colors",
       "1": "white",
       "2": "black",
       "3": "green",
-      "4": "red"
+      "4": "red",
+      "5": "blue"
     }
   }
 }

@@ -1,0 +1,20 @@
+@import '@/scss/config';
+
+.block {
+  @include make-spacer(p, var(--gap-32));
+
+  background-color: var(--color-white);
+  border-radius: var(--border-radius-8);
+  box-shadow: var(--box-shadow-16-24);
+  min-height: rem(200px);
+}
+
+.tooltip {
+  @include make-spacer(p, var(--gap-4));
+
+  background-color: var(--color-primary);
+  border-radius: var(--border-radius-4);
+  color: var(--color-white);
+  line-height: 1;
+  font-size: rem(12px);
+}

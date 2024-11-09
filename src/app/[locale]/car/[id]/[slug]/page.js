@@ -1,4 +1,4 @@
-import { DEFAULT } from '@/constant/config'
+import { NA } from '@/constant/config'
 import { fetchMetaTags } from '@/utils/fetchMetaTags'
 import { fetchData } from '@/utils/fetchData'
 
@@ -16,23 +16,23 @@ const Car = async ({ params: { id } }) => {
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "Product",
-    "name": data.name,
-    "description": data.description,
+    "name": data.meta.name,
+    "description": data.meta.description,
     "image": data.images || [],
     "brand": {
       "@type": "Brand",
-      "name": data.make || "N/A",
+      "name": data.make || NA,
     },
-    "model": data.model || "N/A",
-    "vehicleModelDate": data.year || "N/A",
+    "model": data.model.name || NA,
+    "vehicleModelDate": data.date.manufacture || NA,
     "manufacturer": {
       "@type": "Organization",
-      "name": data.make || "N/A",
+      "name": data.make.name || NA,
     },
     "offers": {
       "@type": "Offer",
-      "priceCurrency": data.price || DEFAULT,
-      "price": data.price || DEFAULT,
+      "priceCurrency": data.currency.name || NA,
+      "price": data.price_data.price || NA,
       "itemCondition": "https://schema.org/UsedCondition",
       "availability": "https://schema.org/InStock",
       "url": `${process.env.BASE_URL}/car/${id}`,
@@ -42,25 +42,23 @@ const Car = async ({ params: { id } }) => {
         "url": process.env.BASE_URL,
       },
     },
-    "mpn": data.id || "N/A",
-    "sku": data.sku || "N/A", // TOYOTA-CAMRY-2021
-    "vehicleConfiguration": data.configuration || "Unknown", // ?
+    "sku": data.meta.name || NA,
     "vehicleEngine": {
       "@type": "EngineSpecification",
-      "name": data.engine || DEFAULT,
-      "fuelType": data.fuel || DEFAULT,
+      // "name": data.engine || DEFAULT,
+      "fuelType": data.fuel_type.name || NA,
     },
     "mileageFromOdometer": {
       "@type": "QuantitativeValue",
-      "value": data.mileage || DEFAULT,
-      "unitCode": "KM",
+      "value": data.mileage_data.mileage || NA,
+      "unitCode": data.mileage_data.mileage_unit,
     },
-    "color": data.color || DEFAULT,
-    "bodyType": data.body_type || DEFAULT,
-    "fuelType": data.fuel || DEFAULT,
-    "vehicleTransmission": data.transmission || DEFAULT,
-    "numberOfDoors": data.doors_number || 4,
-    "seatingCapacity": data.seating_capacity || 5,
+    "color": data.color.name || NA,
+    "bodyType": data.body.name || NA,
+    "fuelType": data.fuel_type.name || NA,
+    "vehicleTransmission": data.transmission.name || NA,
+    "numberOfDoors": data.number_of_doors || NA,
+    // "seatingCapacity": data.seating_capacity || 5,
   }
 
   return (

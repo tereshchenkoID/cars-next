@@ -16,9 +16,12 @@ const Betslip = ({ data }) => {
       <header className={style.header}>
         <h6 className={style.prize}>
           <span>Car price</span>
-          <span>{getFormatPrice(auth?.account?.language?.code, auth?.account?.currency?.code, 123123)} </span>
+          <span>{getFormatPrice(auth?.account?.language?.code, auth?.account?.currency?.code, data?.price_data?.price)} </span>
         </h6>
-        <p>Special VAT arrangements</p>
+        <p className={style.prize}>
+          <span>Total price excluding VAT</span>
+          <span>{getFormatPrice(auth?.account?.language?.code, auth?.account?.currency?.code, data?.price_data?.price_without_vat)} </span>
+        </p>
       </header>
 
       <div className={style.body}>
@@ -32,8 +35,12 @@ const Betslip = ({ data }) => {
       <footer className={style.footer}>
         <h6 className={style.prize}>
           <span>Total price</span>
-          <span>{getFormatPrice(auth?.account?.language?.code, auth?.account?.currency?.code, 123123)} </span>
+          <span>{getFormatPrice(auth?.account?.language?.code, auth?.account?.currency?.code, data?.price_data?.price)} </span>
         </h6>
+        <p className={style.prize}>
+          <span>Total price excluding VAT</span>
+          <span>{getFormatPrice(auth?.account?.language?.code, auth?.account?.currency?.code, data?.price_data?.price_without_vat)} </span>
+        </p>
       </footer>
     </div>
   )

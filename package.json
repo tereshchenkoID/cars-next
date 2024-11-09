@@ -25,6 +25,7 @@
     "react-select": "^5.8.1",
     "react-share": "^5.1.0",
     "react-toastify": "^10.0.5",
+    "recharts": "^2.13.3",
     "sas": "^3.0.4",
     "sass": "^1.79.4",
     "swiper": "^11.1.14"
