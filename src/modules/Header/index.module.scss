@@ -1,18 +1,23 @@
 @import '@/scss/config';
 
 .block {
-  @include make-spacer(px, var(--outer-gap));
-  @include flex(space-between, center);
-
   position: sticky;
   top: 0;
   z-index: $z-index-10;
-  height: var(--header-height);
   background-color: var(--color-white);
-  gap: var(--gap-32);
   border-bottom-width: rem(1px);
   border-bottom-style: solid;
-  // box-shadow: var(--box-shadow-4-16);
+
+  @include media-breakpoint-up(lg) {
+    justify-content: flex-start;
+  }
+}
+
+.container {
+  @include flex(space-between, center);
+
+  gap: var(--gap-32);
+  height: var(--header-height);
 
   @include media-breakpoint-up(lg) {
     justify-content: flex-start;

@@ -1,14 +1,18 @@
 import { useTranslations } from 'next-intl'
-import { 
-  AreaChart, 
-  Area, 
-  XAxis, 
-  YAxis, 
-  CartesianGrid, 
-  Tooltip, 
-  ResponsiveContainer, 
-  LabelList 
+import { useSelector } from 'react-redux'
+import {
+  AreaChart,
+  Area,
+  Label,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  ResponsiveContainer,
+  LabelList
 } from 'recharts'
+
+import { getFormatNumber } from '@/helpers/getFormatNumber'
 
 import style from './index.module.scss'
 
@@ -27,13 +31,13 @@ const CustomTooltip = ({ data, active, payload, label }) => {
 const CustomDot = (props) => {
   const { cx, cy } = props
   return (
-    <circle 
-      cx={cx} 
-      cy={cy} 
-      r={4} 
-      fill="#8884d8" 
-      stroke="white" 
-      strokeWidth={2} 
+    <circle
+      cx={cx}
+      cy={cy}
+      r={4}
+      fill="#8884d8"
+      stroke="#fff"
+      strokeWidth={2}
     />
   )
 }
@@ -62,6 +66,7 @@ const CustomLabel = ({ x, y, value, index, dataLength, chartHeight }) => {
 
 const History = ({ data }) => {
   const t = useTranslations()
+  const auth = useSelector((state) => state.auth)
 
   return (
     <div className={style.block}>
@@ -69,55 +74,71 @@ const History = ({ data }) => {
         <AreaChart
           data={data.price_history}
           margin={{
-            top: 10,
-            right: 30,
+            top: 40,
+            right: 10,
             left: 0,
-            bottom: 0,
+            bottom: 10,
           }}
         >
           <defs>
             <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="5%" stopColor="#8884d8" stopOpacity={0.8}/>
-              <stop offset="95%" stopColor="#8884d8" stopOpacity={0}/>
+              <stop offset="10%" stopColor="#8884d8" stopOpacity={0.3} />
+              <stop offset="50%" stopColor="#8884d8" stopOpacity={0} />
             </linearGradient>
           </defs>
-          <CartesianGrid strokeDasharray="3 3" vertical={false} />
-          <XAxis 
-            axisLine={false} 
+          <CartesianGrid 
+            vertical={false} 
+            stroke={'var(--color-grey-100)'}
+            strokeWidth={1}
+          />
+          <XAxis
+            axisLine={false}
             tickLine={false}
             dataKey="date"
-            tick={{ fill: 'var(--color-grey-500)', fontSize: 12 }} 
+            tick={{ fill: '#979fad', fontSize: 12 }}
           />
-          <YAxis 
-            axisLine={false} 
+          <YAxis
+            axisLine={false}
             tickLine={false}
             dataKey="price"
-            tick={{ fill: 'var(--color-grey-500)', fontSize: 12 }} 
-          />
-          <Tooltip 
+            tickCount={3}
+            tick={{ fill: '#979fad', fontSize: 12 }}
+            tickFormatter={(price) =>
+              getFormatNumber(auth?.account?.language?.code, price)
+            }
+          >
+            <Label
+              value={data.currency.name}
+              position="top"
+              offset={24}
+              fill={'#979fad'}
+              fontSize={12}
+            />
+          </YAxis>
+          <Tooltip
             content={
               <CustomTooltip data={data} />
-            } 
+            }
           />
-          <Area 
-            type="monotone" 
-            dataKey="price" 
-            stroke="#8884d8" 
-            fillOpacity={1} 
-            fill="url(#colorUv)" 
-            dot={<CustomDot />} 
+          <Area
+            type="monotone"
+            dataKey="price"
+            stroke="#8884d8"
+            fillOpacity={1}
+            fill="url(#colorUv)"
+            dot={<CustomDot />}
           >
-            <LabelList 
-              dataKey="price" 
+            <LabelList
+              dataKey="price"
               content={({ x, y, value, index }) => (
-                <CustomLabel 
-                  x={x} 
-                  y={y} 
-                  value={value} 
-                  index={index} 
-                  dataLength={data.price_history.length} 
+                <CustomLabel
+                  x={x}
+                  y={y}
+                  value={value}
+                  index={index}
+                  dataLength={data.price_history.length}
                 />
-              )} 
+              )}
             />
           </Area>
         </AreaChart>

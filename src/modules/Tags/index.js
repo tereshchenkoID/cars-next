@@ -11,6 +11,9 @@ const Tags = ({ data }) => {
   const totalItems = data.length
   const hiddenItemsCount = totalItems - COUNT
 
+  if(!data)
+    return 
+
   return (
     <ul className={style.block}>
       {data.slice(0, show ? totalItems : COUNT).map((el, idx) => (

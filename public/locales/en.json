@@ -35,7 +35,10 @@
     "not_found": "No matching results...",
     "404_title": "Oops! There was an accident",
     "404_text": "This page may have wandered around somewhere. We'll look after it as soon as possible.",
-    "404_error": "Error 404"
+    "404_error": "Error 404",
+    "price_map_title": "This car compared to others in it’s category.",
+    "chosen_car": "Your chosen car",
+    "compared_car": "Compared car"
   },
   "my_profile": "My profile",
   "contact_information": "Contact information",
@@ -105,10 +108,21 @@
   "reset_filters": "Reset filters",
   "without_vat": "without VAT",
   "not_deductible": "Not deductible",
+  "general": "General",
   "details": "Details",
   "feature": "Features",
   "price_history": "Price history",
   "price_map": "Price map",
+  "manufacture_registration": "Manufacture registration",
+  "first_registration": "First registration",
+  "power": "Power",
+  "location": "Location",
+  "vehicle_id": "Vehicle ID",
+  "make": "Make",
+  "doors": "Doors",
+  "seats": "Seats",
+  "body_color": "Body color",
+  "description": "Description",
   "features": {
     "1": {
       "0": "Other",

@@ -5,6 +5,7 @@ import { useState } from 'react'
 
 import classNames from 'classnames'
 
+import Container from '@/components/Container'
 import Toastify from '@/components/Toastify'
 import Logo from '@/components/Logo'
 import Account from './Account'
@@ -21,30 +22,32 @@ const Header = () => {
   return (
     <>
       <header className={style.block}>
-        {
-          <div
-            className={style.button}
-            onClick={() => setShow(!show)}
-          >
-            <button
-              type={'button'}
-              className={classNames(style.toggle, show && style.active)}
-              aria-label="Toggle"
+        <Container classes={style.container}>
+          {
+            <div
+              className={style.button}
+              onClick={() => setShow(!show)}
             >
-              <span className={style.line} />
-              <span className={style.line} />
-              <span className={style.line} />
-            </button>
-            <p className={style.text}>{t('menu')}</p>
+              <button
+                type={'button'}
+                className={classNames(style.toggle, show && style.active)}
+                aria-label="Toggle"
+              >
+                <span className={style.line} />
+                <span className={style.line} />
+                <span className={style.line} />
+              </button>
+              <p className={style.text}>{t('menu')}</p>
+            </div>
+          }
+          <Logo />
+          <Menu setShow={setShow} show={show} />
+          <div className={style.wrapper}>
+            <Favorite />
+            <Language />
+            <Account />
           </div>
-        }
-        <Logo />
-        <Menu setShow={setShow} show={show} />
-        <div className={style.wrapper}>
-          <Favorite />
-          <Language />
-          <Account />
-        </div>
+        </Container>
       </header>
       <Toastify />
     </>

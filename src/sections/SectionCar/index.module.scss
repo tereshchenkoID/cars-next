@@ -162,7 +162,7 @@
 
 .tabs {
   position: sticky;
-  top: var(--header-height);
+  top: calc(var(--header-height) + rem(1px));
   box-shadow: rgba(72, 88, 133, 0.06) 0 rem(2px) rem(4px) rem(-1px), rgba(72, 88, 133, 0.1) 0 rem(4px) rem(6px) rem(-1px);
   background-color: var(--color-white);
   z-index: $z-index-10;
@@ -172,6 +172,7 @@
   @include flex;
 
   gap: var(--gap-12);
+  overflow-x: auto;
   height: rem(73px);
 
   @include media-breakpoint-up(lg) {
@@ -363,6 +364,7 @@
   li {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
+    align-items: baseline;
     font-size: rem(14px);
   }
 
@@ -380,6 +382,8 @@
 
     &:not(:last-child) {
       @include make-spacer(mb, var(--gap-2));
+
+      min-height: rem(26px);
     }
   }
 }
@@ -478,4 +482,9 @@
       opacity: 1;
     }
   }
+}
+
+.link {
+  color: var(--color-primary);
+  font-weight: var(--typography-bold);
 }

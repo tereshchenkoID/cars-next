@@ -138,7 +138,7 @@ const Card = ({ data }) => {
               height={18}
               className={style.icon}
             />
-            <p>{filters['transmission'].options[data.transmission.id]}</p>
+            <p>{t(`filters.transmission.${data.transmission.id}`)}</p>
           </li>
           <li className={style.option}>
             <Icon 
@@ -147,7 +147,7 @@ const Card = ({ data }) => {
               height={18}
               className={style.icon}
             />
-            <p>{filters['fuel_type'].options[data.fuel_type.id]}</p>
+            <p>{t(`filters.fuel_type.${data.fuel_type.id}`)}</p>
           </li>
         </ul>
         

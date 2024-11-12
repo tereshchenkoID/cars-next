@@ -6,6 +6,8 @@ import { useSelector } from 'react-redux'
 import { useRouter } from 'next/navigation'
 import { useTranslations } from 'next-intl'
 
+import { NAVIGATION } from '@/constant/config'
+
 import classNames from 'classnames'
 
 import { Swiper, SwiperSlide } from 'swiper/react'
@@ -14,6 +16,7 @@ import { Fancybox } from '@fancyapps/ui'
 
 import { getFuelIcon } from '@/helpers/getFuelIcon'
 
+import Link from 'next/link'
 import Image from 'next/image'
 import Tags from '@/modules/Tags'
 import Icon from '@/components/Icon'
@@ -21,6 +24,7 @@ import Button from '@/components/Button'
 import Container from '@/components/Container'
 import Betslip from './Betslip'
 import History from './History'
+import Comparison from './Comparison'
 
 const Share = dynamic(() => import('./Share'), {
   ssr: false,
@@ -58,7 +62,7 @@ const SectionCar = ({ data }) => {
   const sectionRefs = useRef(TABS.map(() => React.createRef()))
   const [active, setActive] = useState(0)
 
-  console.log(data)
+  // console.log(data)
 
   const featureTags = data?.featured_tags.map(tag => tag.id)
 
@@ -191,7 +195,7 @@ const SectionCar = ({ data }) => {
                   height={24}
                   className={style.icon}
                 />
-                <p>{filters['transmission'].options[data.transmission.id]}</p>
+                <p>{t(`filters.transmission.${data.transmission.id}`)}</p>
               </li>
               <li
                 className={
@@ -207,7 +211,7 @@ const SectionCar = ({ data }) => {
                   height={24}
                   className={style.icon}
                 />
-                <p>{filters['fuel_type'].options[data.fuel_type.id]}</p>
+                <p>{t(`filters.fuel_type.${data.fuel_type.id}`)}</p>
               </li>
             </ul>
 
@@ -317,7 +321,7 @@ const SectionCar = ({ data }) => {
                 )
               }
             >
-              Details
+              {t('details')}
             </h3>
             <ul
               className={
@@ -361,7 +365,7 @@ const SectionCar = ({ data }) => {
                   className={style.icon}
                 />
                 <div>
-                  <p className={style.label}>Manufacture registration</p>
+                  <p className={style.label}>{t('manufacture_registration')}</p>
                   <p className={style.text}>{data.date.manufacture}</p>
                 </div>
               </li>
@@ -380,7 +384,7 @@ const SectionCar = ({ data }) => {
                   className={style.icon}
                 />
                 <div>
-                  <p className={style.label}>First registration</p>
+                  <p className={style.label}>{t('first_registration')}</p>
                   <p className={style.text}>{data.date.first_registration}</p>
                 </div>
               </li>
@@ -399,7 +403,7 @@ const SectionCar = ({ data }) => {
                   className={style.icon}
                 />
                 <div>
-                  <p className={style.label}>Power</p>
+                  <p className={style.label}>{t('power')}</p>
                   <p className={style.text}>{data.power_data.power} {data.power_data.power_unit}</p>
                 </div>
               </li>
@@ -419,7 +423,7 @@ const SectionCar = ({ data }) => {
                 />
                 <div>
                   <p className={style.label}>{t('filters.transmission.0')}</p>
-                  <p className={style.text}>{filters['transmission'].options[data.transmission.id]}</p>
+                  <p className={style.text}>{t(`filters.transmission.${data.transmission.id}`)}</p>
                 </div>
               </li>
               <li
@@ -438,7 +442,7 @@ const SectionCar = ({ data }) => {
                 />
                 <div>
                   <p className={style.label}>{t('filters.fuel_type.0')}</p>
-                  <p className={style.text}>{filters['fuel_type'].options[data.fuel_type.id]}</p>
+                  <p className={style.text}>{t(`filters.fuel_type.${data.fuel_type.id}`)}</p>
                 </div>
               </li>
               <li
@@ -475,7 +479,7 @@ const SectionCar = ({ data }) => {
                   className={style.icon}
                 />
                 <div>
-                  <p className={style.label}>Location</p>
+                  <p className={style.label}>{t('location')}</p>
                   <p className={style.text}>Italy</p>
                 </div>
               </li>
@@ -491,27 +495,43 @@ const SectionCar = ({ data }) => {
                 )
               }
             >
-              General
+              {t('general')}
             </h6>
             <ul className={style.info}>
               <li>
-                <p>Vehicle ID</p>
+                <p>{t('vehicle_id')}</p>
                 <strong>{data.id}</strong>
               </li>
               <li>
-                <p>Make</p>
-                <strong>{data.make.name}</strong>
+                <p>{t('make')}</p>
+                <Link
+                  href={`${NAVIGATION.buy.link}?make_${data.make.id}=0`}
+                  rel="noreferrer"
+                  className={style.link}
+                  aria-label={data.make.name}
+                  title={data.make.name}
+                >
+                  {data.make.name}
+                </Link>
               </li>
               <li>
-                <p>Model</p>
-                <strong>{data.model.name}</strong>
+                <p>{t('make')}</p>
+                <Link
+                  href={`${NAVIGATION.buy.link}?make_${data.make.id}=${data.model.id}`}
+                  rel="noreferrer"
+                  className={style.link}
+                  aria-label={data.model.name}
+                  title={data.model.name}
+                >
+                  {data.model.name}
+                </Link>
               </li>
               <li>
-                <p>Body</p>
+                <p>{t('filters.vehicle_type.0')}</p>
                 <strong>{t(`filters.vehicle_type.${data.body.id}`)}</strong>
               </li>
               <li>
-                <p>Body color</p>
+                <p>{t('body_color')}</p>
                 <strong>
                   <span 
                     className={style.color}
@@ -528,12 +548,16 @@ const SectionCar = ({ data }) => {
                 </strong>
               </li>
               <li>
-                <p>Doors</p>
+                <p>{t('doors')}</p>
                 <strong>{data.number_of_doors}</strong>
               </li>
               <li>
-                <p>Seats</p>
+                <p>{t('seats')}</p>
                 <strong>{data.number_of_seats}</strong>
+              </li>
+              <li>
+                <p>{t('description')}</p>
+                <p>{data.meta.description}</p>
               </li>
             </ul>
           </div>
@@ -551,7 +575,7 @@ const SectionCar = ({ data }) => {
                 )
               }
             >
-              Features
+              {t('feature')}
             </h3>
             <div
               className={
@@ -606,7 +630,7 @@ const SectionCar = ({ data }) => {
                 )
               }
             >
-              Price history
+              {t('price_history')}
             </h3>
             <History data={data} />
           </div>
@@ -623,8 +647,9 @@ const SectionCar = ({ data }) => {
                 )
               }
             >
-              Price map
+              {t('price_map')}
             </h3>
+            <Comparison data={data} />
           </div>
         </div>
         <Betslip data={data} />
