@@ -2,7 +2,6 @@
 
 import dynamic from 'next/dynamic'
 import React, { useEffect, useMemo, useRef, useState } from 'react'
-import { useSelector } from 'react-redux'
 import { useRouter } from 'next/navigation'
 import { useTranslations } from 'next-intl'
 
@@ -14,6 +13,7 @@ import { Swiper, SwiperSlide } from 'swiper/react'
 import { Navigation, Pagination, Mousewheel } from 'swiper/modules'
 import { Fancybox } from '@fancyapps/ui'
 
+import { getDate } from '@/helpers/getDate'
 import { getFuelIcon } from '@/helpers/getFuelIcon'
 
 import Link from 'next/link'
@@ -23,16 +23,12 @@ import Icon from '@/components/Icon'
 import Button from '@/components/Button'
 import Container from '@/components/Container'
 import Betslip from './Betslip'
-import History from './History'
-import Comparison from './Comparison'
 
-const Share = dynamic(() => import('./Share'), {
-  ssr: false,
-})
-
-const Favorites = dynamic(() => import('./Favorites'), {
-  ssr: false,
-})
+const Share = dynamic(() => import('./Share'), {ssr: false})
+const Favorites = dynamic(() => import('./Favorites'), {ssr: false})
+const History = dynamic(() => import('./History'), {ssr: false})
+const Map = dynamic(() => import('./Map'), {ssr: false})
+const Comparison = dynamic(() => import('./Comparison'), {ssr: false})
 
 import style from './index.module.scss'
 
@@ -52,18 +48,19 @@ const TABS = [
   {
     id: 3,
     text: 'price_map'
+  },
+  {
+    id: 4,
+    text: 'comparison'
   }
 ]
 
-const SectionCar = ({ data }) => {
+const SectionCar = ({ data, next }) => {
   const t = useTranslations()
   const router = useRouter()
-  const filters = useSelector((state) => state.filters)
   const sectionRefs = useRef(TABS.map(() => React.createRef()))
   const [active, setActive] = useState(0)
-
-  // console.log(data)
-
+  
   const featureTags = data?.featured_tags.map(tag => tag.id)
 
   const groupedFeatures = useMemo(() => {
@@ -147,7 +144,7 @@ const SectionCar = ({ data }) => {
                   height={24}
                   className={style.icon}
                 />
-                <p>{data.date.manufacture}</p>
+                <p>{getDate(data.date.manufacture, 3)}</p>
               </li>
               <li
                 className={
@@ -163,7 +160,7 @@ const SectionCar = ({ data }) => {
                   height={24}
                   className={style.icon}
                 />
-                <p>{data.date.first_registration}</p>
+                <p>{getDate(data.date.first_registration, 3)}</p>
               </li>
               <li
                 className={
@@ -366,7 +363,7 @@ const SectionCar = ({ data }) => {
                 />
                 <div>
                   <p className={style.label}>{t('manufacture_registration')}</p>
-                  <p className={style.text}>{data.date.manufacture}</p>
+                  <p className={style.text}>{getDate(data.date.manufacture, 3)}</p>
                 </div>
               </li>
               <li
@@ -385,7 +382,7 @@ const SectionCar = ({ data }) => {
                 />
                 <div>
                   <p className={style.label}>{t('first_registration')}</p>
-                  <p className={style.text}>{data.date.first_registration}</p>
+                  <p className={style.text}>{getDate(data.date.first_registration, 3)}</p>
                 </div>
               </li>
               <li
@@ -635,8 +632,28 @@ const SectionCar = ({ data }) => {
             <History data={data} />
           </div>
 
+          {
+            next &&
+            <div
+              ref={sectionRefs.current[3]}
+              className={style.body}
+            >
+              <h3
+                className={
+                  classNames(
+                    style.title,
+                    style.lg
+                  )
+                }
+              >
+                {t('price_map')}
+              </h3>
+              <Map data={data} next={next} />
+            </div>
+          }
+
           <div
-            ref={sectionRefs.current[3]}
+            ref={sectionRefs.current[4]}
             className={style.body}
           >
             <h3
@@ -647,7 +664,7 @@ const SectionCar = ({ data }) => {
                 )
               }
             >
-              {t('price_map')}
+              {t('comparison')}
             </h3>
             <Comparison data={data} />
           </div>

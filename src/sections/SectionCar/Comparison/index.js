@@ -1,289 +1,97 @@
 import { useTranslations } from 'next-intl'
-import { useEffect, useState, Fragment } from 'react'
 import { useSelector } from 'react-redux'
-import {
-  ScatterChart,
-  Scatter,
-  XAxis,
-  YAxis,
-  Label,
-  CartesianGrid,
-  ResponsiveContainer,
-} from 'recharts'
 
 import classNames from 'classnames'
 
-import { getData } from '@/helpers/api'
-import { getFuelIcon } from '@/helpers/getFuelIcon'
 import { getFormatPrice } from '@/helpers/getFormatPrice'
-import { getFormatNumber } from '@/helpers/getFormatNumber'
-
-import Image from 'next/image'
-import Icon from '@/components/Icon'
-import Tags from '@/modules/Tags'
 
 import style from './index.module.scss'
 
-const options = [
-  {
-    id: '68837112',
-    mileage: '40139',
-    price: '27091',
-    selected: true
-  },
-  {
-    id: '68837122',
-    mileage: '19100',
-    price: '33116',
-    active: true
-  },
-  {
-    id: '68837130',
-    mileage: '33702',
-    price: '21718'
-  },
-  {
-    id: '68837131',
-    mileage: '75000',
-    price: '15791'
-  }
-]
+const Scale = ({t, auth, min, max, data, idx}) => {
+  const notEmpty = data > min && data <= max
+
+  return (
+    <div>
+      {
+        notEmpty &&
+        <div
+          style={{
+            left: `${((data - min) / (max - min)) * 100}%`
+          }}
+          className={style.marker}
+        >
+          <div 
+            className={
+              classNames(
+                style.value,
+                idx > 3 && style.reverse
+              )
+            }
+          >
+            <p>{t('this_car')}</p>
+            <h6>{getFormatPrice(auth?.account?.language?.code, auth?.account?.currency?.code, data)}</h6>
+          </div>
+        </div>
+      }
+    </div>
+  )
+}
 
 const Comparison = ({ data }) => {
   const t = useTranslations()
   const auth = useSelector((state) => state.auth)
-  const filters = useSelector((state) => state.filters)
-  const [cars, setCars] = useState([data, null])
-  const [active, setActive] = useState(options.find(option => option.selected)?.id || options[0].id)
-  const [loading, setLoading] = useState(true)
 
-  const handleClick = (index) => {
-    setActive(index)
-  }
+  const options = [
+    '56528',
+    '67876',
+    '71692',
+    '77565',
+    '81563',
+    '98142',
+  ]
 
-  const getPointColor = (props) => {
-    if (props.payload.active) {
-      return style.active
-    }
-
-    if (props.id === active) {
-      return style.selected
-    }
-  }
-
-  const handleLoad = () => {
-    getData(`item/${active}`).then(json => {
-      setCars((prevState) => [
-        prevState[0],
-        json
-      ])
-      setLoading(false)
-    })
-  }
-
-  const compareValues = (field, idx) => {
-    if (!cars[0] || !cars[1]) return ''
-
-    const getNestedValue = (obj, path) => path.split('.').reduce((acc, key) => acc && acc[key], obj);
-
-    const value1 = Number(getNestedValue(cars[idx === 0 ? 0 : 1], field))
-    const value2 = Number(getNestedValue(cars[idx === 0 ? 1 : 0], field))
-    
-    if (value2 > value1) {
-      return 'lower'
-    }
-    return ''
-  }
-
-  useEffect(() => {
-    handleLoad()
-  }, [active])
-
-  if(loading)
-    return
+  const value = 78000
 
   return (
     <div className={style.block}>
-      <div className={style.header}>{t('notification.price_map_title')}</div>
-      <hr className={style.hr} />
-      <div className={style.body}>
-        <ResponsiveContainer width="100%" height={300}>
-          <ScatterChart
-            data={options}
-            margin={{
-              top: 40,
-              right: 10,
-              left: 0,
-              bottom: 24,
-            }}
-          >
-            <CartesianGrid 
-              vertical={false} 
-              stroke={'var(--color-grey-100)'}
-              strokeWidth={1}
-            />
-            <XAxis
-              axisLine={false}
-              tickLine={false}
-              type={'number'}
-              dataKey={'mileage'}
-              tick={{ fill: '#979fad', fontSize: 12 }}
-              tickFormatter={(mileage) => 
-                `${getFormatNumber(auth?.account?.language?.code, mileage)} ${data.mileage_data.mileage_unit}`
-              }
-            />
-            <YAxis
-              axisLine={false}
-              tickLine={false}
-              type={'number'}
-              dataKey={'price'}
-              tick={{ fill: '#979fad', fontSize: 12 }}
-              tickFormatter={(price) => 
-                getFormatNumber(auth?.account?.language?.code, price)
-              }
-            >
-              <Label 
-                value={data.currency.name}
-                position="top" 
-                offset={24} 
-                fill={'#979fad'}
-                fontSize={12}
+      <p className={style.title}>
+        Compared with more than <strong>220 similar vehicles</strong> offered in recent months.
+        We take in account <strong>up to 70 vehicle characteristics.</strong>
+      </p>
+
+      <div className={style.wrapper}>
+        <div className={style.labels}>
+          <div>{t('top_offer')}</div>
+          <div>{t('very_good_price')}</div>
+          <div>{t('fair_price')}</div>
+          <div>{t('higher_price')}</div>
+          <div>{t('high_price')}</div>
+        </div>
+        <div className={style.scale}>
+          {
+            options.map((el, idx) =>
+              idx !== 0 &&
+              <Scale
+                key={idx}
+                t={t}
+                auth={auth}
+                min={Number(options[idx === 0 ? 0 : idx - 1])}
+                max={Number(el)}
+                data={value}
+                idx={idx}
               />
-            </YAxis>
-            <Scatter
-              onClick={(e) => handleClick(e.id)}
-              shape={(props) => (
-                <circle
-                  className={
-                    classNames(
-                      style.circle,
-                      getPointColor(props),
-                    )
-                  }
-                  cx={props.cx}
-                  cy={props.cy}
-                  r={8}
-                />
-              )}
-            />
-          </ScatterChart>
-        </ResponsiveContainer>
-      </div>
-      <hr className={style.hr} />
-      <div className={style.footer}>
-        {
-          cars?.map((el, idx) => 
-            <Fragment key={idx}>
-              <div
-                className={
-                  classNames(
-                    style.card,
-                    idx === 0 && style.active,
-                    idx === 1 && style.next
-                  )
-                }
-              >
-                <p className={style.status}>{t(`notification.${idx === 0 ? 'chosen_car' : 'compared_car'}`)}</p>
-                <Image
-                  src={el.images[0]}
-                  width={270}
-                  height={270}
-                  className={style.image}
-                  priority={false}
-                  alt={el.meta.name}
-                />
-                <h6 className={style.title}>{el.meta.name}</h6>
-
-                <div className={style.price}>
-                  <h5 
-                    className={
-                      style[compareValues('price_data.price', idx)]
-                    }
-                  >
-                    {getFormatPrice(auth?.account?.language?.code, auth?.account?.currency?.code, el.price_data.price)}
-                  </h5>
-                  <p className={style.vat}>
-                    {
-                      el.price_data.price_without_vat
-                        ?
-                        <><strong>{getFormatPrice(auth?.account?.language?.code, auth?.account?.currency?.code, el.price_data.price_without_vat)}</strong> {t('without_vat')}</>
-                        :
-                        <span>{t('not_deductible')}</span>
-                    }
-                  </p>
-                </div>
-
-                <ul className={style.list}>
-                  <li 
-                    className={
-                      classNames(
-                        style.option,
-                        style[compareValues('mileage_data.mileage', idx)]
-                      )
-                    }
-                  >
-                    <Icon
-                      iconName={'road'}
-                      width={16}
-                      height={16}
-                      className={style.icon}
-                    />
-                    <p>{el.mileage_data.mileage} {el.mileage_data.mileage_unit}</p>
-                  </li>
-                  <li className={style.option}>
-                    <Icon
-                      iconName={'calendar'}
-                      width={16}
-                      height={16}
-                      className={style.icon}
-                    />
-                    <p>{el.date.manufacture}</p>
-                  </li>
-                  <li className={style.option}>
-                    <Icon
-                      iconName={'engine'}
-                      width={16}
-                      height={16}
-                      className={style.icon}
-                    />
-                    <p>{el.power_data.power} {el.power_data.power_unit}</p>
-                  </li>
-                  <li className={style.option}>
-                    <Icon
-                      iconName={'transmission'}
-                      width={16}
-                      height={16}
-                      className={style.icon}
-                    />
-                    <p>{t(`filters.transmission.${el.transmission.id}`)}</p>
-                  </li>
-                  <li className={style.option}>
-                    <Icon
-                      iconName={getFuelIcon(el.fuel_type.id)}
-                      width={16}
-                      height={16}
-                      className={style.icon}
-                    />
-                    <p>{t(`filters.fuel_type.${el.fuel_type.id}`)}</p>
-                  </li>
-                </ul>
-
-                <Tags data={el.featured_tags} />
+            )
+          }
+        </div>
+        <div className={style.prices}>
+          {
+            options.slice(1, -1).map((el, idx) =>
+              <div key={idx}>
+                {getFormatPrice(auth?.account?.language?.code, auth?.account?.currency?.code, el)}
               </div>
-              {
-                idx === 0 &&
-                <hr 
-                  className={
-                    classNames(
-                      style.hr,
-                      style.vertical
-                    )
-                  } 
-                />
-              }
-            </Fragment>
-          )
-        }
+            )
+          }
+        </div>
       </div>
     </div>
   )

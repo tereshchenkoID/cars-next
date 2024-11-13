@@ -1,13 +1,15 @@
 import { useState } from 'react'
 import { useTranslations } from 'next-intl'
+
 import classNames from 'classnames'
+
 import style from './index.module.scss'
 
 const COUNT = 4
 
-const Tags = ({ data }) => {
+const Tags = ({ data, isOpen = false }) => {
   const t = useTranslations()
-  const [show, setShow] = useState(false)
+  const [show, setShow] = useState(isOpen)
   const totalItems = data.length
   const hiddenItemsCount = totalItems - COUNT
 

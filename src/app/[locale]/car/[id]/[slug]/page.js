@@ -9,9 +9,16 @@ export async function generateMetadata() {
 }
 
 const Car = async ({ params: { id } }) => {
-  const [data] = await Promise.all([
-    fetchData(`item/${id}`),
-  ])
+  // const [data, next] = await Promise.all([
+  //   fetchData(`item/${id}`).then((data) => {
+  //     const selectedOption = data.price_map?.find((option) => option.selected)
+  //     return selectedOption ? fetchData(`item/${selectedOption.id}`) : null
+  //   })
+  // ]).then(([data, next]) => [data, next])
+
+  const data = await fetchData(`item/${id}`)
+  const nextId = data.price_map?.find(option => option.selected)?.id
+  const next = nextId ? await fetchData(`item/${nextId}`) : null
 
   const jsonLd = {
     "@context": "https://schema.org",
@@ -45,7 +52,7 @@ const Car = async ({ params: { id } }) => {
     "sku": data.meta.name || NA,
     "vehicleEngine": {
       "@type": "EngineSpecification",
-      // "name": data.engine || DEFAULT,
+      "name": data.power_data.power || NA,
       "fuelType": data.fuel_type.name || NA,
     },
     "mileageFromOdometer": {
@@ -58,12 +65,12 @@ const Car = async ({ params: { id } }) => {
     "fuelType": data.fuel_type.name || NA,
     "vehicleTransmission": data.transmission.name || NA,
     "numberOfDoors": data.number_of_doors || NA,
-    // "seatingCapacity": data.seating_capacity || 5,
+    "seatingCapacity": data.number_of_seats || 5,
   }
 
   return (
     <>
-      <SectionCar data={data} />
+      <SectionCar data={data} next={next} />
 
       <script
         type="application/ld+json"

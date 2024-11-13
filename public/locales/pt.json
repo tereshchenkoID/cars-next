@@ -110,6 +110,7 @@
   "not_deductible": "Not deductible PT",
   "general": "General PT",
   "details": "Details PT",
+  "comparison": "Comparison PT",
   "feature": "Features PT",
   "price_history": "Price history PT",
   "price_map": "Price map PT",
@@ -123,6 +124,12 @@
   "seats": "Seats PT",
   "body_color": "Body color PT",
   "description": "Description PT",
+  "this_car": "This car PT",
+  "top_offer": "Top offer  PT",
+  "very_good_price": "Very good price  PT",
+  "fair_price": "Fair price PT",
+  "higher_price": "Higher price PT",
+  "high_price": "High price PT",
   "features": {
     "1": {
       "0": "Other PT",

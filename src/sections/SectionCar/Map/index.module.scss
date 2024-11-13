@@ -1,0 +1,141 @@
+@import '@/scss/config';
+
+.block {
+  background-color: var(--color-white);
+  border-radius: var(--border-radius-8);
+  box-shadow: var(--box-shadow-16-24);
+
+  .circle {
+    @include transition;
+    
+    cursor: pointer;
+    fill: var(--color-grey-200);
+
+    @include hover {
+
+      &:hover {
+        fill: var(--color-primary-hover);  
+      }
+    }
+
+    &.active,
+    &.selected {
+      pointer-events: none;
+    }
+
+    &.active {
+      fill: var(--color-primary);
+    }
+
+    &.selected {
+      fill: var(--color-orange)
+    }
+  }
+}
+
+.header {
+  @include make-spacer(py, var(--gap-32));
+
+  text-align: center
+}
+
+.body {
+  @include make-spacer(pt, var(--gap-32));
+  @include make-spacer(px, var(--gap-16));
+}
+
+.footer {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+}
+
+.hr {
+  @include size(100%, rem(1px));
+  
+  background: repeating-linear-gradient(45deg, rgb(215, 225, 239), rgb(215, 225, 239) 9px, transparent 3px, transparent 18px);
+
+  &.vertical {
+    @include size(rem(1px), 100%);
+  }
+}
+
+.card {
+  @include flex($direction: column);
+  @include make-spacer(p, var(--gap-32));
+  
+  gap: var(--gap-12);
+  overflow: hidden;
+
+  &.active {
+    pointer-events: none;
+    
+    .status {
+
+      &::before {
+        background-color: var(--color-primary-hover);
+      }
+    }
+  }
+
+  &.next {
+
+    .status {
+
+      &::before {
+        background-color: var(--color-orange);
+      }
+    }
+  }
+}
+
+.status {
+  @include flex($align-items: center);
+
+  gap: var(--gap-8);
+  font-size: rem(12px);
+  text-transform: uppercase;
+  letter-spacing: rem(0.5px);
+
+  &::before {
+    @include size(rem(16px));
+
+    border-radius: 50%;
+    content: '';
+  }
+}
+
+.image {
+  aspect-ratio: rem(270px) / rem(270px);
+  height: rem(270px);
+}
+
+.list {
+  @include make-spacer(p, var(--gap-12));
+
+  border-width: rem(1px);
+  border-style: solid;
+  border-radius: var(--border-radius-4);
+}
+
+.option {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: center;
+  gap: var(--gap-12);
+  font-size: rem(14px);
+
+  &:not(:last-child) {
+    @include make-spacer(mb, var(--gap-8));
+  }
+}
+
+.price {
+  @include flex($align-items: flex-end, $direction: column);
+
+  font-size: rem(12px);
+}
+
+.lower {
+  color: var(--color-success);
+  font-weight: var(--typography-bold);
+}

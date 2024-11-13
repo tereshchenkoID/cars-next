@@ -111,6 +111,7 @@
   "general": "General",
   "details": "Details",
   "feature": "Features",
+  "comparison": "Comparison",
   "price_history": "Price history",
   "price_map": "Price map",
   "manufacture_registration": "Manufacture registration",
@@ -123,6 +124,12 @@
   "seats": "Seats",
   "body_color": "Body color",
   "description": "Description",
+  "this_car": "This car",
+  "top_offer": "Top offer",
+  "very_good_price": "Very good price",
+  "fair_price": "Fair price",
+  "higher_price": "Higher price",
+  "high_price": "High price",
   "features": {
     "1": {
       "0": "Other",

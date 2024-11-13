@@ -12,6 +12,7 @@ import {
   LabelList
 } from 'recharts'
 
+import { getDate } from '@/helpers/getDate'
 import { getFormatNumber } from '@/helpers/getFormatNumber'
 
 import style from './index.module.scss'
@@ -96,6 +97,9 @@ const History = ({ data }) => {
             tickLine={false}
             dataKey="date"
             tick={{ fill: '#979fad', fontSize: 12 }}
+            tickFormatter={(date) =>
+              getDate(date, 3)
+            }
           />
           <YAxis
             axisLine={false}

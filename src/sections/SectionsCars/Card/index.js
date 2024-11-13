@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux'
 
 import { NAVIGATION } from '@/constant/config'
 
+import { getDate } from '@/helpers/getDate'
 import { getFormatPrice } from '@/helpers/getFormatPrice'
 import { getFuelIcon } from '@/helpers/getFuelIcon'
 
@@ -20,7 +21,6 @@ import style from './index.module.scss'
 const Card = ({ data }) => {
   const t = useTranslations()
   const auth = useSelector((state) => state.auth)
-  const filters = useSelector((state) => state.filters)
 
   return (
     <div className={style.block}>
@@ -28,7 +28,7 @@ const Card = ({ data }) => {
         {
           data.images.length > 0 &&
           <>
-            {/* <Swiper
+            <Swiper
               className={style.slider}
               slidesPerView={1}
               pagination={{
@@ -54,7 +54,7 @@ const Card = ({ data }) => {
                   </SwiperSlide>
                 )
               }
-            </Swiper> */}
+            </Swiper>
 
             <div 
               className={style.count}
@@ -120,7 +120,16 @@ const Card = ({ data }) => {
               height={18}
               className={style.icon}
             />
-            <p>{data.first_registration_date || data.manufacture_date}</p>
+            <p>{getDate(data.first_registration_date, 3)}</p>
+          </li>
+          <li className={style.option}>
+            <Icon 
+              iconName={'calendar'}
+              width={18}
+              height={18}
+              className={style.icon}
+            />
+            <p>{getDate(data.manufacture_date, 3)}</p>
           </li>
           <li className={style.option}>
             <Icon 

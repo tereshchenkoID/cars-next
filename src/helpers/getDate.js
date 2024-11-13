@@ -1,5 +1,5 @@
 export const getDate = (data, type) => {
-  const date = new Date(data)
+  const date = new Date(Number(data))
   const day = String(date.getDate()).padStart(2, '0')
   const month = String(date.getMonth() + 1).padStart(2, '0')
   const year = date.getFullYear()
@@ -11,5 +11,6 @@ export const getDate = (data, type) => {
   if (type === 1) return `${minutes}:${seconds}`
   if (type === 2) return `${year}-${month}-${day}T${hours}:${minutes}`
   if (type === 3) return `${year}-${month}-${day}`
+  if (type === 4) return `${year}-${month}`
   return `${day}.${month}.${year} ${hours}:${minutes}:${seconds}`
 }
