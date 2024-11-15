@@ -14,18 +14,21 @@
 
 .scale,
 .labels {
-  display: grid;
   grid-template-columns: repeat(5, 1fr);
   gap: var(--gap-4);
 }
 
 .title {
-  @include make-spacer(mb, var(--gap-32));
+  @include make-spacer(mb, var(--gap-80));
   @include make-spacer(mx, auto);
 
   text-align: center;
   font-size: rem(15px);
   max-width: rem(550px);
+
+  @include media-breakpoint-up(lg) {
+    @include make-spacer(mb, var(--gap-32));
+  }
 }
 
 .wrapper {
@@ -36,107 +39,60 @@
 
 .prices {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  padding-inline: 10%;
+  gap: var(--gap-8);
 
-  & > div {
+  @include media-breakpoint-up(lg) {
+    grid-template-columns: repeat(4, 1fr);
+    padding-inline: 10%;
+    gap: 0;
+  }
+
+  p {
+
+    &:nth-child(2) {
+      @include media-breakpoint-up(lg) {
+        display: none;
+      }
+    }
+  }
+}
+
+.price {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: var(--gap-12);
+  align-items: center;
+  font-size: rem(13px);
+
+  &:nth-child(1) {
+    @include media-breakpoint-up(lg) {
+      display: none;
+    }
+  }
+
+  @include media-breakpoint-up(lg) {
+    grid-template-columns: 1fr;
     text-align: center;
-    font-size: rem(13px);
   }
 }
 
 .labels {
+  display: none;
 
-  & > div {
-    text-align: center;
-    font-size: rem(13px);
-
-    &:nth-child(1) {
-      color: rgb(103, 185, 46)
-    }
-
-    &:nth-child(2) {
-      color: rgb(136, 189, 4)
-    }
-
-    &:nth-child(3) {
-      color: rgb(197, 215, 0)
-    }
-
-    &:nth-child(4) {
-      color: rgb(244, 190, 0)
-    }
-
-    &:nth-child(5) {
-      color: rgb(254, 137, 0);
-    }
+  @include media-breakpoint-up(lg) {
+    display: grid;
   }
+}
+
+.label {
+  text-align: center;
+  font-size: rem(11px);
+  white-space: nowrap;
 }
 
 .scale {
   @include make-spacer(my, var(--gap-12));
 
+  display: grid;
   height: rem(8px);
-
-  & > div {
-    position: relative;
-    border-radius: var(--border-radius-2);
-    height: 100%;
-
-    &:nth-child(1) {
-      background: linear-gradient(to right, rgb(103, 185, 46), rgb(103, 185, 46));
-    }
-
-    &:nth-child(2) {
-      background: linear-gradient(to right, rgb(103, 185, 46), rgb(103, 185, 46));
-    }
-
-    &:nth-child(3) {
-      background: linear-gradient(to right, rgb(104, 185, 46), rgb(196, 209, 21));
-    }
-
-    &:nth-child(4) {
-      background: linear-gradient(to right, rgb(201, 210, 19), rgb(247, 193, 6))
-    }
-
-    &:nth-child(5) {
-      background: linear-gradient(to right, rgb(247, 189, 5), rgb(255, 136, 0))
-    }
-  }
-}
-
-.marker {
-  @include size(rem(3px), rem(21px));
-
-  position: absolute;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  background: inherit;
-  border-radius: var(--border-radius-2);
-}
-
-.value {
-  @include flex(center, center, column);
-  @include make-spacer(p, var(--gap-12));
-
-  position: absolute;
-  bottom: calc(100% + 32px);
-  left: 0;
-  min-width: rem(145px);
-  border-radius: var(--border-radius-4);
-  background: inherit;
-  text-align: center;
-  font-size: rem(12px);
-  text-transform: uppercase;
-
-  &.reverse {
-    right: 0;
-    left: auto;
-    clip-path: polygon(0% 0%, 100% 0%, 100% 90%, 94% 90%, 100% 100%, 100% 90%, 0 90%);
-  }
-
-  * {
-    position: relative;
-    color: var(--color-white);
-  }
 }

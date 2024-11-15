@@ -17,6 +17,19 @@
   @include flex($direction: column);
 }
 
+.features,
+.info {
+
+  li {
+
+    &:not(:last-child) {
+      @include make-spacer(mb, var(--gap-2));
+
+      min-height: rem(26px);
+    }
+  }
+}
+
 .head {
   @include make-spacer(pb, var(--gap-24));
 
@@ -216,6 +229,10 @@
   }
 }
 
+.column {
+  overflow: hidden;
+}
+
 .slider {
   order: 1;
   position: relative;
@@ -365,27 +382,22 @@
   li {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    align-items: baseline;
     font-size: rem(14px);
+
+    &:not(:last-child) {
+      align-items: center;
+      min-height: rem(32px);
+    }
+
+    &:last-child {
+      align-items: baseline;
+    }
   }
 
   strong {
     @include flex($align-items: center);
     
     gap: var(--gap-8);
-  }
-}
-
-.features,
-.info {
-
-  li {
-
-    &:not(:last-child) {
-      @include make-spacer(mb, var(--gap-2));
-
-      min-height: rem(26px);
-    }
   }
 }
 

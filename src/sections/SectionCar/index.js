@@ -305,7 +305,7 @@ const SectionCar = ({ data, next }) => {
 
 
       <Container classes={style.main}>
-        <div>
+        <div className={style.column}>
           <div
             ref={sectionRefs.current[0]}
             className={style.body}
@@ -497,7 +497,19 @@ const SectionCar = ({ data, next }) => {
             <ul className={style.info}>
               <li>
                 <p>{t('vehicle_id')}</p>
-                <strong>{data.id}</strong>
+                <strong>
+                  {data.id}
+                </strong>
+              </li>
+              <li>
+                <p>{t('vin_code')}</p>
+                <strong
+                  style={{
+                    wordBreak: 'break-all'
+                  }}
+                >
+                  {data.meta.vin}
+                </strong>
               </li>
               <li>
                 <p>{t('make')}</p>
@@ -512,7 +524,7 @@ const SectionCar = ({ data, next }) => {
                 </Link>
               </li>
               <li>
-                <p>{t('make')}</p>
+                <p>{t('model')}</p>
                 <Link
                   href={`${NAVIGATION.buy.link}?make_${data.make.id}=${data.model.id}`}
                   rel="noreferrer"
@@ -522,6 +534,10 @@ const SectionCar = ({ data, next }) => {
                 >
                   {data.model.name}
                 </Link>
+              </li>
+              <li>
+                <p>{t('engine_capacity')}</p>
+                <strong>{data.power_data.capacity} ccm</strong>
               </li>
               <li>
                 <p>{t('filters.vehicle_type.0')}</p>

@@ -1,0 +1,41 @@
+@import '@/scss/config';
+
+.block {
+  @include size(rem(75px), rem(6px));
+
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: var(--gap-2);
+
+  @include media-breakpoint-up(lg) {
+    display: none;
+  }
+}
+
+.scale {
+  background: var(--color-grey-200);
+  border-radius: var(--border-radius-2);
+
+  &.active {
+
+    &:nth-child(1) {
+      background: linear-gradient(to right, rgb(103, 185, 46), rgb(103, 185, 46));
+    }
+
+    &:nth-child(2) {
+      background: linear-gradient(to right, rgb(103, 185, 46), rgb(103, 185, 46));
+    }
+
+    &:nth-child(3) {
+      background: linear-gradient(to right, rgb(104, 185, 46), rgb(196, 209, 21));
+    }
+
+    &:nth-child(4) {
+      background: linear-gradient(to right, rgb(201, 210, 19), rgb(247, 193, 6))
+    }
+
+    &:nth-child(5) {
+      background: linear-gradient(to right, rgb(247, 189, 5), rgb(255, 136, 0))
+    }
+  }
+}

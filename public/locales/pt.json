@@ -38,7 +38,9 @@
     "404_error": "Error 404 PT",
     "price_map_title": "This car compared to others in it’s category. PT",
     "chosen_car": "Your chosen car PT",
-    "compared_car": "Compared car PT"
+    "compared_car": "Compared car PT",
+    "similar_vehicle": "Compared with more than [cars] similar vehicles offered in recent months. PT",
+    "vehicle_characteristics": "We take in account up to [count] vehicle characteristics. PT"
   },
   "my_profile": "My profile PT",
   "contact_information": "Contact information PT",
@@ -130,6 +132,8 @@
   "fair_price": "Fair price PT",
   "higher_price": "Higher price PT",
   "high_price": "High price PT",
+  "vin_code": "VIN code PT",
+  "engine_capacity": "Engine capacity PT",
   "features": {
     "1": {
       "0": "Other PT",

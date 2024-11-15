@@ -78,7 +78,15 @@ const Map = ({ data, next }) => {
     <div className={style.block}>
       <div className={style.header}>{t('notification.price_map_title')}</div>
       <hr className={style.hr} />
-      <div className={style.body}>
+
+      <div 
+        className={
+          classNames(
+            style.body,
+            style.hiddenMobile
+          )
+        }
+      >
         <ResponsiveContainer width="100%" height={300}>
           <ScatterChart
             data={data.price_map}
@@ -141,6 +149,43 @@ const Map = ({ data, next }) => {
           </ScatterChart>
         </ResponsiveContainer>
       </div>
+
+
+      <div 
+        className={
+          classNames(
+            style.body,
+            style.hiddenDesktop
+          )
+        }
+      >
+        <div className={style.prices}>
+          {
+            data.price_map.map((el, idx) =>
+              <button 
+                key={idx}
+                type={'button'}
+                className={
+                  classNames(
+                    style.button,
+                    el.active && style.active,
+                    el.id === active && style.selected,
+                  )
+                }
+                onClick={(e) => handleClick(el.id)}
+                aria-label={`${t('price_map')} ${el.id}`}
+                title={`${t('price_map')} ${el.id}`}
+              >
+                <strong>{getFormatNumber(auth?.account?.language?.code, el.mileage)}</strong> 
+                <span>{data.mileage_data.mileage_unit}</span>
+                <span>-</span>
+                <strong>{getFormatPrice(auth?.account?.language?.code, auth?.account?.currency?.code, el.price)}</strong>
+              </button>
+            )
+          }
+        </div>
+      </div>
+
       <hr className={style.hr} />
       <div className={style.footer}>
         {

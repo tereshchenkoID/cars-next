@@ -7,14 +7,14 @@
 
   .circle {
     @include transition;
-    
+
     cursor: pointer;
     fill: var(--color-grey-200);
 
     @include hover {
 
       &:hover {
-        fill: var(--color-primary-hover);  
+        fill: var(--color-primary-hover);
       }
     }
 
@@ -46,12 +46,13 @@
 
 .footer {
   display: grid;
-  grid-template-columns: 1fr auto 1fr;
+  grid-template-columns: minmax(rem(220px), 1fr) auto minmax(rem(220px), 1fr);
+  overflow-x: auto;
 }
 
 .hr {
   @include size(100%, rem(1px));
-  
+
   background: repeating-linear-gradient(45deg, rgb(215, 225, 239), rgb(215, 225, 239) 9px, transparent 3px, transparent 18px);
 
   &.vertical {
@@ -61,14 +62,19 @@
 
 .card {
   @include flex($direction: column);
-  @include make-spacer(p, var(--gap-32));
-  
+  @include make-spacer(px, var(--gap-8));
+  @include make-spacer(py, var(--gap-16));
+
   gap: var(--gap-12);
   overflow: hidden;
 
+  @include media-breakpoint-up(xl) {
+    @include make-spacer(p, var(--gap-32));
+  }
+
   &.active {
     pointer-events: none;
-    
+
     .status {
 
       &::before {
@@ -105,8 +111,14 @@
 }
 
 .image {
-  aspect-ratio: rem(270px) / rem(270px);
-  height: rem(270px);
+  aspect-ratio: rem(150px) / rem(150px);
+  height: rem(150px);
+
+
+  @include media-breakpoint-up(md) {
+    aspect-ratio: rem(270px) / rem(270px);
+    height: rem(270px);
+  }
 }
 
 .list {
@@ -138,4 +150,52 @@
 .lower {
   color: var(--color-success);
   font-weight: var(--typography-bold);
+}
+
+.hiddenMobile {
+  display: none;
+
+  @include media-breakpoint-up(xl) {
+    display: block;
+  }
+}
+
+.hiddenDesktop {
+  display: block;
+  
+  @include media-breakpoint-up(xl) {
+    display: none;
+  }
+}
+
+
+.prices {
+  @include make-spacer(pb, var(--gap-32));
+  @include flex($wrap: wrap);
+
+  gap: var(--gap-12);
+}
+
+.button {
+  @include flex($align-items: center);
+  @include make-spacer(p, var(--gap-8));
+
+  background-color: var(--color-grey-200);
+  border-radius: var(--border-radius-4);
+  gap: var(--gap-4);
+  font-size: rem(13px);
+
+  &.active,
+  &.selected {
+    pointer-events: none;
+    color: var(--color-white);
+  }
+
+  &.active {
+    background-color: var(--color-primary);
+  }
+
+  &.selected {
+    background-color: var(--color-orange)
+  }
 }
