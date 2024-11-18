@@ -22,3 +22,20 @@
   line-height: 1;
   font-size: rem(12px);
 }
+
+.header {
+  @include make-spacer(mb, var(--gap-8));
+  @include flex($justify-content: space-between, $align-items: center, $wrap: wrap);
+
+  gap: var(--gap-8);
+}
+
+.discount {
+  font-size: rem(12px);
+  line-height: 1.2;
+  text-transform: uppercase;
+}
+
+.days {
+  font-size: rem(14px);
+}

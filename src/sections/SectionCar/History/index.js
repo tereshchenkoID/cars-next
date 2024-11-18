@@ -14,14 +14,17 @@ import {
 
 import { getDate } from '@/helpers/getDate'
 import { getFormatNumber } from '@/helpers/getFormatNumber'
+import { getFormatPrice } from '@/helpers/getFormatPrice'
+
+import Discount from '@/modules/Discount'
 
 import style from './index.module.scss'
 
-const CustomTooltip = ({ data, active, payload, label }) => {
+const CustomTooltip = ({ data, active, payload, label, auth }) => {
   if (active && payload && payload.length) {
     return (
       <div className={style.tooltip}>
-        <p>{`${data.currency.symbol}${payload[0].value} - ${label}`}</p>
+        <p>{`${getFormatPrice(auth?.account?.language?.code, auth?.account?.currency?.code, payload[0].value)} - ${getDate(label, 3)}`}</p>
       </div>
     )
   }
@@ -71,9 +74,22 @@ const History = ({ data }) => {
 
   return (
     <div className={style.block}>
+      <div className={style.header}>
+        <div>
+          <p className={style.discount}><strong>{data.price_history.counts}</strong> {t('change')}</p>
+          <h6 className={style.days}>{data.price_history.days || 1} {t('days')}</h6>
+        </div>
+        {
+          data.price_data.discount &&
+          <Discount
+            size={'sm'}
+            amount={getFormatPrice(auth?.account?.language?.code, auth?.account?.currency?.code, data.price_data.discount)}
+          />
+        }
+      </div>
       <ResponsiveContainer width="100%" height={200}>
         <AreaChart
-          data={data.price_history}
+          data={data.price_history.options}
           margin={{
             top: 40,
             right: 10,
@@ -87,8 +103,8 @@ const History = ({ data }) => {
               <stop offset="50%" stopColor="#8884d8" stopOpacity={0} />
             </linearGradient>
           </defs>
-          <CartesianGrid 
-            vertical={false} 
+          <CartesianGrid
+            vertical={false}
             stroke={'var(--color-grey-100)'}
             strokeWidth={1}
           />
@@ -121,7 +137,7 @@ const History = ({ data }) => {
           </YAxis>
           <Tooltip
             content={
-              <CustomTooltip data={data} />
+              <CustomTooltip data={data} auth={auth} />
             }
           />
           <Area
@@ -140,7 +156,7 @@ const History = ({ data }) => {
                   y={y}
                   value={value}
                   index={index}
-                  dataLength={data.price_history.length}
+                  dataLength={data.price_history.options.length}
                 />
               )}
             />

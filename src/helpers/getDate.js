@@ -10,7 +10,8 @@ export const getDate = (data, type) => {
   if (type === 0) return `${hours}:${minutes}:${seconds}`
   if (type === 1) return `${minutes}:${seconds}`
   if (type === 2) return `${year}-${month}-${day}T${hours}:${minutes}`
-  if (type === 3) return `${year}-${month}-${day}`
-  if (type === 4) return `${year}-${month}`
+  if (type === 3) return `${day}/${month}/${year}`
+  if (type === 4) return `${month}/${year}`
+  if (type === 5) return `${day}/${year}`
   return `${day}.${month}.${year} ${hours}:${minutes}:${seconds}`
 }

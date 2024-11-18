@@ -46,6 +46,7 @@
   min-width: rem(125px);
   border-radius: var(--border-radius-4);
   background: inherit;
+  clip-path: polygon(0px 0px, 100% 0px, 100% 90%, 0% 90%, 0% 100%, 6% 90%, 0px 90%);
   text-align: center;
   font-size: rem(12px);
   text-transform: uppercase;

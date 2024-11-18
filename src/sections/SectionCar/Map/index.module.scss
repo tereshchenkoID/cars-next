@@ -110,6 +110,10 @@
   }
 }
 
+.title {
+  min-height: rem(54px);;
+}
+
 .image {
   aspect-ratio: rem(150px) / rem(150px);
   height: rem(150px);

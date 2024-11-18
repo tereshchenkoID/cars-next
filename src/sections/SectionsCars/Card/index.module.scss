@@ -47,10 +47,17 @@
   }
 }
 
-.meta {
+.footer {
   @include make-spacer(mt, auto);
   @include make-spacer(mb, 0);
+  @include flex($align-items: baseline, $wrap: wrap);
+
+  gap: var(--gap-16);
+}
+
+.meta {
   @include flex($align-items: flex-end, $direction: column);
+  @include make-spacer(ml, auto);
 }
 
 .favorite {
@@ -85,15 +92,6 @@
   @include flex($align-items: center, $wrap: wrap);
 
   gap: var(--gap-16);
-}
-
-.option {
-  display: grid;
-  grid-template-columns: auto 1fr;
-  align-items: center;
-  gap: var(--gap-8);
-  font-size: rem(12px);
-  font-weight: var(--typography-bold);
 }
 
 .count {

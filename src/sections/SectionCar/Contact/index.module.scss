@@ -1,0 +1,58 @@
+@import '@/scss/config';
+
+.block {
+  @include make-spacer(p, var(--gap-24));
+
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: var(--gap-16);
+  position: relative;
+  border-radius: var(--border-radius-8);
+  border: rem(1px) solid rgba(179, 184, 251, 0.5);
+  background: linear-gradient(var(--color-secondary) 0%, var(--color-secondary) 100%);
+  overflow: hidden;
+  
+  &::before {
+    @include transition;
+
+    position: absolute;
+    bottom: 0;
+    right: rem(-32px);
+    clip-path: polygon(8.48% 100%, 0% 91%, 85.64% 0.05%, 100% 0.05%, 100% 100%, 8.48% 100%);
+    width: rem(228px);
+    background: linear-gradient(90deg, var(--color-secondary-hover) 0%, transparent 100%);
+    opacity: 0.5;
+    aspect-ratio: 9 / 16;
+    content: '';
+  }
+
+  @include hover {
+
+    &:hover {
+
+      &::before {
+        right: 0;
+      }
+    }
+  }
+}
+
+.date {
+  font-size: rem(12px);
+}
+
+.social {
+  @include size(rem(24px));
+  @include flex(center, center);
+
+  background-color: var(--color-primary);
+  border-radius: rem(4px);
+  color: var(--color-white);
+
+  @include hover {
+
+    &:hover {
+      background-color: var(--color-primary-hover);
+    }
+  }
+}

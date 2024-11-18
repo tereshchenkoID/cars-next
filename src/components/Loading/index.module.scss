@@ -1,0 +1,38 @@
+@import '@/scss/config';
+
+.block {
+  @include make-spacer(p, var(--gap-32));
+  @include flex(center, center);
+
+  border-radius: var(--border-radius-8);
+  box-shadow: var(--box-shadow-16-24);
+  background-color: var(--color-white);
+  overflow: hidden;
+  color: var(--color-primary);
+}
+
+.item {
+  @include size(rem(32px));
+
+  position: relative;
+  border-radius: 50%;
+
+  &::before {
+    position: absolute;
+    inset: 0;
+    border: rem(6px) solid currentColor;
+    border-radius: inherit;
+    animation: 1s infinite ease-in-out spin;
+    content: '';
+  }
+}
+
+@keyframes spin {
+  0% {
+    transform: scale(0);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}

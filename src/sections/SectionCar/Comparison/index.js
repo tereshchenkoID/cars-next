@@ -39,8 +39,8 @@ const Comparison = ({ data }) => {
   return (
     <div className={style.block}>
       <p className={style.title}>
-        <p dangerouslySetInnerHTML={{ __html: t('notification.similar_vehicle').replace('[cars]', `<strong>${data.price_score.cars}</strong>`) }} />
-        <p dangerouslySetInnerHTML={{ __html: t('notification.vehicle_characteristics').replace('[count]', `<strong>${data.price_score.counts}</strong>`) }} />
+        <span dangerouslySetInnerHTML={{ __html: t('notification.similar_vehicle').replace('[cars]', `<strong>${data.price_score.cars}</strong>`) }} />
+        <span dangerouslySetInnerHTML={{ __html: t('notification.vehicle_characteristics').replace('[count]', `<strong>${data.price_score.counts}</strong>`) }} />
       </p>
       <div className={style.wrapper}>
         <div className={style.labels}>

@@ -134,6 +134,9 @@
   "high_price": "High price PT",
   "vin_code": "VIN code PT",
   "engine_capacity": "Engine capacity PT",
+  "discount": "Discount PT",
+  "change": "Change PT",
+  "day": "Day PT",
   "features": {
     "1": {
       "0": "Other PT",
@@ -386,11 +389,17 @@
     },
     "color": {
       "0": "Colors PT",
-      "1": "white PT",
-      "2": "black PT",
-      "3": "green PT",
-      "4": "red PT",
-      "5": "blue PT"
+      "1": "beige",
+      "2": "white",
+      "3": "black",
+      "4": "red",
+      "6": "brown",
+      "7": "blue",
+      "8": "orange",
+      "9": "silver",
+      "10": "grey",
+      "11": "green",
+      "13": "yellow"
     }
   }
 }

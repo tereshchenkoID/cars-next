@@ -1,0 +1,38 @@
+@import '@/scss/config';
+
+.block {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: center;
+  font-size: rem(14px);
+  font-weight: var(--typography-bold);
+
+  &.xs {
+    gap: var(--gap-8);
+
+    .text {
+      font-size: rem(12px);
+    }
+  }
+
+  &.sm {
+    gap: var(--gap-8);
+
+    .text {
+      font-size: rem(14px);
+    }
+  }
+
+  &.lg {
+    gap: var(--gap-16);
+
+    .text {
+      font-size: rem(16px);
+    }
+  }
+}
+
+.label {
+  font-size: rem(11px);
+  text-transform: uppercase;
+}

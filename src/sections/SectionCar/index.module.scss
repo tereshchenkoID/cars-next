@@ -148,31 +148,6 @@
   @include flex($align-items: center, $wrap: wrap);
 }
 
-.option {
-  display: grid;
-  grid-template-columns: auto 1fr;
-  align-items: center;
-  font-size: rem(14px);
-  font-weight: var(--typography-bold);
-
-  &.sm {
-    gap: var(--gap-8);
-  }
-
-  &.lg {
-    gap: var(--gap-16);
-  }
-}
-
-.label {
-  font-size: rem(11px);
-  text-transform: uppercase;
-}
-
-.text {
-  font-size: rem(16px);
-}
-
 .tabs {
   position: sticky;
   top: calc(var(--header-height) + rem(1px));
@@ -411,40 +386,6 @@
 .social {
   @include media-breakpoint-up(lg) {
     @include make-spacer(pr, calc(436px + var(--outer-gap)))
-  }
-}
-
-.contact {
-  @include make-spacer(p, var(--gap-24));
-
-  position: relative;
-  border-radius: var(--border-radius-8);
-  border: rem(1px) solid rgba(179, 184, 251, 0.5);
-  background: linear-gradient(var(--color-secondary) 0%, var(--color-secondary) 100%);
-  overflow: hidden;
-  
-  &::before {
-    @include transition;
-
-    position: absolute;
-    bottom: 0;
-    right: rem(-32px);
-    clip-path: polygon(8.48% 100%, 0% 91%, 85.64% 0.05%, 100% 0.05%, 100% 100%, 8.48% 100%);
-    width: rem(228px);
-    background: linear-gradient(90deg, var(--color-secondary-hover) 0%, transparent 100%);
-    opacity: 0.5;
-    aspect-ratio: 9 / 16;
-    content: '';
-  }
-
-  @include hover {
-
-    &:hover {
-
-      &::before {
-        right: 0;
-      }
-    }
   }
 }
 

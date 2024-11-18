@@ -15,6 +15,8 @@ import Link from 'next/link'
 import Image from 'next/image'
 import Icon from '@/components/Icon'
 import Tags from '@/modules/Tags'
+import Option from '@/modules/Option'
+import Discount from '@/modules/Discount'
 
 import style from './index.module.scss'
 
@@ -34,7 +36,7 @@ const Card = ({ data }) => {
               pagination={{
                 dynamicBullets: true,
                 clickable: true,
-              }} 
+              }}
               navigation={true}
               // mousewheel={true}
               modules={[Pagination, Mousewheel, Navigation]}
@@ -48,7 +50,7 @@ const Card = ({ data }) => {
                       height={207}
                       className={style.image}
                       priority={idx === 0}
-                      style={{aspectRatio: 277 / 207 }}
+                      style={{ aspectRatio: 277 / 207 }}
                       alt={`${data.slug} ${idx}`}
                     />
                   </SwiperSlide>
@@ -56,7 +58,7 @@ const Card = ({ data }) => {
               }
             </Swiper>
 
-            <div 
+            <div
               className={style.count}
               onClick={() => {
                 Fancybox.show(
@@ -71,7 +73,7 @@ const Card = ({ data }) => {
                 );
               }}
             >
-              <Icon 
+              <Icon
                 iconName={'image'}
                 width={24}
                 height={24}
@@ -87,7 +89,7 @@ const Card = ({ data }) => {
           aria-label={t('favorite')}
           title={t('favorite')}
         >
-          <Icon 
+          <Icon
             iconName={'heart-filled'}
             width={24}
             height={24}
@@ -97,85 +99,88 @@ const Card = ({ data }) => {
         </button>
       </div>
       <div className={style.right}>
-        <Link 
+        <Link
           href={`${NAVIGATION.car.link}/${data.id}/${data.slug}`}
           className={style.link}
         >
           {data.name}
         </Link>
         <ul className={style.options}>
-          <li className={style.option}>
-            <Icon 
+          <li>
+            <Option
+              size={'xs'}
               iconName={'road'}
-              width={18}
-              height={18}
-              className={style.icon}
+              iconSize={18}
+              text={`${Number(data.mileage_data.mileage)} ${data.mileage_data.mileage_unit}`}
             />
-            <p>{data.mileage_data.mileage} {data.mileage_data.mileage_unit}</p>
           </li>
-          <li className={style.option}>
-            <Icon 
+          <li>
+            <Option
+              size={'xs'}
               iconName={'calendar'}
-              width={18}
-              height={18}
-              className={style.icon}
+              iconSize={18}
+              text={getDate(data.first_registration_date, 3)}
             />
-            <p>{getDate(data.first_registration_date, 3)}</p>
           </li>
-          <li className={style.option}>
-            <Icon 
+          <li>
+            <Option
+              size={'xs'}
               iconName={'calendar'}
-              width={18}
-              height={18}
-              className={style.icon}
+              iconSize={18}
+              text={getDate(data.manufacture_date, 5)}
             />
-            <p>{getDate(data.manufacture_date, 3)}</p>
           </li>
-          <li className={style.option}>
-            <Icon 
+          <li>
+            <Option
+              size={'xs'}
               iconName={'engine'}
-              width={18}
-              height={18}
-              className={style.icon}
+              iconSize={18}
+              text={`${data.power_data.power} (${data.power_data.power_unit})`}
             />
-            <p>{data.power_data.power} ({data.power_data.power_unit})</p>
           </li>
-          <li className={style.option}>
-            <Icon 
+          <li>
+            <Option
+              size={'xs'}
               iconName={'transmission'}
-              width={18}
-              height={18}
-              className={style.icon}
+              iconSize={18}
+              text={t(`filters.transmission.${data.transmission.id}`)}
             />
-            <p>{t(`filters.transmission.${data.transmission.id}`)}</p>
           </li>
-          <li className={style.option}>
-            <Icon 
+          <li>
+            <Option
+              size={'xs'}
               iconName={getFuelIcon(data.fuel_type.id)}
-              width={18}
-              height={18}
-              className={style.icon}
+              iconSize={18}
+              text={t(`filters.fuel_type.${data.fuel_type.id}`)}
             />
-            <p>{t(`filters.fuel_type.${data.fuel_type.id}`)}</p>
           </li>
         </ul>
-        
+
         {
           data.featured_tags &&
           <Tags data={data.featured_tags} />
         }
 
-        <div className={style.meta}>
-          <h5>{getFormatPrice(auth?.account?.language?.code, auth?.account?.currency?.code, data?.price_data?.price)}</h5>
-          <p className={style.vat}>
+        <div className={style.footer}>
           {
-            data.price_data.price_without_vat 
-            ?
-              <><strong>{getFormatPrice(auth?.account?.language?.code, auth?.account?.currency?.code, data.price_data.price_without_vat)}</strong> {t('without_vat')}</>
-            :
-              <span>{t('not_deductible')}</span>
+            data.price_data.discount &&
+            <Discount
+              size={'sm'}
+              amount={getFormatPrice(auth?.account?.language?.code, auth?.account?.currency?.code, data.price_data.discount)}
+            />
           }
-          </p>
+          <div className={style.meta}>
+            <h5>{getFormatPrice(auth?.account?.language?.code, auth?.account?.currency?.code, data?.price_data?.price)}</h5>
+            <p className={style.vat}>
+              {
+                data.price_data.price_without_vat
+                  ?
+                  <><strong>{getFormatPrice(auth?.account?.language?.code, auth?.account?.currency?.code, data.price_data.price_without_vat)}</strong> {t('without_vat')}</>
+                  :
+                  <span>{t('not_deductible')}</span>
+              }
+            </p>
+          </div>
         </div>
       </div>
     </div>

@@ -134,6 +134,9 @@
   "high_price": "High price",
   "vin_code": "VIN code",
   "engine_capacity": "Engine capacity",
+  "discount": "Discount",
+  "change": "Change",
+  "day": "Day",
   "features": {
     "1": {
       "0": "Other",
@@ -383,11 +386,17 @@
     },
     "color": {
       "0": "Colors",
-      "1": "white",
-      "2": "black",
-      "3": "green",
+      "1": "beige",
+      "2": "white",
+      "3": "black",
       "4": "red",
-      "5": "blue"
+      "6": "brown",
+      "7": "blue",
+      "8": "orange",
+      "9": "silver",
+      "10": "grey",
+      "11": "green",
+      "13": "yellow"
     }
   }
 }

@@ -1,5 +1,5 @@
 export const getFormatPrice = (locale, currency, amount) => {
-  return new Intl.NumberFormat(locale || 'en-IN', {
+  return new Intl.NumberFormat(locale || 'en-US', {
     style: 'currency',
     currency: currency || 'USD',
     currencyDisplay: 'narrowSymbol',

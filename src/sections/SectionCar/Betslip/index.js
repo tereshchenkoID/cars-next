@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux'
 
 import { getFormatPrice } from '@/helpers/getFormatPrice'
 
+import Discount from '@/modules/Discount'
 import Button from '@/components/Button'
 
 import style from './index.module.scss'
@@ -14,6 +15,16 @@ const Betslip = ({ data }) => {
   return (
     <div className={style.block}>
       <header className={style.header}>
+        {
+          data?.price_data?.price_start &&
+          <div className={style.discount}>
+            <Discount 
+              size={'lg'} 
+              amount={getFormatPrice(auth?.account?.language?.code, auth?.account?.currency?.code, data.price_data.discount)}
+            />
+            <p className={style.old}>{getFormatPrice(auth?.account?.language?.code, auth?.account?.currency?.code, data.price_data.price_start)}</p>
+          </div>
+        }
         <h6 className={style.prize}>
           <span>Car price</span>
           <span>{getFormatPrice(auth?.account?.language?.code, auth?.account?.currency?.code, data?.price_data?.price)} </span>
@@ -32,7 +43,7 @@ const Betslip = ({ data }) => {
         />
       </div>
 
-      <footer className={style.footer}>
+      {/* <footer className={style.footer}>
         <h6 className={style.prize}>
           <span>Total price</span>
           <span>{getFormatPrice(auth?.account?.language?.code, auth?.account?.currency?.code, data?.price_data?.price)} </span>
@@ -41,7 +52,7 @@ const Betslip = ({ data }) => {
           <span>Total price excluding VAT</span>
           <span>{getFormatPrice(auth?.account?.language?.code, auth?.account?.currency?.code, data?.price_data?.price_without_vat)} </span>
         </p>
-      </footer>
+      </footer> */}
     </div>
   )
 }

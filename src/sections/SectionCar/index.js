@@ -19,48 +19,40 @@ import { getFuelIcon } from '@/helpers/getFuelIcon'
 import Link from 'next/link'
 import Image from 'next/image'
 import Tags from '@/modules/Tags'
+import Option from '@/modules/Option'
 import Icon from '@/components/Icon'
 import Button from '@/components/Button'
 import Container from '@/components/Container'
+import Loading from '@/components/Loading'
 import Betslip from './Betslip'
+import Contact from './Contact'
 
-const Share = dynamic(() => import('./Share'), {ssr: false})
-const Favorites = dynamic(() => import('./Favorites'), {ssr: false})
-const History = dynamic(() => import('./History'), {ssr: false})
-const Map = dynamic(() => import('./Map'), {ssr: false})
-const Comparison = dynamic(() => import('./Comparison'), {ssr: false})
+const Share = dynamic(() => import('./Share'), { ssr: false })
+const Favorites = dynamic(() => import('./Favorites'), { ssr: false })
+const History = dynamic(() => import('./History'), { ssr: false, loading: () => <Loading /> })
+const Map = dynamic(() => import('./Map'), { ssr: false, loading: () => <Loading /> })
+const Comparison = dynamic(() => import('./Comparison'), { ssr: false, loading: () => <Loading /> })
 
 import style from './index.module.scss'
 
-const TABS = [
-  {
-    id: 0,
-    text: 'details'
-  },
-  {
-    id: 1,
-    text: 'feature'
-  },
-  {
-    id: 2,
-    text: 'price_history'
-  },
-  {
-    id: 3,
-    text: 'price_map'
-  },
-  {
-    id: 4,
-    text: 'comparison'
-  }
-]
-
 const SectionCar = ({ data, next }) => {
   const t = useTranslations()
+  const extraTabs = [
+    data.price_history.options && { id: 2, text: 'price_history' },
+    next && { id: 3, text: 'price_map' },
+    data.price_score.options && { id: 4, text: 'comparison' },
+  ].filter(Boolean)
+
+  const TABS = [
+    { id: 0, text: 'details' },
+    { id: 1, text: 'feature' },
+    ...extraTabs,
+  ]
+
   const router = useRouter()
   const sectionRefs = useRef(TABS.map(() => React.createRef()))
   const [active, setActive] = useState(0)
-  
+
   const featureTags = data?.featured_tags.map(tag => tag.id)
 
   const groupedFeatures = useMemo(() => {
@@ -114,101 +106,53 @@ const SectionCar = ({ data, next }) => {
             </div>
 
             <ul className={style.options}>
-              <li
-                className={
-                  classNames(
-                    style.option,
-                    style.sm
-                  )
-                }
-              >
-                <Icon
+              <li>
+                <Option
+                  size={'sm'}
                   iconName={'road'}
-                  width={24}
-                  height={24}
-                  className={style.icon}
+                  iconSize={24}
+                  text={`${data.mileage_data.mileage} ${data.mileage_data.mileage_unit}`}
                 />
-                <p>{data.mileage_data.mileage} {data.mileage_data.mileage_unit}</p>
               </li>
-              <li
-                className={
-                  classNames(
-                    style.option,
-                    style.sm
-                  )
-                }
-              >
-                <Icon
+              <li>
+                <Option
+                  size={'sm'}
                   iconName={'calendar'}
-                  width={24}
-                  height={24}
-                  className={style.icon}
+                  iconSize={24}
+                  text={getDate(data.date.manufacture, 5)}
                 />
-                <p>{getDate(data.date.manufacture, 3)}</p>
               </li>
-              <li
-                className={
-                  classNames(
-                    style.option,
-                    style.sm
-                  )
-                }
-              >
-                <Icon
+              <li>
+                <Option
+                  size={'sm'}
                   iconName={'calendar'}
-                  width={24}
-                  height={24}
-                  className={style.icon}
+                  iconSize={24}
+                  text={getDate(data.date.first_registration, 3)}
                 />
-                <p>{getDate(data.date.first_registration, 3)}</p>
               </li>
-              <li
-                className={
-                  classNames(
-                    style.option,
-                    style.sm
-                  )
-                }
-              >
-                <Icon
+              <li>
+                <Option
+                  size={'sm'}
                   iconName={'engine'}
-                  width={24}
-                  height={24}
-                  className={style.icon}
+                  iconSize={24}
+                  text={`${data.power_data.power} ${data.power_data.power_unit}`}
                 />
-                <p>{data.power_data.power} {data.power_data.power_unit}</p>
               </li>
-              <li
-                className={
-                  classNames(
-                    style.option,
-                    style.sm
-                  )
-                }
-              >
-                <Icon
+              <li>
+                <Option
+                  size={'sm'}
                   iconName={'transmission'}
-                  width={24}
-                  height={24}
-                  className={style.icon}
+                  iconSize={24}
+                  text={t(`filters.transmission.${data.transmission.id}`)}
                 />
-                <p>{t(`filters.transmission.${data.transmission.id}`)}</p>
               </li>
-              <li
-                className={
-                  classNames(
-                    style.option,
-                    style.sm
-                  )
-                }
-              >
-                <Icon
+              <li>
+                <Option
+                  size={'sm'}
                   iconName={getFuelIcon(data.fuel_type.id)}
-                  width={24}
-                  height={24}
-                  className={style.icon}
+                  iconSize={24}
+                  text={t(`filters.fuel_type.${data.fuel_type.id}`)}
                 />
-                <p>{t(`filters.fuel_type.${data.fuel_type.id}`)}</p>
               </li>
             </ul>
 
@@ -276,9 +220,7 @@ const SectionCar = ({ data, next }) => {
 
       <div className={style.contacts}>
         <Container classes={style.social}>
-          <div className={style.contact}>
-            <p>1</p>
-          </div>
+          <Contact data={data.contact} />
         </Container>
       </div>
 
@@ -302,7 +244,6 @@ const SectionCar = ({ data, next }) => {
           }
         </Container>
       </div>
-
 
       <Container classes={style.main}>
         <div className={style.column}>
@@ -328,157 +269,77 @@ const SectionCar = ({ data, next }) => {
                 )
               }
             >
-              <li
-                className={
-                  classNames(
-                    style.option,
-                    style.lg
-                  )
-                }
-              >
-                <Icon
+              <li>
+                <Option
+                  size={'lg'}
                   iconName={'road'}
-                  width={32}
-                  height={32}
-                  className={style.icon}
+                  iconSize={32}
+                  label={t('filters.mileage.0')}
+                  text={`${Number(data.mileage_data.mileage)} ${data.mileage_data.mileage_unit}`}
                 />
-                <div>
-                  <p className={style.label}>{t('filters.mileage.0')}</p>
-                  <p className={style.text}>{data.mileage_data.mileage} {data.mileage_data.mileage_unit}</p>
-                </div>
               </li>
-              <li
-                className={
-                  classNames(
-                    style.option,
-                    style.lg
-                  )
-                }
-              >
-                <Icon
+              <li>
+                <Option
+                  size={'lg'}
                   iconName={'calendar'}
-                  width={32}
-                  height={32}
-                  className={style.icon}
+                  iconSize={32}
+                  label={t('manufacture_registration')}
+                  text={getDate(data.date.manufacture, 5)}
                 />
-                <div>
-                  <p className={style.label}>{t('manufacture_registration')}</p>
-                  <p className={style.text}>{getDate(data.date.manufacture, 3)}</p>
-                </div>
               </li>
-              <li
-                className={
-                  classNames(
-                    style.option,
-                    style.lg
-                  )
-                }
-              >
-                <Icon
+              <li>
+                <Option
+                  size={'lg'}
                   iconName={'calendar'}
-                  width={32}
-                  height={32}
-                  className={style.icon}
+                  iconSize={32}
+                  label={t('first_registration')}
+                  text={getDate(data.date.first_registration, 3)}
                 />
-                <div>
-                  <p className={style.label}>{t('first_registration')}</p>
-                  <p className={style.text}>{getDate(data.date.first_registration, 3)}</p>
-                </div>
               </li>
-              <li
-                className={
-                  classNames(
-                    style.option,
-                    style.lg
-                  )
-                }
-              >
-                <Icon
+              <li>
+                <Option
+                  size={'lg'}
                   iconName={'engine'}
-                  width={32}
-                  height={32}
-                  className={style.icon}
+                  iconSize={32}
+                  label={t('power')}
+                  text={`${data.power_data.power} ${data.power_data.power_unit}`}
                 />
-                <div>
-                  <p className={style.label}>{t('power')}</p>
-                  <p className={style.text}>{data.power_data.power} {data.power_data.power_unit}</p>
-                </div>
               </li>
-              <li
-                className={
-                  classNames(
-                    style.option,
-                    style.lg
-                  )
-                }
-              >
-                <Icon
+              <li>
+                <Option
+                  size={'lg'}
                   iconName={'transmission'}
-                  width={32}
-                  height={32}
-                  className={style.icon}
+                  iconSize={32}
+                  label={t('filters.transmission.0')}
+                  text={t(`filters.transmission.${data.transmission.id}`)}
                 />
-                <div>
-                  <p className={style.label}>{t('filters.transmission.0')}</p>
-                  <p className={style.text}>{t(`filters.transmission.${data.transmission.id}`)}</p>
-                </div>
               </li>
-              <li
-                className={
-                  classNames(
-                    style.option,
-                    style.lg
-                  )
-                }
-              >
-                <Icon
+              <li>
+                <Option
+                  size={'lg'}
                   iconName={'hybrid'}
-                  width={32}
-                  height={32}
-                  className={style.icon}
+                  iconSize={32}
+                  label={t('filters.fuel_type.0')}
+                  text={t(`filters.fuel_type.${data.fuel_type.id}`)}
                 />
-                <div>
-                  <p className={style.label}>{t('filters.fuel_type.0')}</p>
-                  <p className={style.text}>{t(`filters.fuel_type.${data.fuel_type.id}`)}</p>
-                </div>
               </li>
-              <li
-                className={
-                  classNames(
-                    style.option,
-                    style.lg
-                  )
-                }
-              >
-                <Icon
+              <li>
+                <Option
+                  size={'lg'}
                   iconName={'drive'}
-                  width={32}
-                  height={32}
-                  className={style.icon}
+                  iconSize={32}
+                  label={t('filters.drive.0')}
+                  text={data.drive.name}
                 />
-                <div>
-                  <p className={style.label}>{t('filters.drive.0')}</p>
-                  <p className={style.text}>{data.drive.name}</p>
-                </div>
               </li>
-              <li
-                className={
-                  classNames(
-                    style.option,
-                    style.lg
-                  )
-                }
-              >
-                <Icon
+              <li>
+                <Option
+                  size={'lg'}
                   iconName={'location'}
-                  width={32}
-                  height={32}
-                  className={style.icon}
+                  iconSize={32}
+                  label={t('location')}
+                  text={'Italy'}
                 />
-                <div>
-                  <p className={style.label}>{t('location')}</p>
-                  <p className={style.text}>Italy</p>
-                </div>
               </li>
             </ul>
           </div>
@@ -537,7 +398,7 @@ const SectionCar = ({ data, next }) => {
               </li>
               <li>
                 <p>{t('engine_capacity')}</p>
-                <strong>{data.power_data.capacity} ccm</strong>
+                <strong>{data.power_data.capacity} cm</strong>
               </li>
               <li>
                 <p>{t('filters.vehicle_type.0')}</p>
@@ -546,7 +407,7 @@ const SectionCar = ({ data, next }) => {
               <li>
                 <p>{t('body_color')}</p>
                 <strong>
-                  <span 
+                  <span
                     className={style.color}
                     style={{ backgroundColor: t(`filters.color.${data.color.id}`) }}
                     title={t(`filters.color.${data.color.id}`)}
@@ -574,7 +435,6 @@ const SectionCar = ({ data, next }) => {
               </li>
             </ul>
           </div>
-
 
           <div
             ref={sectionRefs.current[1]}
@@ -631,22 +491,25 @@ const SectionCar = ({ data, next }) => {
             </div>
           </div>
 
-          <div
-            ref={sectionRefs.current[2]}
-            className={style.body}
-          >
-            <h3
-              className={
-                classNames(
-                  style.title,
-                  style.lg
-                )
-              }
+          {
+            data.price_history.options &&
+            <div
+              ref={sectionRefs.current[2]}
+              className={style.body}
             >
-              {t('price_history')}
-            </h3>
-            <History data={data} />
-          </div>
+              <h3
+                className={
+                  classNames(
+                    style.title,
+                    style.lg
+                  )
+                }
+              >
+                {t('price_history')}
+              </h3>
+              <History data={data} />
+            </div>
+          }
 
           {
             next &&
@@ -668,22 +531,25 @@ const SectionCar = ({ data, next }) => {
             </div>
           }
 
-          <div
-            ref={sectionRefs.current[4]}
-            className={style.body}
-          >
-            <h3
-              className={
-                classNames(
-                  style.title,
-                  style.lg
-                )
-              }
+          {
+            data.price_score.options &&
+            <div
+              ref={sectionRefs.current[4]}
+              className={style.body}
             >
-              {t('comparison')}
-            </h3>
-            <Comparison data={data} />
-          </div>
+              <h3
+                className={
+                  classNames(
+                    style.title,
+                    style.lg
+                  )
+                }
+              >
+                {t('comparison')}
+              </h3>
+              <Comparison data={data} />
+            </div>
+          }
         </div>
         <Betslip data={data} />
       </Container>
