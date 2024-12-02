@@ -40,8 +40,12 @@
     "chosen_car": "Your chosen car PT",
     "compared_car": "Compared car PT",
     "similar_vehicle": "Compared with more than [cars] similar vehicles offered in recent months. PT",
-    "vehicle_characteristics": "We take in account up to [count] vehicle characteristics. PT"
+    "vehicle_characteristics": "We take in account up to [count] vehicle characteristics. PT",
+    "saved_filters": "Here you'll see saved filters and new offer notifications. PT",
+    "delete_search": "Are you sure you wish to delete PT"
   },
+  "delete_search": "Delete search PT",
+  "dont_delete": "Don’t delete PT",
   "my_profile": "My profile PT",
   "contact_information": "Contact information PT",
   "billing_information": "Billing information PT",
@@ -134,6 +138,10 @@
   "high_price": "High price PT",
   "vin_code": "VIN code PT",
   "engine_capacity": "Engine capacity PT",
+  "engine": "Engine PT",
+  "basic_info": "Basic information PT",
+  "equipment": "Equipment PT",
+  "detailed_search": "Detailed search PT",
   "discount": "Discount PT",
   "change": "Change PT",
   "day": "Day PT",
@@ -307,6 +315,12 @@
     "page": {
       "0": "Page PT"
     },
+    "vat_reclaimable": {
+      "0": "VAT deduction PT"
+    },
+    "discount": {
+      "0": "Discounted cars PT"
+    },
     "sort": {
       "0": "Recommended PT",
       "1": "From cheap to expensive PT",
@@ -346,7 +360,7 @@
       "0": "Price PT"
     },
     "mileage": {
-      "0": "mileage PT"
+      "0": "Mileage PT"
     },
     "fuel_type": {
       "0": "Fuel PT",
@@ -356,6 +370,7 @@
       "4": "LPG PT",
       "5": "CNG PT",
       "6": "Hybrid PT",
+      "7": "Other fuel type PT",
       "8": "Hydrogen PT"
     },
     "eco": {

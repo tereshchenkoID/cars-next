@@ -98,7 +98,6 @@
 .body {
   @include make-spacer(py, var(--gap-32));
 
-  // border: 1px solid red;
   scroll-margin-top: rem(140px);
 }
 

@@ -2,11 +2,12 @@ import Button from '@/components/Button'
 
 import style from './index.module.scss'
 
-const Pagination = ({
-  pagination,
-  handlePrev,
-  handleNext,
-}) => {
+const Pagination = ({ filtersProps }) => {
+  const {
+    pagination,
+    handlePrev,
+    handleNext,
+  } = filtersProps
 
   return (
     <div className={style.block}>

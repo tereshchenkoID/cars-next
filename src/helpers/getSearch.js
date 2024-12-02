@@ -1,32 +1,21 @@
 import { TYPES, DEFAULT } from '@/constant/config'
 
-export const getSearch = (data, type, key, value) => {  
+export const getSearch = (data, type, key, value) => {
+  const isDefaultValue = (arr) => arr.length === 0 || arr.includes(DEFAULT)
+
   if (TYPES.includes(type)) {
+    let values = data[key].value
+
     if (value === DEFAULT) {
       data[key].value = [DEFAULT]
     } else {
-      if (data[key].value.includes(DEFAULT)) {
-        data[key].value = []
-      }
-
-      if (data[key].value.includes(value)) {
-        data[key].value = data[key].value.filter(item => item !== value)
-      } else {
-        data[key].value = [...data[key].value, value]
-      }
-    }
-
-    if (data[key].value.length === 0) {
-      data[key].value = [DEFAULT]
+      values = values.filter((item) => item !== value && item !== DEFAULT)
+      if (!data[key].value.includes(value)) values.push(value)
+      data[key].value = isDefaultValue(values) ? [DEFAULT] : values
     }
   } else {
     const lastIndex = data[key].value.length - 1
-
-    if (value.length === 0) {
-      data[key].value[lastIndex] = DEFAULT
-    } else {
-      data[key].value[lastIndex] = value
-    }
+    data[key].value[lastIndex] = value.length === 0 ? DEFAULT : value
   }
 
   return data

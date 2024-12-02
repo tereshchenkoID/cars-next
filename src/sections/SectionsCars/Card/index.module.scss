@@ -6,7 +6,7 @@
   border-radius: var(--border-radius-8);
   box-shadow: var(--box-shadow-4-8);
   background-color: var(--color-white);
-  overflow: hidden;
+  position: relative;
 
   @include media-breakpoint-up(md) {
     grid-template-rows: rem(320px) auto;
@@ -32,6 +32,33 @@
   position: absolute;
   right: var(--gap-12);
   z-index: $z-index-1;
+}
+
+.discount {
+  position: absolute;
+  top: var(--gap-16);
+  left: rem(-8px);
+  z-index: $z-index-2;
+
+  &::before {
+    @include size(rem(7px));
+
+    position: absolute;
+    display: block;
+    clip-path: polygon(0 0, 100% 100%, 100% 0);
+    left: rem(1px);
+    bottom: rem(-6px);
+    z-index: 1;
+    background: var(--gradient-gold);
+    content: '';
+  }
+}
+
+.left {
+  @include size(100%);
+  
+  border-radius: var(--border-radius-8);
+  overflow: hidden
 }
 
 .right {
@@ -179,4 +206,11 @@
 .vat {
   font-size: rem(12px);
   color: var(--color-grey-600);
+}
+
+.loading {
+  position: absolute;
+  inset: 0;
+  border-radius: 0;
+  z-index: $z-index-2;
 }

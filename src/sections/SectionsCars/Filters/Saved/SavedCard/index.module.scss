@@ -1,0 +1,70 @@
+@import '@/scss/config';
+
+.block {
+  @include transition;
+  @include make-spacer(p, var(--gap-12));
+
+  display: grid;
+  gap: var(--gap-8);
+  flex-shrink: 0;
+  border-radius: var(--border-radius-8);
+  border-style: solid;
+  border-width: rem(1px);
+  cursor: pointer;
+
+  @include hover {
+
+    &:hover {
+      border-color: var(--color-primary);
+
+      .title {
+        color: var(--color-primary);
+      }
+    }
+  }
+}
+
+.options {
+  @include make-spacer(p, var(--gap-4));
+
+  position: absolute;
+  top: calc(100% + var(--gap-8));
+  right: 0;
+  background-color: var(--color-white);
+  border-radius: var(--border-radius-4);
+  border-style: solid;
+  border-width: rem(1px);
+  z-index: $z-index-1;
+}
+
+.head {
+  @include flex(space-between, center);
+
+  position: relative;
+}
+
+.title {
+  font-size: rem(16px);
+}
+
+.tags {
+  @include flex($align-items: center, $wrap: wrap);
+
+  gap: var(--gap-6);
+}
+
+.tag {
+  @include flex($align-items: center);
+  @include make-spacer(px, var(--gap-8));
+  @include make-spacer(py, var(--gap-2));
+
+  border-radius: var(--border-radius-4);
+  text-transform: capitalize;
+  font-size: rem(12px);
+  font-weight: var(--typography-bold);
+  white-space: nowrap;
+  background-color: var(--color-secondary);
+  color: var(--color-primary-hover);
+  height: rem(24px);
+  gap: var(--gap-4);
+}

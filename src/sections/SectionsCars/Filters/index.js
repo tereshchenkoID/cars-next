@@ -1,31 +1,25 @@
-import { useRouter } from '@/i18n/routing'
 import { useTranslations } from 'next-intl'
-import { useSearchParams } from 'next/navigation'
 import { useEffect, useState } from 'react'
-import { useSelector, useDispatch } from 'react-redux'
 
-import { 
-  ACTIVE, 
-  DEFAULT, 
-  NAVIGATION,
-} from '@/constant/config'
+import { DEFAULT, NAVIGATION } from '@/constant/config'
 
 import classNames from 'classnames'
 
-import { getSearch } from '@/helpers/getSearch'
 import { overflowBody } from '@/helpers/overflowBody'
-import { setBrands } from '@/store/actions/brandsAction'
-import { setSearch } from '@/store/actions/searchAction'
+import { getYears } from '@/helpers/getYears'
 
 import Icon from '@/components/Icon'
 import Button from '@/components/Button'
 import Field from '@/components/Field'
 import Select from '@/components/Select'
-import Checkbox from '@/components/Checkbox'
 import Reference from '@/components/Reference'
+import Checkbox from '@/components/Checkbox'
 import Backdrop from '@/modules/Backdrop'
 import Brands from '@/modules/Brands'
-import SavedCard from './SavedCard'
+import FiltersMultiSelect from '@/modules/FiltersMultiSelect'
+import FiltersColorSelect from '@/modules/FiltersColorSelect'
+import History from './History'
+import Saved from './Saved'
 
 import style from './index.module.scss'
 
@@ -35,127 +29,28 @@ const TABS = [
   { icon: "history", text: "history" }
 ]
 
-const Filters = ({ show, setShow, handleLoad }) => {
+const Filters = ({
+  show,
+  setShow,
+  filtersProps,
+  showBrand,
+  setShowBrands
+}) => {
   const t = useTranslations()
-  const dispatch = useDispatch()
-  const router = useRouter()
-  const searchParams = useSearchParams()
-  const filters = useSelector((state) => state.filters)
-  const search = useSelector((state) => state.search)
-  const brands = useSelector((state) => state.brands)
   const [active, setActive] = useState(0)
-
-  const groupedFilters = {}
-  const currentYear = new Date().getFullYear()
-  const years = Array.from({ length: currentYear - 1900 + 1 }, (_, i) => (currentYear - i).toString())
-  years.unshift(DEFAULT)
-
-  Object.keys(filters).forEach((key) => {
-    if(filters[key].visible === ACTIVE) {
-      const group = filters[key].group || key
-      if (!groupedFilters[group]) {
-        groupedFilters[group] = []
-      }
-
-      groupedFilters[group].push({ key, filter: filters[key] })
-    }
-  })
-
-  const generateParams = () => {
-    const params = new URLSearchParams()
-
-    brands.forEach((brand) => {
-      let selectedOptions = brand.options
-        .filter(option => option.selected === ACTIVE)
-        .map(option => option.id)
-
-      if (selectedOptions.includes(DEFAULT)) {
-        selectedOptions = [DEFAULT]
-      }
-  
-      if (selectedOptions.length > 0) {
-        params.append(`make_${brand.id}`, selectedOptions)
-      }
-    })
-  
-    Object.keys(search).forEach((key) => {
-      if(key.indexOf("make") === -1) {
-        const filterValue = search[key]?.value;
-        if (filterValue && filterValue.length > 0 && filterValue[0] !== DEFAULT) {
-          params.append(key, filterValue.join(';'))
-        }
-      }
-    })
-  
-    return params.toString()
-  }
-
-  const generateSearchFromFilters = (filters, query) => {
-    const date = {}
-    const paramsObject = query ? Object.fromEntries(query.entries()) : {}
-    const makes = JSON.parse(JSON.stringify(brands))
-
-    if(query) {
-      for (const [key, value] of Object.entries(paramsObject)) {
-        if(key.indexOf("make") !== -1) {
-          const brandId = key.replace('make_', '')
-
-          date[key] = {
-            value: value.split(',')
-          }
-
-          makes.forEach((brand) => {
-            if (brand.id === brandId) {
-              brand.options.forEach((option) => {
-                option.selected = value.split(',').includes(option.id) ? ACTIVE : DEFAULT
-              })
-            }
-          })
-        }
-      }
-    }
-    else {
-      makes.forEach((brand) => {
-        brand.options.forEach((option) => {
-          option.selected = DEFAULT
-        })
-      })
-    }
-
-    dispatch(setBrands(makes))  
-
-    for (const [key, value] of Object.entries(filters)) {
-      const queryValue = paramsObject[key] || DEFAULT
-      const queryArray = queryValue?.split(';')
-      
-      date[key] = {
-        value: queryArray
-      }
-    }
-  
-    return date
-  }
-
-  const handleChange = (type, key, value) => {
-    dispatch(setSearch(getSearch(JSON.parse(JSON.stringify(search)), type, key, value)))
-  }
-
-  const handleReset = () => {
-    dispatch(setSearch(generateSearchFromFilters(filters, null)))
-    handleLoad(0)
-  }
-
-  useEffect(() => {
-    dispatch(setSearch(generateSearchFromFilters(filters, searchParams)))
-  }, [])
-
-  useEffect(() => {
-    router.push(`?${generateParams()}`, { scroll: false })
-  }, [search])
+  const {
+    handleLoad,
+    handleChange,
+    handleReset,
+    filters,
+    search,
+    searchParams,
+  } = filtersProps
 
   useEffect(() => {
     overflowBody(show)
   }, [show])
+
 
   return (
     <>
@@ -163,9 +58,10 @@ const Filters = ({ show, setShow, handleLoad }) => {
         show &&
         <Backdrop onChange={() => setShow(false)} />
       }
-      <form 
+      <form
         onSubmit={(e) => {
           e.preventDefault()
+          setShow(false)
           handleLoad(0)
         }}
         className={
@@ -179,7 +75,7 @@ const Filters = ({ show, setShow, handleLoad }) => {
           <div className={style.title}>
             <h6>{t('filter')}</h6>
             {
-              searchParams.size > 0 &&
+              (searchParams.size > 0 && active === 0) &&
               <Button
                 icon={'trash'}
                 classes={['secondary', 'square', 'sm']}
@@ -216,134 +112,200 @@ const Filters = ({ show, setShow, handleLoad }) => {
             <>
               <div className={style.section}>
                 <h6 className={style.subtitle}>{t('model')}</h6>
-                <Brands isWide={true} />
+                <Brands
+                  show={showBrand}
+                  setShow={setShowBrands}
+                  isWide={true}
+                />
               </div>
-              {
-                Object.keys(groupedFilters).map((group) => (
-                  <div
-                    key={group}
-                    className={style.section}
-                  >
-                    <h6 className={style.subtitle}>
-                      {
-                        (groupedFilters[group][0].key.indexOf('from') !== -1 || groupedFilters[group][0].key.indexOf('to') !== -1) 
-                        ?
-                          t(`filters.${groupedFilters[group][0].key.split('_')[0]}.0`)
-                        :
-                          t(`filters.${groupedFilters[group][0].key}.0`)
-                      }
-                    </h6>
-                    <div
-                      className={style.wrapper}
-                      style={{
-                        gridTemplateColumns: `repeat(${groupedFilters[group].length}, 1fr)`,
-                      }}
-                    >
-                      {
-                        groupedFilters[group].map(({ key, filter }) => (
-                          filter &&
-                          <div
-                            key={key}
-                            className={style.wrapper}
-                          >
-                            {
-                              (key.indexOf('from') !== -1 || key.indexOf('to') !== -1) &&
-                              <p className={style.label}>{t(key.split('_')[1])}:</p>
-                            }
 
-                            {filter.type === "select" && (
-                              <div className={style.list}>
-                                <Select
-                                  id={`select_${key}`}
-                                  options={
-                                    key.includes('year')
-                                      ?
-                                        years.map(year => ({
-                                          value: year === DEFAULT ? DEFAULT : year,
-                                          label: year === DEFAULT ? t('all') : year,
-                                        }))
-                                      :
-                                        Object.entries(filter.options).map(([optionKey, optionValue]) => ({
-                                          value: optionKey,
-                                          label: optionKey === DEFAULT ? t('all') : (filter.translation === DEFAULT ? optionValue : t(`filters.${key}.${optionKey}`)),
-                                        }))
-                                  }
-                                  data={search[key]?.value?.[search[key]?.value?.length - 1] || DEFAULT}
-                                  onChange={(value) => handleChange(filter.type, key, value)}
-                                />
-                              </div>
-                            )}
+              <div className={style.section}>
+                <h6 className={style.subtitle}>{t('filters.state.0')}</h6>
+                <div className={style.wrapper}>
+                  <Select
+                    id={'select_state'}
+                    options={
+                      Object.entries(filters.state.options).map(([optionKey, _]) => ({
+                        value: optionKey,
+                        label: optionKey === DEFAULT ? t('all') : t(`filters.state.${optionKey}`),
+                      }))
+                    }
+                    data={search.state?.value[0] || DEFAULT}
+                    onChange={(value) => handleChange('select', 'state', value)}
+                  />
+                </div>
+              </div>
 
-                            {filter.type === "field" && (
-                              <div className={style.grid}>
-                                <Field
-                                  type="number"
-                                  placeholder={t('all')}
-                                  data={
-                                    search[key]?.value?.[search[key]?.value?.length - 1] === DEFAULT
-                                      ? ''
-                                      : search[key]?.value?.[search[key]?.value?.length - 1] || ''
-                                  }
-                                  onChange={(value) => handleChange(filter.type, key, value)}
-                                />
-                              </div>
-                            )}
+              <div className={style.section}>
+                <h6 className={style.subtitle}>{t('filters.price.0')}</h6>
+                <div
+                  className={style.wrapper}
+                  style={{
+                    gridTemplateColumns: 'repeat(2, 1fr)',
+                  }}
+                >
+                  <Field
+                    type={"number"}
+                    placeholder={t('from')}
+                    data={search.price_from?.value[0] !== DEFAULT ? search.price_from?.value[0] : ''}
+                    onChange={(value) => handleChange('field', 'price_from', value)}
+                  />
+                  <Field
+                    type={"number"}
+                    placeholder={t('to')}
+                    data={search.price_to?.value[0] !== DEFAULT ? search.price_to?.value[0] : ''}
+                    onChange={(value) => handleChange('field', 'price_to', value)}
+                  />
+                </div>
+              </div>
 
-                            {filter.type === "checkbox" && (
-                              <div className={style.list}>
-                                {
-                                  Object.entries(filter.options).map(([optionKey, optionValue]) => (
-                                    <Checkbox
-                                      key={optionKey}
-                                      placeholder={optionKey === DEFAULT ? t('all') : t(`filters.${key}.${optionKey}`)}
-                                      data={search[key]?.value?.includes(optionKey) ? ACTIVE : DEFAULT}
-                                      onChange={() => handleChange(filter.type, key, optionKey)}
-                                    />
-                                  ))
-                                }
-                              </div>
-                            )}
+              <div className={style.section}>
+                <Checkbox
+                  placeholder={t('filters.vat_reclaimable.0')}
+                  data={search.vat_reclaimable?.value[0]}
+                  onChange={(value) => handleChange('select', 'vat_reclaimable', value)}
+                />
+              </div>
+              <div className={style.section}>
+                <Checkbox
+                  placeholder={t('filters.discount.0')}
+                  data={search.discount?.value[0]}
+                  onChange={(value) => handleChange('select', 'discount', value)}
+                />
+              </div>
 
-                            {filter.type === "color" && (
-                              <div className={style.colors}>
-                                {
-                                  Object.entries(filter.options).map(([optionKey, optionValue]) => (
-                                    <button
-                                      key={optionKey}
-                                      type="button"
-                                      aria-label={t(`filters.${key}.${optionKey}`)}
-                                      style={{ backgroundColor: optionValue }}
-                                      title={optionKey === DEFAULT ? t('all') : t(`filters.${key}.${optionKey}`)}
-                                      className={
-                                        classNames(
-                                          style.color,
-                                          search[key]?.value?.includes(optionKey) && style.active
-                                        )
-                                      }
-                                      onClick={() => handleChange(filter.type, key, optionKey)}
-                                    />
-                                  ))
-                                }
-                              </div>
-                            )}
-                          </div>
-                        ))
-                      }
-                    </div>
-                  </div>
-                ))
-              }
+              <div className={style.section}>
+                <h6 className={style.subtitle}>{t('filters.category.0')}</h6>
+                <FiltersMultiSelect
+                  placeholder={'category'}
+                  options={filters.category.options}
+                  data={search.category}
+                  onChange={handleChange}
+                />
+              </div>
+
+              <div className={style.section}>
+                <h6 className={style.subtitle}>{t('filters.vehicle_type.0')}</h6>
+                <FiltersMultiSelect
+                  placeholder={'vehicle_type'}
+                  options={filters.vehicle_type.options}
+                  data={search.vehicle_type}
+                  onChange={handleChange}
+                />
+              </div>
+
+              <div className={style.section}>
+                <h6 className={style.subtitle}>{t('filters.mileage.0')}</h6>
+                <div
+                  className={style.wrapper}
+                  style={{
+                    gridTemplateColumns: 'repeat(2, 1fr)',
+                  }}
+                >
+                  <Field
+                    type={"number"}
+                    placeholder={t('from')}
+                    data={search.mileage_from?.value[0] !== DEFAULT ? search.mileage_from?.value[0] : ''}
+                    onChange={(value) => handleChange('field', 'mileage_from', value)}
+                  />
+                  <Field
+                    type={"number"}
+                    placeholder={t('to')}
+                    data={search.mileage_to?.value[0] !== DEFAULT ? search.mileage_to?.value[0] : ''}
+                    onChange={(value) => handleChange('field', 'mileage_to', value)}
+                  />
+                </div>
+              </div>
+
+              <div className={style.section}>
+                <h6 className={style.subtitle}>{t('filters.year.0')}</h6>
+                <div
+                  className={style.wrapper}
+                  style={{
+                    gridTemplateColumns: 'repeat(2, 1fr)',
+                  }}
+                >
+                  <Select
+                    id={'select_year_from'}
+                    options={
+                      getYears().map(year => ({
+                        value: year === DEFAULT ? DEFAULT : year,
+                        label: year === DEFAULT ? t('from') : year,
+                      }))
+                    }
+                    data={search.year_from?.value[0] || DEFAULT}
+                    onChange={(value) => handleChange('select', 'year_from', value)}
+                  />
+                  <Select
+                    id={'select_year_to'}
+                    options={
+                      getYears().map(year => ({
+                        value: year === DEFAULT ? DEFAULT : year,
+                        label: year === DEFAULT ? t('to') : year,
+                      }))
+                    }
+                    data={search.year_to?.value[0] || DEFAULT}
+                    onChange={(value) => handleChange('select', 'year_to', value)}
+                  />
+                </div>
+              </div>
+
+              <div className={style.section}>
+                <h6 className={style.subtitle}>{t('filters.fuel_type.0')}</h6>
+                <FiltersMultiSelect
+                  placeholder={'fuel_type'}
+                  options={filters.fuel_type.options}
+                  data={search.fuel_type}
+                  onChange={handleChange}
+                />
+              </div>
+
+              <div className={style.section}>
+                <h6 className={style.subtitle}>{t('filters.transmission.0')}</h6>
+                <FiltersMultiSelect
+                  placeholder={'transmission'}
+                  options={filters.transmission.options}
+                  data={search.transmission}
+                  onChange={handleChange}
+                />
+              </div>
+
+              <div className={style.section}>
+                <h6 className={style.subtitle}>{t('filters.eco.0')}</h6>
+                <FiltersMultiSelect
+                  placeholder={'eco'}
+                  options={filters.eco.options}
+                  data={search.eco}
+                  onChange={handleChange}
+                />
+              </div>
+
+              <div className={style.section}>
+                <h6 className={style.subtitle}>{t('filters.color.0')}</h6>
+                <FiltersColorSelect
+                  placeholder={'color'}
+                  options={filters.color.options}
+                  data={search.color}
+                  onChange={handleChange}
+                />
+              </div>
             </>
           }
 
           {
             active === 1 &&
-            <SavedCard isExists={true} />
+            <Saved 
+              filtersProps={filtersProps} 
+              setActive={setActive}
+            />
           }
 
           {
             active === 2 &&
-            <SavedCard isExists={false} />
+            <History 
+              filtersProps={filtersProps} 
+              setActive={setActive}
+            />
           }
         </div>
         {

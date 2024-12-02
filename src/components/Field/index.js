@@ -67,8 +67,8 @@ const Field = ({
               >
                 <Icon
                   iconName={'xmark'}
-                  width={16}
-                  height={16}
+                  width={12}
+                  height={12}
                 />
               </button>
       }

@@ -1,6 +1,8 @@
 import { useTranslations } from 'next-intl'
 import { useRef, useState } from 'react'
 
+import { DEFAULT } from '@/constant/config'
+
 import Select from 'react-select'
 
 import './default.scss'
@@ -38,7 +40,7 @@ const CustomSelect = ({
         instanceId={id}
         placeholder={placeholder || t('all')}
         options={search}
-        value={selectedOption || "0"}
+        value={selectedOption || DEFAULT}
         onChange={handleSelectChange}
         onInputChange={handleSearch}
         className="react-select-container"

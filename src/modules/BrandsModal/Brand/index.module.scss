@@ -3,6 +3,7 @@
 .block {
   @include flex(center, center);
   @include size(rem(48px));
+  @include transition;
 
   position: relative;
   gap: var(--gap-16);

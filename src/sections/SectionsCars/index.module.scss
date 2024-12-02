@@ -1,13 +1,12 @@
 @import '@/scss/config';
 
 .block {
-  @include make-spacer(pb, var(--gap-16));
-
+  @include make-spacer(py, var(--gap-16));
+  
   position: relative;
+  min-height: 100vh;
 
   @include media-breakpoint-up(lg) {
-    @include make-spacer(py, var(--gap-32));
-
     display: grid;
     grid-template-columns: rem(320px) 1fr;
     align-items: flex-start;
@@ -25,6 +24,8 @@
 .meta {
   display: grid;
   gap: var(--gap-16);
+  position: relative;
+  z-index: $z-index-3;
 
   @include media-breakpoint-up(lg) {
     grid-template-columns: repeat(2, 1fr);
@@ -90,9 +91,10 @@
   background-color: var(--color-secondary);
   height: rem(32px);
   color: var(--color-primary-hover);
-  font-size: rem(14px);
+  font-size: rem(13px);
   font-weight: var(--typography-medium);
   white-space: nowrap;
+  text-transform: capitalize;
 
   &.gold {
     background: var(--gradient-gold);

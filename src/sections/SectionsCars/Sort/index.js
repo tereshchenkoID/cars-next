@@ -1,22 +1,23 @@
 import { useState, useRef } from 'react'
 import { useTranslations } from 'next-intl'
-import { useSelector, useDispatch } from 'react-redux'
-import { DEFAULT } from '@/constant/config'
-
-import { useOutsideClick } from '@/hooks/useOutsideClick'
-import { setSearch } from '@/store/actions/searchAction'
 
 import classNames from 'classnames'
+
+import { useOutsideClick } from '@/hooks/useOutsideClick'
 
 import Icon from '@/components/Icon'
 
 import style from './index.module.scss'
 
-const Sort = ({ pagination, handleLoad }) => {
+const Sort = ({ filtersProps }) => {
   const t = useTranslations()
-  const dispatch = useDispatch()
-  const search = useSelector((state) => state.search)
-  const filters = useSelector((state) => state.filters)
+  const {
+    handleChange,
+    pagination,
+    filters,
+    search,
+  } = filtersProps
+
   const active = search.sort?.value[0]
   const [show, setShow] = useState(false)
 
@@ -28,28 +29,6 @@ const Sort = ({ pagination, handleLoad }) => {
     () => setShow(null),
     { buttonRef }
   )
-
-  const handleChange = (value) => {
-    let a = JSON.parse(JSON.stringify(search))
-    a = {
-      ...a,
-      sort: {
-        value: [
-          value
-        ]
-      },
-      page: {
-        value: [
-          1
-        ]
-      }
-    }
-
-    dispatch(setSearch(a))
-
-    handleLoad(0)
-    setShow(false)
-  }
 
   return (
     <div className={style.block}>
@@ -99,7 +78,10 @@ const Sort = ({ pagination, handleLoad }) => {
                           active == key.toString() && style.active
                         )
                       }
-                      onClick={() => handleChange(key)}
+                      onClick={() => {
+                        handleChange('string', 'sort', key, true)
+                        setShow(false)
+                      }}
                     >
                       {t(`filters.sort.${key}`)}
                     </li>

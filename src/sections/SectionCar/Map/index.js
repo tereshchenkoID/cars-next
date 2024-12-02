@@ -24,6 +24,7 @@ import { getFormatNumber } from '@/helpers/getFormatNumber'
 import Link from 'next/link'
 import Image from 'next/image'
 import Icon from '@/components/Icon'
+import Loading from '@/components/Loading'
 import Tags from '@/modules/Tags'
 
 import style from './index.module.scss'
@@ -33,7 +34,7 @@ const Map = ({ data, next }) => {
   const auth = useSelector((state) => state.auth)
   const [cars, setCars] = useState([data, next])
   const [active, setActive] = useState(next.id)
-  const [loading, setLoading] = useState(true)
+  const [loading, setLoading] = useState(false)
 
   const handleClick = (index) => {
     setActive(index)
@@ -51,12 +52,16 @@ const Map = ({ data, next }) => {
   }
 
   const handleLoad = (index) => {
+    setLoading(true)
+    
     getData(`item/${index || active}`).then(json => {
       setCars((prevState) => [
         prevState[0],
         json
       ])
-      setLoading(false)
+      setTimeout(() => {
+        setLoading(false)
+      }, 1000)
     })
   }
 
@@ -205,6 +210,10 @@ const Map = ({ data, next }) => {
                 aria-label={el.meta.name}
                 title={el.meta.name}
               >
+                {
+                  (idx === 1 && loading) &&
+                  <Loading classes={[style.loading]}/>
+                }
                 <p className={style.status}>{t(`notification.${idx === 0 ? 'chosen_car' : 'compared_car'}`)}</p>
                 <Image
                   src={el.images[0]}

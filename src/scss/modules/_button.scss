@@ -1,5 +1,6 @@
 @mixin button {
 	--icon-size: 24px;
+	--button-height: 48px;
 
 	@include make-spacer(px, var(--gap-12));
 
@@ -7,7 +8,7 @@
 	position: relative;
 	align-items: center;
 	justify-content: center;
-	height: rem(48px);
+	height: var(--button-height);
 	gap: var(--gap-12);
 	border-radius: var(--border-radius-4);
 	box-shadow: var(--box-shadow-16-24);
@@ -95,30 +96,31 @@
 
 	&.xs {
 		--icon-size: 16px;
+		--button-height: 32px;
 
-		height: rem(32px);
 		gap: var(--gap-6);
 		font-size: rem(12px);
 	}
 
 	&.sm {
 		--icon-size: 20px;
+		--button-height: 38px;
 
-		height: rem(38px);
 		gap: var(--gap-8);
 		font-size: rem(14px);
 	}
 
 	&.lg {
 		--icon-size: 28px;
+		--button-height: 56px;
 
-		height: rem(56px);
 		font-size: rem(16px);
 	}
 
 	&.square {
 		@include make-spacer(p, 0);
 
+		width: var(--button-height);
 		aspect-ratio: 1 / 1;
 	}
 

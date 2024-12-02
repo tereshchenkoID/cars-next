@@ -1,0 +1,111 @@
+@import '@/scss/config';
+
+.block {
+  @include size(100%, rem(40px));
+
+  display: grid;
+  position: relative;
+  cursor: pointer;
+
+  &.disabled {
+    opacity: 0.5;
+    pointer-events: none;
+    user-select: none;
+  }
+
+  &.active {
+
+    .input {
+      border-color: var(--color-primary);
+      box-shadow: 0 0 0 4px rgba(62, 71, 221, 0.16);
+    }
+
+    .dropdown {
+      display: block;
+    }
+  }
+
+  @include hover {
+
+    &:hover {
+
+      .input {
+        border-color: var(--color-primary);
+      }
+    }
+  }
+}
+
+.input {
+  @include flex($align-items: center);
+  @include make-spacer(pl, var(--gap-12));
+  @include transition(border-color);
+  @include size(100%);
+  
+  border: rem(1px) solid var(--color-grey-400);
+  font-size: rem(13px);
+  overflow: hidden;
+  border-radius: var(--border-radius-4);
+}
+
+.list {
+  overflow: hidden;
+  width: calc(100% - rem(70px));
+  white-space: nowrap;
+  color: var(--color-primary);
+  text-overflow: ellipsis;
+}
+
+.close,
+.icon {
+  @include flex(center, center);
+  @include size(rem(32px), 100%);
+
+  opacity: 0.7;
+}
+
+.indicators {
+  @include flex;
+
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.hr {
+  @include size(rem(1px), rem(22px));
+
+  align-self: center;
+  background-color: var(--color-grey-400);
+}
+
+.dropdown {
+  display: none;
+  position: absolute;
+  top: calc(100% + var(--gap-8));
+  left: 0;
+  right: 0;
+  transform: translateX(0);
+  border-radius: var(--border-radius-4);
+  border-width: rem(1px);
+  border-style: solid;
+  background-color: var(--color-white);
+  z-index: $z-index-1;
+  overflow-y: auto;
+  max-height: rem(150px);
+}
+
+.item {
+  @include make-spacer(p, var(--gap-8));
+  @include transition;
+
+  cursor: pointer;
+
+  @include hover {
+
+    &:hover {
+      background-color: var(--color-grey-200);
+    }
+  }
+}

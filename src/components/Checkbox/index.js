@@ -1,5 +1,7 @@
 import classNames from 'classnames'
 
+import { ACTIVE, DEFAULT } from '@/constant/config'
+
 import Image from 'next/image'
 
 import style from './index.module.scss'
@@ -25,9 +27,9 @@ const Checkbox = ({
       <input
         type={'checkbox'}
         className={style.input}
-        checked={data === "1"}
+        checked={data === ACTIVE}
         onChange={() => {
-          onChange(data === "1" ? "0" : "1")
+          onChange(data === ACTIVE ? DEFAULT : ACTIVE)
         }}
       />
       <span className={style.item} />

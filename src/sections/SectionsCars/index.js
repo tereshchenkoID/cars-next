@@ -1,127 +1,64 @@
 "use client"
 
 import { useTranslations } from 'next-intl'
-import { useSearchParams, useRouter } from 'next/navigation'
-import { useState } from 'react'
-import { useSelector, useDispatch } from 'react-redux'
+import { useState, useEffect } from 'react'
+import { useModal } from '@/context/ModalContext'
 
 import classNames from 'classnames'
 
-import { postData } from '@/helpers/api'
-import { getSearch } from '@/helpers/getSearch'
-import { setSearch } from '@/store/actions/searchAction'
-import { setToastify } from '@/store/actions/toastifyAction'
+import { DEFAULT, TYPES } from '@/constant/config'
 
-import { DEFAULT, NAVIGATION, TYPES } from '@/constant/config'
+import useFilters from '@/hooks/useFilters'
+import { overflowBody } from '@/helpers/overflowBody'
 
 import Container from '@/components/Container'
 import Icon from '@/components/Icon'
+import BrandsModal from '@/modules/BrandsModal'
+import HistoryModal from '@/modules/HistoryModal'
 import Pagination from './Pagination'
 import Filters from './Filters'
 import Card from './Card'
 import Sort from './Sort'
+import Skeleton from './Skeleton'
 
 import style from './index.module.scss'
 
 const SectionsCars = ({ initialData }) => {
   const t = useTranslations()
-  const dispatch = useDispatch()
-  const router = useRouter()
-  const searchParams = useSearchParams()
-  const filters = useSelector((state) => state.filters)
-  const search = useSelector((state) => state.search)
-  const [data, setData] = useState(initialData)
+  const filtersProps = useFilters(initialData)
+  const { showModal } = useModal()
+  const {
+    handleChange,
+    filters,
+    search,
+    data,
+    loading,
+    searchParams
+  } = filtersProps
+
   const [show, setShow] = useState(false)
-  const [pagination, setPagination] = useState({
-    page: initialData.page,
-    pages: initialData.pages,
-    quantity: initialData.quantity,
-    results: initialData.results,
-  })
+  const [showBrand, setShowBrands] = useState(false)
 
-  const handleLoad = (page) => {
-    let a = search
-    a = {
-      ...a,
-      page: {
-        value: [
-          page
-        ]
-      }
-    }
-
-    setShow(false)
-
-    const formData = new FormData()
-    // formData.append('data', JSON.stringify(search))
-    formData.append('data', JSON.stringify(a))
-    formData.append('page', page)
-
-    postData('filters/search/', formData).then(json => {
-      if (json) {
-        setData(json)
-        setPagination({
-          page: json.page,
-          pages: json.pages,
-          quantity: json.quantity,
-          results: json.results,
-        })
-      } else {
-        dispatch(
-          setToastify({
-            type: 'error',
-            text: json.error_message,
-          })
-        )
-      }
-    })
-  }
-
-  const handlePagination = (fieldName, fieldValue) => {
-    let a = search
-    a = {
-      ...a,
-      page: {
-        value: [
-          fieldValue === 1 ? "0" : fieldValue.toString()
-        ]
-      }
-    }
-
-    setPagination(prevPagination => ({
-      ...prevPagination,
-      [fieldName]: fieldValue,
-    }))
-
-    dispatch(setSearch(a))
-    handleLoad(fieldValue.toString())
-  }
-
-  const handlePrev = () => {
-    const prev = pagination.page > 0 ? pagination.page - 1 : 0
-    handlePagination('page', prev)
-  }
-
-  const handleNext = () => {
-    const next = pagination.page < pagination.pages ? pagination.page + 1 : pagination.pages
-    handlePagination('page', next)
-  }
-
-  const handleRemove = (type, key, value) => {
-    dispatch(setSearch(getSearch(JSON.parse(JSON.stringify(search)), type, key, TYPES.includes(type) ? value : DEFAULT)))
-
-    if (key === 'page') {
-      handlePagination('page', 0)
-    }
-  }
+  useEffect(() => {
+    overflowBody(showBrand)
+  }, [showBrand])
 
   return (
     <Container>
+      {
+        showBrand &&
+        <BrandsModal 
+          show={showBrand}
+          setShow={setShowBrands}
+        />
+      }
       <div className={style.block}>
         <Filters
           show={show}
           setShow={setShow}
-          handleLoad={() => handleLoad(0)}
+          filtersProps={filtersProps}
+          showBrand={showBrand}
+          setShowBrands={setShowBrands}
         />
         <div className={style.content}>
           <div className={style.searches}>
@@ -157,6 +94,9 @@ const SectionsCars = ({ initialData }) => {
                   }
                   aria-label={t('save_search')}
                   title={t('save_search')}
+                  onClick={() => {
+                    showModal(<HistoryModal />, t('save_search'))
+                  }}
                 >
                   <Icon
                     iconName="bell"
@@ -176,17 +116,25 @@ const SectionsCars = ({ initialData }) => {
                           className={style.search}
                           aria-label={key}
                           title={t('remove')}
-                          onClick={() => handleRemove(filters[key].type, key, el)}
+                          onClick={() => handleChange(filters[key].type, key, TYPES.includes(filters[key].type) ? el : DEFAULT, true)}
                         >
                           <span>
                             {
-                              key.indexOf('to') !== -1 || key.indexOf('from') !== -1
-                                ?
-                                <>{t(`filters.${key.split('_')[0]}.0`)} {t(key.split('_')[1])}</>
-                                :
-                                t(`filters.${key}.0`)
+                              (key.indexOf('_to') !== -1 || key.indexOf('_from') !== -1) &&
+                              <>{t(`filters.${key.split('_')[0]}.0`)} {t(key.split('_')[1])}: </>
                             }
-                            : <strong>{filters[key].options?.[el] || el}</strong>
+                            {
+                              key === 'page' &&  <>{t(`filters.${key}.0`)}: </>
+                            }
+                            <strong>
+                              {
+                                (key === 'vat_reclaimable' || key === 'discount') 
+                                  ?
+                                    <>{t(`filters.${key}.0`)}</>
+                                  :
+                                    <>{filters[key].options?.[el] || el}</>
+                              }
+                            </strong>
                           </span>
                           <Icon
                             iconName="xmark"
@@ -207,17 +155,10 @@ const SectionsCars = ({ initialData }) => {
           {/* <pre className={style.pre}>{JSON.stringify(search, null, 2)}</pre> */}
 
           <div className={style.meta}>
-            <Sort
-              pagination={pagination}
-              handleLoad={() => handleLoad()}
-            />
+            <Sort filtersProps={filtersProps} />
             {
               data?.data?.length > 0 &&
-              <Pagination
-                pagination={pagination}
-                handlePrev={() => handlePrev()}
-                handleNext={() => handleNext()}
-              />
+              <Pagination filtersProps={filtersProps} />
             }
           </div>
           {
@@ -227,36 +168,25 @@ const SectionsCars = ({ initialData }) => {
                   <div className={style.cards}>
                     {
                       data?.data?.map((el, idx) =>
-                        <Card
-                          key={idx}
-                          data={el}
-                        />
+                        loading 
+                        ?
+                          <Skeleton key={idx} />
+                        :
+                          <Card
+                            key={idx}
+                            data={el}
+                          />
                       )
                     }
                   </div>
-                  <Pagination
-                    pagination={pagination}
-                    handlePrev={() => handlePrev()}
-                    handleNext={() => handleNext()}
-                  />
+                  <Pagination filtersProps={filtersProps} />
                 </>
               :
                 <div className={style.empty}>
                   <h6>Whoops!</h6>
                   <p>None of our cars matches your search parameters.</p>
-                  {/* <button
-                    type={"button"}
-                    title={t('remove')}
-                    aria-label={t('remove')}
-                    onClick={() => {
-                      router.push(NAVIGATION.buy.link, { scroll: false })
-                    }}
-                  >
-                    Cancel filters
-                  </button> */}
                 </div>
           }
-
         </div>
       </div>
     </Container>

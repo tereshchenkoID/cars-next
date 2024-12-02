@@ -25,10 +25,10 @@
 }
 
 .close {
-  position: absolute;
+  position: absolute!important;
   top: 0;
   right: 0;
-  transform: translate(50%, -50%)
+  transform: translate(50%, -50%);
 }
 
 .title {

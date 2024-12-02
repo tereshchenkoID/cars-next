@@ -1,22 +1,19 @@
-import { useState, useEffect } from 'react'
+import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
 import { ACTIVE, DEFAULT } from '@/constant/config'
 
-import { overflowBody } from '@/helpers/overflowBody'
 import { setSearch } from '@/store/actions/searchAction'
 
 import Toggle from './Toggle'
-import Modal from './Modal'
 import List from './List'
 
 import style from './index.module.scss'
 
-const Brands = ({ isWide = false }) => {
+const Brands = ({ show, setShow, isWide = false }) => {
   const dispatch = useDispatch()
   const brands = useSelector((state) => state.brands)
   const search = useSelector((state) => state.search)
-  const [show, setShow] = useState(false)
 
   useEffect(() => {
     const updatedFilters = JSON.parse(JSON.stringify(search))
@@ -46,10 +43,6 @@ const Brands = ({ isWide = false }) => {
     dispatch(setSearch(updatedFilters))
   }, [brands])
 
-  useEffect(() => {
-    overflowBody(show)
-  }, [show])
-
   return (
     <div className={style.block}>
       <List
@@ -62,13 +55,6 @@ const Brands = ({ isWide = false }) => {
         setShow={setShow}
         isWide={isWide}
       />
-      {
-        show &&
-        <Modal
-          show={show}
-          setShow={setShow}
-        />
-      }
     </div>
   )
 }

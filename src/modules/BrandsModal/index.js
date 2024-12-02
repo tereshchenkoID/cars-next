@@ -10,11 +10,11 @@ import Image from 'next/image'
 import Button from '@/components/Button'
 import Field from '@/components/Field'
 import Checkbox from '@/components/Checkbox'
-import Brand from '../Brand'
+import Brand from './Brand'
 
 import style from './index.module.scss'
 
-const Modal = ({ show, setShow }) => {
+const BrandsModal = ({ show, setShow }) => {
   const t = useTranslations()
   const dispatch = useDispatch()
   const brands = useSelector((state) => state.brands)
@@ -244,4 +244,4 @@ const Modal = ({ show, setShow }) => {
   )
 }
 
-export default Modal
+export default BrandsModal

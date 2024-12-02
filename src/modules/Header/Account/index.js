@@ -5,7 +5,7 @@ import { useOutsideClick } from '@/hooks/useOutsideClick'
 import { useModal } from '@/context/ModalContext'
 import { useSelector } from 'react-redux'
 
-import { NAVIGATION, ROUTES_USER } from '@/constant/config'
+import { ROUTES_USER } from '@/constant/config'
 
 import classNames from 'classnames'
 

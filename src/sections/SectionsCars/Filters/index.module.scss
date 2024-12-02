@@ -17,10 +17,12 @@
   max-height: 100%;
 
   @include media-breakpoint-up(lg) {
-    position: static;
+    position: sticky;
+    top: calc(var(--header-height) + var(--gap-16));
+    height: calc(100vh - var(--header-height) - var(--gap-32));
     border-radius: var(--border-radius-8);
-    z-index: unset;
     transform: none;
+    z-index: $z-index-9;
   }
   
   &.active {
@@ -36,14 +38,8 @@
 }
 
 .section,
-.wrapper,
-.list {
-  display: grid;
-}
-
-.section,
 .wrapper {
-  gap: var(--gap-8);
+  display: grid;
 }
 
 .title {
@@ -69,14 +65,14 @@
 
 .content {
   @include make-spacer(pb, var(--gap-8));
-
-  display: grid;
-  gap: var(--gap-8);
+  @include flex($direction: column);
+  
+  gap: var(--gap-16);
   flex-grow: 1;
   overflow-y: auto;
 
   @include media-breakpoint-up(lg) {
-    overflow-y: initial;
+    @include scroll;
   }
 }
 
@@ -88,7 +84,7 @@
   height: rem(68px);
 
   @include media-breakpoint-up(lg) {
-    @include make-spacer(mt, var(--gap-16));
+    @include make-spacer(mt, var(--gap-8));
   }
 }
 
@@ -136,70 +132,15 @@
   @include size(rem(24px));
 }
 
-.subtitle {
-  font-size: rem(13px);
-  text-transform: uppercase;
-}
-
-.list {
-  gap: var(--gap-12);
+.wrapper {
+  gap: var(--gap-8);
 }
 
 .section {
-  @include make-spacer(py, var(--gap-8));
+  gap: var(--gap-4);
 }
 
-.colors {
-  @include flex($align-items: center, $wrap: wrap);
-
-  gap: var(--gap-10);
-}
-
-.color {
-  @include transition;
-  @include size(rem(20px));
-
-  position: relative;
-  border-radius: 50%;
-  overflow: hidden;
-  overflow: visible;
-  opacity: 0.8;
-
-  &::before,
-  &::after {
-    position: absolute;
-    border-radius: 50%;
-    content: '';
-  }
-
-  &::before {
-    @include transition;
-
-    inset: rem(-3px);
-    background-color: var(--color-white);
-    border: rem(1px) solid var(--color-primary);
-    opacity: 0;
-    content: '';
-  }
-
-  &::after {
-    position: absolute;
-    inset: 0;
-    background-color: inherit;
-    border: rem(1px) solid var(--color-grey-400);
-  }
-
-  @include hover {
-
-    &:hover {
-      opacity: 1;
-    }
-  }
-
-  &.active {
-
-    &::before {
-      opacity: 1;
-    }
-  }
+.subtitle {
+  font-size: rem(12px);
+  text-transform: uppercase;
 }

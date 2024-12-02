@@ -1,0 +1,11 @@
+@import '@/scss/config';
+
+.block {
+  display: grid;
+  gap: var(--gap-16);
+  font-size: rem(14px);
+
+  @include media-breakpoint-up(md) {
+    min-width: rem(488px);
+  }
+}

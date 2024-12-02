@@ -16,11 +16,6 @@
   @include flex($direction: column);
 }
 
-.subtitle,
-.section {
-  @include make-spacer(mb, var(--gap-16));
-}
-
 .header {
   align-items: flex-start;
   gap: var(--gap-16);
@@ -46,11 +41,14 @@
 }
 
 .subtitle {
+  @include make-spacer(mb, var(--gap-8));
+
   font-size: rem(12px);
   text-transform: uppercase;
 }
 
 .section {
+  @include make-spacer(mb, var(--gap-16));
   // border: 1px solid red;
 
   &:last-child {
@@ -82,10 +80,16 @@
 }
 
 .list {
-  @include flex($align-items: center, $wrap: wrap);
+  @include flex($direction: column);
 
   column-gap: var(--gap-32);
   row-gap: var(--gap-16);
+
+  @include media-breakpoint-up(lg) {
+    flex-direction: row;
+    align-items: center;
+    flex-wrap: wrap;
+  }
 }
 
 .colors {

@@ -27,7 +27,7 @@ const poppins = Poppins({
   display: 'swap',
 })
 
-async function fetchInitialData() {
+async function fetchInitialData(query) {
   try {
     const [settings, filters, brands] = await Promise.all([
       fetchData('settings/'),

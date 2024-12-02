@@ -5,93 +5,97 @@
   font-weight: var(--typography-medium);
   cursor: pointer;
 
-  .react-select__control {
-    @include make-spacer(pl, var(--gap-12));
+  .react-select {
 
-    height: 100%;
-    border-radius: var(--border-radius-4);
-    box-shadow: none;
-    cursor: pointer;
-    border: rem(1px) solid var(--color-grey-400);
+    &__control {
+      @include make-spacer(pl, var(--gap-12));
 
-    @include hover {
+      height: 100%;
+      border-radius: var(--border-radius-4);
+      box-shadow: none;
+      cursor: pointer;
+      border: rem(1px) solid var(--color-grey-400);
 
-      &:hover {
+      @include hover {
+
+        &:hover {
+          border-color: var(--color-primary);
+        }
+      }
+
+      &--is-focused {
         border-color: var(--color-primary);
+        box-shadow: 0 0 0 4px rgba(62, 71, 221, 0.16);
       }
     }
 
-    &--is-focused {
-      border-color: var(--color-primary);
-      box-shadow: 0 0 0 4px rgba(62, 71, 221, 0.16);
+    &__placeholder {
+      color: var(--color-text)
     }
-  }
 
-  .react-select__placeholder {
-    color: var(--color-text)
-  }
+    &__value-container {
+      @include make-spacer(p, 0);
+    }
 
-  .react-select__value-container {
-    @include make-spacer(p, 0);
-  }
+    &__input-container {
+      @include make-spacer(m, 0);
+    }
 
-  .react-select__input-container {
-    @include make-spacer(m, 0);
-  }
+    &__single-value {
+      font-size: rem(13px);
+    }
 
-  .react-select__single-value {
-    font-size: rem(14px);
-  }
+    &__indicator-separator {
+      display: none;
+    }
 
-  .react-select__indicator-separator {
-    display: none;
-  }
+    &__indicator {
+      @include flex(center, center);
+      @include size(rem(32px), 100%);
 
-  .react-select__indicator {
-    @include flex(center, center);
-    @include size(rem(40px), 100%);
+      color: var(--color-text)!important;
+      opacity: 0.5;
+    }
 
-    color: var(--color-text)!important;
-    opacity: 0.5;
-  }
+    &__clear-indicator {
+      display: none;
+    }
 
-  .react-select__clear-indicator {
-    display: none;
-  }
+    &__menu {
+      overflow: hidden;
+      border-radius: var(--border-radius-4);
+      border: rem(1px) solid var(--color-grey-200);
+      box-shadow: unset;
+      max-height: rem(150px);
+      z-index: $z-index-2;
+    }
 
-  .react-select__menu {
-    overflow: hidden;
-    border-radius: var(--border-radius-4);
-    border: 1px solid var(--color-grey-400);
-    box-shadow: unset;
-    max-height: rem(120px);
-    z-index: $z-index-2;
-  }
+    &__menu-list {
+      @include make-spacer(py, 0);
+    }
 
-  .react-select__menu-list {
-    @include make-spacer(py, 0);
-  }
+    &__option {
+      @include transition;
+      @include make-spacer(p, var(--gap-8));
 
-  .react-select__option {
-    @include transition;
-    @include make-spacer(px, var(--gap-12));
+      cursor: pointer;
+      font-size: rem(14px);
 
-    cursor: pointer;
+      @include hover {
 
-    @include hover {
-
-      &:hover {
-				background-color: var(--color-grey-300);
+        &:hover {
+          background-color: var(--color-grey-200);
+        }
       }
-    }
 
-    &--is-focused {
-      background-color: var(--color-grey-300);
-    }
+      &--is-focused {
+        background-color: var(--color-grey-300);
+      }
 
-    &--is-selected {
-      background-color: var(--color-grey-200);
-      color: var(--color-text);
+      &--is-selected {
+        background-color: var(--color-grey-100);
+        color: var(--color-text);
+      }
     }
   }
 }

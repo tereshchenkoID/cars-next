@@ -1,0 +1,72 @@
+@import '@/scss/config';
+
+.block {
+  display: grid;
+  position: relative;
+  border-radius: var(--border-radius-8);
+  box-shadow: var(--box-shadow-4-8);
+  background-color: var(--color-white);
+  overflow: hidden;
+
+  @include media-breakpoint-up(lg) {
+    grid-template-columns: rem(277px) 1fr;
+  }
+}
+
+.image,
+.content {
+  background: linear-gradient(-90deg, rgb(239, 239, 239) 0%, rgb(252, 252, 252) 50%, rgb(239, 239, 239) 100%) 0% 0% / 400% 400%;
+  animation: 2s ease-in-out 0s infinite normal none running pulse;
+}
+
+.image {
+  height: rem(207px);
+}
+
+.body {
+  @include make-spacer(p, var(--gap-16));
+
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: 1fr rem(1px) 1fr rem(1px) 1fr;
+  grid-gap: var(--gap-12);  
+}
+
+.row {
+  @include flex($direction: column);
+
+  grid-gap: var(--gap-6);
+
+  &.left {
+    align-items: flex-start;
+  }
+
+  &.right {
+    align-items: flex-end;
+  }
+}
+
+.hr {
+  @include size(100%, rem(1px));
+  
+  background: repeating-linear-gradient(45deg, rgb(215, 225, 239), rgb(215, 225, 239) 9px, transparent 3px, transparent 18px);
+}
+
+.content {
+  display: inline-flex;
+  height: rem(36px);
+
+  @include media-breakpoint-up(lg) {
+    height: rem(16px);
+  }
+}
+
+@keyframes pulse {
+  0% {
+    background-position: 0% 0%;
+  }
+
+  100% {
+    background-position: -135% 0%;
+  }
+}

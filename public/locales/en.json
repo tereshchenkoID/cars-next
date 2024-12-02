@@ -40,8 +40,12 @@
     "chosen_car": "Your chosen car",
     "compared_car": "Compared car",
     "similar_vehicle": "Compared with more than [cars] similar vehicles offered in recent months.",
-    "vehicle_characteristics": "We take in account up to [count] vehicle characteristics."
+    "vehicle_characteristics": "We take in account up to [count] vehicle characteristics.",
+    "saved_filters": "Here you'll see saved filters and new offer notifications.",
+    "delete_search": "Are you sure you wish to delete"
   },
+  "delete_search": "Delete search",
+  "dont_delete": "Don’t delete",
   "my_profile": "My profile",
   "contact_information": "Contact information",
   "billing_information": "Billing information",
@@ -134,6 +138,10 @@
   "high_price": "High price",
   "vin_code": "VIN code",
   "engine_capacity": "Engine capacity",
+  "engine": "Engine",
+  "basic_info": "Basic information",
+  "equipment": "Equipment",
+  "detailed_search": "Detailed search",
   "discount": "Discount",
   "change": "Change",
   "day": "Day",
@@ -307,6 +315,12 @@
     "page": {
       "0": "Page"
     },
+    "vat_reclaimable": {
+      "0": "VAT deduction"
+    },
+    "discount": {
+      "0": "Discounted cars"
+    },
     "sort": {
       "0": "Recommended",
       "1": "From cheap to expensive",
@@ -343,7 +357,7 @@
       "0": "Price"
     },
     "mileage": {
-      "0": "mileage"
+      "0": "Mileage"
     },
     "fuel_type": {
       "0": "Fuel",
@@ -353,6 +367,7 @@
       "4": "LPG",
       "5": "CNG",
       "6": "Hybrid",
+      "7": "Other fuel type",
       "8": "Hydrogen"
     },
     "eco": {

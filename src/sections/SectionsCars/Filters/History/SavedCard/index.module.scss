@@ -6,6 +6,7 @@
 
   display: grid;
   gap: var(--gap-8);
+  flex-shrink: 0;
   border-radius: var(--border-radius-8);
   border-style: solid;
   border-width: rem(1px);
@@ -16,13 +17,12 @@
 
     &:hover {
       border-color: var(--color-primary);
+
+      .title {
+        color: var(--color-primary);
+      }
     }
   }
-}
-
-.options,
-.tags {
-  @include flex($align-items: center, $wrap: wrap);
 }
 
 .head {
@@ -34,6 +34,8 @@
 }
 
 .tags {
+  @include flex($align-items: center, $wrap: wrap);
+
   gap: var(--gap-6);
 }
 
@@ -43,10 +45,12 @@
   @include make-spacer(py, var(--gap-2));
 
   border-radius: var(--border-radius-4);
+  text-transform: capitalize;
   font-size: rem(12px);
   font-weight: var(--typography-bold);
   white-space: nowrap;
   background-color: var(--color-secondary);
   color: var(--color-primary-hover);
   height: rem(24px);
+  gap: var(--gap-4);
 }

@@ -1,0 +1,7 @@
+@import '@/scss/config';
+
+.block {
+  @include flex($direction: column);
+
+  gap: var(--gap-16);
+}

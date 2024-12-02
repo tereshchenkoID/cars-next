@@ -1,0 +1,24 @@
+@use 'rem-converter' as *;
+
+@mixin scroll {
+  overflow-y: auto;
+
+  &::-webkit-scrollbar {
+    width: rem(5px);
+  }
+
+  &::-webkit-scrollbar-corner {
+    background-color: var(--color-grey-300);
+  }
+
+  &::-webkit-scrollbar-thumb {
+    border: rem(1px) solid var(--color-grey-300);
+    background-color: var(--color-grey-300);
+    background-clip: content-box;
+  }
+
+  &::-webkit-scrollbar-track {
+    border: rem(1px) solid var(--color-grey-50);
+    background-color: var(--color-grey-50);
+  }
+}

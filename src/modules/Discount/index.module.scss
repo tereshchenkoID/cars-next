@@ -5,7 +5,7 @@
   @include make-spacer(py, var(--gap-2));
 
   gap: var(--gap-4);
-  background-color: var(--color-gold);
+  background: var(--gradient-gold);
   border-radius: var(--border-radius-4);
   width: fit-content;
   color: var(--color-white);

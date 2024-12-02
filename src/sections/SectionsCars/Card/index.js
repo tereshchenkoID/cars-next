@@ -1,5 +1,6 @@
 import { useTranslations } from 'next-intl'
 import { useSelector } from 'react-redux'
+import { useState } from 'react'
 
 import { NAVIGATION } from '@/constant/config'
 
@@ -14,6 +15,7 @@ import { Fancybox } from '@fancyapps/ui'
 import Link from 'next/link'
 import Image from 'next/image'
 import Icon from '@/components/Icon'
+import Loading from '@/components/Loading'
 import Tags from '@/modules/Tags'
 import Option from '@/modules/Option'
 import Discount from '@/modules/Discount'
@@ -23,22 +25,25 @@ import style from './index.module.scss'
 const Card = ({ data }) => {
   const t = useTranslations()
   const auth = useSelector((state) => state.auth)
+  const [image, setImage] = useState(false)
 
   return (
     <div className={style.block}>
       <div className={style.left}>
+        {!image && <Loading classes={style.loading} />}
         {
           data.images.length > 0 &&
           <>
-            <Swiper
+            {/* <Swiper
               className={style.slider}
               slidesPerView={1}
               pagination={{
                 dynamicBullets: true,
                 clickable: true,
               }}
+              lazy={true}
               navigation={true}
-              // mousewheel={true}
+              mousewheel={true}
               modules={[Pagination, Mousewheel, Navigation]}
             >
               {
@@ -52,11 +57,14 @@ const Card = ({ data }) => {
                       priority={idx === 0}
                       style={{ aspectRatio: 277 / 207 }}
                       alt={`${data.slug} ${idx}`}
+                      onLoad={() => {
+                        if (idx === 0) setImage(true)
+                      }}
                     />
                   </SwiperSlide>
                 )
               }
-            </Swiper>
+            </Swiper> */}
 
             <div
               className={style.count}
@@ -162,13 +170,6 @@ const Card = ({ data }) => {
         }
 
         <div className={style.footer}>
-          {
-            data.price_data.discount &&
-            <Discount
-              size={'sm'}
-              amount={getFormatPrice(auth?.account?.language?.code, auth?.account?.currency?.code, data.price_data.discount)}
-            />
-          }
           <div className={style.meta}>
             <h5>{getFormatPrice(auth?.account?.language?.code, auth?.account?.currency?.code, data?.price_data?.price)}</h5>
             <p className={style.vat}>
@@ -183,6 +184,15 @@ const Card = ({ data }) => {
           </div>
         </div>
       </div>
+      {
+        data.price_data.discount &&
+        <div className={style.discount}>
+          <Discount
+            size={'sm'}
+            amount={getFormatPrice(auth?.account?.language?.code, auth?.account?.currency?.code, data.price_data.discount)}
+          />
+        </div>
+      }
     </div>
   )
 }

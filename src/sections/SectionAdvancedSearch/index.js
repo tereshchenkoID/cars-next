@@ -1,107 +1,54 @@
 "use client"
 
 import { useTranslations } from 'next-intl'
-import { useSearchParams } from 'next/navigation'
-import { useRouter } from 'next/navigation'
-import { useEffect } from 'react'
-import { useSelector, useDispatch } from 'react-redux'
+import { useState } from 'react'
+
+import { DEFAULT, ACTIVE, NAVIGATION } from "@/constant/config"
 
 import classNames from 'classnames'
 
-import { DEFAULT, ACTIVE } from "@/constant/config"
+import useFilters from '@/hooks/useFilters'
+import { getYears } from '@/helpers/getYears'
 
-import { getSearch } from '@/helpers/getSearch'
-import { setBrands } from '@/store/actions/brandsAction'
-import { setSearch } from '@/store/actions/searchAction'
-
+import Reference from '@/components/Reference'
 import Container from "@/components/Container"
 import Checkbox from '@/components/Checkbox'
 import Field from '@/components/Field'
 import Button from '@/components/Button'
+import Select from '@/components/Select'
 import Brands from '@/modules/Brands'
+import BrandsModal from '@/modules/BrandsModal'
 
 import style from './index.module.scss'
 
-  // const generateTranslate = () => {
-  //   const a = {}
+// const generateTranslate = () => {
+//   const a = {}
 
-  //   options.map((el, idx) => {
-  //     let s = {
-  //       "0": el.name + " PT"
-  //     }
+//   options.map((el, idx) => {
+//     let s = {
+//       "0": el.name + " PT"
+//     }
 
-  //     el.options.map((el_o, idx_o) => {
-  //       s[el_o.id] = el_o.name + " PT"
-  //     })
+//     el.options.map((el_o, idx_o) => {
+//       s[el_o.id] = el_o.name + " PT"
+//     })
 
-  //     a[el.id] = s
-  //   })
+//     a[el.id] = s
+//   })
 
-  //   return a
-  // }
+//   return a
+// }
 
 const SectionAdvancedSearch = ({ options }) => {
   const t = useTranslations()
-  const dispatch = useDispatch()
-  const router = useRouter()
-  const searchParams = useSearchParams()
-  const filters = useSelector((state) => state.filters)
-  const search = useSelector((state) => state.search)
-  const brands = useSelector((state) => state.brands)
-
-  const generateSearchFromFilters = (filters, query) => {
-    const date = {}
-    const paramsObject = query ? Object.fromEntries(query.entries()) : {}
-    const makes = JSON.parse(JSON.stringify(brands))
-
-    if(query) {
-      for (const [key, value] of Object.entries(paramsObject)) {
-        if(key.indexOf("make") !== -1) {
-          const brandId = key.replace('make_', '')
-
-          date[key] = {
-            value: value.split(',')
-          }
-
-          makes.forEach((brand) => {
-            if (brand.id === brandId) {
-              brand.options.forEach((option) => {
-                option.selected = value.split(',').includes(option.id) ? ACTIVE : DEFAULT
-              })
-            }
-          })
-        }
-      }
-    }
-    else {
-      makes.forEach((brand) => {
-        brand.options.forEach((option) => {
-          option.selected = DEFAULT
-        })
-      })
-    }
-
-    dispatch(setBrands(makes))  
-
-    for (const [key, value] of Object.entries(filters)) {
-      const queryValue = paramsObject[key] || DEFAULT
-      const queryArray = queryValue?.split(';')
-      
-      date[key] = {
-        value: queryArray
-      }
-    }
-  
-    return date
-  }
-
-  const handleChange = (type, key, value) => {
-    dispatch(setSearch(getSearch(JSON.parse(JSON.stringify(search)), type, key, value)))
-  }
-
-  useEffect(() => {
-    dispatch(setSearch(generateSearchFromFilters(filters, searchParams)))
-  }, [])
+  const {
+    handleChange,
+    handleReset,
+    auth,
+    filters,
+    search,
+  } = useFilters()
+  const [showBrand, setShowBrands] = useState(false)
 
   return (
     <>
@@ -109,26 +56,38 @@ const SectionAdvancedSearch = ({ options }) => {
         {/* <pre className={style.pre}>{JSON.stringify(generateTranslate(), null, 2)}</pre> */}
         {/* <pre className={style.pre}>{JSON.stringify(search, null, 2)}</pre> */}
 
+        {
+          showBrand &&
+          <BrandsModal 
+            show={showBrand}
+            setShow={setShowBrands}
+          />
+        }
+
         <div className={style.header}>
-          <Button
+          <Reference
+            link={NAVIGATION.buy.link}
             icon={'angle-left'}
             classes={['reference', 'sm']}
             placeholder={(t('back'))}
-            onChange={() => router.back()}
           />
-          <h2>Detailed search</h2>
+          <h2>{t('detailed_search')}</h2>
         </div>
 
         <div className={style.wrapper}>
           <div className={style.head}>
-            <h3 className={style.title}>Basic information</h3>
+            <h3 className={style.title}>{t('basic_info')}</h3>
           </div>
           <div className={style.section}>
             <h6 className={style.subtitle}>{t('model')}</h6>
-            <Brands />
+            <Brands 
+              show={showBrand}
+              setShow={setShowBrands}
+            />
           </div>
+
           <div className={style.section}>
-            <div 
+            <div
               className={
                 classNames(
                   style.options,
@@ -137,7 +96,47 @@ const SectionAdvancedSearch = ({ options }) => {
               }
             >
               <div>
-                <h6 className={style.subtitle}>{t('filters.price.0')}</h6>
+                <h6 className={style.subtitle}>{t('filters.state.0')}</h6>
+                <Select
+                  id={`select_state`}
+                  options={
+                    Object.entries(filters.state.options).map(([optionKey, optionValue]) => ({
+                      value: optionKey,
+                      label: optionKey === DEFAULT ? t('all') : (filters.translation === DEFAULT ? optionValue : t(`filters.state.${optionKey}`)),
+                    }))
+                  }
+                  data={search['state']?.value[0] || DEFAULT}
+                  onChange={(value) => handleChange(filters.state, 'state', value)}
+                />
+              </div>
+              <div>
+                <h6 className={style.subtitle}>{t('filters.category.0')}</h6>
+                <Select
+                  id={`select_category`}
+                  options={
+                    Object.entries(filters.category.options).map(([optionKey, optionValue]) => ({
+                      value: optionKey,
+                      label: optionKey === DEFAULT ? t('all') : (filters.translation === DEFAULT ? optionValue : t(`filters.category.${optionKey}`)),
+                    }))
+                  }
+                  data={search['category']?.value[0] || DEFAULT}
+                  onChange={(value) => handleChange(filters.category, 'category', value)}
+                />
+              </div>
+            </div>
+          </div>
+
+          <div className={style.section}>
+            <div
+              className={
+                classNames(
+                  style.options,
+                  style.end
+                )
+              }
+            >
+              <div>
+                <h6 className={style.subtitle}>{t('filters.price.0')} (${auth?.account?.currency?.code})</h6>
                 <Field
                   type="number"
                   placeholder={t('from')}
@@ -168,14 +167,51 @@ const SectionAdvancedSearch = ({ options }) => {
               />
             </div>
           </div>
+
+          <div className={style.section}>
+            <div
+              className={
+                classNames(
+                  style.options,
+                  style.end
+                )
+              }
+            >
+              <div>
+                <h6 className={style.subtitle}>{t('filters.year.0')}</h6>
+                <Select
+                  id={`select_year_from`}
+                  options={
+                    getYears().map(year => ({
+                      value: year === DEFAULT ? DEFAULT : year,
+                      label: year === DEFAULT ? t('from') : year,
+                    }))
+                  }
+                  data={search['year_from']?.value[0] || DEFAULT}
+                  onChange={(value) => handleChange(filters.year_from, 'year_from', value)}
+                />
+              </div>
+              <Select
+                id={`select_year_to`}
+                options={
+                  getYears().map(year => ({
+                    value: year === DEFAULT ? DEFAULT : year,
+                    label: year === DEFAULT ? t('to') : year,
+                  }))
+                }
+                data={search['year_to']?.value[0] || DEFAULT}
+                onChange={(value) => handleChange(filters.year_to, 'year_to', value)}
+              />
+            </div>
+          </div>
         </div>
 
         <div className={style.wrapper}>
           <div className={style.head}>
-            <h3 className={style.title}>Vehicle type</h3>
+            <h3 className={style.title}>{t('filters.vehicle_type.0')}</h3>
           </div>
           <div className={style.section}>
-            <div 
+            <div
               className={
                 classNames(
                   style.options,
@@ -185,21 +221,16 @@ const SectionAdvancedSearch = ({ options }) => {
             >
               {
                 Object.entries(filters.vehicle_type.options).map(([optionKey]) => (
+                  optionKey !== '0' &&
                   <Checkbox
                     key={optionKey}
                     classes={['image']}
-                    image={
-                      optionKey !== '0' 
-                      ?
-                        {
-                          url: `/images/vehicle-type/${optionKey}.webp`,
-                          width: 108,
-                          height: 48,
-                          alt: t(`filters.vehicle_type.${optionKey}`)
-                        }
-                      :
-                        null
-                    }
+                    image={{
+                      url: `/images/vehicle-type/${optionKey}.webp`,
+                      width: 108,
+                      height: 48,
+                      alt: t(`filters.vehicle_type.${optionKey}`)
+                    }}
                     placeholder={optionKey === DEFAULT ? t('all') : t(`filters.vehicle_type.${optionKey}`)}
                     data={search['vehicle_type']?.value?.includes(optionKey) ? ACTIVE : DEFAULT}
                     onChange={() => handleChange(filters.vehicle_type.type, 'vehicle_type', optionKey)}
@@ -235,7 +266,7 @@ const SectionAdvancedSearch = ({ options }) => {
 
         <div className={style.wrapper}>
           <div className={style.head}>
-            <h3 className={style.title}>Engine</h3>
+            <h3 className={style.title}>{t('filters.vehicle_type.0')}</h3>
           </div>
           <div className={style.section}>
             <h6 className={style.subtitle}>{t('filters.fuel_type.0')}</h6>
@@ -286,7 +317,7 @@ const SectionAdvancedSearch = ({ options }) => {
 
         <div className={style.wrapper}>
           <div className={style.head}>
-            <h3 className={style.title}>Equipment</h3>
+            <h3 className={style.title}>{t('equipment')}</h3>
           </div>
           {
             options.map((el, idx) =>
@@ -313,12 +344,13 @@ const SectionAdvancedSearch = ({ options }) => {
           }
         </div>
       </Container>
-    
+
       <div className={style.footer}>
         <Container classes={style.container}>
           <Button
             classes={['reference']}
             placeholder={(t('reset_filters'))}
+            onChange={() => handleReset()}
           />
           <Button
             placeholder={(t('search'))}

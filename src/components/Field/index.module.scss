@@ -77,7 +77,7 @@
 .close,
 .icon {
   @include flex(center, center);
-  @include size(rem(40px), 100%);
+  @include size(rem(32px), 100%);
   @include absolute-center-right(0);
 
   cursor: pointer;

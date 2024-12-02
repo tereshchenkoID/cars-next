@@ -7,6 +7,7 @@
   gap: var(--gap-4);
   font-size: rem(12px);
   z-index: $z-index-2;
+  white-space: nowrap;
 
   @include media-breakpoint-up(lg) {
     justify-content: flex-start;
@@ -60,10 +61,12 @@
   right: 0;
   border-radius: var(--border-radius-4);
   background-color: var(--color-white);
+  border-width: rem(1px);
+  border-style: solid;
   z-index: $z-index-1;
   min-width: rem(130px);
 
-  @include media-breakpoint-up(md) {
+  @include media-breakpoint-up(lg) {
     right: auto;
     left: 0;
   }

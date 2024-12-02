@@ -65,6 +65,7 @@
   @include make-spacer(px, var(--gap-8));
   @include make-spacer(py, var(--gap-16));
 
+  position: relative;
   gap: var(--gap-12);
   overflow: hidden;
 
@@ -202,4 +203,10 @@
   &.selected {
     background-color: var(--color-orange)
   }
+}
+
+.loading {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
 }

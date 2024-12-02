@@ -9,30 +9,35 @@
   background-color: var(--color-white);
   overflow: hidden;
   color: var(--color-primary);
+  gap: var(--gap-8);
 }
 
 .item {
-  @include size(rem(32px));
+  @include size(rem(14px));
 
   position: relative;
   border-radius: 50%;
+  background-color: var(--color-grey-200);
 
-  &::before {
-    position: absolute;
-    inset: 0;
-    border: rem(6px) solid currentColor;
-    border-radius: inherit;
-    animation: 1s infinite ease-in-out spin;
-    content: '';
+  &:nth-child(1) {
+    animation: 1.4s ease-in-out -0.32s infinite normal both running spin;
+  }
+
+  &:nth-child(2) {
+    animation: 1.4s ease-in-out -0.16s infinite normal both running spin;
+  }
+
+  &:nth-child(3) {
+    animation: 1.4s ease-in-out 0s infinite normal both running spin;
   }
 }
 
 @keyframes spin {
-  0% {
+  0%, 80%, 100% {
     transform: scale(0);
   }
 
-  100% {
+  40% {
     transform: scale(1);
   }
 }
