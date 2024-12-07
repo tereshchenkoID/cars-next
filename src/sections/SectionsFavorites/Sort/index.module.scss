@@ -1,0 +1,93 @@
+@import '@/scss/config';
+
+.block {
+  @include flex(space-between, center);
+
+  gap: var(--gap-4);
+  font-size: rem(12px);
+  white-space: nowrap;
+
+  @include media-breakpoint-up(lg) {
+    @include make-spacer(mr, auto);
+    
+    justify-content: flex-start;
+  }
+}
+
+.arrow,
+.item {
+  @include transition;
+}
+
+.counts,
+.toggle {
+  @include flex($align-items: center);
+
+  gap: var(--gap-4);
+}
+
+.hr {
+  @include make-spacer(mx, var(--gap-12));
+  @include size(rem(1px), rem(20px));
+
+  display: none;
+  background-color: var(--color-text);
+
+  @include media-breakpoint-up(lg) {
+    display: block;
+  }
+}
+
+.dropdown {
+  position: relative;
+}
+
+.toggle {
+  font-weight: var(--typography-bold);
+
+  &.active {
+
+    .arrow {
+      transform: rotateZ(180deg);
+    }
+  }
+}
+
+.list {
+  @include make-spacer(p, var(--gap-8));
+
+  position: absolute;
+  top: calc(100% + var(--gap-8));
+  right: 0;
+  border-radius: var(--border-radius-4);
+  background-color: var(--color-white);
+  border-width: rem(1px);
+  border-style: solid;
+  z-index: $z-index-1;
+  min-width: rem(130px);
+
+  @include media-breakpoint-up(lg) {
+    right: auto;
+    left: 0;
+  }
+}
+
+.item {
+  @include make-spacer(px, var(--gap-8));
+  @include make-spacer(py, var(--gap-4));
+
+  border-radius: var(--border-radius-4);
+  cursor: pointer;
+  white-space: nowrap;
+
+  @include hover {
+
+    &:hover {
+      background-color: var(--color-grey-50);
+    }
+  }
+
+  &.active {
+    color: var(--color-primary);
+  }
+}

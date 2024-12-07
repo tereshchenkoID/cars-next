@@ -15,7 +15,8 @@ const Button = React.forwardRef(({
   isDisabled = false,
   isActive = false,
   title = false,
-}, ref) => {
+}, ref
+) => {
 
   return (
     <button

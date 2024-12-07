@@ -2,13 +2,12 @@ import { useState, useMemo } from 'react'
 import { useTranslations } from 'next-intl'
 import { useModal } from '@/context/ModalContext'
 import { useDispatch } from 'react-redux'
-import { signIn } from 'next-auth/react'
+import { signIn, getSession } from 'next-auth/react'
 
 import { validationRules } from '@/utils/validationRules'
 
 import { setToastify } from '@/store/actions/toastifyAction'
 import { setAuth } from '@/store/actions/authAction'
-import { getSession } from 'next-auth/react'
 
 import Field from '@/components/Field'
 import Button from '@/components/Button'
@@ -59,6 +58,9 @@ const LoginModal = () => {
             text: `${t('modal.login')} ${filter.username.value}`,
           }),
         )
+
+        // Need tested
+        window.location.reload()
         closeModal()
       }
       else {

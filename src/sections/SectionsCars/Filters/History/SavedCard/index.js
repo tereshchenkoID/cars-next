@@ -1,9 +1,8 @@
 import { useTranslations } from 'next-intl'
-import { useDispatch } from 'react-redux'
 import { Fragment } from 'react'
+import { useDispatch } from 'react-redux'
 
 import { getDate } from '@/helpers/getDate'
-
 import { setBrands } from '@/store/actions/brandsAction'
 import { setSearch } from '@/store/actions/searchAction'
 
@@ -38,10 +37,6 @@ const SavedCard = ({
     setActive(0)
   }
 
-  const handleSave = () => {
-    handleSaveHistory()
-  }
-
   const getMakesModel = (key, value) => {
     const id = key.replace('make_', '')
     const models = value.split(',')
@@ -70,7 +65,7 @@ const SavedCard = ({
           icon={'bookmark-plus'}
           onChange={(e) => {
             e.stopPropagation()
-            handleSave()
+            handleSaveHistory('0', data)
           }}
         />
       </div>

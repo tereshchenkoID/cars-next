@@ -3,8 +3,6 @@ import { useDispatch } from 'react-redux'
 import { Fragment, useState, useRef } from 'react'
 import { useOutsideClick } from '@/hooks/useOutsideClick'
 
-import { getDate } from '@/helpers/getDate'
-
 import { setBrands } from '@/store/actions/brandsAction'
 import { setSearch } from '@/store/actions/searchAction'
 
@@ -15,8 +13,7 @@ import style from './index.module.scss'
 const SavedCard = ({ 
   data, 
   setActive,
-  handleSaveHistory,
-  handleDeleteHistory,
+  handleHistory,
   filtersProps, 
 }) => {
   const t = useTranslations()
@@ -68,7 +65,7 @@ const SavedCard = ({
     >
       <div className={style.head}>
         <h6 className={style.title}>
-          {getDate(data.name)}
+          {data.name}
         </h6>
         <Button
           ref={buttonRef}
@@ -79,7 +76,6 @@ const SavedCard = ({
             setShow(!show)
           }}
         />
-
         {
           show &&
           <div className={style.options}>
@@ -89,7 +85,7 @@ const SavedCard = ({
               placeholder={'Rename'}
               onChange={(e) => {
                 e.stopPropagation()
-                handleSaveHistory()
+                handleHistory(data.id, '1', data.name, data)
               }}
             />
             <Button
@@ -98,58 +94,61 @@ const SavedCard = ({
               placeholder={'Delete'}
               onChange={(e) => {
                 e.stopPropagation()
-                handleDeleteHistory()
+                handleHistory(data.id, '2', data.name, null)
               }}
             />
           </div>
         }
       </div>
-      <ul className={style.tags}>
-        {Object.entries(data.params).map(([key, value]) => (
-          <Fragment key={key}>
-            {
-              key.indexOf('make') !== -1 
-              ? 
-                <li className={style.tag}>
-                  {
-                    getMakesModel(key, value).map((el, idx) =>
-                      <Fragment key={idx}>
-                        {el}
-                        {idx === 0 
-                          ? <>: </>
-                          :
-                            idx !== (getMakesModel(key, value).length - 1) &&  <>, </>
-                        }
-                      </Fragment>
-                    )
-                  }
-                </li>
-              :  
-                (key.indexOf('_to') !== -1 || key.indexOf('_from') !== -1) 
-                ?
+      {
+        data.params &&
+        <ul className={style.tags}>
+          {Object.entries(data.params).map(([key, value]) => (
+            <Fragment key={key}>
+              {
+                key.indexOf('make') !== -1 
+                ? 
                   <li className={style.tag}>
-                    {t(`filters.${key.split('_')[0]}.0`)} {t(key.split('_')[1])}: {value}
+                    {
+                      getMakesModel(key, value).map((el, idx) =>
+                        <Fragment key={idx}>
+                          {el}
+                          {idx === 0 
+                            ? <>: </>
+                            :
+                              idx !== (getMakesModel(key, value).length - 1) &&  <>, </>
+                          }
+                        </Fragment>
+                      )
+                    }
                   </li>
-                :
-                  (key === 'vat_reclaimable' || key === 'discount') 
+                :  
+                  (key.indexOf('_to') !== -1 || key.indexOf('_from') !== -1) 
                   ?
-                    <li className={style.tag}>{t(`filters.${key}.0`)}</li>
+                    <li className={style.tag}>
+                      {t(`filters.${key.split('_')[0]}.0`)} {t(key.split('_')[1])}: {value}
+                    </li>
                   :
-                    value.split(';').map((el, idx) =>
-                      <li
-                        key={idx}
-                        className={style.tag}
-                      >
-                        {t(`filters.${key}.${el}`)}
-                      </li>
-                    )
-            }
-          </Fragment>
-        ))}
-      </ul>
+                    (key === 'vat_reclaimable' || key === 'discount') 
+                    ?
+                      <li className={style.tag}>{t(`filters.${key}.0`)}</li>
+                    :
+                      value.split(';').map((el, idx) =>
+                        <li
+                          key={idx}
+                          className={style.tag}
+                        >
+                          {t(`filters.${key}.${el}`)}
+                        </li>
+                      )
+              }
+            </Fragment>
+          ))}
+        </ul>
+      }
       <Button
         classes={['primary', 'sm', 'wide']}
-        placeholder={`${t(`results`)} ${data.results}`}
+        placeholder={`${t(`results`)} ${data.counts}`}
       />
     </div>
   )

@@ -91,6 +91,10 @@
   top: rem(12px);
   color: var(--color-grey-500);
 
+  &.active {
+    color: var(--color-primary-hover);
+  }
+
   @include hover {
 
     &:hover {

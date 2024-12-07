@@ -1,12 +1,17 @@
 import { useTranslations } from 'next-intl'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { useState } from 'react'
+
+import classNames from 'classnames'
 
 import { NAVIGATION } from '@/constant/config'
 
+import { useModal } from '@/context/ModalContext'
+import { postData } from '@/helpers/api'
 import { getDate } from '@/helpers/getDate'
 import { getFormatPrice } from '@/helpers/getFormatPrice'
 import { getFuelIcon } from '@/helpers/getFuelIcon'
+import { setToastify } from '@/store/actions/toastifyAction'
 
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { Pagination, Navigation, Mousewheel } from 'swiper/modules'
@@ -19,13 +24,50 @@ import Loading from '@/components/Loading'
 import Tags from '@/modules/Tags'
 import Option from '@/modules/Option'
 import Discount from '@/modules/Discount'
+import LoginModal from '@/modules/LoginModal'
 
 import style from './index.module.scss'
 
 const Card = ({ data }) => {
   const t = useTranslations()
+  const dispatch = useDispatch()
+  const { showModal } = useModal()
   const auth = useSelector((state) => state.auth)
+  const isAuth = auth?.id
   const [image, setImage] = useState(false)
+  const [favorite, setFavorite] = useState(data.is_favorite)
+  
+  const handleFavorite = (type) => {
+    if(isAuth) {
+      const formData = new FormData()
+      formData.append('id', data.id)
+      formData.append('type', type)
+      formData.append('userId', auth.id)
+
+      postData('user/favorites/action/', formData).then(json => {
+        if (json) {
+          dispatch(
+            setToastify({
+              type: 'success',
+              text: type === '1' ? t('notification.removed_favourites') : t('notification.added_favourites'),
+            })
+          )
+
+          setFavorite(type === '1' ? 0 : 1)
+        } else {
+          dispatch(
+            setToastify({
+              type: 'error',
+              text: json.error_message,
+            })
+          )
+        }
+      })
+    }
+    else {
+      showModal(<LoginModal />)
+    }
+  }
 
   return (
     <div className={style.block}>
@@ -34,7 +76,7 @@ const Card = ({ data }) => {
         {
           data.images.length > 0 &&
           <>
-            {/* <Swiper
+            <Swiper
               className={style.slider}
               slidesPerView={1}
               pagination={{
@@ -64,7 +106,7 @@ const Card = ({ data }) => {
                   </SwiperSlide>
                 )
               }
-            </Swiper> */}
+            </Swiper>
 
             <div
               className={style.count}
@@ -93,9 +135,15 @@ const Card = ({ data }) => {
 
         <button
           type={'button'}
-          className={style.favorite}
+          className={
+            classNames(
+              style.favorite,
+              (favorite === 1 && isAuth) && style.active
+            )
+          }
           aria-label={t('favorite')}
           title={t('favorite')}
+          onClick={() => handleFavorite(favorite === 1 ? '1' : '0')}
         >
           <Icon
             iconName={'heart-filled'}

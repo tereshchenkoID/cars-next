@@ -1,50 +1,76 @@
 import { useTranslations } from 'next-intl'
 import { useSelector } from 'react-redux'
 import { useModal } from '@/context/ModalContext'
+import { useEffect, useState } from 'react'
+
+import { postData } from '@/helpers/api'
 
 import Image from 'next/image'
 import Button from '@/components/Button'
-import HistoryModal from '@/modules/HistoryModal'
-import DeleteHistoryModal from '@/modules/DeleteHistoryModal'
 import LoginModal from '@/modules/LoginModal'
+import HistoryModal from '@/modules/HistoryModal'
 import SavedCard from './SavedCard'
 
 import style from './index.module.scss'
 
-const Saved = ({
-  filtersProps,
-  setActive
-}) => {
+const Saved = ({ filtersProps, setActive }) => {
   const t = useTranslations()
-  const {
-    history
-  } = filtersProps
-
   const auth = useSelector((state) => state.auth)
   const isAuth = auth?.id
   const { showModal } = useModal()
+  const [data, setData] = useState([])
+  const [loading, setLoading] = useState(true)
 
-  const handleSaveHistory = () => {
-    showModal(<HistoryModal />, t('save_search'))
+  const handleHistory = (id, type, name, params) => {
+    showModal(
+      <HistoryModal 
+        id={id} 
+        name={name}
+        type={type}
+        data={params}
+        setData={setData}
+      />, 
+      t('save_search')
+    )
   }
 
-  const handleDeleteHistory = () => {
-    showModal(<DeleteHistoryModal />, t('delete_search'))
-  }
+  useEffect(() => {
+    if(isAuth) {
+      setLoading(true)
+      const formData = new FormData()
+      formData.append('userId', isAuth)
+
+      postData('user/filters/', formData).then(json => {
+        if (json) {
+          setData(json)
+          setLoading(false)
+        } else {
+          dispatch(
+            setToastify({
+              type: 'error',
+              text: json.error_message,
+            })
+          )
+        }
+      })
+    }
+  }, [])
+
+  if(loading)
+    return
 
   return (
     <div className={style.block}>
       {
-        !isAuth
+        data.length > 0
           ?
-            history.map((el, idx) => (
+            data.map((el, idx) => (
               <SavedCard
                 key={idx}
                 data={el}
                 setActive={setActive}
                 filtersProps={filtersProps}
-                handleSaveHistory={handleSaveHistory}
-                handleDeleteHistory={handleDeleteHistory}
+                handleHistory={handleHistory}
               />
             ))
           :
@@ -58,11 +84,14 @@ const Saved = ({
                 alt={'Saved filters'}
               />
               <p className={style.text}>{t('notification.saved_filters')}</p>
-              <Button
-                classes={['primary', 'wide']}
-                placeholder={t('login')}
-                onChange={() => showModal(<LoginModal />)}
-              />
+              {
+                !isAuth && 
+                <Button
+                  classes={['primary', 'wide']}
+                  placeholder={t('login')}
+                  onChange={() => showModal(<LoginModal />)}
+                />
+              }
             </>
       }
     </div>

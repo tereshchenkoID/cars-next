@@ -12,6 +12,7 @@ import { ACTIVE, DEFAULT } from '@/constant/config'
 const useFilters = (initialData) => {
   const dispatch = useDispatch()
   const searchParams = useSearchParams()
+  const auth = useSelector((state) => state.auth)
   const filters = useSelector((state) => state.filters)
   const brands = useSelector((state) => state.brands)
   const search = useSelector((state) => state.search)
@@ -43,10 +44,15 @@ const useFilters = (initialData) => {
     setHistory(updatedHistory)
   }
 
+  const getSearchParams = () => {
+    return Object.fromEntries(searchParams.entries())
+  }
+
   const handleLoad = (page, data) => {
     setLoading(true)
 
     const formData = new FormData()
+    formData.append('userId', auth?.id)
     formData.append('data', JSON.stringify(data || search))
     formData.append('page', page)
 
@@ -205,10 +211,10 @@ const useFilters = (initialData) => {
 
   useEffect(() => {
     window.history.pushState(null, '', `?${generateParams()}`)
-    // handleLoad(search?.page?.value[0] || DEFAULT)
   }, [search])
 
   return {
+    getSearchParams,
     saveHistory,
     handleChange,
     handleReset,

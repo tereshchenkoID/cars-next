@@ -26,10 +26,17 @@
 }
 
 .head {
-  @include flex(space-between, center);
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  overflow: hidden;
+  position: relative;
 }
 
 .title {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
   font-size: rem(16px);
 }
 
@@ -37,10 +44,10 @@
   @include flex($align-items: center, $wrap: wrap);
 
   gap: var(--gap-6);
+  overflow: hidden;
 }
 
 .tag {
-  @include flex($align-items: center);
   @include make-spacer(px, var(--gap-8));
   @include make-spacer(py, var(--gap-2));
 
@@ -48,9 +55,7 @@
   text-transform: capitalize;
   font-size: rem(12px);
   font-weight: var(--typography-bold);
-  white-space: nowrap;
+  word-break: break-all;
   background-color: var(--color-secondary);
   color: var(--color-primary-hover);
-  height: rem(24px);
-  gap: var(--gap-4);
 }

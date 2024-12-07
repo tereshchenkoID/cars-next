@@ -3,23 +3,23 @@
 import { useTranslations } from 'next-intl'
 import { useState, useEffect } from 'react'
 import { useModal } from '@/context/ModalContext'
+import useFilters from '@/hooks/useFilters'
 
 import classNames from 'classnames'
 
 import { DEFAULT, TYPES } from '@/constant/config'
 
-import useFilters from '@/hooks/useFilters'
 import { overflowBody } from '@/helpers/overflowBody'
 
 import Container from '@/components/Container'
 import Icon from '@/components/Icon'
 import BrandsModal from '@/modules/BrandsModal'
 import HistoryModal from '@/modules/HistoryModal'
-import Pagination from './Pagination'
+import Skeleton from '@/modules/Skeleton'
+import Card from '@/modules/Card'
+import Pagination from '@/modules/Pagination'
 import Filters from './Filters'
-import Card from './Card'
 import Sort from './Sort'
-import Skeleton from './Skeleton'
 
 import style from './index.module.scss'
 
@@ -29,6 +29,7 @@ const SectionsCars = ({ initialData }) => {
   const { showModal } = useModal()
   const {
     handleChange,
+    getSearchParams,
     filters,
     search,
     data,
@@ -95,7 +96,15 @@ const SectionsCars = ({ initialData }) => {
                   aria-label={t('save_search')}
                   title={t('save_search')}
                   onClick={() => {
-                    showModal(<HistoryModal />, t('save_search'))
+                    showModal(
+                      <HistoryModal 
+                        type={'0'}
+                        data={{
+                          params: getSearchParams()
+                        }}
+                      />, 
+                      t('save_search')
+                    )
                   }}
                 >
                   <Icon
@@ -151,7 +160,7 @@ const SectionsCars = ({ initialData }) => {
             }
           </div>
 
-          <h4>Verified cars</h4>
+          <h4>{t('verified_cars')}</h4>
           {/* <pre className={style.pre}>{JSON.stringify(search, null, 2)}</pre> */}
 
           <div className={style.meta}>

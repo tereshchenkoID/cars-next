@@ -1,0 +1,53 @@
+@import '@/scss/config';
+
+.block {
+  @include make-spacer(py, var(--gap-16));
+  
+  position: relative;
+}
+
+.block,
+.cards {
+  @include flex($direction: column);
+
+  gap: var(--gap-16);
+}
+
+.meta {
+  @include flex($align-items: center);
+
+  position: relative;
+  gap: var(--gap-4);
+  font-size: rem(12px);
+  z-index: $z-index-3;
+  white-space: nowrap;
+}
+
+.counts {
+  @include flex($align-items: center);
+
+  gap: var(--gap-4);
+  text-transform: lowercase;
+}
+
+.hr {
+  @include make-spacer(mx, var(--gap-12));
+  @include size(rem(1px), rem(20px));
+
+  display: none;
+  background-color: var(--color-text);
+
+  @include media-breakpoint-up(lg) {
+    display: block;
+  }
+}
+
+.empty {
+  text-align: center;
+}
+
+.decor {
+  @include make-spacer(mx, auto);
+
+  max-width: rem(410px);
+}

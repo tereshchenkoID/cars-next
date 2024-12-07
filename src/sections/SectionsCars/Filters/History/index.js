@@ -1,29 +1,38 @@
 import { useTranslations } from 'next-intl'
 import { useModal } from '@/context/ModalContext'
+import { useSelector } from 'react-redux'
 
 import Image from 'next/image'
 import HistoryModal from '@/modules/HistoryModal'
+import LoginModal from '@/modules/LoginModal'
 import SavedCard from './SavedCard'
 
 import style from './index.module.scss'
 
-const History = ({
-  filtersProps,
-  setActive
-}) => {
+const History = ({ filtersProps, setActive }) => {
   const t = useTranslations()
   const { showModal } = useModal()
-  const {
-    history
-  } = filtersProps
+  const { history } = filtersProps
+  const auth = useSelector((state) => state.auth)
 
-  const handleSaveHistory = () => {
-    showModal(<HistoryModal />, t('save_search'))
+  const handleSaveHistory = (type, data) => {
+    auth.id 
+    ?
+      showModal(
+        <HistoryModal
+          type={type}
+          data={data}
+        />, 
+        t('save_search')
+      )
+    :
+      showModal(
+        <LoginModal />
+      )
   }
 
   return (
     <div className={style.block}>
-      {/* <pre className={style.pre}>{JSON.stringify(history, null, 2)}</pre> */}
       {
         history.length > 0
           ?
