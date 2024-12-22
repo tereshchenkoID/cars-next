@@ -11,6 +11,12 @@ export const USERS_TYPE = {
   1: "user"
 }
 
+export const CARD_STATUS = {
+  0: "not_active",
+  1: "active",
+  2: "sold"
+}
+
 export const USER_VERIFICATIONS = {
   0: "not_verified",
   1: "basic_verified",
@@ -57,6 +63,10 @@ export const NAVIGATION = {
   not_found: {
     link: '/not-found',
     text: 'navigation.not_found'
+  },
+  sitemap: {
+    link: '/sitemap',
+    text: 'navigation.sitemap'
   },
 }
 

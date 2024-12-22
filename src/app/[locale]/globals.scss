@@ -20,6 +20,10 @@
   --border-radius-4: 4px;
   --border-radius-8: 8px;
 
+  --mask-left: polygon(0 0, 100% 0, 100% 95%, 0 100%);
+  --mask-right: polygon(0 0, 100% 0, 100% 100%, 0 95%);
+  --mask-gradient-right: linear-gradient(0deg, rgb(31, 43, 89) 0px, rgba(31, 43, 89, 0) 52%), radial-gradient(132.46% 225.99% at -6.56% 50%, rgba(29, 33, 118, 0.8) 0%, rgba(29, 33, 118, 0.72) 33.92%, rgba(29, 33, 118, 0.62) 47.27%, rgba(29, 33, 118, 0.46) 57.58%, rgba(29, 33, 118, 0.22) 63.62%, rgba(29, 33, 118, 0) 70.14%);
+
   --gap-2: 2px;
   --gap-4: 4px;
   --gap-6: 6px;
@@ -58,7 +62,7 @@
   --color-grey-800: #1f2b59;
   --color-grey-900: #131c4a;
 
-  --color-text: var(--color-grey-800);
+  --color-text: var(--color-grey-700);
   --color-primary: #3e47dd;
   --color-primary-hover: #3e27c4;
 
@@ -68,8 +72,10 @@
   --color-warning: #e74c3c;
   --color-success: #07bc0c;
   --color-info: #3498db;
+  
   --color-orange: #ff9d32;
   --color-gold: #ff7300;
+  --color-red: #b51632;
   
   --color-background: #edf1f8;
 }
@@ -78,6 +84,7 @@
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
   border-color: var(--color-grey-200);
+  user-select: none;
 
   &::after, 
   &::before {

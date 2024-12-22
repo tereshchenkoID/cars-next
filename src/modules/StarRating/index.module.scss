@@ -1,0 +1,29 @@
+@import '@/scss/config';
+
+.block {
+  @include flex($align-items: center);
+
+  gap: var(--gap-8);
+
+  &.sm {
+
+    .star {
+      @include size(rem(16px));
+    }
+  }
+
+  &.lg {
+
+    .star {
+      @include size(rem(24px));
+    }
+
+    .title {
+      font-size: rem(36px);
+    }
+  }
+}
+
+.stars {
+  @include flex($align-items: center);
+}

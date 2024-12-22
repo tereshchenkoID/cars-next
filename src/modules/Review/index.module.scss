@@ -1,0 +1,47 @@
+@import '@/scss/config';
+
+.block {
+  @include size(100%);
+  @include flex($direction: column);
+
+  border-radius: var(--border-radius-8);
+  background-color: var(--color-white);
+  box-shadow: var(--box-shadow-4-16);
+  overflow: hidden;
+  max-width: rem(360px);
+  font-size: rem(14px);
+}
+
+.content,
+.footer {
+  @include make-spacer(p, var(--gap-24));
+}
+
+.picture {
+  height: rem(225px);
+}
+
+.image {
+  object-fit: cover;
+}
+
+.content {
+  @include flex($direction: column);
+
+  gap: var(--gap-6);
+}
+
+.footer {
+  @include make-spacer(mt, auto);
+
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: center;
+  gap: var(--gap-12);
+  border-top-width: rem(1px);
+  border-top-style: solid;
+}
+
+.make {
+  @include size(rem(44px));
+}

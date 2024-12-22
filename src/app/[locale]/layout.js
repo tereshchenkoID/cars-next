@@ -27,7 +27,7 @@ const poppins = Poppins({
   display: 'swap',
 })
 
-async function fetchInitialData(query) {
+async function fetchInitialData() {
   try {
     const [settings, filters, brands] = await Promise.all([
       fetchData('settings/'),
@@ -53,7 +53,7 @@ export default async function RootLayout({ children, params, session }) {
       <body>
         <NextIntlClientProvider messages={messages}>
           <StoreProvider preloadedState={{...initialData, auth: cookies || session}}>
-            <AppProviders preloadedState={initialData} session={session}>
+            <AppProviders session={session}>
               <NextTopLoader
                 color="#3e47dd"
                 crawlSpeed={400}

@@ -4,7 +4,7 @@ import { useState } from 'react'
 
 import classNames from 'classnames'
 
-import { NAVIGATION } from '@/constant/config'
+import { CARD_STATUS, NAVIGATION } from '@/constant/config'
 
 import { useModal } from '@/context/ModalContext'
 import { postData } from '@/helpers/api'
@@ -12,6 +12,7 @@ import { getDate } from '@/helpers/getDate'
 import { getFormatPrice } from '@/helpers/getFormatPrice'
 import { getFuelIcon } from '@/helpers/getFuelIcon'
 import { setToastify } from '@/store/actions/toastifyAction'
+import { setFavorite } from '@/store/actions/favoriteAction'
 
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { Pagination, Navigation, Mousewheel } from 'swiper/modules'
@@ -35,25 +36,27 @@ const Card = ({ data }) => {
   const auth = useSelector((state) => state.auth)
   const isAuth = auth?.id
   const [image, setImage] = useState(false)
-  const [favorite, setFavorite] = useState(data.is_favorite)
+  const [favorites, setFavorites] = useState(data.is_favorite)
   
   const handleFavorite = (type) => {
     if(isAuth) {
       const formData = new FormData()
       formData.append('id', data.id)
       formData.append('type', type)
-      formData.append('userId', auth.id)
+      formData.append('userId', isAuth)
 
       postData('user/favorites/action/', formData).then(json => {
         if (json) {
+          setFavorites(type === '0' ? '1' : '0')
+
           dispatch(
             setToastify({
               type: 'success',
-              text: type === '1' ? t('notification.removed_favourites') : t('notification.added_favourites'),
+              text: type === '1' ? t('notification.removed_favorites') : t('notification.added_favorites'),
             })
           )
+          dispatch(setFavorite(json.counts, isAuth))
 
-          setFavorite(type === '1' ? 0 : 1)
         } else {
           dispatch(
             setToastify({
@@ -70,9 +73,16 @@ const Card = ({ data }) => {
   }
 
   return (
-    <div className={style.block}>
+    <div 
+      className={
+        classNames(
+          style.block,
+          style[CARD_STATUS[data.status]]
+        )
+      }
+    >
       <div className={style.left}>
-        {!image && <Loading classes={style.loading} />}
+        {/* {!image && <Loading classes={style.loading} />}
         {
           data.images.length > 0 &&
           <>
@@ -131,20 +141,21 @@ const Card = ({ data }) => {
               {data.images?.length}
             </div>
           </>
-        }
+        } */}
 
         <button
           type={'button'}
           className={
             classNames(
               style.favorite,
-              (favorite === 1 && isAuth) && style.active
+              favorites === '1' && style.active
             )
           }
           aria-label={t('favorite')}
           title={t('favorite')}
-          onClick={() => handleFavorite(favorite === 1 ? '1' : '0')}
+          onClick={() => handleFavorite(favorites === '0' ? '0' : '1')}
         >
+          {/* {favorites} */}
           <Icon
             iconName={'heart-filled'}
             width={24}
@@ -156,10 +167,10 @@ const Card = ({ data }) => {
       </div>
       <div className={style.right}>
         <Link
-          href={`${NAVIGATION.car.link}/${data.id}/${data.slug}`}
+          href={`${NAVIGATION.car.link}/${data.id}/${data.meta.slug}`}
           className={style.link}
         >
-          {data.name}
+          {data.meta.name}
         </Link>
         <ul className={style.options}>
           <li>
@@ -175,7 +186,7 @@ const Card = ({ data }) => {
               size={'xs'}
               iconName={'calendar'}
               iconSize={18}
-              text={getDate(data.first_registration_date, 3)}
+              text={getDate(data.meta.first_registration_date, 3)}
             />
           </li>
           <li>
@@ -183,7 +194,7 @@ const Card = ({ data }) => {
               size={'xs'}
               iconName={'calendar'}
               iconSize={18}
-              text={getDate(data.manufacture_date, 5)}
+              text={getDate(data.meta.manufacture_date, 5)}
             />
           </li>
           <li>
@@ -224,22 +235,49 @@ const Card = ({ data }) => {
               {
                 data.price_data.price_without_vat
                   ?
-                  <><strong>{getFormatPrice(auth?.account?.language?.code, auth?.account?.currency?.code, data.price_data.price_without_vat)}</strong> {t('without_vat')}</>
+                    <><strong>{getFormatPrice(auth?.account?.language?.code, auth?.account?.currency?.code, data.price_data.price_without_vat)}</strong> {t('without_vat')}</>
                   :
-                  <span>{t('not_deductible')}</span>
+                    <span>{t('not_deductible')}</span>
               }
             </p>
           </div>
         </div>
       </div>
       {
-        data.price_data.discount &&
-        <div className={style.discount}>
-          <Discount
-            size={'sm'}
-            amount={getFormatPrice(auth?.account?.language?.code, auth?.account?.currency?.code, data.price_data.discount)}
-          />
-        </div>
+        data.status === '1' 
+        ?
+          data.price_data.discount &&
+            <div 
+              className={
+                classNames(
+                  style.label,
+                  style.discount
+                )
+              }
+            > 
+              <Discount
+                size={'sm'}
+                amount={getFormatPrice(auth?.account?.language?.code, auth?.account?.currency?.code, data.price_data.discount)}
+              />
+            </div>
+        :
+          <div 
+            className={
+              classNames(
+                style.label,
+                style[CARD_STATUS[data.status]]
+              )
+            }
+          > 
+            <strong className={style.status}>
+              <Icon 
+                iconName={'warning'}
+                width={14}
+                height={14}
+              />
+              <span>{t(CARD_STATUS[data.status])}</span>
+            </strong>
+          </div>
       }
     </div>
   )

@@ -16,7 +16,7 @@
 
   position: absolute;
   top: calc(100% + var(--gap-8));
-  right: 0;
+  left: 0;
   gap: var(--gap-8);
   overflow-y: auto;
   background-color: var(--color-white);
@@ -24,4 +24,9 @@
   border-width: rem(1px);
   border-style: solid;
   box-shadow: var(--box-shadow-4-16);
+
+  @include media-breakpoint-up(lg) {
+    left: auto;
+    right: 0;
+  }
 }

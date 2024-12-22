@@ -1,0 +1,82 @@
+@import '@/scss/config';
+
+.header {
+  @include make-spacer(py, var(--gap-80));
+
+  position: relative;
+
+  &::before {
+    position: absolute;
+    inset: 0;
+    clip-path: var(--mask-left);
+    background: var(--mask-gradient-right);
+    content: '';
+  }
+}
+
+.hero {
+  display: grid;
+  gap: var(--gap-32);
+  position: relative;
+
+  @include media-breakpoint-up(lg) {
+    grid-template-columns: rem(550px) auto;
+    justify-content: space-between;
+  }
+}
+
+.title {
+  color: var(--color-white);
+}
+
+.section {
+  @include make-spacer(py, var(--gap-40));
+
+  overflow: hidden;
+}
+
+.grid {
+  @include make-spacer(mx, auto);
+
+  column-count: 1;
+  max-width: fit-content;
+
+  @include media-breakpoint-up(md) {
+    column-count: 2;
+  }
+
+  @include media-breakpoint-up(lg) {
+    column-count: 3;
+  }
+
+  & > div {
+    @include make-spacer(mb, var(--gap-24));
+
+    break-inside: avoid;
+    height: fit-content;
+  }
+}
+
+.banner {
+  @include make-spacer(p, var(--gap-32));
+
+  border-radius: var(--border-radius-8);
+  background-color: var(--color-white);
+  overflow: hidden;
+  width: fit-content;
+
+  @include media-breakpoint-up(md) {
+    @include make-spacer(px, var(--gap-80));
+  }
+}
+
+.rate {
+  @include flex($align-items: center);
+
+  gap: var(--gap-12);
+}
+
+.count {
+  font-size: rem(12px);
+  text-transform: lowercase;
+}

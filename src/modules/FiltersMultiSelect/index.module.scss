@@ -81,6 +81,8 @@
 }
 
 .dropdown {
+  @include scroll;
+  
   display: none;
   position: absolute;
   top: calc(100% + var(--gap-8));
@@ -92,7 +94,6 @@
   border-style: solid;
   background-color: var(--color-white);
   z-index: $z-index-1;
-  overflow-y: auto;
   max-height: rem(150px);
 }
 

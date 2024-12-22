@@ -1,8 +1,8 @@
 @import '@/scss/config';
 
 .block {
-  @include make-spacer(py, var(--gap-16));
-  
+  @include make-spacer(py, var(--gap-40));
+
   position: relative;
 }
 
@@ -43,11 +43,17 @@
 }
 
 .empty {
+  @include flex($align-items: center, $direction: column);
+
+  gap: var(--gap-24);
   text-align: center;
 }
 
 .decor {
-  @include make-spacer(mx, auto);
-
   max-width: rem(410px);
+}
+
+.link {
+  max-width: rem(320px);
+  width: 100%;
 }

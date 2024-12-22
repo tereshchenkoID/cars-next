@@ -1,17 +1,7 @@
 @import '@/scss/config';
 
 .block {
-  @include make-spacer(py, var(--gap-24));
-
-  display: grid;
-  gap: var(--gap-24);
-  max-width: rem(800px);
-
-  @include media-breakpoint-up(md) {
-    @include make-spacer(p, var(--gap-32));
-
-    gap: var(--gap-32);
-  }
+  @include make-spacer(py, var(--gap-40));
 }
 
 .icon,
@@ -23,6 +13,16 @@
 .form {
   display: grid;
   gap: var(--gap-16);
+
+  @include media-breakpoint-up(md) {
+    gap: var(--gap-32);
+  }
+}
+
+.container {
+  display: grid;
+  gap: var(--gap-24);
+  max-width: rem(800px);
 
   @include media-breakpoint-up(md) {
     gap: var(--gap-32);

@@ -1,5 +1,7 @@
 import { useTranslations } from 'next-intl'
-import { useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
+
+import classNames from 'classnames'
 
 import { DEFAULT } from '@/constant/config'
 
@@ -14,7 +16,9 @@ const CustomSelect = ({
   placeholder,
   options, 
   data, 
-  onChange, 
+  onChange,
+  isAsync = false,
+  isDisabled = false
 }) => {
   const t = useTranslations()
   const [search, setSearch] = useState([...options])
@@ -33,8 +37,21 @@ const CustomSelect = ({
     )
   }
 
+  useEffect(() => {
+    if(isAsync) {
+      setSearch(options)
+    }
+  }, [options])
+
   return (
-    <div className={style.block}>
+    <div 
+      className={
+        classNames(
+          style.block,
+          isDisabled && style.disabled,
+        )
+      }
+    >
       <Select
         ref={selectRef}
         instanceId={id}

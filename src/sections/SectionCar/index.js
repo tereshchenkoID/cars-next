@@ -167,6 +167,7 @@ const SectionCar = ({ data, next }) => {
             onChange={() => router.back()}
           />
           <Swiper
+            // @TODO Check class
             className={style.slider}
             slidesPerView={'auto'}
             // mousewheel={true}

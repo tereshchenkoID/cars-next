@@ -64,16 +64,12 @@
 }
 
 .content {
+  @include scroll;
   @include make-spacer(pb, var(--gap-8));
   @include flex($direction: column);
   
   gap: var(--gap-16);
   flex-grow: 1;
-  overflow-y: auto;
-
-  @include media-breakpoint-up(lg) {
-    @include scroll;
-  }
 }
 
 .tab {

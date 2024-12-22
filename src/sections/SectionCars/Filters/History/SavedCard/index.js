@@ -100,14 +100,20 @@ const SavedCard = ({
                   ?
                     <li className={style.tag}>{t(`filters.${key}.0`)}</li>
                   :
-                    value.split(';').map((el, idx) =>
-                      <li
-                        key={idx}
-                        className={style.tag}
-                      >
-                        {t(`filters.${key}.${el}`)}
+                    (key === 'page')
+                    ?
+                      <li className={style.tag}>
+                        {t(`filters.page.0`)} {value}
                       </li>
-                    )
+                    :
+                      value.split(';').map((el, idx) =>
+                        <li
+                          key={idx}
+                          className={style.tag}
+                        >
+                          {t(`filters.${key}.${el}`)}
+                        </li>
+                      )
             }
           </Fragment>
         ))}

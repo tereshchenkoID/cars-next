@@ -1,19 +1,17 @@
 @import '@/scss/config';
 
 .block {
-  @include make-spacer(py, var(--gap-24));
-
-  gap: var(--gap-24);
-
-  @include media-breakpoint-up(xl) {
-    @include make-spacer(py, var(--gap-32));
-  }
+  @include make-spacer(py, var(--gap-40));
 }
 
-.block,
+.container,
 .header,
 .wrapper {
   @include flex($direction: column);
+}
+
+.container {
+  gap: var(--gap-24);
 }
 
 .header {
@@ -159,6 +157,6 @@
   box-shadow: var(--box-shadow-4-16);
 }
 
-.container {
+.nav {
   @include flex(space-between, center);
 }

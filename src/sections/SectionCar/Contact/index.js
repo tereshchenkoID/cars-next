@@ -6,7 +6,9 @@ import { getDate } from '@/helpers/getDate'
 
 import Link from 'next/link'
 import Avatar from '@/modules/Avatar'
+import StarRating from '@/modules/StarRating'
 import Icon from '@/components/Icon'
+import Reference from '@/components/Reference'
 
 import style from './index.module.scss'
 
@@ -25,21 +27,31 @@ const Contact = ({ data }) => {
           <Link
             href={`${NAVIGATION.home.link}`}
             rel="noreferrer"
-            className={style.link}
             aria-label={data.name}
             title={data.name}
           >
             {data.name}
           </Link>
         </h6>
-        <p>Rate: {data.rating}</p>
-        <p>Offers: {data.offers}</p>
         <p className={style.date}>Registration: {getDate(data.registration, 3)}</p>
         <p className={style.date}>Last activity: {getDate(data.activity, 3)}</p>
+        <div className={style.meta}>
+          <StarRating data={data.rating} />
+          <Reference
+            link={'/'}
+            classes={['reference', style.link]}
+            placeholder={`${data.offers} ${t('offers')}`}
+          />
+        </div>
         <div className={style.phones}>
           {
             data.phone.map((el, idx) =>
-              <p key={idx}>{el}</p>
+              <Reference
+                key={idx}
+                link={`tel:${el}`}
+                classes={['reference', style.link]}
+                placeholder={el}
+              />
             )
           }
         </div>
@@ -54,7 +66,7 @@ const Contact = ({ data }) => {
                 aria-label={data.text}
                 title={data.text}
               >
-                <Icon 
+                <Icon
                   iconName={el.text}
                   width={18}
                   height={18}

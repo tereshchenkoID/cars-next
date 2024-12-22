@@ -30,7 +30,8 @@
     }
 
     &__placeholder {
-      color: var(--color-text)
+      color: var(--color-text);
+      font-size: rem(13px)
     }
 
     &__value-container {
@@ -39,6 +40,10 @@
 
     &__input-container {
       @include make-spacer(m, 0);
+
+      input {
+        font-size: rem(13px)!important;
+      }
     }
 
     &__single-value {
@@ -66,12 +71,18 @@
       border-radius: var(--border-radius-4);
       border: rem(1px) solid var(--color-grey-200);
       box-shadow: unset;
-      max-height: rem(150px);
       z-index: $z-index-2;
+    }
+
+    &__menu-notice {
+      font-size: rem(13px);
     }
 
     &__menu-list {
       @include make-spacer(py, 0);
+      @include scroll;
+
+      max-height: rem(150px);
     }
 
     &__option {
@@ -79,7 +90,7 @@
       @include make-spacer(p, var(--gap-8));
 
       cursor: pointer;
-      font-size: rem(14px);
+      font-size: rem(13px);
 
       @include hover {
 

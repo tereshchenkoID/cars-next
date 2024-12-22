@@ -6,6 +6,7 @@ import toastifyReducer from '@/store/reducers/toastifyReducer'
 import filtersReducer from '@/store/reducers/filtersReducer'
 import searchReducer from '@/store/reducers/searchReducer'
 import brandsReducer from '@/store/reducers/brandsReducer'
+import favoriteReducer from '@/store/reducers/favoriteReducer'
 
 export function initializeStore(preloadedState = {}) {
   return configureStore({
@@ -16,6 +17,7 @@ export function initializeStore(preloadedState = {}) {
       filters: filtersReducer,
       search: searchReducer,
       brands: brandsReducer,
+      favorite: favoriteReducer,
     },
     preloadedState,
   })

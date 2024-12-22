@@ -2,7 +2,7 @@ import { getServerSession } from 'next-auth'
 import { fetchMetaTags } from '@/utils/fetchMetaTags'
 import { authOptions } from '@/app/api/auth/[...nextauth]/route'
 
-import SectionsFavorites from '@/sections/SectionsFavorites'
+import SectionFavorites from '@/sections/SectionFavorites'
 
 export async function generateMetadata() {
   return await fetchMetaTags('profile/favorite')
@@ -11,7 +11,7 @@ export async function generateMetadata() {
 async function postData(endpoint, searchParams, cookies) {
   const formData = new FormData()
   formData.append('userId', cookies?.id || null)
-  formData.append('sort', searchParams?.sort || 0)
+  formData.append('sort', Number(searchParams?.sort) || 0)
   formData.append('page', Number(searchParams?.page) || 1)
 
   try {
@@ -38,7 +38,7 @@ const Favorite = async ({ searchParams }) => {
   const data = await postData('user/favorites/', searchParams, cookies)
 
   return (
-    <SectionsFavorites initialData={data} />
+    <SectionFavorites initialData={data} />
   )
 }
 

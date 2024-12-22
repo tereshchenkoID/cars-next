@@ -3,11 +3,13 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useSearchParams } from 'next/navigation'
 
 import { postData } from '@/helpers/api'
+import { setFavorite } from '@/store/actions/favoriteAction'
 
 const useFavorite = (initialData) => {
   const dispatch = useDispatch()
   const searchParams = useSearchParams()
   const auth = useSelector((state) => state.auth)
+  const isAuth = auth?.id
   const [data, setData] = useState(initialData || [])
   const [loading, setLoading] = useState(false)
   const [pagination, setPagination] = useState({
@@ -16,6 +18,7 @@ const useFavorite = (initialData) => {
     quantity: initialData?.quantity,
     results: initialData?.results,
   })
+
   const [search, setSearch] = useState({
     page: 0,
     sort: 0
@@ -24,7 +27,7 @@ const useFavorite = (initialData) => {
   const handleLoad = (page, sort) => {
     setLoading(true)
     const formData = new FormData()
-    formData.append('userId', auth?.id)
+    formData.append('userId', isAuth)
     formData.append('sort', sort)
     formData.append('page', page)
 
@@ -63,16 +66,22 @@ const useFavorite = (initialData) => {
   }
 
   const generateSearchFromFilters = (query) => {
-    if(query.size > 0) {
-      const paramsObject = Object.fromEntries(query.entries())
-      const updatedSearch = Object.keys(paramsObject).reduce((acc, key) => {
-        acc[key] = { value: paramsObject[key].split(',') }
-        return acc
-      }, {})
-    
-      setSearch(updatedSearch)
+    if (query.size > 0) {
+      const paramsObject = Object.fromEntries(query.entries());
+      const updatedSearch = Object.keys(search).reduce((acc, key) => {
+        acc[key] = paramsObject[key] ? Number(paramsObject[key]) : search[key]
+
+        // if (paramsObject[key]) {
+        //   acc[key] = Number(paramsObject[key])
+        // } else {
+        //   acc[key] = search[key]
+        // }
+        return acc;
+      }, {});
+  
+      setSearch(updatedSearch);
     }
-  }
+  };
 
   const handleChange = (key, value) => {
     let a = {}
@@ -80,7 +89,7 @@ const useFavorite = (initialData) => {
     if (key === 'page') {
       a = {
         ...search,
-        page: value
+        page: value === 1 ? 0 : value
       }
     }
     else {
@@ -105,19 +114,29 @@ const useFavorite = (initialData) => {
   }
 
   const handleReset = () => {
-    setSearch({
-      page: 0,
-      sort: 0
+    const formData = new FormData()
+    formData.append('userId', isAuth)
+    formData.append('type', '2')
+  
+    postData('user/favorites/action/', formData).then(json => {
+      if (json) {
+        setSearch({
+          page: 0,
+          sort: 0
+        })
+    
+        handleLoad(0, 0)
+        dispatch(setFavorite('0', isAuth))
+      }
     })
-
-    handleLoad(0, 0)
   }
 
   useEffect(() => {
     generateSearchFromFilters(searchParams)
+    handleLoad(search.page, search.sort)
   }, [])
 
-  useEffect(() => {
+  useEffect(() => { 
     window.history.pushState(null, '', `?${generateParams()}`)
   }, [search])
 
@@ -129,7 +148,7 @@ const useFavorite = (initialData) => {
     data,
     pagination,
     loading,
-    search
+    search,
   }
 }
 

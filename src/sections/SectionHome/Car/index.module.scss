@@ -1,0 +1,52 @@
+@import '@/scss/config';
+
+.block {
+  @include size(100%);
+  @include flex($direction: column);
+
+  border-radius: var(--border-radius-8);
+  background-color: var(--color-white);
+  box-shadow: var(--box-shadow-4-16);
+  overflow: hidden;
+  max-width: rem(360px);
+  font-size: rem(14px);
+}
+
+.picture {
+  height: rem(225px);
+}
+
+.image {
+  object-fit: cover;
+}
+
+.content,
+.footer {
+  @include flex($direction: column);
+  @include make-spacer(p, var(--gap-24));
+}
+
+.content {
+  gap: var(--gap-12);
+}
+
+.option {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: center;
+  gap: var(--gap-12);
+  font-size: rem(14px);
+
+  &:not(:last-child) {
+    @include make-spacer(mb, var(--gap-8));
+  }
+}
+
+.footer {
+  @include make-spacer(mt, auto);
+
+  align-items: flex-end;
+  border-top-width: rem(1px);
+  border-top-style: solid;
+  font-size: rem(12px);
+}

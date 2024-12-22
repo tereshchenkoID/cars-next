@@ -59,9 +59,11 @@ const LoginModal = () => {
           }),
         )
 
-        // Need tested
-        window.location.reload()
-        closeModal()
+        setTimeout(() => {
+          // Need tested
+          closeModal()
+          window.location.reload()
+        }, [1000])
       }
       else {
         dispatch(

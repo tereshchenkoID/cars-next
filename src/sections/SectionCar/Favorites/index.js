@@ -9,7 +9,7 @@ const Favorites = ({ data }) => {
 
   return (
     <Button
-      icon={'heart'}
+      icon={data.is_favorite === '0' ? 'heart' : 'heart-filled'}
       classes={['reference', 'sm', style.link]}
       placeholder={(t('favorites'))}
     />

@@ -16,7 +16,8 @@
     "settings": "Settings",
     "saved": "Saved search",
     "last": "Last search",
-    "orders": "Orders in progress"
+    "orders": "Orders in progress",
+    "sitemap": "Sitemap"
   },
   "modal": {
     "login": "Welcome back",
@@ -43,15 +44,23 @@
     "vehicle_characteristics": "We take in account up to [count] vehicle characteristics.",
     "saved_filters": "Here you'll see saved filters and new offer notifications.",
     "delete_search": "Are you sure you wish to delete",
-    "history_saved": "Filter was successfuly saved.",
-    "history_remove": "Filter was successfuly removed.",
+    "history_saved": "Filter was successfully saved.",
+    "history_remove": "Filter was successfully removed.",
     "sure_remove": "Are you sure you wish to delete",
-    "removed_favourites": "Car was removed from your favourites.",
-    "added_favourites": "Car was added to your favourites."
+    "removed_favorites": "Car was removed from your favorites.",
+    "added_favorites": "Car was added to your favorites.",
+    "empty_favorites": "You add a car to favorites by clicking on a heart icon.",
+    "reviews": "If you're not happy, neither are we!"
+  },
+  "sections": {
+    "hero": "You choose your car online. We inspect it and deliver it.",
+    "popular_categories": "Popular categories",
+    "new_cars": "New cars",
+    "reviews": "What do our customers think?"
   },
   "cars": "Cars",
   "verified_cars": "Verified cars",
-  "favourite_cars": "Favourite cars",
+  "favorite_cars": "Favorite cars",
   "delete_search": "Delete search",
   "dont_delete": "Don’t delete",
   "my_profile": "My profile",
@@ -154,6 +163,11 @@
   "discount": "Discount",
   "change": "Change",
   "day": "Day",
+  "days": "Days",
+  "sold": "Sold",
+  "not_active": "Not active",
+  "reviews": "Reviews",
+  "similar_cars": "Show similar cars",
   "features": {
     "1": {
       "0": "Other",
@@ -340,6 +354,15 @@
       "6": "Mileage, by growth",
       "7": "Mileage, in descending order"
     },
+    "favorites": {
+      "0": "Recommended",
+      "1": "Lowest price",
+      "2": "Highest price",
+      "3": "Newest first",
+      "4": "Latest discount",
+      "5": "Lowest mileage",
+      "6": "By brand"
+    },
     "category": {
       "0": "Category",
       "1": "Passenger cars",
@@ -422,5 +445,10 @@
       "11": "green",
       "13": "yellow"
     }
+  },
+  "home_filters": {
+    "year": "Year from",
+    "price": "Price up to",
+    "mileage": "Mileage"
   }
 }

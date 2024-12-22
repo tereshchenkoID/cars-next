@@ -18,15 +18,12 @@ const useFilters = (initialData) => {
   const search = useSelector((state) => state.search)
   const [data, setData] = useState(initialData || [])
   const [loading, setLoading] = useState(false)
+  const [history, setHistory] = useState([])
   const [pagination, setPagination] = useState({
     page: initialData?.page,
     pages: initialData?.pages,
     quantity: initialData?.quantity,
     results: initialData?.results,
-  })
-
-  const [history, setHistory] = useState(() => {
-    return JSON.parse(localStorage.getItem('historySearch')) || []
   })
 
   const saveHistory = (results) => {
@@ -204,6 +201,7 @@ const useFilters = (initialData) => {
   }
 
   useEffect(() => {
+    setHistory(JSON.parse(localStorage.getItem('historySearch')) || [])
     const { date, makes } = generateSearchFromFilters(filters, searchParams)
     dispatch(setBrands(makes))
     dispatch(setSearch(date))

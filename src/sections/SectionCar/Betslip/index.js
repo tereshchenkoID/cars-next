@@ -42,17 +42,6 @@ const Betslip = ({ data }) => {
           classes={['primary', 'wide']}
         />
       </div>
-
-      {/* <footer className={style.footer}>
-        <h6 className={style.prize}>
-          <span>Total price</span>
-          <span>{getFormatPrice(auth?.account?.language?.code, auth?.account?.currency?.code, data?.price_data?.price)} </span>
-        </h6>
-        <p className={style.prize}>
-          <span>Total price excluding VAT</span>
-          <span>{getFormatPrice(auth?.account?.language?.code, auth?.account?.currency?.code, data?.price_data?.price_without_vat)} </span>
-        </p>
-      </footer> */}
     </div>
   )
 }

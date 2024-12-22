@@ -2,7 +2,7 @@ import { getServerSession } from 'next-auth'
 import { fetchMetaTags } from '@/utils/fetchMetaTags'
 import { authOptions } from '@/app/api/auth/[...nextauth]/route'
 
-import SectionsCars from "@/sections/SectionsCars"
+import SectionCars from "@/sections/SectionCars"
 
 function transformInput(input) {
   const result = {}
@@ -30,7 +30,7 @@ async function postData(endpoint, searchParams, cookies) {
   const formData = new FormData()
   formData.append('userId', cookies?.id || null)
   formData.append('data', JSON.stringify(transformInput(searchParams)))
-  formData.append('page', Number(searchParams.page) || 1)
+  formData.append('page', Number(searchParams.page || 1))
 
   try {
     const res = await fetch(`${process.env.API_BASE_URL}/${endpoint}`, {
@@ -44,6 +44,7 @@ async function postData(endpoint, searchParams, cookies) {
     }
 
     const data = await res.json()
+
     return data
   } catch (error) {
     console.error('Error posting data:', error)
@@ -84,7 +85,7 @@ const Cars = async ({ searchParams }) => {
 
   return (
     <>
-      <SectionsCars initialData={data} />
+      <SectionCars initialData={data} />
 
       <script
         type="application/ld+json"

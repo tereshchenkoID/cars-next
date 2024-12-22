@@ -1,0 +1,69 @@
+@import '@/scss/config';
+
+.section {
+  @include make-spacer(py, var(--gap-40));
+
+  position: relative;
+  overflow: hidden;
+
+  &.right {
+    @include make-spacer(pb, var(--gap-80));
+
+    &::before {
+      position: absolute;
+      inset: 0;
+      clip-path: var(--mask-left);
+      background-color: var(--color-grey-200);
+      content: '';
+    }
+  }
+}
+
+.container {
+  position: relative;
+}
+
+.title {
+  @include make-spacer(mb, var(--gap-24));
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--gap-12);
+
+  @include media-breakpoint-up(sm) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  @include media-breakpoint-up(lg) {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  @include media-breakpoint-up(xl) {
+    grid-template-columns: repeat(6, 1fr);
+  }
+}
+
+.submenu {
+  display: grid;
+  gap: var(--gap-12);
+}
+
+.brand,
+.link {
+  @include hover {
+
+    &:hover {
+      color: var(--color-primary);
+    }
+  }
+}
+
+.brand {
+  display: grid;
+  grid-template-columns: rem(32px) 1fr;
+  align-items: center;
+  gap: var(--gap-12);
+  font-size: rem(14px);
+}

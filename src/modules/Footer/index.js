@@ -25,7 +25,8 @@ const MENU = [
     submenu: [
       NAVIGATION.buy,
       NAVIGATION.new_auto,
-      NAVIGATION.about_us
+      NAVIGATION.about_us,
+      NAVIGATION.sitemap
     ]
   },
   {

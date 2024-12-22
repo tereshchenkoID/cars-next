@@ -9,16 +9,6 @@ import Icon from '@/components/Icon'
 
 import style from './index.module.scss'
 
-const SORT = {
-  0: 'Recommended',
-  1: 'Lowest price',
-  2: 'Highest price',
-  3: 'Newest first',
-  4: 'Latest discount',
-  5: 'Lowest mileage',
-  6: 'By brand'
-}
-
 const Sort = ({ favoriteProps }) => {
   const t = useTranslations()
   const {
@@ -39,8 +29,6 @@ const Sort = ({ favoriteProps }) => {
     { buttonRef }
   )
 
-  console.log(search.sort)
-
   return (
     <div className={style.block}>
       <p className={style.counts}>
@@ -57,13 +45,12 @@ const Sort = ({ favoriteProps }) => {
               show && style.active
             )
           }
-          // aria-label={t(`filters.sort.${active}`)}
-          // title={t(`filters.sort.${active}`)}
+          aria-label={t(`filters.favorites.${active}`)}
+          title={t(`filters.favorites.${active}`)}
           ref={buttonRef}
           onClick={() => setShow(!show)}
         >
-          <span>{SORT[active]}</span>
-          {/* <span>{t(`filters.sort.${active}`)}</span> */}
+          <span>{t(`filters.favorites.${active}`)}</span>
           <Icon
             iconName={'angle-down'}
             width={12}
@@ -78,23 +65,23 @@ const Sort = ({ favoriteProps }) => {
             className={style.list}
           >
             {
-              Object.entries(SORT).map(([key]) =>
+              Array.from({ length: 7 }, (_, i) => (
                 <li
-                  key={key}
+                  key={i}
                   className={
                     classNames(
                       style.item,
-                      active == key && style.active
+                      active == i && style.active
                     )
                   }
                   onClick={() => {
-                    handleChange('sort', key)
+                    handleChange('sort', i)
                     setShow(false)
                   }}
                 >
-                  {SORT[key]}
+                  {t(`filters.favorites.${i}`)}
                 </li>
-              )
+              ))
             }
           </ul>
         }

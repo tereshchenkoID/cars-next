@@ -16,7 +16,8 @@
     "settings": "Settings PT",
     "saved": "Saved search PT",
     "last": "Last search PT",
-    "orders": "Orders in progress PT"
+    "orders": "Orders in progress PT",
+    "sitemap": "Sitemap PT"
   },
   "modal": {
     "login": "Welcome back PT",
@@ -43,15 +44,23 @@
     "vehicle_characteristics": "We take in account up to [count] vehicle characteristics. PT",
     "saved_filters": "Here you'll see saved filters and new offer notifications. PT",
     "delete_search": "Are you sure you wish to delete PT",
-    "history_saved": "Filter was successfuly saved. PT",
-    "history_remove": "Filter was successfuly removed. PT",
+    "history_saved": "Filter was successfully saved. PT",
+    "history_remove": "Filter was successfully removed. PT",
     "sure_remove": "Are you sure you wish to delete PT",
-    "removed_favourites": "Car was removed from your favourites. PT",
-    "added_favourites": "Car was added to your favourites. PT"
+    "removed_favorites": "Car was removed from your favorites. PT",
+    "added_favorites": "Car was added to your favorites. PT",
+    "empty_favorites": "You add a car to favorites by clicking on a heart icon. PT",
+    "reviews": "If you're not happy, neither are we! PT"
+  },
+  "sections": {
+    "hero": "You choose your car online. We inspect it and deliver it. PT",
+    "popular_categories": "Popular categories PT",
+    "new_cars": "New cars PT",
+    "reviews": "What do our customers think? PT"
   },
   "cars": "Cars PT",
   "verified_cars": "Verified cars PT",
-  "favourite_cars": "Favourite cars PT",
+  "favorite_cars": "Favorite cars PT",
   "delete_search": "Delete search PT",
   "dont_delete": "Don’t delete PT",
   "my_profile": "My profile PT",
@@ -154,6 +163,11 @@
   "discount": "Discount PT",
   "change": "Change PT",
   "day": "Day PT",
+  "days": "Days PT",
+  "sold": "Sold PT",
+  "not_active": "Not active PT",
+  "reviews": "Reviews PT",
+  "similar_cars": "Show similar cars PT",
   "features": {
     "1": {
       "0": "Other PT",
@@ -340,6 +354,15 @@
       "6": "Mileage, by growth PT",
       "7": "Mileage, in descending order PT"
     },
+    "favorites": {
+      "0": "Recommended PT",
+      "1": "Lowest price PT",
+      "2": "Highest price PT",
+      "3": "Newest first PT",
+      "4": "Latest discount PT",
+      "5": "Lowest mileage PT",
+      "6": "By brand PT"
+    },
     "category": {
       "0": "Category PT",
       "1": "Passenger cars PT",
@@ -425,5 +448,10 @@
       "11": "green",
       "13": "yellow"
     }
+  },
+  "home_filters": {
+    "year": "Year from PT",
+    "price": "Price up to PT",
+    "mileage": "Mileage PT"
   }
 }
