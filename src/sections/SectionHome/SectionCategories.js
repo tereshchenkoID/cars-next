@@ -7,6 +7,7 @@ import { Swiper, SwiperSlide } from 'swiper/react'
 import { Navigation, Pagination, Mousewheel } from 'swiper/modules'
 
 import Container from "@/components/Container"
+import Discount from './Discount'
 import Card from './Card'
 
 import style from './index.module.scss'
@@ -29,12 +30,14 @@ const SectionCategories = () => {
             enabled: true,
           }}
           pagination={{
-            dynamicBullets: true,
             clickable: true,
           }}
           navigation={true}
           modules={[Mousewheel, Pagination, Navigation]}
         >
+          <SwiperSlide>
+            <Discount />
+          </SwiperSlide>
           {
             Object.entries(filters?.vehicle_type?.options).map(([key, _]) =>
               (key !== '0' && key !== '5') &&

@@ -1,10 +1,17 @@
 @import '@/scss/config';
 
 .block {
-  @include make-spacer(py, var(--gap-16));
-  
+  @include make-spacer(pb, var(--gap-16));
+
   position: relative;
   min-height: 100vh;
+
+  @include media-breakpoint-up(lg) {
+    @include make-spacer(pt, var(--gap-16));
+  }
+}
+
+.container {
 
   @include media-breakpoint-up(lg) {
     display: grid;

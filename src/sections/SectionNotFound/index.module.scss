@@ -1,11 +1,11 @@
 @import '@/scss/config';
 
 .block {
-  @include make-spacer(py, var(--gap-24));
+  @include make-spacer(py, var(--gap-40));
+}
 
+.container {
   @include media-breakpoint-up(xl) {
-    @include make-spacer(py, var(--gap-48));
-
     max-width: 70%;
   }
 }

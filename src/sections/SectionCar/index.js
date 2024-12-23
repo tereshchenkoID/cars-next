@@ -89,7 +89,7 @@ const SectionCar = ({ data, next }) => {
   }, [])
 
   return (
-    <article className={style.block}>
+    <section className={style.block}>
       <div className={style.head}>
         <Container classes={style.header}>
           <Button
@@ -554,7 +554,7 @@ const SectionCar = ({ data, next }) => {
         </div>
         <Betslip data={data} />
       </Container>
-    </article>
+    </section>
   )
 }
 

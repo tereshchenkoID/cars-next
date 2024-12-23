@@ -1,0 +1,67 @@
+@import '@/scss/config';
+
+.block {
+  @include size(rem(298px), rem(128px));
+
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  position: relative;
+  background: var(--gradient-blue);
+  border-radius: var(--border-radius-8);
+  box-shadow: var(--box-shadow-4-16);
+  color: var(--color-white);
+  overflow: hidden;
+
+  &::before {
+    @include transition;
+
+    position: absolute;
+    clip-path: polygon(8.48% 100%, 0% 91%, 85.64% 0.05%, 100% 0.05%, 100% 100%, 8.48% 100%);
+    bottom: 0;
+    right: rem(-62px);
+    width: rem(168px);
+    background-image: linear-gradient(90deg, var(--color-grey-400) 0%, transparent 100%);
+    opacity: 0.5;
+    aspect-ratio: 9 / 16;
+    content: '';
+  }
+
+  @include hover {
+
+    &:hover {
+
+      &::before {
+        right: rem(-32px);
+      }
+    }
+  }
+}
+
+.info {
+  @include flex($direction: column);
+  @include make-spacer(pt, var(--gap-32));
+  @include make-spacer(pb, var(--gap-16));
+  @include make-spacer(pl, var(--gap-16));
+}
+
+.more {
+  @include make-spacer(mt, auto);
+  @include flex($align-items: center);
+
+  gap: var(--gap-8);
+
+  span {
+    text-decoration: underline;
+    text-underline-offset: var(--gap-4);
+    font-size: rem(14px);
+  }
+}
+
+.image {
+  position: relative;
+}
+
+.title {
+  color: var(--color-white);
+  line-height: 1.2;
+}

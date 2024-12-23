@@ -19,12 +19,12 @@ const Car = ({ data }) => {
 
   return (
     <Link
-      href={`${NAVIGATION.car.link}/${data.id}/${data.slug}`}
+      href={`${NAVIGATION.car.link}/${data.id}/${data.meta.slug}`}
       rel="noreferrer"
       target='_blank'
       className={style.block}
-      aria-label={data.name}
-      title={data.name}
+      aria-label={data.meta.name}
+      title={data.meta.name}
     >
       <div className={style.picture}>
         <Image
@@ -33,11 +33,11 @@ const Car = ({ data }) => {
           height={270}
           className={style.image}
           priority={false}
-          alt={data.name}
+          alt={data.meta.name}
         />
       </div>
       <div className={style.content}>
-        <h6 className={style.subtitle}>{data.name}</h6>
+        <h6 className={style.subtitle}>{data.meta.name}</h6>
         <ul className={style.list}>
           <li className={style.option}>
             <Icon
@@ -55,7 +55,7 @@ const Car = ({ data }) => {
               height={16}
               className={style.icon}
             />
-            <p>{getDate(data.manufacture_date, 3)}</p>
+            <p>{getDate(data.meta.manufacture_date, 3)}</p>
           </li>
           <li className={style.option}>
             <Icon
@@ -64,7 +64,7 @@ const Car = ({ data }) => {
               height={16}
               className={style.icon}
             />
-            <p>{getDate(data.first_registration_date, 3)}</p>
+            <p>{getDate(data.meta.first_registration_date, 3)}</p>
           </li>
           <li className={style.option}>
             <Icon

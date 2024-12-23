@@ -33,53 +33,55 @@ const SectionNotFound = () => {
   const t = useTranslations()
 
   return (
-    <Container classes={style.block}>
-      <div className={style.info}>
-        <div>
-          <p className={style.code}>{t('notification.404_error')}</p>
-          <h1 className={style.title}>{t('notification.404_title')}</h1>
-          <p className={style.text}>{t('notification.404_text')}</p>
-        </div>
-        <div>
-          <Image
-            src={'/images/404.webp'}
-            width={1392}
-            height={640}
-            className={style.image}
-            priority={true}
-            alt={t('notification.404_title')}
-          />
+    <section className={style.block}>
+      <Container classes={style.container}>
+        <div className={style.info}>
+          <div>
+            <p className={style.code}>{t('notification.404_error')}</p>
+            <h1 className={style.title}>{t('notification.404_title')}</h1>
+            <p className={style.text}>{t('notification.404_text')}</p>
           </div>
-      </div>
-      <div className={style.links}>
-        {
-          LINKS.map((el, idx) =>
-            <Link
-              key={idx}
-              href={el.link}
-              rel="noreferrer"
-              className={style.link}
-              aria-label={t(el.text)}
-              title={t(el.text)}
-            >
-              <Icon
-                iconName={el.icon}
-                className={style.icon}
-                width={40}
-                height={40}
-              />
-              {t(el.text)}
-              <Icon
-                iconName={'arrow-right'}
-                className={style.arrow}
-                width={24}
-                height={24}
-              />
-            </Link>
-          )
-        }
-      </div>
-    </Container>
+          <div>
+            <Image
+              src={'/images/404.webp'}
+              width={1392}
+              height={640}
+              className={style.image}
+              priority={true}
+              alt={t('notification.404_title')}
+            />
+            </div>
+        </div>
+        <div className={style.links}>
+          {
+            LINKS.map((el, idx) =>
+              <Link
+                key={idx}
+                href={el.link}
+                rel="noreferrer"
+                className={style.link}
+                aria-label={t(el.text)}
+                title={t(el.text)}
+              >
+                <Icon
+                  iconName={el.icon}
+                  className={style.icon}
+                  width={40}
+                  height={40}
+                />
+                {t(el.text)}
+                <Icon
+                  iconName={'arrow-right'}
+                  className={style.arrow}
+                  width={24}
+                  height={24}
+                />
+              </Link>
+            )
+          }
+        </div>
+      </Container>
+    </section>
   )
 }
 

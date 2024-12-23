@@ -37,7 +37,8 @@
 }
 
 .container {
-  display: grid;
+  @include flex($direction: column);
+
   gap: var(--gap-32);
   position: relative;
 }
@@ -63,6 +64,7 @@
 
   overflow: visible;
   position: static;
+  max-width: 100%;
 
   :global {
     --swiper-pagination-color: var(--color-primary);
@@ -99,6 +101,10 @@
       }
     }
 
+    .swiper-wrapper {
+      max-width: fit-content;
+    }
+
     .swiper-button-prev {
       left: var(--outer-gap);
     }
@@ -122,11 +128,13 @@
     }
 
     .swiper-slide {
-      @include make-spacer(pr, var(--gap-24));
-
       position: relative;
       width: fit-content;
-      height: 100%;
+      height: auto;
+
+      &:not(:last-child) {
+        @include make-spacer(pr, var(--gap-24));
+      }
     }
   }
 }

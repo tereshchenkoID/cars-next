@@ -1,0 +1,86 @@
+@import '@/scss/config';
+
+.block {
+  @include make-spacer(py, var(--gap-40));
+}
+
+.top,
+.bottom {
+  @include make-spacer(p, var(--gap-32));
+}
+
+.info {
+  @include make-spacer(mx, auto);
+
+  border-radius: var(--border-radius-8);
+  box-shadow: var(--box-shadow-4-16);
+  background-color: var(--color-white);
+  overflow: hidden;
+
+  @include media-breakpoint-up(lg) {
+    max-width: rem(800px);
+  }
+}
+
+.top {
+  background-size: 0;
+
+  @include media-breakpoint-up(md) {
+    background-position: 100% 0;
+    background-repeat: no-repeat;
+    background-size: contain;
+  }
+}
+
+.title {
+  @include make-spacer(mb, var(--gap-32));
+
+  max-width: 100%;
+
+  @include media-breakpoint-up(md) {
+    max-width: 60%;
+  }
+}
+
+.button {
+  width: 100%;
+
+  @include media-breakpoint-up(md) {
+    width: fit-content;
+    min-width: rem(100px);
+  }
+}
+
+.bottom {
+  @include flex($justify-content: center, $direction: column);
+
+  gap: var(--gap-40);
+  background-color: var(--color-grey-100);
+  border-top-width: rem(1px);
+  border-top-style: solid;
+
+  @include media-breakpoint-up(md) {
+    flex-direction: row;
+    align-items: center;
+  }
+}
+
+.contact {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: center;
+  gap: var(--gap-24);
+}
+
+.label {
+  font-size: rem(14px);
+}
+
+.icon {
+  @include flex(center, center);
+  @include size(rem(52px));
+
+  border-radius: 50%;
+  background-color: var(--color-white);
+  color: var(--color-primary);
+}

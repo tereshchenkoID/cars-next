@@ -26,12 +26,11 @@ const SectionsFavorites = ({ initialData }) => {
     data,
     loading,
     pagination,
-    search,
   } = favoriteProps
 
   return (
-    <Container>
-      <div className={style.block}>
+    <section className={style.block}>
+      <Container classes={style.container}>
         <h1>{t('favorite_cars')}</h1>
         {/* <pre className={style.pre}>{JSON.stringify(search, null, 2)}</pre> */}
         {
@@ -55,12 +54,12 @@ const SectionsFavorites = ({ initialData }) => {
                     data?.data?.map((el, idx) =>
                       loading
                         ?
-                          <Skeleton key={idx} />
+                        <Skeleton key={idx} />
                         :
-                          <Card
-                            key={idx}
-                            data={el}
-                          />
+                        <Card
+                          key={idx}
+                          data={el}
+                        />
                     )
                   }
                   {
@@ -87,8 +86,8 @@ const SectionsFavorites = ({ initialData }) => {
                 />
               </div>
         }
-      </div>
-    </Container>
+      </Container>
+    </section>
   )
 }
 

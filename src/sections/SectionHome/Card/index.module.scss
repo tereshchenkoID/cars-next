@@ -1,11 +1,11 @@
 @import '@/scss/config';
 
 .block {
+  @include size(100%, rem(128px));
   @include flex(center, center, column);
-  @include size(100%, rem(168px));
   @include make-spacer(p, var(--gap-16));
 
-  gap: var(--gap-16);
+  gap: var(--gap-4);
   border-radius: var(--border-radius-8);
   background-color: var(--color-white);
   box-shadow: var(--box-shadow-4-16);
@@ -29,6 +29,7 @@
 
       .text {
         transform: translateX(0);
+        color: var(--color-primary)
       }
     }
   }
@@ -36,6 +37,8 @@
 
 .image {
   @include transition(all);
+
+  max-height: 80px;
 }
 
 .headline {

@@ -102,3 +102,9 @@
     }
   }
 }
+
+.copyright {
+  @include make-spacer(pb, var(--gap-32));
+  
+  font-size: rem(12px);
+}

@@ -48,19 +48,19 @@
 }
 
 .social {
-  @include size(rem(24px));
+  @include size(rem(42px));
   @include flex(center, center);
 
-  background-color: var(--color-primary);
-  border-radius: rem(4px);
-  color: var(--color-white);
+  background-color: var(--color-white);
+  border-radius: 50%;
+  color: var(--color-primary);
+}
 
-  @include hover {
-
-    &:hover {
-      background-color: var(--color-primary-hover);
-    }
-  }
+.phones {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: center;
+  gap: var(--gap-16)
 }
 
 .meta {

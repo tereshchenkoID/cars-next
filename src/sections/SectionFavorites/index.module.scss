@@ -6,7 +6,7 @@
   position: relative;
 }
 
-.block,
+.container,
 .cards {
   @include flex($direction: column);
 

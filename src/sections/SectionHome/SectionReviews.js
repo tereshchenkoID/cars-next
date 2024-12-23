@@ -21,7 +21,7 @@ const SectionReviews = ({ data }) => {
 
   return (
     <section className={style.section}>
-      <Container classes={[style.container]}>
+      <Container classes={style.container}>
         <div className={style.headline}>
           <h2 className={style.subtitle}>{t('sections.reviews')}</h2>
           <div className={style.rate}>
@@ -44,7 +44,6 @@ const SectionReviews = ({ data }) => {
             enabled: true,
           }}
           pagination={{
-            dynamicBullets: true,
             clickable: true,
           }}
           navigation={true}

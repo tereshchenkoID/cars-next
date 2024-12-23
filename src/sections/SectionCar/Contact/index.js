@@ -44,16 +44,25 @@ const Contact = ({ data }) => {
           />
         </div>
         <div className={style.phones}>
-          {
-            data.phone.map((el, idx) =>
-              <Reference
-                key={idx}
-                link={`tel:${el}`}
-                classes={['reference', style.link]}
-                placeholder={el}
-              />
-            )
-          }
+          <div className={style.social}>
+            <Icon 
+              iconName={'phone'}
+              width={22}
+              height={22}
+            />
+          </div>
+          <div>
+            {
+              data.phone.map((el, idx) =>
+                <Reference
+                  key={idx}
+                  link={`tel:${el}`}
+                  classes={['reference', style.link]}
+                  placeholder={el}
+                />
+              )
+            }
+          </div>
         </div>
         <div className={style.socials}>
           {
@@ -68,8 +77,8 @@ const Contact = ({ data }) => {
               >
                 <Icon
                   iconName={el.text}
-                  width={18}
-                  height={18}
+                  width={22}
+                  height={22}
                 />
               </Link>
             )

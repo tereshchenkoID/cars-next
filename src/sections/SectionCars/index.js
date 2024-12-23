@@ -45,15 +45,15 @@ const SectionsCars = ({ initialData }) => {
   }, [showBrand])
 
   return (
-    <Container>
-      {
-        showBrand &&
-        <BrandsModal 
-          show={showBrand}
-          setShow={setShowBrands}
-        />
-      }
-      <div className={style.block}>
+    <section className={style.block}>
+      <Container classes={style.container}>
+        {
+          showBrand &&
+          <BrandsModal
+            show={showBrand}
+            setShow={setShowBrands}
+          />
+        }
         <Filters
           show={show}
           setShow={setShow}
@@ -97,12 +97,12 @@ const SectionsCars = ({ initialData }) => {
                   title={t('save_search')}
                   onClick={() => {
                     showModal(
-                      <HistoryModal 
+                      <HistoryModal
                         type={'0'}
                         data={{
                           params: getSearchParams()
                         }}
-                      />, 
+                      />,
                       t('save_search')
                     )
                   }}
@@ -133,15 +133,15 @@ const SectionsCars = ({ initialData }) => {
                               <>{t(`filters.${key.split('_')[0]}.0`)} {t(key.split('_')[1])}: </>
                             }
                             {
-                              key === 'page' &&  <>{t(`filters.${key}.0`)}: </>
+                              key === 'page' && <>{t(`filters.${key}.0`)}: </>
                             }
                             <strong>
                               {
-                                (key === 'vat_reclaimable' || key === 'discount') 
+                                (key === 'vat_reclaimable' || key === 'discount')
                                   ?
-                                    <>{t(`filters.${key}.0`)}</>
+                                  <>{t(`filters.${key}.0`)}</>
                                   :
-                                    <>{filters[key].options?.[el] || el}</>
+                                  <>{filters[key].options?.[el] || el}</>
                               }
                             </strong>
                           </span>
@@ -173,32 +173,32 @@ const SectionsCars = ({ initialData }) => {
           {
             data.data
               ?
-                <>
-                  <div className={style.cards}>
-                    {
-                      data?.data?.map((el, idx) =>
-                        loading 
+              <>
+                <div className={style.cards}>
+                  {
+                    data?.data?.map((el, idx) =>
+                      loading
                         ?
-                          <Skeleton key={idx} />
+                        <Skeleton key={idx} />
                         :
-                          <Card
-                            key={idx}
-                            data={el}
-                          />
-                      )
-                    }
-                  </div>
-                  <Pagination filtersProps={filtersProps} />
-                </>
-              :
-                <div className={style.empty}>
-                  <h6>Whoops!</h6>
-                  <p>None of our cars matches your search parameters.</p>
+                        <Card
+                          key={idx}
+                          data={el}
+                        />
+                    )
+                  }
                 </div>
+                <Pagination filtersProps={filtersProps} />
+              </>
+              :
+              <div className={style.empty}>
+                <h6>Whoops!</h6>
+                <p>None of our cars matches your search parameters.</p>
+              </div>
           }
         </div>
-      </div>
-    </Container>
+      </Container>
+    </section>
   )
 }
 
