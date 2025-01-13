@@ -39,7 +39,7 @@ const SectionCategories = () => {
             <Discount />
           </SwiperSlide>
           {
-            Object.entries(filters?.vehicle_type?.options).map(([key, _]) =>
+            Object.entries(filters?.body?.options).map(([key, _]) =>
               (key !== '0' && key !== '5') &&
               <SwiperSlide key={key}>
                 <Card data={key} />

@@ -1,12 +1,7 @@
 import { getServerSession } from 'next-auth'
-import { fetchMetaTags } from '@/utils/fetchMetaTags'
 import { authOptions } from '@/app/api/auth/[...nextauth]/route'
 
 import SectionFavorites from '@/sections/SectionFavorites'
-
-export async function generateMetadata() {
-  return await fetchMetaTags('profile/favorite')
-}
 
 async function postData(endpoint, searchParams, cookies) {
   const formData = new FormData()
@@ -18,9 +13,9 @@ async function postData(endpoint, searchParams, cookies) {
     const res = await fetch(`${process.env.API_BASE_URL}/${endpoint}`, {
       method: 'POST',
       body: formData,
-      cache: 'no-cache'
+      cache: 'no-cache',
     })
-
+    
     if (!res.ok) {
       throw new Error(`Failed to fetch data from ${endpoint}: ${res.statusText}`)
     }

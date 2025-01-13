@@ -9,13 +9,6 @@ export async function generateMetadata() {
 }
 
 const Car = async ({ params: { id } }) => {
-  // const [data, next] = await Promise.all([
-  //   fetchData(`item/${id}`).then((data) => {
-  //     const selectedOption = data.price_map?.find((option) => option.selected)
-  //     return selectedOption ? fetchData(`item/${selectedOption.id}`) : null
-  //   })
-  // ]).then(([data, next]) => [data, next])
-
   const data = await fetchData(`item/${id}`)
   const nextId = data.price_map?.find(option => option.selected)?.id
   const next = nextId ? await fetchData(`item/${nextId}`) : null

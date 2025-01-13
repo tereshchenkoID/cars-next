@@ -12,11 +12,24 @@
   @include make-spacer(mb, var(--gap-24));
 
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   align-items: center;
-  gap: var(--gap-24);
+  gap: var(--gap-8);
+
+  @include media-breakpoint-up(md) {
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--gap-24);
+  }
 }
 
 .footer {
   @include flex(space-between);
+}
+
+.button {
+  min-width: rem(80px);
+
+  @include media-breakpoint-up(md) {
+    min-width: rem(100px);
+  }
 }

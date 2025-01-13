@@ -1,0 +1,53 @@
+@import '@/scss/config';
+
+.form {
+  @include flex($direction: column);
+
+  gap: var(--gap-32);
+}
+
+.label {
+  @include flex(center, center);
+  @include make-spacer(p, var(--gap-24));
+
+  border-radius: var(--border-radius-8);
+  border: rem(1px) dashed var(--color-primary);
+  gap: var(--gap-8);
+  color: var(--color-primary);
+  cursor: pointer;
+}
+
+.input {
+  @include size(0);
+  
+  visibility: hidden;
+  opacity: 0;
+}
+
+.previews {
+  @include flex($wrap: wrap);
+
+  gap: var(--gap-24)
+}
+
+.preview {
+  @include size(rem(150px));
+
+  position: relative;
+  background-image: 
+    linear-gradient(45deg, rgba(0, 0, 0, 0.1) 25%, transparent 25%, transparent 74%, rgba(0, 0, 0, 0.1) 75%, rgba(0, 0, 0, 0.1)), 
+    linear-gradient(45deg, rgba(0, 0, 0, 0.1) 25%, transparent 25%, transparent 74%, rgba(0, 0, 0, 0.1) 75%, rgba(0, 0, 0, 0.1));
+  background-size: rem(20px) rem(20px);
+  background-position: 0 0, rem(10px) rem(10px);
+}
+
+.remove {
+  position: absolute;
+  top: rem(-16px);
+  right: rem(-16px);
+}
+
+.button {
+  align-self: flex-end;
+  min-width: rem(100px);
+}

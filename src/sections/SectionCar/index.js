@@ -29,9 +29,9 @@ import Contact from './Contact'
 
 const Share = dynamic(() => import('./Share'), { ssr: false })
 const Favorites = dynamic(() => import('./Favorites'), { ssr: false })
-const History = dynamic(() => import('./History'), { ssr: false, loading: () => <Loading /> })
-const Map = dynamic(() => import('./Map'), { ssr: false, loading: () => <Loading /> })
-const Comparison = dynamic(() => import('./Comparison'), { ssr: false, loading: () => <Loading /> })
+const History = dynamic(() => import('./History'), { ssr: false, loading: () => <Loading classes={'transparent'} /> })
+const Map = dynamic(() => import('./Map'), { ssr: false, loading: () => <Loading classes={'transparent'} /> })
+const Comparison = dynamic(() => import('@/modules/Comparison'), { ssr: false, loading: () => <Loading classes={'transparent'} /> })
 
 import style from './index.module.scss'
 
@@ -111,7 +111,7 @@ const SectionCar = ({ data, next }) => {
                   size={'sm'}
                   iconName={'road'}
                   iconSize={24}
-                  text={`${data.mileage_data.mileage} ${data.mileage_data.mileage_unit}`}
+                  text={`${data.mileage_data.mileage} (${t(`filters.mileage.${data.mileage_data.mileage_unit.id}`)})`}
                 />
               </li>
               <li>
@@ -135,7 +135,7 @@ const SectionCar = ({ data, next }) => {
                   size={'sm'}
                   iconName={'engine'}
                   iconSize={24}
-                  text={`${data.power_data.power} ${data.power_data.power_unit}`}
+                  text={`${data.power_data.power} (${t(`filters.power.${data.power_data.power_unit.id}`)})`}
                 />
               </li>
               <li>
@@ -276,7 +276,7 @@ const SectionCar = ({ data, next }) => {
                   iconName={'road'}
                   iconSize={32}
                   label={t('filters.mileage.0')}
-                  text={`${Number(data.mileage_data.mileage)} ${data.mileage_data.mileage_unit}`}
+                  text={`${Number(data.mileage_data.mileage)} (${t(`filters.mileage.${data.mileage_data.mileage_unit.id}`)})`}
                 />
               </li>
               <li>
@@ -303,7 +303,7 @@ const SectionCar = ({ data, next }) => {
                   iconName={'engine'}
                   iconSize={32}
                   label={t('power')}
-                  text={`${data.power_data.power} ${data.power_data.power_unit}`}
+                  text={`${data.power_data.power} (${t(`filters.power.${data.power_data.power_unit.id}`)})`}
                 />
               </li>
               <li>
@@ -399,11 +399,11 @@ const SectionCar = ({ data, next }) => {
               </li>
               <li>
                 <p>{t('engine_capacity')}</p>
-                <strong>{data.power_data.capacity} cm</strong>
+                <strong>{data.power_data.capacity} (cm)</strong>
               </li>
               <li>
-                <p>{t('filters.vehicle_type.0')}</p>
-                <strong>{t(`filters.vehicle_type.${data.body.id}`)}</strong>
+                <p>{t('filters.body.0')}</p>
+                <strong>{t(`filters.body.${data.body.id}`)}</strong>
               </li>
               <li>
                 <p>{t('body_color')}</p>
@@ -508,7 +508,9 @@ const SectionCar = ({ data, next }) => {
               >
                 {t('price_history')}
               </h3>
-              <History data={data} />
+              <div className={style.wrapper}>
+                <History data={data} />
+              </div>
             </div>
           }
 
@@ -528,7 +530,9 @@ const SectionCar = ({ data, next }) => {
               >
                 {t('price_map')}
               </h3>
-              <Map data={data} next={next} />
+              <div className={style.wrapper}>
+                <Map data={data} next={next} />
+              </div>
             </div>
           }
 
@@ -548,7 +552,9 @@ const SectionCar = ({ data, next }) => {
               >
                 {t('comparison')}
               </h3>
-              <Comparison data={data} />
+              <div className={style.wrapper}>
+                <Comparison data={data} />
+              </div>
             </div>
           }
         </div>

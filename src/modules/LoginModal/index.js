@@ -8,6 +8,7 @@ import { validationRules } from '@/utils/validationRules'
 
 import { setToastify } from '@/store/actions/toastifyAction'
 import { setAuth } from '@/store/actions/authAction'
+import { postData } from '@/helpers/api'
 
 import Field from '@/components/Field'
 import Button from '@/components/Button'
@@ -38,6 +39,18 @@ const LoginModal = () => {
     showModal(<ModalComponent />)
   }
 
+  // const handleSubmit = (e) => {
+  //   e.preventDefault()
+
+  //   const formData = new FormData()
+  //   formData.append('username', filter.username.value)
+  //   formData.append('password', filter.password.value)
+
+  //   postData('login/', formData).then(json => {
+  //     console.log(json)
+  //   })
+  // }
+
   const handleSubmit = async (e) => {
     e.preventDefault()
 
@@ -50,7 +63,6 @@ const LoginModal = () => {
 
       if (result?.ok) {
         const session = await getSession()
-
         dispatch(setAuth(session))
         dispatch(
           setToastify({
@@ -60,7 +72,6 @@ const LoginModal = () => {
         )
 
         setTimeout(() => {
-          // Need tested
           closeModal()
           window.location.reload()
         }, [1000])
@@ -95,72 +106,6 @@ const LoginModal = () => {
   }, [filter])
 
   const handleSignIn = async (provider) => {
-    // const oauth2Endpoint = 'https://accounts.google.com/o/oauth2/v2/auth';
-    // const params = new URLSearchParams({
-    //   client_id: "214317679965-e10brq593pt679qb424glitrlmc4i6t8.apps.googleusercontent.com",
-    //   redirect_uri: `http://localhost:3000/api/auth/callback/${provider}`,
-    //   response_type: 'token',
-    //   scope: 'openid email profile',
-    //   prompt: 'select_account',
-    //   include_granted_scopes: true,
-    // });
-
-    // const width = 550
-    // const height = 600
-    // const left = window.screenX + (window.innerWidth - width) / 2
-    // const top = window.screenY + (window.innerHeight - height) / 2
-    // const authWindow = window.open(
-    //                     `${oauth2Endpoint}?${params.toString()}`, 
-    //                     'SignIn', 
-    //                     `width=${width},height=${height},top=${top},left=${left}`
-    //                   )
-  
-    // const interval = setInterval(() => {
-    //   if (authWindow.closed) {
-    //     clearInterval(interval)
-    //     console.error('User closed the login window without completing sign-in.')
-    //     return
-    //   }
-    //   try {
-    //     const hash = authWindow.location.hash
-    //     const params = new URLSearchParams(hash.substring(1))
-    //     const token = params.get('access_token')
-          
-    //     if (token) {
-    //       alert('Access Token:', token)
-
-    //       fetch('/api/auth/callback/google', {
-    //         method: 'POST',
-    //         headers: {
-    //           'Content-Type': 'application/json',
-    //         },
-    //         body: JSON.stringify({ token }),
-    //       })
-    //       .then(response => {
-    //         console.log(response)
-    //         if (!response.ok) {
-    //           throw new Error('Network response was not ok');
-    //         }
-    //         return response.json();
-    //       })
-    //       .then(data => {
-    //         console.log('Session saved:', data);
-    //         authWindow.close();
-    //       })
-    //       .catch(error => {
-    //         console.error('Error saving session:', error);
-    //       });
-    //     } else {
-    //       alert('Token not found');
-    //     }
-    //   }
-    //   catch (error) {
-    //     console.log("Error")
-    //     clearInterval(interval)
-    //   }
-
-    // }, 1000);
-
     await signIn(provider)
   }
 

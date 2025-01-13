@@ -4,7 +4,7 @@ import { useState } from 'react'
 
 import classNames from 'classnames'
 
-import { CARD_STATUS, NAVIGATION } from '@/constant/config'
+import { CARD_STATUS, NAVIGATION, ROUTES_USER } from '@/constant/config'
 
 import { useModal } from '@/context/ModalContext'
 import { postData } from '@/helpers/api'
@@ -29,7 +29,7 @@ import LoginModal from '@/modules/LoginModal'
 
 import style from './index.module.scss'
 
-const Card = ({ data }) => {
+const Card = ({ data, isProfile = false }) => {
   const t = useTranslations()
   const dispatch = useDispatch()
   const { showModal } = useModal()
@@ -37,6 +37,7 @@ const Card = ({ data }) => {
   const isAuth = auth?.id
   const [image, setImage] = useState(false)
   const [favorites, setFavorites] = useState(data.is_favorite)
+  const domain = isProfile ? ROUTES_USER.vehicles.link : NAVIGATION.car.link
   
   const handleFavorite = (type) => {
     if(isAuth) {
@@ -167,7 +168,7 @@ const Card = ({ data }) => {
       </div>
       <div className={style.right}>
         <Link
-          href={`${NAVIGATION.car.link}/${data.id}/${data.meta.slug}`}
+          href={`${domain}/${data.id}/${data.meta.slug}`}
           className={style.link}
         >
           {data.meta.name}
@@ -178,7 +179,7 @@ const Card = ({ data }) => {
               size={'xs'}
               iconName={'road'}
               iconSize={18}
-              text={`${Number(data.mileage_data.mileage)} ${data.mileage_data.mileage_unit}`}
+              text={`${Number(data.mileage_data.mileage)} (${t(`filters.mileage.${data.mileage_data.mileage_unit.id}`)})`}
             />
           </li>
           <li>
@@ -202,7 +203,7 @@ const Card = ({ data }) => {
               size={'xs'}
               iconName={'engine'}
               iconSize={18}
-              text={`${data.power_data.power} (${data.power_data.power_unit})`}
+              text={`${data.power_data.power} (${t(`filters.power.${data.power_data.power_unit.id}`)})`}
             />
           </li>
           <li>

@@ -114,6 +114,19 @@
   }
 }
 
+.wrapper {
+  @include make-spacer(p, var(--gap-16));
+  
+  background-color: var(--color-white);
+  border-radius: var(--border-radius-8);
+  box-shadow: var(--box-shadow-16-24);
+  // min-height: rem(200px);
+
+  @include media-breakpoint-up(lg) {
+    @include make-spacer(p, var(--gap-32));
+  }
+}
+
 .grid {
   display: grid;
   gap: var(--gap-16);

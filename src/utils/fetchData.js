@@ -2,7 +2,8 @@ export async function fetchData(url) {
   try {
     const res = await fetch(`${process.env.API_BASE_URL}/${url}`, 
       {      
-        cache: 'no-cache'
+        cache: 'no-cache',
+        // credentials: 'include',
       }
     )
     if (!res.ok) {

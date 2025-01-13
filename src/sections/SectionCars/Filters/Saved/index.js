@@ -5,11 +5,10 @@ import { useEffect, useState } from 'react'
 
 import { postData } from '@/helpers/api'
 
-import Image from 'next/image'
-import Button from '@/components/Button'
 import LoginModal from '@/modules/LoginModal'
 import HistoryModal from '@/modules/HistoryModal'
 import SavedCard from './SavedCard'
+import Empty from './Empty'
 
 import style from './index.module.scss'
 
@@ -19,19 +18,25 @@ const Saved = ({ filtersProps, setActive }) => {
   const isAuth = auth?.id
   const { showModal } = useModal()
   const [data, setData] = useState([])
-  const [loading, setLoading] = useState(true)
+  const [loading, setLoading] = useState(false)
 
-  const handleHistory = (id, type, name, params) => {
-    showModal(
-      <HistoryModal 
-        id={id} 
-        name={name}
-        type={type}
-        data={params}
-        setData={setData}
-      />, 
-      t('save_search')
-    )
+  const handleAction = (id, type, name, params) => {
+    isAuth
+    ?
+      showModal(
+        <HistoryModal 
+          id={id} 
+          name={name}
+          type={type}
+          data={params}
+          setData={setData}
+        />, 
+        t('save_search')
+      )
+    :
+      showModal(
+        <LoginModal />
+      )
   }
 
   useEffect(() => {
@@ -70,29 +75,14 @@ const Saved = ({ filtersProps, setActive }) => {
                 data={el}
                 setActive={setActive}
                 filtersProps={filtersProps}
-                handleHistory={handleHistory}
+                handleAction={handleAction}
               />
             ))
           :
-            <>
-              <Image
-                width={327}
-                height={262}
-                className={style.decor}
-                src={`/images/saved-filters.svg`}
-                priority={true}
-                alt={'Saved filters'}
-              />
-              <p className={style.text}>{t('notification.saved_filters')}</p>
-              {
-                !isAuth && 
-                <Button
-                  classes={['primary', 'wide']}
-                  placeholder={t('login')}
-                  onChange={() => showModal(<LoginModal />)}
-                />
-              }
-            </>
+            <Empty 
+              isAuth={isAuth}
+              handleAction={handleAction} 
+            />
       }
     </div>
   )

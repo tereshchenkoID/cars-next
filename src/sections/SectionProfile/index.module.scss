@@ -1,0 +1,53 @@
+@import '@/scss/config';
+
+.nav {
+  position: sticky;
+  overflow-x: auto;
+  height: rem(73px);
+  top: calc(var(--header-height) + rem(1px));
+  background-color: var(--color-white);
+  box-shadow: rgba(72, 88, 133, 0.06) 0 rem(2px) rem(4px) rem(-1px), rgba(72, 88, 133, 0.1) 0 rem(4px) rem(6px) rem(-1px);
+  z-index: $z-index-9;
+}
+
+.container {
+  @include flex;
+
+  gap: var(--gap-24);
+  height: 100%;
+}
+
+.link {
+  @include flex($align-items: center);
+
+  position: relative;
+  flex-shrink: 0;
+  font-size: rem(14px);
+
+  &::after {
+    @include size(0, rem(3px));
+    @include transition;
+
+    position: absolute;
+    left: 0px;
+    right: 0;
+    bottom: 0;
+    background-color: var(--color-primary-hover);
+    content: '';
+  }
+
+  @include hover {
+
+    &:hover {
+      color: var(--color-primary-hover);  
+    }
+  }
+
+  &.active {
+    color: var(--color-primary-hover);
+
+    &::after {
+      width: 100%;
+    }
+  }
+}

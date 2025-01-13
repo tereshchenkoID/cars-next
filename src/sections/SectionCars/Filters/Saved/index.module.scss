@@ -4,13 +4,4 @@
   @include flex($direction: column);
 
   gap: var(--gap-16);
-
-  button {
-    flex-shrink: 0;
-  }
-}
-
-.text {
-  text-align: center;
-  line-height: 1.8;
 }

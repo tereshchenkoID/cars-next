@@ -1,0 +1,7 @@
+@import '@/scss/config';
+
+.block {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: var(--gap-24);
+}

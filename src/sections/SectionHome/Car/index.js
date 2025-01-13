@@ -46,7 +46,7 @@ const Car = ({ data }) => {
               height={16}
               className={style.icon}
             />
-            <p>{data.mileage_data.mileage} {data.mileage_data.mileage_unit}</p>
+            <p>{data.mileage_data.mileage} ({t(`filters.mileage.${data.mileage_data.mileage_unit.id}`)})</p>
           </li>
           <li className={style.option}>
             <Icon
@@ -73,7 +73,7 @@ const Car = ({ data }) => {
               height={16}
               className={style.icon}
             />
-            <p>{data.power_data.power} {data.power_data.power_unit}</p>
+            <p>{data.power_data.power} ({t(`filters.power.${data.power_data.power_unit.id}`)})</p>
           </li>
           <li className={style.option}>
             <Icon

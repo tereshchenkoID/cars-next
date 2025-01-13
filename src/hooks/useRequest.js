@@ -1,20 +1,29 @@
 import axios from 'axios'
+// import Cookies from 'js-cookie'
 
 import { API_BASE_URL } from '@/constant/config';
 
 export const useRequest = (link, data, headers) => {
+  // const token = Cookies.get('next-auth.session-token') || ''
   const server = axios.create({
     baseURL: `${API_BASE_URL}/${link}`,
-    withCredentials: true,
+    // withCredentials: true,
+    // headers: {
+    //   ...headers,
+    //   // Authorization: `Bearer ${token}`,
+    // },
   })
 
-  const handleSessionExpiry = (response) => {
-    if (response?.data?.code === "2") {
-      sessionStorage.clear()
+
+  // console.log(Cookies.get('SID'))
+
+  // const handleSessionExpiry = (response) => {
+  //   if (response?.data?.code === "2") {
+  //     sessionStorage.clear()
       
-      window.location.href = '/';
-    }
-  };
+  //     window.location.href = '/';
+  //   }
+  // };
 
   const get = async url => {
     try {

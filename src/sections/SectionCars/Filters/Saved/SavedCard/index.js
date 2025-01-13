@@ -13,7 +13,7 @@ import style from './index.module.scss'
 const SavedCard = ({ 
   data, 
   setActive,
-  handleHistory,
+  handleAction,
   filtersProps, 
 }) => {
   const t = useTranslations()
@@ -85,7 +85,7 @@ const SavedCard = ({
               placeholder={'Rename'}
               onChange={(e) => {
                 e.stopPropagation()
-                handleHistory(data.id, '1', data.name, data)
+                handleAction(data.id, '1', data.name, data)
               }}
             />
             <Button
@@ -94,7 +94,7 @@ const SavedCard = ({
               placeholder={'Delete'}
               onChange={(e) => {
                 e.stopPropagation()
-                handleHistory(data.id, '2', data.name, null)
+                handleAction(data.id, '2', data.name, null)
               }}
             />
           </div>

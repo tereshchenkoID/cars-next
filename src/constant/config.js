@@ -75,10 +75,6 @@ export const ROUTES_USER = {
     link: 'profile',
     text: 'navigation.profile',
   },
-  sale: {
-    link: '/profile/sale',
-    text: 'navigation.sale',
-  },
   favorite: {
     link: '/profile/favorite',
     text: 'navigation.favorite',
@@ -103,5 +99,9 @@ export const ROUTES_USER = {
     link: '/profile/settings',
     text: 'navigation.settings',
     icon: 'settings'
+  },
+  vehicles: {
+    link: '/profile/vehicles',
+    text: 'navigation.vehicles',
   }
 }

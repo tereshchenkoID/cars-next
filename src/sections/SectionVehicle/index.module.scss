@@ -1,0 +1,97 @@
+@import '@/scss/config';
+
+.block {
+  @include make-spacer(py, var(--gap-40));
+  
+  color: var(--color-grey-600);
+}
+
+.container {
+  @include make-spacer(mx, auto);
+  @include flex($direction: column);
+
+  gap: var(--gap-24);
+  max-width: rem(800px);
+
+  @include media-breakpoint-up(md) {
+    gap: var(--gap-32);
+  }
+}
+
+.grid {
+  @include flex($direction: column);
+
+  gap: var(--gap-24);
+}
+
+.footer {
+  @include make-spacer(mt, var(--gap-24));
+  @include flex($justify-content: flex-end);
+
+  border-top-width: rem(1px);
+  border-top-style: solid;
+
+  @include media-breakpoint-up(md) {
+    @include make-spacer(pt, var(--gap-24));
+  }
+}
+
+.images {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  align-items: center;
+  gap: var(--gap-16);
+
+  @include media-breakpoint-up(md) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.image {
+  cursor: pointer;
+}
+
+.list {
+  display: grid;
+  gap: var(--gap-24);
+
+  @include media-breakpoint-up(md) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.accept {
+  @include make-spacer(p, var(--gap-24));
+
+  display: grid;
+  align-items: center;
+  border-radius: var(--border-radius-8);
+  border: rem(1px) dashed var(--color-primary);
+  gap: var(--gap-8);
+
+  @include media-breakpoint-up(sm) {
+    grid-template-columns: 1fr auto;
+  }
+}
+
+.options {
+  @include make-spacer(mt, var(--gap-16));
+  @include flex($direction: column);
+
+  gap: var(--gap-12);
+}
+
+.button {
+  min-width: rem(100px);
+}
+
+.hr {
+  @include make-spacer(my, var(--gap-24));
+
+  border: 0;
+  background-color: var(--color-grey-200);
+
+  @include media-breakpoint-up(md) {
+    @include make-spacer(my, var(--gap-32));
+  }
+}

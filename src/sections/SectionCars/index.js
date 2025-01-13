@@ -23,6 +23,24 @@ import Sort from './Sort'
 
 import style from './index.module.scss'
 
+const TYPE = {
+  state: 'select',
+  vat_reclaimable: 'select',
+  discount: 'select',
+  year_from: 'select',
+  year_to: 'select',
+  price_from: 'field',
+  price_to: 'field',
+  mileage_from: 'field',
+  mileage_to: 'field',
+  category: 'checkbox',
+  body: 'checkbox',
+  fuel_type: 'checkbox',
+  transmission: 'checkbox',
+  eco: 'checkbox',
+  color: 'color'
+}
+
 const SectionsCars = ({ initialData }) => {
   const t = useTranslations()
   const filtersProps = useFilters(initialData)
@@ -125,7 +143,7 @@ const SectionsCars = ({ initialData }) => {
                           className={style.search}
                           aria-label={key}
                           title={t('remove')}
-                          onClick={() => handleChange(filters[key].type, key, TYPES.includes(filters[key].type) ? el : DEFAULT, true)}
+                          onClick={() => handleChange(TYPE[key], key, TYPES.includes(TYPE[key]) ? el : DEFAULT, true)}
                         >
                           <span>
                             {
@@ -161,7 +179,7 @@ const SectionsCars = ({ initialData }) => {
           </div>
 
           <h4>{t('verified_cars')}</h4>
-          {/* <pre className={style.pre}>{JSON.stringify(search, null, 2)}</pre> */}
+          {/* <pre className={style.pre}>{JSON.stringify(search.color, null, 2)}</pre> */}
 
           <div className={style.meta}>
             <Sort filtersProps={filtersProps} />

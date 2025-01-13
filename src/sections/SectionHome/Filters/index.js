@@ -128,7 +128,7 @@ const Filters = () => {
         />
         <Reference
           link={`${NAVIGATION.buy.link}${generateParams()}`}
-          classes={['primary', 'md']}
+          classes={['primary', 'md', style.button]}
           placeholder={t('offers')}
         />
       </div>

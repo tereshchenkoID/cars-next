@@ -17,13 +17,28 @@
     "saved": "Saved search PT",
     "last": "Last search PT",
     "orders": "Orders in progress PT",
-    "sitemap": "Sitemap PT"
+    "sitemap": "Sitemap PT",
+    "vehicles": "My vehicles PT"
   },
   "modal": {
     "login": "Welcome back PT",
     "registration": "Registration PT",
     "language": "Language PT",
     "restore": "Forgot your password?"
+  },
+  "month": {
+    "january": "january PT",
+    "february": "february PT",
+    "march": "march PT",
+    "april": "april PT",
+    "may": "may PT",
+    "june": "june PT",
+    "july": "july PT",
+    "august": "august PT",
+    "september": "september PT",
+    "october": "october PT",
+    "november": "november PT",
+    "december": "december PT"
   },
   "notification": {
     "login": "Don’t have an account? PT",
@@ -126,6 +141,7 @@
   "current_password": "Current password PT",
   "new_password": "New password PT",
   "phone": "Phone PT",
+  "vat": "Vat PT",
   "vat_id": "VAT ID PT",
   "vat_player": "I'm a VAT payer PT",
   "country": "Country PT",
@@ -134,8 +150,11 @@
   "not_deductible": "Not deductible PT",
   "general": "General PT",
   "details": "Details PT",
-  "comparison": "Comparison PT",
   "feature": "Features PT",
+  "comparison": "Comparison PT",
+  "contact": "Contact PT",
+  "upload": "Upload PT",
+  "price": "Price PT",
   "price_history": "Price history PT",
   "price_map": "Price map PT",
   "manufacture_registration": "Manufacture registration PT",
@@ -143,6 +162,8 @@
   "power": "Power PT",
   "location": "Location PT",
   "vehicle_id": "Vehicle ID PT",
+  "add_vehicle": "Add vehicle PT",
+  "photos": "Photos PT",
   "make": "Make PT",
   "doors": "Doors PT",
   "seats": "Seats PT",
@@ -169,6 +190,8 @@
   "not_active": "Not active PT",
   "reviews": "Reviews PT",
   "similar_cars": "Show similar cars PT",
+  "number_of_seats": "Number of seats PT",
+  "number_of_doors": "Number of doors PT",
   "features": {
     "1": {
       "0": "Other PT",
@@ -370,7 +393,7 @@
       "2": "Moto PT",
       "3": "Trucks PT"
     },
-    "vehicle_type": {
+    "body": {
       "0": "Vehicle type PT",
       "1": "Estate car PT",
       "2": "Sedans / saloons PT",
@@ -392,8 +415,19 @@
     "price": {
       "0": "Price PT"
     },
+    "price_type": {
+      "1": "Fixed PT",
+      "2": "Negotiable PT"
+    },
     "mileage": {
-      "0": "Mileage PT"
+      "0": "Mileage PT",
+      "1": "km PT",
+      "2": "m PT"
+    },
+    "power": {
+      "0": "Power PT",
+      "1": "hp PT",
+      "2": "kw PT"
     },
     "fuel_type": {
       "0": "Fuel PT",

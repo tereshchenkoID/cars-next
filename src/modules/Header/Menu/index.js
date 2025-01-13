@@ -1,10 +1,9 @@
 "use client"
 
 import { useEffect, useState, useRef } from 'react'
-import { usePathname } from 'next/navigation';
+import { usePathname } from 'next/navigation'
 import { useOutsideClick } from '@/hooks/useOutsideClick'
 import { useTranslations } from 'next-intl'
-import Link from 'next/link'
 
 import classNames from 'classnames'
 
@@ -12,6 +11,7 @@ import { NAVIGATION } from '@/constant/config'
 
 import { overflowBody } from '@/helpers/overflowBody'
 
+import Link from 'next/link'
 import Reference from '@/components/Reference'
 import Button from '@/components/Button'
 import Logo from '@/components/Logo'

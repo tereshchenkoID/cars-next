@@ -3,10 +3,8 @@
 import { useTranslations } from 'next-intl'
 import { useState } from 'react'
 
-import classNames from 'classnames'
-
-import Icon from '@/components/Icon'
 import Container from "@/components/Container"
+import Accordion from '@/modules/Accordion'
 import Contact from './Contact'
 import Security from './Security'
 import Billing from './Billing'
@@ -18,7 +16,7 @@ const SectionSettings = () => {
   const t = useTranslations()
   const [show, setShow] = useState({})
 
-  const handleChange = (index) => {
+  const handleToggle = (index) => {
     setShow((prev) => ({
       ...prev,
       [index]: !prev[index],
@@ -27,134 +25,44 @@ const SectionSettings = () => {
 
   return (
     <section className={style.block}>
-      <Container classes={style.container}>
-        <h1>{t('my_profile')}</h1>
-        <div
-          className={
-            classNames(
-              style.tab,
-              show[0] && style.active
-            )
-          }
-        >
-          <div
-            className={style.head}
-            role={'button'}
-            onClick={() => handleChange(0)}
+      <Container>
+        <div className={style.container}>
+          <h1>{t('my_profile')}</h1>
+          <Accordion
+            data={show[0]}
+            action={() => handleToggle(0)}
+            icon={'user'}
+            placeholder={t('contact_information')}
           >
-            <Icon
-              className={style.icon}
-              iconName={'user'}
-            />
-            <span>{t('contact_information')}</span>
-            <Icon
-              className={style.arrow}
-              iconName={'angle-down'}
-              width={16}
-              height={16}
-            />
-          </div>
-          <div className={style.body}>
-            <div className={style.content}>
-              <Contact />
-            </div>
-          </div>
-        </div>
+            <Contact />
+          </Accordion>
 
-        <div
-          className={
-            classNames(
-              style.tab,
-              show[1] && style.active
-            )
-          }
-        >
-          <div
-            className={style.head}
-            role={'button'}
-            onClick={() => handleChange(1)}
+          <Accordion
+            data={show[1]}
+            action={() => handleToggle(1)}
+            icon={'file'}
+            placeholder={t('billing_information')}
           >
-            <Icon
-              className={style.icon}
-              iconName={'file'}
-            />
-            <span>{t('billing_information')}</span>
-            <Icon
-              className={style.arrow}
-              iconName={'angle-down'}
-              width={16}
-              height={16}
-            />
-          </div>
-          <div className={style.body}>
-            <div className={style.content}>
-              <Billing />
-            </div>
-          </div>
-        </div>
+            <Billing />
+          </Accordion>
 
-        <div
-          className={
-            classNames(
-              style.tab,
-              show[2] && style.active
-            )
-          }
-        >
-          <div
-            className={style.head}
-            role={'button'}
-            onClick={() => handleChange(2)}
+          <Accordion
+            data={show[2]}
+            action={() => handleToggle(2)}
+            icon={'unlock'}
+            placeholder={t('change_password')}
           >
-            <Icon
-              className={style.icon}
-              iconName={'unlock'}
-            />
-            <span>{t('change_password')}</span>
-            <Icon
-              className={style.arrow}
-              iconName={'angle-down'}
-              width={16}
-              height={16}
-            />
-          </div>
-          <div className={style.body}>
-            <div className={style.content}>
-              <Security />
-            </div>
-          </div>
-        </div>
+            <Security />
+          </Accordion>
 
-        <div
-          className={
-            classNames(
-              style.tab,
-              show[3] && style.active
-            )
-          }
-        >
-          <div
-            className={style.head}
-            role={'button'}
-            onClick={() => handleChange(3)}
+          <Accordion
+            data={show[3]}
+            action={() => handleToggle(3)}
+            icon={'bell'}
+            placeholder={t('notification_settings')}
           >
-            <Icon
-              className={style.icon}
-              iconName={'bell'}
-            />
-            <span>{t('notification_settings')}</span>
-            <Icon
-              className={style.arrow}
-              iconName={'angle-down'}
-              width={16}
-              height={16}
-            />
-          </div>
-          <div className={style.body}>
-            <div className={style.content}>
-              <Notification />
-            </div>
-          </div>
+            <Notification />
+          </Accordion>
         </div>
       </Container>
     </section>

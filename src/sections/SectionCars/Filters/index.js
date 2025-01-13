@@ -184,11 +184,11 @@ const Filters = ({
               </div>
 
               <div className={style.section}>
-                <h6 className={style.subtitle}>{t('filters.vehicle_type.0')}</h6>
+                <h6 className={style.subtitle}>{t('filters.body.0')}</h6>
                 <FiltersMultiSelect
-                  placeholder={'vehicle_type'}
-                  options={filters.vehicle_type.options}
-                  data={search.vehicle_type}
+                  placeholder={'body'}
+                  options={filters.body.options}
+                  data={search.body}
                   onChange={handleChange}
                 />
               </div>

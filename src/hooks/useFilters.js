@@ -152,6 +152,8 @@ const useFilters = (initialData) => {
   }
 
   const handleChange = (type, key, value, update) => {
+    console.log(type, key, value, update)
+    
     const s = JSON.parse(JSON.stringify(search))
     let a = {}
 

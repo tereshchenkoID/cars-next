@@ -114,7 +114,7 @@ const Map = ({ data, next }) => {
               dataKey={'mileage'}
               tick={{ fill: '#979fad', fontSize: 12 }}
               tickFormatter={(mileage) => 
-                `${getFormatNumber(auth?.account?.language?.code, mileage)} ${data.mileage_data.mileage_unit}`
+                `${getFormatNumber(auth?.account?.language?.code, mileage)} ${t(`filters.mileage.${data.mileage_data.mileage_unit.id}`)}`
               }
             />
             <YAxis
@@ -182,7 +182,7 @@ const Map = ({ data, next }) => {
                 title={`${t('price_map')} ${el.id}`}
               >
                 <strong>{getFormatNumber(auth?.account?.language?.code, el.mileage)}</strong> 
-                <span>{data.mileage_data.mileage_unit}</span>
+                <span>{t(`filters.mileage.${data.mileage_data.mileage_unit.id}`)}</span>
                 <span>-</span>
                 <strong>{getFormatPrice(auth?.account?.language?.code, auth?.account?.currency?.code, el.price)}</strong>
               </button>
@@ -258,7 +258,7 @@ const Map = ({ data, next }) => {
                       height={16}
                       className={style.icon}
                     />
-                    <p>{el.mileage_data.mileage} {el.mileage_data.mileage_unit}</p>
+                    <p>{el.mileage_data.mileage} ({t(`filters.mileage.${el.mileage_data.mileage_unit.id}`)})</p>
                   </li>
                   <li 
                     className={
@@ -299,7 +299,7 @@ const Map = ({ data, next }) => {
                       height={16}
                       className={style.icon}
                     />
-                    <p>{el.power_data.power} {el.power_data.power_unit}</p>
+                    <p>{el.power_data.power} ({t(`filters.power.${el.power_data.power_unit.id}`)})</p>
                   </li>
                   <li className={style.option}>
                     <Icon

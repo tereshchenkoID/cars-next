@@ -7,13 +7,13 @@ import SectionHero from './SectionHero'
 import SectionContact from '../SectionContact'
 
 const SectionHome = ({ initialData }) => {
-  const { reviews } = initialData
+  const { reviews, cars } = initialData
 
   return (
     <>
       <SectionHero />
       <SectionCategories />
-      <SectionNew />
+      <SectionNew data={cars} />
       <SectionReviews data={reviews} />
       <SectionContact />
     </>

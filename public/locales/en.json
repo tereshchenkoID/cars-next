@@ -17,13 +17,28 @@
     "saved": "Saved search",
     "last": "Last search",
     "orders": "Orders in progress",
-    "sitemap": "Sitemap"
+    "sitemap": "Sitemap",
+    "vehicles": "My vehicles"
   },
   "modal": {
     "login": "Welcome back",
     "registration": "Registration",
     "language": "Language",
     "restore": "Forgot your password?"
+  },
+  "month": {
+    "january": "january",
+    "february": "february",
+    "march": "march",
+    "april": "april",
+    "may": "may",
+    "june": "june",
+    "july": "july",
+    "august": "august",
+    "september": "september",
+    "october": "october",
+    "november": "november",
+    "december": "december"
   },
   "notification": {
     "login": "Don’t have an account?",
@@ -126,6 +141,7 @@
   "current_password": "Current password",
   "new_password": "New password",
   "phone": "Phone",
+  "vat": "Vat",
   "vat_id": "VAT ID",
   "vat_player": "I'm a VAT payer",
   "country": "Country",
@@ -136,6 +152,9 @@
   "details": "Details",
   "feature": "Features",
   "comparison": "Comparison",
+  "contact": "Contact",
+  "upload": "Upload",
+  "price": "Price",
   "price_history": "Price history",
   "price_map": "Price map",
   "manufacture_registration": "Manufacture registration",
@@ -143,6 +162,8 @@
   "power": "Power",
   "location": "Location",
   "vehicle_id": "Vehicle ID",
+  "add_vehicle": "Add vehicle",
+  "photos": "Photos",
   "make": "Make",
   "doors": "Doors",
   "seats": "Seats",
@@ -169,6 +190,8 @@
   "not_active": "Not active",
   "reviews": "Reviews",
   "similar_cars": "Show similar cars",
+  "number_of_seats": "Number of seats",
+  "number_of_doors": "Number of doors",
   "features": {
     "1": {
       "0": "Other",
@@ -370,8 +393,8 @@
       "2": "Moto",
       "3": "Trucks"
     },
-    "vehicle_type": {
-      "0": "Vehicle type",
+    "body": {
+      "0": "Body type",
       "1": "Estate car",
       "2": "Sedans / saloons",
       "3": "Station Wagon",
@@ -389,8 +412,19 @@
     "price": {
       "0": "Price"
     },
+    "price_type": {
+      "1": "Fixed",
+      "2": "Negotiable"
+    },
     "mileage": {
-      "0": "Mileage"
+      "0": "Mileage",
+      "1": "km",
+      "2": "m"
+    },
+    "power": {
+      "0": "Power",
+      "1": "hp",
+      "2": "kw"
     },
     "fuel_type": {
       "0": "Fuel",

@@ -209,7 +209,7 @@ const SectionAdvancedSearch = ({ options }) => {
 
           <div className={style.wrapper}>
             <div className={style.head}>
-              <h3 className={style.title}>{t('filters.vehicle_type.0')}</h3>
+              <h3 className={style.title}>{t('filters.body.0')}</h3>
             </div>
             <div className={style.section}>
               <div
@@ -221,7 +221,7 @@ const SectionAdvancedSearch = ({ options }) => {
                 }
               >
                 {
-                  Object.entries(filters.vehicle_type.options).map(([optionKey]) => (
+                  Object.entries(filters.body.options).map(([optionKey]) => (
                     (optionKey !== '0' && optionKey !== '5') &&
                     <Checkbox
                       key={optionKey}
@@ -230,11 +230,11 @@ const SectionAdvancedSearch = ({ options }) => {
                         url: `/images/vehicle-type/${optionKey}.webp`,
                         width: 108,
                         height: 48,
-                        alt: t(`filters.vehicle_type.${optionKey}`)
+                        alt: t(`filters.body.${optionKey}`)
                       }}
-                      placeholder={optionKey === DEFAULT ? t('all') : t(`filters.vehicle_type.${optionKey}`)}
-                      data={search['vehicle_type']?.value?.includes(optionKey) ? ACTIVE : DEFAULT}
-                      onChange={() => handleChange(filters.vehicle_type.type, 'vehicle_type', optionKey)}
+                      placeholder={optionKey === DEFAULT ? t('all') : t(`filters.body.${optionKey}`)}
+                      data={search['body']?.value?.includes(optionKey) ? ACTIVE : DEFAULT}
+                      onChange={() => handleChange(filters.body.type, 'body', optionKey)}
                     />
                   ))
                 }
@@ -267,7 +267,7 @@ const SectionAdvancedSearch = ({ options }) => {
 
           <div className={style.wrapper}>
             <div className={style.head}>
-              <h3 className={style.title}>{t('filters.vehicle_type.0')}</h3>
+              <h3 className={style.title}>{t('engine')}</h3>
             </div>
             <div className={style.section}>
               <h6 className={style.subtitle}>{t('filters.fuel_type.0')}</h6>

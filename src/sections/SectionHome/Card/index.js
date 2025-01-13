@@ -13,11 +13,11 @@ const Card = ({ data }) => {
 
   return (
     <Link
-      href={`${NAVIGATION.buy.link}?vehicle_type=${data}`}
+      href={`${NAVIGATION.buy.link}?body=${data}`}
       className={style.block}
     >
       <strong className={style.headline}>
-        <span className={style.text}>{t(`filters.vehicle_type.${data}`)}</span>
+        <span className={style.text}>{t(`filters.body.${data}`)}</span>
         <Icon
           className={style.arrow}
           iconName={'arrow-right'}
@@ -27,10 +27,10 @@ const Card = ({ data }) => {
       </strong>
       <Image
         className={style.image}
-        src={`/images/vehicle-type/${data}.webp`}
+        src={`/images/body/${data}.webp`}
         width={108}
         height={48}
-        alt={t(`filters.vehicle_type.${data}`)}
+        alt={t(`filters.body.${data}`)}
       />
     </Link>
   )

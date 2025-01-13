@@ -10,6 +10,12 @@
   overflow: hidden;
   color: var(--color-primary);
   gap: var(--gap-8);
+
+  &.transparent {
+    background-color: transparent;
+    border-radius: 0;
+    box-shadow: none;
+  }
 }
 
 .item {
