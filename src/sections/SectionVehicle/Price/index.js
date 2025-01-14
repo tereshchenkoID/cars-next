@@ -98,7 +98,7 @@ const Price = ({
         }
         <div className={style.accept}>
           <div>
-            <p>Price recommendation</p>
+            <p>{t('price_recommendation')}</p>
             <h5>{getFormatPrice(auth?.account?.language?.code, auth?.account?.currency?.code, data?.price_data?.price_recommended)}</h5>
           </div>
           <Button
@@ -107,7 +107,10 @@ const Price = ({
             onChange={() => handleChange('price_data.price', data.price_data.price_recommended)}
           />
         </div>
-        <Comparison data={data} />
+        {
+          data.price_score &&
+          <Comparison data={data} />
+        }
       </div>
     </Accordion>
   )

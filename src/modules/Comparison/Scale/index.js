@@ -8,18 +8,22 @@ import { getFormatPrice } from '@/helpers/getFormatPrice'
 
 import style from './index.module.scss'
 
-const Scale = ({min, max, data, idx}) => {
+const Scale = ({min, max, data, idx, period}) => {
   const t = useTranslations()
   const auth = useSelector((state) => state.auth)
-  const isWithinRange = useMemo(() => data > min && data <= max, [data, min, max])
+  const value = useMemo(() => {
+    if (data < min) return 0
+    if (data > max) return 100
+    return ((data - min) / (max - min)) * 100
+  }, [data, min, max])
 
   return (
     <div className={style.block}>
       {
-        isWithinRange &&
+        period === idx &&
         <div
           style={{
-            left: `${((data - min) / (max - min)) * 100}%`
+            left: `${value}%`
           }}
           className={style.marker}
         >

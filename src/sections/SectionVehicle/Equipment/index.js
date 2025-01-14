@@ -3,22 +3,23 @@
 import { useSelector } from 'react-redux'
 import { useTranslations } from 'next-intl'
 
+import classNames from 'classnames'
+
 import { ACTIVE, DEFAULT } from "@/constant/config"
 
 import Label from '@/components/Label'
 import Field from '@/components/Field'
-import Select from '@/components/Select'
 import Button from '@/components/Button'
 import Checkbox from '@/components/Checkbox'
 import Accordion from '@/modules/Accordion'
 
 import style from '../index.module.scss'
 
-const Equipment = ({ 
+const Equipment = ({
   options,
   data,
   toggle,
-  handleToggle, 
+  handleToggle,
   handleChange,
   handleFeature,
   isFeatureExist
@@ -35,27 +36,6 @@ const Equipment = ({
     >
       <div className={style.grid}>
         <div className={style.list}>
-          <div className={style.wrapper}>
-            <Label
-              data={t('body_color')}
-              isRequired={true}
-            />
-            <Select
-              id={'select_color'}
-              options={
-                Object.entries(filters.color.options).map(([optionKey, optionValue]) => ({
-                  value: optionKey,
-                  label: optionKey === DEFAULT ? t('all') : (filters.translation === DEFAULT ? optionValue : t(`filters.color.${optionKey}`)),
-                }))
-              }
-              data={data.color.id || DEFAULT}
-              onChange={(value) => handleChange('color', {
-                id: value,
-                name: t(`filters.color.${value}`)
-              })}
-            />
-          </div>
-
           <div className={style.wrapper}>
             <Label
               data={t('number_of_seats')}
@@ -82,6 +62,36 @@ const Equipment = ({
               onChange={(value) => handleChange('number_of_doors', value)}
               min={0}
             />
+          </div>
+        </div>
+
+        <div className={style.wrapper}>
+          <Label
+            data={t('body_color')}
+            isRequired={true}
+          />
+          <div className={style.colors}>
+            {
+              Object.entries(filters.color.options).map(([optionKey, optionValue]) => (
+                <button
+                  key={optionKey}
+                  type="button"
+                  aria-label={t(`filters.color.${optionKey}`)}
+                  style={{ backgroundColor: optionValue }}
+                  title={optionKey === DEFAULT ? t('all') : t(`filters.color.${optionKey}`)}
+                  className={
+                    classNames(
+                      style.color,
+                      data.color.id === optionKey && style.active
+                    )
+                  }
+                  onClick={() => handleChange('color', {
+                    id: optionKey,
+                    name: optionValue
+                  })}
+                />
+              ))
+            }
           </div>
         </div>
 

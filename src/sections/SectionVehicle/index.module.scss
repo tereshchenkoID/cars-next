@@ -95,3 +95,58 @@
     @include make-spacer(my, var(--gap-32));
   }
 }
+
+.colors {
+  @include flex($align-items: center, $wrap: wrap);
+
+  gap: var(--gap-10);
+}
+
+.color {
+  @include transition;
+  @include size(rem(20px));
+
+  position: relative;
+  border-radius: 50%;
+  overflow: hidden;
+  overflow: visible;
+  opacity: 0.8;
+
+  &::before,
+  &::after {
+    position: absolute;
+    border-radius: 50%;
+    content: '';
+  }
+
+  &::before {
+    @include transition;
+
+    inset: rem(-3px);
+    background-color: var(--color-white);
+    border: rem(1px) solid var(--color-primary);
+    opacity: 0;
+    content: '';
+  }
+
+  &::after {
+    position: absolute;
+    inset: 0;
+    background-color: inherit;
+    border: rem(1px) solid var(--color-grey-400);
+  }
+
+  @include hover {
+
+    &:hover {
+      opacity: 1;
+    }
+  }
+
+  &.active {
+
+    &::before {
+      opacity: 1;
+    }
+  }
+}

@@ -1,4 +1,5 @@
 import { useTranslations } from 'next-intl'
+import { useMemo } from 'react'
 import { useSelector } from 'react-redux'
 
 import { getFormatPrice } from '@/helpers/getFormatPrice'
@@ -34,8 +35,23 @@ const LABELS = [
 const Comparison = ({ data }) => {
   const t = useTranslations()
   const auth = useSelector((state) => state.auth)
-  const options = data.price_score.options.reverse(-1)
-
+  const price = Number(data.price_data.price)
+  const options = data.price_score.options.map(Number)
+  const period = useMemo(() => {
+    if (price < options[0]) {
+      return 1
+    }
+    if (price >= options[options.length - 1]) {
+      return options.length - 1 
+    }
+  
+    const index = options.findIndex((value, idx) =>
+      price >= value && price < (options[idx + 1] ?? Infinity)
+    )
+  
+    return index + 1
+  }, [options, data])
+  
   return (
     <div className={style.block}>
       <p className={style.title}>
@@ -67,7 +83,8 @@ const Comparison = ({ data }) => {
                 idx={idx}
                 min={Number(options[idx === 0 ? 0 : idx - 1])}
                 max={Number(el)}
-                data={Number(data.price_data.price)}
+                data={price}
+                period={period}
               />
             )
           }

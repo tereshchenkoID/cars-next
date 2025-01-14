@@ -83,12 +83,12 @@ const DATA = {
     "cars": 72,
     "counts": 102,
     "options": [
-      "39184",
-      "35699",
-      "32213",
-      "28727",
+      "21755",
       "25241",
-      "21755"
+      "28727",
+      "32213",
+      "35699",
+      "39184"
     ]
   },
   "category": {
@@ -138,7 +138,7 @@ const DATA = {
 const SectionVehicle = ({ data, options }) => {
   const t = useTranslations()
   const [formData, setFormData] = useState(DATA)
-  const [show, setShow] = useState({ 3: true })
+  const [show, setShow] = useState({ 0: true })
 
   const handleToggle = (index) => {
     setShow((prev) => ({
@@ -181,11 +181,10 @@ const SectionVehicle = ({ data, options }) => {
 
   return (
     <section className={style.block}>
-      {/* <pre className={style.pre}>{JSON.stringify(formData.mileage_data, null, 2)}</pre> */}
+      <pre className={style.pre}>{JSON.stringify(formData.color, null, 2)}</pre>
       <Container>
         <div className={style.container}>
           <h1>{t('add_vehicle')}</h1>
-
           <Photos
             data={formData}
             toggle={show}
