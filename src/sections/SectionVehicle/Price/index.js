@@ -111,6 +111,12 @@ const Price = ({
           data.price_score &&
           <Comparison data={data} />
         }
+        <div className={style.footer}>
+          <Button
+            classes={['primary', style.button]}
+            placeholder={t('save')}
+          />
+        </div>
       </div>
     </Accordion>
   )

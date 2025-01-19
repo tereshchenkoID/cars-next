@@ -14,7 +14,7 @@ import style from './index.module.scss'
 
 const SectionSettings = () => {
   const t = useTranslations()
-  const [show, setShow] = useState({})
+  const [show, setShow] = useState({0: true})
 
   const handleToggle = (index) => {
     setShow((prev) => ({

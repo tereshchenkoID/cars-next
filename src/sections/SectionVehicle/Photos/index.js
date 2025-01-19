@@ -1,20 +1,61 @@
 "use client"
 
 import { useTranslations } from 'next-intl'
+import { useState } from 'react'
+import { useModal } from '@/context/ModalContext'
+
+import { ReactPhotoEditor } from 'react-photo-editor'
 
 import Image from 'next/image'
+import Button from '@/components/Button';
 import Accordion from '@/modules/Accordion'
 
 import ImageUploader from './ImageUploader'
+import RulesModal from './RulesModal'
 
+import './default.scss'
 import style from '../index.module.scss'
 
-const Photos = ({ 
+const Photos = ({
   data,
   toggle,
-  handleToggle, 
+  handleChange,
+  handleToggle,
 }) => {
+  const COUNTS = 15
   const t = useTranslations()
+  const { showModal, closeModal } = useModal()
+  const [file, setFile] = useState()
+  const [showEditor, setShowEditor] = useState(false)
+
+  const urlToFile = async (url, filename) => {
+    const response = await fetch(url);
+    const blob = await response.blob();
+    return new File([blob], 'editor', { type: blob.type })
+  }
+
+  const openEditor = async (image) => {
+    const blob = await urlToFile(image)
+    setFile(blob)
+    setShowEditor(true)
+  }
+
+  const hideEditor = () => {
+    setShowEditor(false)
+  }
+
+  const handleSave = async (editedDataURL) => {
+    if (!file) return
+
+    const editedBlob = await fetch(editedDataURL).then((res) => res.blob())
+
+    console.log(editedBlob, editedDataURL)
+  }
+
+  const handleDelete = (idx) => {
+    const updatedImages = data.images.filter((_, index) => index !== idx)
+    handleChange('images', updatedImages)
+  }
 
   return (
     <Accordion
@@ -24,6 +65,16 @@ const Photos = ({
       placeholder={t('photos')}
     >
       <>
+        <div className={style.head}>
+          <div>
+            {data.images.length || 0} - {COUNTS} {t('rules.upload_photo.title')}
+          </div>
+          <Button
+            classes={['reference']}
+            placeholder={t('rules.upload_photo.text')}
+            onChange={() => showModal(<RulesModal />)}
+          />
+        </div>
         <ImageUploader />
         {
           data.images.length > 0 &&
@@ -34,7 +85,7 @@ const Photos = ({
                 data.images.map((el, idx) =>
                   <div
                     key={idx}
-                    className={style.image}
+                    className={style.picture}
                   >
                     <Image
                       src={el}
@@ -44,12 +95,36 @@ const Photos = ({
                       priority={false}
                       alt={`${t('image')} ${idx}`}
                     />
+                    <div className={style.toggle}>
+                      <Button
+                        icon={'edit'}
+                        classes={['primary', 'square', 'xs']}
+                        onChange={() => openEditor(el)}
+                      />
+                      <Button
+                        icon={'trash'}
+                        classes={['primary', 'square', 'xs']}
+                        onChange={() => handleDelete(idx)}
+                      />
+                    </div>
                   </div>
                 )
               }
             </div>
           </>
         }
+        <ReactPhotoEditor
+          open={showEditor}
+          onClose={hideEditor}
+          file={file}
+          allowColorEditing={true}
+          allowFlip={true}
+          allowRotate={true}
+          allowZoom={true}
+          onSaveImage={handleSave}
+          downloadOnSave={false}
+          exportOptions={{ type: "image/webp", quality: 0.9 }}
+        />
       </>
     </Accordion>
   )

@@ -1,14 +1,13 @@
 @import '@/scss/config';
 
 .block {
-  @include size(100%);
+  @include size(rem(360px), 100%);
   @include flex($direction: column);
 
   border-radius: var(--border-radius-8);
   background-color: var(--color-white);
   box-shadow: var(--box-shadow-4-16);
   overflow: hidden;
-  max-width: rem(360px);
   font-size: rem(14px);
 }
 

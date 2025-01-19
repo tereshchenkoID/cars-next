@@ -1,7 +1,6 @@
 "use client"
 
 import React, { useState } from 'react'
-import { useSelector } from 'react-redux'
 import { useTranslations } from 'next-intl'
 
 import Container from '@/components/Container'
@@ -181,13 +180,14 @@ const SectionVehicle = ({ data, options }) => {
 
   return (
     <section className={style.block}>
-      <pre className={style.pre}>{JSON.stringify(formData.color, null, 2)}</pre>
+      {/* <pre className={style.pre}>{JSON.stringify(formData.color, null, 2)}</pre> */}
       <Container>
         <div className={style.container}>
           <h1>{t('add_vehicle')}</h1>
           <Photos
             data={formData}
             toggle={show}
+            handleChange={handleChange}
             handleToggle={handleToggle}
           />
 

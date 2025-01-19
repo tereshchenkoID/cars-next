@@ -224,6 +224,7 @@ const Billing = () => {
           rules={[
             validationRules.required,
             validationRules.minLength(2),
+            validationRules.noNumbers
           ]}
           onValidationChange={(isValid) =>
             handleChange('city', { value: filter.city.value, isValid })
@@ -266,6 +267,7 @@ const Billing = () => {
           rules={[
             validationRules.required,
             validationRules.minLength(2),
+            validationRules.noNumbers
           ]}
           onValidationChange={(isValid) =>
             handleChange('street', { value: filter.street.value, isValid })
@@ -304,6 +306,7 @@ const Billing = () => {
               validationRules.required,
               validationRules.minLength(4),
               validationRules.maxLength(8),
+              validationRules.noLetters
             ]}
             onValidationChange={(isValid) =>
               handleChange('postal_code', { value: filter.postal_code.value, isValid })

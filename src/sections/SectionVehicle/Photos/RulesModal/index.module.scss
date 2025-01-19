@@ -1,0 +1,43 @@
+@import '@/scss/config';
+
+.block {
+  font-size: rem(14px);
+
+  @include media-breakpoint-up(md) {
+    width: rem(600px);
+  }
+}
+
+.step {
+  display: none;
+  grid-gap: var(--gap-24);
+
+  &.active {
+    display: grid;
+  }
+}
+
+.image {
+  @include make-spacer(mx, auto);
+  @include make-spacer(mb, var(--gap-8));
+
+  height: auto;
+}
+
+.grid,
+.footer {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: var(--gap-16);
+  align-items: center;
+}
+
+.pagination {
+  @include make-spacer(my, var(--gap-24));
+
+  text-align: center;
+}
+
+.footer {
+  justify-items: flex-start;
+}

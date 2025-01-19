@@ -100,7 +100,7 @@ const ImageUploader = ({ onUpload }) => {
             width={24}
             height={24}
           />
-          <p>Drag & Drop or Add Images</p>
+          <p>{t('upload_photo')}</p>
         </label>
 
         {previewImages.length > 0 &&
@@ -115,11 +115,13 @@ const ImageUploader = ({ onUpload }) => {
                     src={src}
                     alt={`Preview ${index}`}
                   />
-                  <Button
-                    classes={['primary', 'sm', 'square', style.remove]}
-                    icon={'xmark'}
-                    onChange={() => handleRemoveImage(index)}
-                  />
+                  <div className={style.remove}>
+                    <Button
+                      classes={['primary', 'sm', 'square']}
+                      icon={'xmark'}
+                      onChange={() => handleRemoveImage(index)}
+                    />
+                  </div>
                 </div>
               ))}
             </div>

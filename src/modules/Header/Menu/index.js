@@ -27,7 +27,10 @@ const MENU = [
   NAVIGATION.reviews,
   {
     ...NAVIGATION.services,
-    submenu: [],
+    submenu: [
+      NAVIGATION.new_auto,
+      NAVIGATION.how_it_works,
+    ],
   },
   NAVIGATION.about_us
 ]

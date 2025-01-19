@@ -31,7 +31,10 @@ const MENU = [
   },
   {
     title: 'services',
-    submenu: []
+    submenu: [
+      NAVIGATION.new_auto,
+      NAVIGATION.how_it_works,
+    ]
   },
   {
     title: 'company',

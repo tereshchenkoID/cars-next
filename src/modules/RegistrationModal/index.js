@@ -167,6 +167,8 @@ const RegistrationModal = () => {
             value={filter.name.value}
             rules={[
               validationRules.required,
+              validationRules.minLength(2),
+              validationRules.noNumbers
             ]}
             onValidationChange={(isValid) =>
               handleChange('name', { value: filter.name.value, isValid })
@@ -184,6 +186,8 @@ const RegistrationModal = () => {
             value={filter.surname.value}
             rules={[
               validationRules.required,
+              validationRules.minLength(2),
+              validationRules.noNumbers
             ]}
             onValidationChange={(isValid) =>
               handleChange('surname', { value: filter.surname.value, isValid })
@@ -240,6 +244,7 @@ const RegistrationModal = () => {
             value={filter.postal_code.value}
             rules={[
               validationRules.required,
+              validationRules.noLetters
             ]}
             onValidationChange={(isValid) =>
               handleChange('postal_code', { value: filter.postal_code.value, isValid })

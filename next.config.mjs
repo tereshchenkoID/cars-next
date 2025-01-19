@@ -33,7 +33,7 @@ const nextConfig = {
         hostname: 'carvago.com',
         port: '',
         pathname: '/_next/**',
-      },
+      }
     ],
   },
   // next.config.js 

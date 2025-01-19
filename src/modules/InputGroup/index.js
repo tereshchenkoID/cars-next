@@ -1,5 +1,4 @@
 import { useState, cloneElement, useEffect } from 'react'
-
 import classNames from 'classnames'
 
 import Icon from '@/components/Icon'
@@ -14,6 +13,7 @@ const InputGroup = ({
   onValidationChange,
 }) => {
   const [error, setError] = useState('')
+  const [touched, setTouched] = useState(false)
 
   const validate = (value) => {
     for (let rule of rules) {
@@ -29,29 +29,37 @@ const InputGroup = ({
   }
 
   useEffect(() => {
-    validate(value)
+    if (value !== '') {
+      validate(value)
+      setTouched(true)
+    }
+    else {
+      if(touched) {
+        validate(value)
+      }
+    }
   }, [value])
 
   return (
     <div
-      className={
-        classNames(
-          style.block,
-          style[error ? 'warning' : 'success']
-        )
-      }
+      className={classNames(
+        style.block,
+        touched && style[error ? 'warning' : 'success']
+      )}
     >
       {label && <label className={style.label}>{label}</label>}
       <div className={style.field}>
-        <Icon
-          className={style.status}
-          iconName={error ? 'warning' : 'success'}
-          width={16}
-          height={16}
-        />
+        {touched && (
+          <Icon
+            className={style.status}
+            iconName={error ? 'warning' : 'success'}
+            width={16}
+            height={16}
+          />
+        )}
         {cloneElement(children)}
       </div>
-      {error && <span className={style.rules}>{error}</span>}
+      {touched && error && <span className={style.rules}>{error}</span>}
     </div>
   )
 }

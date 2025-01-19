@@ -5,17 +5,18 @@ import { useTranslations } from 'next-intl'
 import Label from '@/components/Label'
 import Field from '@/components/Field'
 import Accordion from '@/modules/Accordion'
+import Button from '@/components/Button'
 
 import style from '../index.module.scss'
 
-const Contact = ({ 
+const Contact = ({
   data,
   toggle,
-  handleToggle, 
-  handleChange 
+  handleToggle,
+  handleChange
 }) => {
   const t = useTranslations()
- 
+
   return (
     <Accordion
       data={toggle[4]}
@@ -47,6 +48,12 @@ const Contact = ({
               onChange={(value) => handleChange('contact.surname', value)}
             />
           </div>
+        </div>
+        <div className={style.footer}>
+          <Button
+            classes={['primary', style.button]}
+            placeholder={t('save')}
+          />
         </div>
       </div>
     </Accordion>

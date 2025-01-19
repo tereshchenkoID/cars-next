@@ -61,6 +61,7 @@ const Contact = () => {
           rules={[
             validationRules.required,
             validationRules.minLength(2),
+            validationRules.noNumbers
           ]}
           onValidationChange={(isValid) =>
             handleChange('name', { value: filter.name.value, isValid })
@@ -79,6 +80,7 @@ const Contact = () => {
           rules={[
             validationRules.required,
             validationRules.minLength(2),
+            validationRules.noNumbers
           ]}
           onValidationChange={(isValid) =>
             handleChange('surname', { value: filter.surname.value, isValid })
