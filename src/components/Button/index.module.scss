@@ -1,5 +1,5 @@
-@import '@/scss/config';
-@import '@/scss/modules/button';
+@use '@/scss/config' as *;
+@use '@/scss/modules/button' as *;
 
 .block {
   @include button;

@@ -1,7 +1,8 @@
 import SectionVehicle from '@/sections/SectionVehicle'
 import { fetchData } from '@/utils/fetchData'
 
-const Vehicle = async ({ params: { id } }) => {
+const Vehicle = async ({ params }) => {
+  const { id } = await params
   const [data, options] = await Promise.all([
     fetchData(`item/${id}`),
     fetchData('filters/options')

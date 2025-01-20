@@ -30,7 +30,7 @@ async function postData(endpoint, searchParams, cookies) {
 
 const Favorite = async ({ searchParams }) => {
   const cookies = await getServerSession(authOptions)
-  const data = await postData('user/favorites/', searchParams, cookies)
+  const data = await postData('user/favorites/', await searchParams, cookies)
 
   return (
     <SectionFavorites initialData={data} />

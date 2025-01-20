@@ -16,7 +16,7 @@ const Avatar = ({ size, src, alt }) => {
       {
         src 
           ?
-            <img 
+            <img
               className={style.image}
               src={src} 
               loading={'lazy'}

@@ -95,6 +95,11 @@
       "engine": "Engine PT"
     }
   },
+  "cancel": "Cancel PT",
+  "rotation": "Rotation PT",
+  "contrast": "Contrast PT",
+  "saturate": "Saturation PT",
+  "brightness": "Brightness PT",
   "upload_photo": "Drag & Drop or add images PT",
   "cars": "Cars PT",
   "verified_cars": "Verified cars PT",

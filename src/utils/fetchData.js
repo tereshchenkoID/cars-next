@@ -1,8 +1,9 @@
-export async function fetchData(url) {
+export async function fetchData(url, options = {}) {
   try {
     const res = await fetch(`${process.env.API_BASE_URL}/${url}`, 
-      {      
-        cache: 'no-cache',
+      {  
+        ...options
+        // cache: 'no-cache',
         // credentials: 'include',
       }
     )

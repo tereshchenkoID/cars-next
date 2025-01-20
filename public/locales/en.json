@@ -95,6 +95,11 @@
       "engine": "Engine"
     }
   },
+  "cancel": "Cancel",
+  "rotation": "Rotation",
+  "contrast": "Contrast",
+  "saturate": "Saturation",
+  "brightness": "Brightness",
   "upload_photo": "Drag & Drop or add images",
   "cars": "Cars",
   "verified_cars": "Verified cars",

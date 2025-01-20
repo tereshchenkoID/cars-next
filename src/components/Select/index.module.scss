@@ -1,4 +1,4 @@
-@import '@/scss/config';
+@use '@/scss/config' as *;
 
 .block {
   @include size(100%, rem(40px));
@@ -10,4 +10,15 @@
     pointer-events: none;
     user-select: none;
   }
+}
+
+.loading {
+  @include flex($align-items: center);
+  @include make-spacer(pl, rem(14px));
+
+  height: 100%;
+  border-radius: var(--border-radius-4);
+  border: rem(1px) solid var(--color-grey-400);
+  font-weight: var(--typography-medium);
+  font-size: rem(13px);
 }

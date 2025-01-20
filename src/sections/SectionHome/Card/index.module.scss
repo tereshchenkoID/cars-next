@@ -1,7 +1,7 @@
-@import '@/scss/config';
+@use '@/scss/config' as *;
 
 .block {
-  @include size(100%, rem(128px));
+  @include size(rem(215px), rem(128px));
   @include flex(center, center, column);
   @include make-spacer(p, var(--gap-16));
 
@@ -9,7 +9,6 @@
   border-radius: var(--border-radius-8);
   background-color: var(--color-white);
   box-shadow: var(--box-shadow-4-16);
-  max-width: rem(215px);
   overflow: hidden;
   border-width: rem(1px);
   border-style: solid;

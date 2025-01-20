@@ -33,7 +33,8 @@ const Field = ({
       <input
         className={style.input}
         type={type || 'text'}
-        value={data === null || undefined ? "" : data}
+        value={data || ''}
+        // value={data === null || undefined ? "" : data}
         onChange={e => {
           onChange(e.currentTarget.value)
         }}

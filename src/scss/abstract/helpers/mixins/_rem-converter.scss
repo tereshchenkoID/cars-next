@@ -1,4 +1,6 @@
+@use 'sass:meta';
 @use 'sass:math';
+@use "sass:list";
 
 //
 // Ease convert px to rem
@@ -10,18 +12,17 @@ $rem-px-only: false !default;
 
 @function rem-separator($list, $separator: false) {
   @if $separator == 'comma' or $separator == 'space' {
-    @return append($list, null, $separator);
+    @return list.append($list, null, $separator);
   }
 
-  @if function-exists('list-separator') == true {
-    @return list-separator($list);
+  @if meta.function-exists('list-separator') {
+    @return list.separator($list);
   }
 
-  // list-separator polyfill by Hugo Giraudel (https://sass-compatibility.github.io/#list_separator_function)
   $test-list: ();
 
   @each $item in $list {
-    $test-list: append($test-list, $item, space);
+    $test-list: list.append($test-list, $item, space);
   }
 
   @return if($test-list == $list, space, comma);
@@ -36,33 +37,33 @@ $rem-px-only: false !default;
   $separator: rem-separator($values);
 
   @each $value in $values {
-    @if type-of($value) == 'number' and unit($value) == 'rem' and $to == 'px' {
-      $result: append($result, $value / 1rem * $rem-baseline, $separator);
+    @if meta.type-of($value) == 'number' and math.unit($value) == 'rem' and $to == 'px' {
+      $result: list.append($result, $value / 1rem * $rem-baseline, $separator);
     }
 
     @else if
-      type-of($value) ==
+      meta.type-of($value) ==
       'number' and
-      unit($value) ==
+      math.unit($value) ==
       'px' and
       $to ==
       'rem' {
-      $result: append($result, math.div($value, $rem-baseline) * 1rem, $separator);
+      $result: list.append($result, math.div($value, $rem-baseline) * 1rem, $separator);
     }
 
-    @else if type-of($value) == 'list' {
+    @else if meta.type-of($value) == 'list' {
       $value-separator: rem-separator($value);
       $value: rem-convert($to, $value...);
       $value: rem-separator($value, $value-separator);
-      $result: append($result, $value, $separator);
+      $result: list.append($result, $value, $separator);
     }
 
     @else {
-      $result: append($result, $value, $separator);
+      $result: list.append($result, $value, $separator);
     }
   }
 
-  @return if(length($result) == 1, nth($result, 1), $result);
+  @return if(list.length($result) == 1, list.nth($result, 1), $result);
 }
 
 @function rem($values...) {

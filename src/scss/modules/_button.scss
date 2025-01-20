@@ -1,3 +1,5 @@
+@use '@/scss/config' as *;
+
 @mixin button {
 	--icon-size: 24px;
 	--button-height: 48px;

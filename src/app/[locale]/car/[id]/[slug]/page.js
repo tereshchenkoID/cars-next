@@ -8,7 +8,8 @@ export async function generateMetadata() {
   return await fetchMetaTags('car')
 }
 
-const Car = async ({ params: { id } }) => {
+const Car = async ({ params }) => {
+  const { id } = await params
   const data = await fetchData(`item/${id}`)
   const nextId = data.price_map?.find(option => option.selected)?.id
   const next = nextId ? await fetchData(`item/${nextId}`) : null

@@ -54,7 +54,7 @@ async function postData(endpoint, searchParams, cookies) {
 
 const Cars = async ({ searchParams }) => {
   const cookies = await getServerSession(authOptions)
-  const data = await postData('filters/search/', searchParams, cookies)
+  const data = await postData('filters/search/', await searchParams, cookies)
 
   const jsonLd = {
     "@context": "https://schema.org",

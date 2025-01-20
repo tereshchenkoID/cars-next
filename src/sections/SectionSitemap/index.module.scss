@@ -1,4 +1,4 @@
-@import '@/scss/config';
+@use '@/scss/config' as *;
 
 .section {
   @include make-spacer(py, var(--gap-40));

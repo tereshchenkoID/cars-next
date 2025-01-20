@@ -1,11 +1,12 @@
 @use 'rem-converter' as *;
+@use "sass:list";
 
 @function get-prop-name($prop) {
-  @if (index((m, mx, my, mt, mb, ml, mr), $prop)) {
+  @if (list.index((m, mx, my, mt, mb, ml, mr), $prop)) {
     @return margin;
   }
 
-  @else if (index((p, px, py, pt, pb, pl, pr), $prop)) {
+  @else if (list.index((p, px, py, pt, pb, pl, pr), $prop)) {
     @return padding;
   }
 
@@ -17,35 +18,35 @@
 @function get-prop-postfix-group($prop) {
   $postfix-group: ();
 
-  @if (index((pl, ml, mx, px), $prop)) {
-    $postfix-group: append($postfix-group, -left);
+  @if (list.index((pl, ml, mx, px), $prop)) {
+    $postfix-group: list.append($postfix-group, -left);
   }
 
-  @if (index((pr, mr, mx, px), $prop)) {
-    $postfix-group: append($postfix-group, -right);
+  @if (list.index((pr, mr, mx, px), $prop)) {
+    $postfix-group: list.append($postfix-group, -right);
   }
 
-  @if (index((pt, mt, my, py), $prop)) {
-    $postfix-group: append($postfix-group, -top);
+  @if (list.index((pt, mt, my, py), $prop)) {
+    $postfix-group: list.append($postfix-group, -top);
   }
 
-  @if (index((pb, mb, my, py), $prop)) {
-    $postfix-group: append($postfix-group, -bottom);
+  @if (list.index((pb, mb, my, py), $prop)) {
+    $postfix-group: list.append($postfix-group, -bottom);
   }
 
   @return $postfix-group;
 }
 
 @function get-prop-value($prop, $size) {
-  @if (index((px, mx, pl, pr, ml, mr), $prop)) {
+  @if (list.index((px, mx, pl, pr, ml, mr), $prop)) {
     @return $size;
   }
 
-  @else if (index((py, my, pt, pb, mt, mb), $prop)) {
+  @else if (list.index((py, my, pt, pb, mt, mb), $prop)) {
     @return $size;
   }
 
-  @else if (index((p, m), $prop)) {
+  @else if (list.index((p, m), $prop)) {
     @return $size;
   }
 
@@ -60,7 +61,7 @@
   $prop-value: get-prop-value($prop, $prop-size);
   $prop-postfixes: get-prop-postfix-group($prop);
 
-  @if (length($prop-postfixes) > 0) {
+  @if (list.length($prop-postfixes) > 0) {
     @each $postfix in $prop-postfixes {
       #{$prop-name}#{$postfix}: $prop-value;
     }

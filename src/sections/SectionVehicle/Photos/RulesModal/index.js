@@ -1,7 +1,9 @@
 import { useState } from 'react'
 import { useTranslations } from 'next-intl'
 import { useModal } from '@/context/ModalContext'
+
 import classNames from 'classnames'
+
 import Image from 'next/image'
 import Button from '@/components/Button'
 

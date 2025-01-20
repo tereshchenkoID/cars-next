@@ -1,0 +1,101 @@
+@use '@/scss/config' as *;
+
+.block {
+  display: grid;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.15);
+  z-index: $z-index-11;
+  overflow-y: auto;
+}
+
+.wrapper {
+  @include flex($direction: column);
+  @include make-spacer(p, var(--gap-24));
+  @include size(rem(600px), auto);
+
+  border-radius: var(--border-radius-8);
+  background-color: var(--color-white);
+  gap: var(--gap-24);
+}
+
+.canvas {
+  display: block;
+  max-width: 100%;
+  border-width: rem(1px);
+  border-style: solid;
+  border-radius: var(--border-radius-4);
+  overflow: hidden;
+}
+
+.control {
+  display: grid;
+  grid-template-columns: rem(100px) 1fr;
+  align-items: center;
+
+  &:not(:last-child) {
+    @include make-spacer(mb, var(--gap-8));
+  }
+
+  span {
+    font-size: rem(14px);
+  }
+
+  input[type="range"] {
+    @include size(100%, rem(8px));
+
+    -webkit-appearance: none;
+    border-radius: var(--border-radius-2);
+    background: var(--color-grey-200);
+    outline: none;
+    cursor: pointer;
+
+    &::-webkit-slider-thumb {
+      @include transition(all);
+      @include size(rem(16px));
+
+      -webkit-appearance: none;
+      appearance: none;
+      border-radius: 50%;
+      background-color: var(--color-primary);
+      cursor: pointer;
+    }
+
+    &::-moz-range-thumb {
+      @include size(rem(16px));
+
+      border-radius: 50%;
+      background-color: var(--color-primary);
+      cursor: pointer;
+    }
+
+    @include hover {
+
+      &:hover {
+  
+        &::-webkit-slider-thumb {
+          background: var(--color-primary-hover);
+        }
+
+        &::-moz-range-thumb {
+          background: var(--color-primary-hover);
+        }
+      }
+    }
+  }
+}
+
+.options {
+  @include flex(center, center);
+
+  gap: var(--gap-8);
+}
+
+.head {
+  @include flex(flex-end, center);
+
+  gap: var(--gap-16);
+  flex-shrink: 0;
+}

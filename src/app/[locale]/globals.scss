@@ -1,4 +1,4 @@
-@import '@/scss/config';
+@use '@/scss/config' as *;
 @import '@/scss/app';
 
 :root {

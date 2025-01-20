@@ -12,7 +12,7 @@ import AppProviders from '@/context/AppProviders'
 import { authOptions } from '@/app/api/auth/[...nextauth]/route'
 import { fetchData } from "@/utils/fetchData"
 
-import '@fancyapps/ui/dist/fancybox/fancybox.css';
+import '@fancyapps/ui/dist/fancybox/fancybox.css'
 import 'swiper/css'
 import 'swiper/css/pagination'
 import 'swiper/css/navigation'
@@ -30,9 +30,9 @@ const poppins = Poppins({
 async function fetchInitialData() {
   try {
     const [settings, filters, brands] = await Promise.all([
-      fetchData('settings/'),
-      fetchData('filters/'),
-      fetchData('filters/brands/')
+      fetchData('settings/', { cache: 'force-cache' }),
+      fetchData('filters/', { cache: 'force-cache' }),
+      fetchData('filters/brands/', { cache: 'force-cache' })
     ])
 
     return { settings, filters, brands }
@@ -43,7 +43,7 @@ async function fetchInitialData() {
 }
 
 export default async function RootLayout({ children, params, session }) {
-  const { locale } = params
+  const { locale } = await params
   const initialData = await fetchInitialData()
   const messages = await getMessages(locale)
   const cookies = await getServerSession(authOptions)

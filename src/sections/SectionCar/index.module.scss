@@ -1,4 +1,5 @@
-@import '@/scss/config';
+@use '@/scss/config' as *;
+@use 'sass:math';
 
 .block {
   @include make-spacer(pb, var(--gap-24));
@@ -339,7 +340,7 @@
 }
 
 .image {
-  aspect-ratio: rem(300px) / rem(300px);
+  aspect-ratio: math.div(rem(300px), rem(300px));
   object-fit: cover;
   border-left: rem(2px) solid var(--color-white);
   border-right: rem(2px) solid var(--color-white);

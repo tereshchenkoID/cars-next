@@ -11,6 +11,8 @@ import Checkbox from '@/components/Checkbox'
 import Select from '@/components/Select'
 import Field from '@/components/Field'
 
+// const Select = dynamic(() => import('@/components/Select'), { ssr: false })
+
 import style from './index.module.scss'
 
 const Filters = () => {
@@ -105,6 +107,7 @@ const Filters = () => {
               label: year === DEFAULT ? t('home_filters.year') : year,
             }))
           }
+          placeholder={t('home_filters.year')}
           data={search.year_from || DEFAULT}
           onChange={(value) => handleChange('year_from', value)}
         />

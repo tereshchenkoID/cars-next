@@ -100,7 +100,8 @@ const SectionSitemap = () => {
                     height={32}
                     className={style.img}
                     src={`/images/brands/${el.id}.webp`}
-                    priority={true}
+                    // priority={true}
+                    priority={false}
                     alt={el.name}
                   />
                   <span className={style.text}>{el.name}</span>

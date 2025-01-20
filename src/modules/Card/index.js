@@ -94,7 +94,7 @@ const Card = ({ data, isProfile = false }) => {
                 dynamicBullets: true,
                 clickable: true,
               }}
-              lazy={true}
+              // lazy={true}
               navigation={true}
               mousewheel={true}
               modules={[Pagination, Mousewheel, Navigation]}
@@ -142,8 +142,7 @@ const Card = ({ data, isProfile = false }) => {
               {data.images?.length}
             </div>
           </>
-        } */}
-
+        }
         <button
           type={'button'}
           className={
@@ -156,7 +155,6 @@ const Card = ({ data, isProfile = false }) => {
           title={t('favorite')}
           onClick={() => handleFavorite(favorites === '0' ? '0' : '1')}
         >
-          {/* {favorites} */}
           <Icon
             iconName={'heart-filled'}
             width={24}
@@ -164,7 +162,7 @@ const Card = ({ data, isProfile = false }) => {
             stroke={'var(--color-white)'}
             strokeWidth={2}
           />
-        </button>
+        </button> */}
       </div>
       <div className={style.right}>
         <Link

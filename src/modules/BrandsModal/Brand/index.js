@@ -34,7 +34,8 @@ const Brand = ({ data, onChange, isWide = false }) => {
         height={32}
         className={style.img}
         src={`/images/brands/${data.id}.webp`}
-        priority={true}
+        // priority={true}
+        priority={false}
         alt={data.name}
       />
       {

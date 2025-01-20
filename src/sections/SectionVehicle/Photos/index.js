@@ -4,16 +4,14 @@ import { useTranslations } from 'next-intl'
 import { useState } from 'react'
 import { useModal } from '@/context/ModalContext'
 
-import { ReactPhotoEditor } from 'react-photo-editor'
-
 import Image from 'next/image'
 import Button from '@/components/Button';
 import Accordion from '@/modules/Accordion'
 
 import ImageUploader from './ImageUploader'
 import RulesModal from './RulesModal'
+import PhotoEditor from './PhotoEditor'
 
-import './default.scss'
 import style from '../index.module.scss'
 
 const Photos = ({
@@ -113,18 +111,13 @@ const Photos = ({
             </div>
           </>
         }
-        <ReactPhotoEditor
-          open={showEditor}
-          onClose={hideEditor}
-          file={file}
-          allowColorEditing={true}
-          allowFlip={true}
-          allowRotate={true}
-          allowZoom={true}
-          onSaveImage={handleSave}
-          downloadOnSave={false}
-          exportOptions={{ type: "image/webp", quality: 0.9 }}
-        />
+        {
+          showEditor &&
+          <PhotoEditor 
+            blob={file}
+            onClose={hideEditor}
+          />
+        }
       </>
     </Accordion>
   )

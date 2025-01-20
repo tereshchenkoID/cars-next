@@ -227,7 +227,7 @@ const SectionAdvancedSearch = ({ options }) => {
                       key={optionKey}
                       classes={['image']}
                       image={{
-                        url: `/images/vehicle-type/${optionKey}.webp`,
+                        url: `/images/body/${optionKey}.webp`,
                         width: 108,
                         height: 48,
                         alt: t(`filters.body.${optionKey}`)
