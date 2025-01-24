@@ -102,7 +102,7 @@ const PhotoEditor = ({ blob, onClose }) => {
           <Button
             placeholder={t('save')}
             classes={['primary', 'sm']}
-            onChange={handleSave}
+            onChange={() => handleSave()}
           />
           <Button
             placeholder={t('cancel')}

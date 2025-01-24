@@ -37,6 +37,7 @@ const SectionNew = ({ data }) => {
           }}
           pagination={{
             clickable: true,
+            dynamicBullets: true,
           }}
           navigation={true}
           modules={[Mousewheel, Pagination, Navigation]}

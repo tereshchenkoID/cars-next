@@ -38,8 +38,6 @@ async function fetchInitialData() {
     const [reviews, cars] = await Promise.all([
       fetchData('review/'),
       postInitialData('filters/search/')
-      // fetchData('filters/'),
-      // fetchData('filters/brands/')
     ])
 
     return { reviews, cars }

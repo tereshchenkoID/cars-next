@@ -6,10 +6,9 @@
   gap: var(--gap-4);
   font-size: rem(12px);
   white-space: nowrap;
+  width: 100%;
 
-  @include media-breakpoint-up(lg) {
-    @include make-spacer(mr, auto);
-    
+  @include media-breakpoint-up(md) {
     justify-content: flex-start;
   }
 }
@@ -33,8 +32,8 @@
   display: none;
   background-color: var(--color-text);
 
-  @include media-breakpoint-up(lg) {
-    display: block;
+  @include media-breakpoint-up(md) {
+    display: inline-flex;
   }
 }
 
@@ -66,9 +65,9 @@
   z-index: $z-index-1;
   min-width: rem(130px);
 
-  @include media-breakpoint-up(lg) {
-    right: auto;
+  @include media-breakpoint-up(md) {
     left: 0;
+    right: unset;
   }
 }
 

@@ -1,7 +1,7 @@
 @use '@/scss/config' as *;
 
 .block {
-  @include size(rem(360px), 100%);
+  @include size(rem(340px), 100%);
   @include flex($direction: column);
 
   border-radius: var(--border-radius-8);

@@ -30,6 +30,7 @@ const SectionCategories = () => {
             enabled: true,
           }}
           pagination={{
+            dynamicBullets: true,
             clickable: true,
           }}
           navigation={true}

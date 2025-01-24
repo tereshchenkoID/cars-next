@@ -44,6 +44,7 @@ const SectionReviews = ({ data }) => {
             enabled: true,
           }}
           pagination={{
+            dynamicBullets: true,
             clickable: true,
           }}
           navigation={true}

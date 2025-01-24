@@ -115,16 +115,7 @@
     }
 
     .swiper-pagination.swiper-pagination-bullets {
-      @include make-spacer(px, var(--gap-8));
-      @include flex(center, center);
-
-      width: 100%!important;
       bottom: var(--gap-24);
-    }
-
-    .swiper-pagination-bullet {      
-      flex-shrink: 0;
-      transform: scale(1);
     }
 
     .swiper-slide {
