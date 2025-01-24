@@ -83,7 +83,7 @@ const Card = ({ data, isProfile = false }) => {
       }
     >
       <div className={style.left}>
-        {/* {!image && <Loading classes={style.loading} />}
+        {!image && <Loading classes={style.loading} />}
         {
           data.images.length > 0 &&
           <>
@@ -162,7 +162,7 @@ const Card = ({ data, isProfile = false }) => {
             stroke={'var(--color-white)'}
             strokeWidth={2}
           />
-        </button> */}
+        </button>
       </div>
       <div className={style.right}>
         <Link

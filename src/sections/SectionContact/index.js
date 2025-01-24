@@ -43,9 +43,9 @@ const SectionContact = () => {
                 <p className={style.label}>{t('call_us')}</p>
                 <Reference
                   classes={['reference']} 
-                  link={'tel:+49 2131 2664 106'}
+                  link={'tel:+000000000000'}
                   className={style.link}
-                  placeholder={'+49 2131 2664 106'}
+                  placeholder={'+000000000000'}
                 />
                 <p className={style.label}>Mo–Su 8 am-8 pm</p>
               </div>
@@ -62,9 +62,9 @@ const SectionContact = () => {
                 <p className={style.label}>{t('email')}</p>
                 <Reference
                   classes={['reference']} 
-                  link={'mailto:de.verkauf@gmail.com'}
+                  link={'mailto:test@gmail.com'}
                   className={style.link}
-                  placeholder={'de.verkauf@gmail.com'}
+                  placeholder={'test@gmail.com'}
                 />
               </div>
             </div>
