@@ -1,5 +1,5 @@
 @use '@/scss/config' as *;
-@import '@/scss/app';
+@use '@/scss/app';
 
 :root {
   --max-width: 1366px;
@@ -11,7 +11,7 @@
   --box-shadow-4-8: 0 4px 8px rgba(72, 88, 133, 0.08);
   --box-shadow-4-16:  0 4px 16px 0 rgba(72, 88, 133, 0.12);
   --box-shadow-16-24: 0 16px 24px -20px rgba(62, 71, 221, 1);
-  --box-shadow-16-36: 0 16px 36px -18px rgba(62, 39, 196, 1);
+  --box-shadow-16-36: 0 16px 36px -18px rgb(163, 157, 195);
 
   --gradient-gold: linear-gradient(313.87deg, #ff7300 24.5%, #ff9800 76.4%);
   --gradient-blue: linear-gradient(111.72deg, #3e47dd 14.24%, #262a98 85.8%);

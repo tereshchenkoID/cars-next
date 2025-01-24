@@ -7,7 +7,7 @@ import Filters from './Filters'
 
 import style from './index.module.scss'
 
-const SectionHero = ({ data }) => {
+const SectionHero = () => {
   const t = useTranslations()
 
   return (

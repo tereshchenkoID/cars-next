@@ -29,10 +29,13 @@ const Betslip = ({ data }) => {
           <span>Car price</span>
           <span>{getFormatPrice(auth?.account?.language?.code, auth?.account?.currency?.code, data?.price_data?.price)} </span>
         </h6>
-        <p className={style.prize}>
-          <span>Total price excluding VAT</span>
-          <span>{getFormatPrice(auth?.account?.language?.code, auth?.account?.currency?.code, data?.price_data?.price_without_vat)} </span>
-        </p>
+        {
+          data?.price_data?.price_without_vat &&
+          <p className={style.prize}>
+            <span>Total price excluding VAT</span>
+            <span>{getFormatPrice(auth?.account?.language?.code, auth?.account?.currency?.code, data?.price_data?.price_without_vat)} </span>
+          </p>
+        }
       </header>
 
       <div className={style.body}>

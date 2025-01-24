@@ -16,22 +16,24 @@ const Modal = ({ children, onClose, title }) => {
       onClick={onClose}
     >
       <div 
-        className={style.content} 
+        className={style.content}
         onClick={e => e.stopPropagation()}
       >
-        <Button
-          classes={['secondary', 'square', 'sm', style.close]}
-          icon={'xmark'}
-          onChange={onClose}
-        />
-        {
-          title &&
-          <div className={style.header}>
-            <h5 className={style.title}>{title}</h5>
+        <div className={style.wrapper}>
+          <Button
+            classes={['secondary', 'square', 'sm', style.close]}
+            icon={'xmark'}
+            onChange={onClose}
+          />
+          {
+            title &&
+            <div className={style.header}>
+              <h5 className={style.title}>{title}</h5>
+            </div>
+          }
+          <div className={style.body}>
+            {children}
           </div>
-        }
-        <div className={style.body}>
-          {children}
         </div>
       </div>
     </div>

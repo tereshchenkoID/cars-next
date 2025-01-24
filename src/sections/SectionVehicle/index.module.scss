@@ -4,47 +4,6 @@
   @include make-spacer(py, var(--gap-40));
   
   color: var(--color-grey-600);
-
-  :global {
-
-    .photo-editor-main {
-  
-      #photo-editor-modal {
-        background-color: var(--color-white);
-        border-radius: var(--border-radius-8);
-        width: 100%;
-        max-width: rem(600px);
-      }
-
-      button {
-        border-radius: var(--border-radius-4);
-        height: rem(32px);
-        font-size: rem(12px);
-      }
-
-      label {
-        color: var(--color-text);
-      }
-
-      svg {
-        stroke: var(--color-text);
-      }
-
-      input {
-        @include make-spacer(px, var(--gap-4));
-
-        font-size: rem(12px);
-        border-radius: var(--border-radius-4);
-        border: 0;
-      }
-
-      canvas {
-        // width: 100%!important;
-        // height: auto!important;
-        // aspect-ratio: 1 / 1;
-      }
-    }
-  }
 }
 
 .container {
@@ -86,7 +45,6 @@
 
 .images {
   display: grid;
-  // grid-template-columns: repeat(2, 1fr);
   align-items: center;
   gap: var(--gap-8);
 

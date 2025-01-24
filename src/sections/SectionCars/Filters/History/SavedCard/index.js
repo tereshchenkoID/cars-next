@@ -13,6 +13,7 @@ import style from './index.module.scss'
 const SavedCard = ({ 
   data, 
   setActive,
+  setShow,
   filtersProps, 
   handleSaveHistory
 }) => {
@@ -35,6 +36,7 @@ const SavedCard = ({
     dispatch(setSearch(date))
     handleLoad(0, date)
     setActive(0)
+    setShow(false)
   }
 
   const getMakesModel = (key, value) => {

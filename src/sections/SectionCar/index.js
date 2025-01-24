@@ -110,7 +110,7 @@ const SectionCar = ({ data, next }) => {
                 <Option
                   size={'sm'}
                   iconName={'road'}
-                  iconSize={24}
+                  iconSize={20}
                   text={`${data.mileage_data.mileage} (${t(`filters.mileage.${data.mileage_data.mileage_unit.id}`)})`}
                 />
               </li>
@@ -118,7 +118,7 @@ const SectionCar = ({ data, next }) => {
                 <Option
                   size={'sm'}
                   iconName={'calendar'}
-                  iconSize={24}
+                  iconSize={20}
                   text={getDate(data.date.manufacture, 5)}
                 />
               </li>
@@ -126,7 +126,7 @@ const SectionCar = ({ data, next }) => {
                 <Option
                   size={'sm'}
                   iconName={'calendar'}
-                  iconSize={24}
+                  iconSize={20}
                   text={getDate(data.date.first_registration, 3)}
                 />
               </li>
@@ -134,7 +134,7 @@ const SectionCar = ({ data, next }) => {
                 <Option
                   size={'sm'}
                   iconName={'engine'}
-                  iconSize={24}
+                  iconSize={20}
                   text={`${data.power_data.power} (${t(`filters.power.${data.power_data.power_unit.id}`)})`}
                 />
               </li>
@@ -142,7 +142,7 @@ const SectionCar = ({ data, next }) => {
                 <Option
                   size={'sm'}
                   iconName={'transmission'}
-                  iconSize={24}
+                  iconSize={20}
                   text={t(`filters.transmission.${data.transmission.id}`)}
                 />
               </li>
@@ -150,7 +150,7 @@ const SectionCar = ({ data, next }) => {
                 <Option
                   size={'sm'}
                   iconName={getFuelIcon(data.fuel_type.id)}
-                  iconSize={24}
+                  iconSize={20}
                   text={t(`filters.fuel_type.${data.fuel_type.id}`)}
                 />
               </li>

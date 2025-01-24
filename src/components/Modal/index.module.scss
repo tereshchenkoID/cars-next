@@ -1,7 +1,12 @@
 @use '@/scss/config' as *;
 
 .block {
-  @include flex(center, flex-end);
+  @include scroll;
+  // @include flex(center, flex-end);
+
+  display: grid;
+  align-items: flex-end;
+  // justify-content: center;
 
   position: fixed;
   inset: 0;
@@ -12,6 +17,7 @@
     @include make-spacer(p, var(--gap-52));
 
     align-items: center;
+    justify-content: center;
   }
 
   &.alt {
@@ -29,29 +35,26 @@
       right: var(--gap-16);
     }
   }
-
-  .close {
-    position: absolute;
-    top: var(--gap-10);
-    right: var(--gap-16);
-  
-    @include media-breakpoint-up(md) {
-      top: var(--gap-24);
-    }
-  }
 }
 
 .content {
   position: relative;
-  background-color: var(--color-white);
-  border-radius: rem(24px) rem(24px) 0 0;
-  overflow: hidden;
   min-width: rem(320px);
   width: 100%;
 
   @include media-breakpoint-up(md) {
     border-radius: rem(24px);
     width: fit-content;
+  }
+}
+
+.wrapper {
+  background-color: var(--color-white);
+  border-radius: rem(24px) rem(24px) 0 0;
+  overflow: hidden;
+
+  @include media-breakpoint-up(md) {
+    border-radius: rem(24px);
   }
 }
 
@@ -69,7 +72,18 @@
 .body {
   @include make-spacer(p, var(--gap-16));
 
+
   @include media-breakpoint-up(md) {
     @include make-spacer(p, var(--gap-24));
+  }
+}
+
+.close {
+  position: absolute;
+  top: var(--gap-10);
+  right: var(--gap-16);
+
+  @include media-breakpoint-up(md) {
+    top: var(--gap-24);
   }
 }

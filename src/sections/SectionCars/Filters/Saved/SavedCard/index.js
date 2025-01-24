@@ -13,6 +13,7 @@ import style from './index.module.scss'
 const SavedCard = ({ 
   data, 
   setActive,
+  setShow,
   handleAction,
   filtersProps, 
 }) => {
@@ -28,7 +29,7 @@ const SavedCard = ({
 
   const blockRef = useRef(null)
   const buttonRef = useRef(null)
-  const [show, setShow] = useState(false)
+  const [toggle, setToggle] = useState(false)
 
   const handleChecked = () => {
     const queryParams = new URLSearchParams(data.params)
@@ -39,9 +40,10 @@ const SavedCard = ({
     dispatch(setSearch(date))
     handleLoad(0, date)
     setActive(0)
+    setShow(false)
   }
 
-  useOutsideClick(blockRef, () => setShow(false), { buttonRef })
+  useOutsideClick(blockRef, () => setToggle(false), { buttonRef })
 
   const getMakesModel = (key, value) => {
     const id = key.replace('make_', '')
@@ -73,11 +75,11 @@ const SavedCard = ({
           icon={'dots'}
           onChange={(e) => {
             e.stopPropagation()
-            setShow(!show)
+            setToggle(!toggle)
           }}
         />
         {
-          show &&
+          toggle &&
           <div className={style.options}>
             <Button
               icon={'edit'}

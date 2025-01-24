@@ -1,6 +1,8 @@
 @use '@/scss/config' as *;
 
 .block {
+  @include scroll;
+
   display: grid;
   justify-content: center;
   align-items: center;
@@ -8,17 +10,20 @@
   inset: 0;
   background: rgba(0, 0, 0, 0.15);
   z-index: $z-index-11;
-  overflow-y: auto;
 }
 
 .wrapper {
   @include flex($direction: column);
   @include make-spacer(p, var(--gap-24));
-  @include size(rem(600px), auto);
+  @include size(100%, auto);
 
   border-radius: var(--border-radius-8);
   background-color: var(--color-white);
   gap: var(--gap-24);
+
+  @include media-breakpoint-up(md) {
+    width: rem(600px);
+  }
 }
 
 .canvas {

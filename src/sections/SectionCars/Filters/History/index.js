@@ -9,7 +9,7 @@ import SavedCard from './SavedCard'
 
 import style from './index.module.scss'
 
-const History = ({ filtersProps, setActive }) => {
+const History = ({ filtersProps, setActive, setShow }) => {
   const t = useTranslations()
   const { showModal } = useModal()
   const { history } = filtersProps
@@ -29,6 +29,8 @@ const History = ({ filtersProps, setActive }) => {
       showModal(
         <LoginModal />
       )
+
+    setShow(false)
   }
 
   return (
@@ -41,6 +43,7 @@ const History = ({ filtersProps, setActive }) => {
                 key={idx}
                 data={el}
                 setActive={setActive}
+                setShow={setShow}
                 filtersProps={filtersProps}
                 handleSaveHistory={handleSaveHistory}
               />

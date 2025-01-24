@@ -296,6 +296,7 @@ const Filters = ({
             <Saved 
               filtersProps={filtersProps} 
               setActive={setActive}
+              setShow={setShow}
             />
           }
 
@@ -304,6 +305,7 @@ const Filters = ({
             <History 
               filtersProps={filtersProps} 
               setActive={setActive}
+              setShow={setShow}
             />
           }
         </div>

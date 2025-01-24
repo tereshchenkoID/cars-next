@@ -12,7 +12,11 @@ import Empty from './Empty'
 
 import style from './index.module.scss'
 
-const Saved = ({ filtersProps, setActive }) => {
+const Saved = ({ 
+  filtersProps, 
+  setActive, 
+  setShow 
+}) => {
   const t = useTranslations()
   const auth = useSelector((state) => state.auth)
   const isAuth = auth?.id
@@ -37,6 +41,8 @@ const Saved = ({ filtersProps, setActive }) => {
       showModal(
         <LoginModal />
       )
+
+    setShow(false)  
   }
 
   useEffect(() => {
@@ -74,6 +80,7 @@ const Saved = ({ filtersProps, setActive }) => {
                 key={idx}
                 data={el}
                 setActive={setActive}
+                setShow={setShow}
                 filtersProps={filtersProps}
                 handleAction={handleAction}
               />

@@ -23,7 +23,7 @@ const SectionContact = () => {
               backgroundImage: 'url(/images/contact-bg.webp)'
             }}  
           >
-            <h3 className={style.title}>Your next car is waiting for you here...</h3>
+            <h3 className={style.title}>{t('notification.contact')}...</h3>
             <Reference 
               link={NAVIGATION.buy.link}
               classes={['primary', 'md', style.button]}
@@ -40,7 +40,7 @@ const SectionContact = () => {
                 />
               </div>
               <div>
-                <p className={style.label}>Call us</p>
+                <p className={style.label}>{t('call_us')}</p>
                 <Reference
                   classes={['reference']} 
                   link={'tel:+49 2131 2664 106'}
@@ -59,12 +59,12 @@ const SectionContact = () => {
                 />
               </div>
               <div>
-                <p className={style.label}>Email</p>
+                <p className={style.label}>{t('email')}</p>
                 <Reference
                   classes={['reference']} 
-                  link={'mailto:de.verkauf@carvago.com'}
+                  link={'mailto:de.verkauf@gmail.com'}
                   className={style.link}
-                  placeholder={'de.verkauf@carvago.com'}
+                  placeholder={'de.verkauf@gmail.com'}
                 />
               </div>
             </div>

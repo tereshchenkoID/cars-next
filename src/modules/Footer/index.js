@@ -55,7 +55,7 @@ const Footer = () => {
         <div className={style.top}>
           <div className={style.column}>
             <Logo />
-            <p className={style.text}>Carvago 2024 • All rights reserved</p>
+            <p className={style.text}>{process.env.ORGANIZATION_NAME} {new Date().getFullYear()} • All rights reserved</p>
             <Social />
           </div>
           <div className={style.column}>
@@ -109,7 +109,7 @@ const Footer = () => {
         </div>
       </Container>
       <Container>
-        <p className={style.copyright}>This is a commercial communication of the company Carvago s.r.o. It is not a draft agreement or contract within the meaning of § 1731 of Act No. 89/2012 Coll. of the Commercial Code. The lender is Santander Consumer Bank, Santander-Platz 1, 410 61 Mönchengladbach. ¹Representative example of low rate financing: Net loan amount €20,000; down payment €10,000; contract term 60 months; annual percentage rate of charge 7.99%, fixed borrowing rate 7.71% p.a.; 60 monthly instalments of €99 each; final instalment €8,368.41; total amount €14,160.00. The above information also represents the representative calculation example pursuant to § 6a para. 4 PAngV. Please note that we will make a creditworthiness enquiry. All prices include VAT. ²Net loan amount 20,000 €; contract term 60 months; annual percentage rate of charge 7.99%, fixed borrowing rate 7.71% p.a.; 60 monthly instalments of 212.00 € each; total amount 12,690.36 €. The above information also represents the representative calculation example pursuant to § 6a para. 4 PAngV. Please note that we will make a creditworthiness enquiry. All prices include VAT.        </p>
+        <p className={style.copyright}>{t('notification.footer')}</p>
       </Container>
     </footer>
   )
