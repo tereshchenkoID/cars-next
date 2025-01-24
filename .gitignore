@@ -2,6 +2,7 @@
 
 /build.sh
 env.production
+package-lock.json
 
 # dependencies
 /node_modules
