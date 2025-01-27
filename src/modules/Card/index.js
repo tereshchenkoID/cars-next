@@ -227,6 +227,13 @@ const Card = ({ data, isProfile = false }) => {
           <Tags data={data.featured_tags} />
         }
 
+        <Option
+          size={'xs'}
+          iconName={'clock'}
+          iconSize={18}
+          text={getDate(data.meta.created_at, 3)}
+        />
+
         <div className={style.footer}>
           <div className={style.meta}>
             <h5>{getFormatPrice(auth?.account?.language?.code, auth?.account?.currency?.code, data?.price_data?.price)}</h5>
@@ -239,6 +246,13 @@ const Card = ({ data, isProfile = false }) => {
                     <span>{t('not_deductible')}</span>
               }
             </p>
+            <ul className={style.description}>
+              <li>Seen: <strong>1</strong></li>
+              <li>Favorites: <strong>1</strong></li>
+              <li>Bargaining: <strong>1</strong></li>
+              <li>Exchange: <strong>1</strong></li>
+              <li>Questions: <strong>1</strong></li>
+            </ul>
           </div>
         </div>
       </div>

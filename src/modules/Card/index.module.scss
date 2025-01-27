@@ -262,3 +262,12 @@
   border-radius: 0;
   z-index: $z-index-2;
 }
+
+.description {
+  @include make-spacer(mt, var(--gap-8));
+  @include flex($align-items: center, $wrap: wrap);
+
+  font-size: rem(12px);
+  gap: var(--gap-8);
+  opacity: 0.8;
+}

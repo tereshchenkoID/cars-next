@@ -12,6 +12,7 @@ import Price from './Price'
 import Contact from './Contact'
 
 import style from './index.module.scss'
+
 // status
 // 0 - not add
 // 1 - not active
@@ -19,13 +20,13 @@ import style from './index.module.scss'
 // 3 - sold
 // 4 - expired
 
-// top
-// 0 - not
-// 1 - true
-
 const DATA = {
   "id": "68837122", // need generate if add new car
   "status": "1", // тут надо проставить статус не активен
+  "top": {
+    "level": "100",
+    "period": [1656633600000, 1656633600000] // from - to
+  }, // or null
   "contact": {
     "id": "100",
     "name": "Tester",
@@ -46,10 +47,30 @@ const DATA = {
     "slug": "n-a"
   },
   "meta": {
-    "name": null,
+    "name": null, 
     "slug": null,
     "vin": null,
-    "description": null
+    "description": null,
+    "seen": {
+      "value": "1000", //просмотры
+      "visible": "0" // 0 no  1 yes
+    },
+    "favorites": {
+      "value": "200",//избранные
+      "visible": "0"
+    },
+    "bargaining": {
+      "value": "200", //торг
+      "visible": "0"
+    },
+    "exchange": {
+      "value": "200", //обмен
+      "visible": "0"
+    },
+    "questions": {
+      "value": "200", //вопросы
+      "visible": "0"
+    }
   },
   // тут дефолтную дату надо проставлять желательно
   "date": {

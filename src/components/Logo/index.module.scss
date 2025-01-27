@@ -1,7 +1,7 @@
 @use '@/scss/config' as *;
 
 .block {
-  @include size(rem(102px), auto);
+  @include size(rem(120px), auto);
   
   display: block;
   flex-shrink: 0;

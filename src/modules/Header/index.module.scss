@@ -16,11 +16,12 @@
 .container {
   @include flex(space-between, center);
 
-  gap: var(--gap-32);
+  gap: var(--gap-16);
   height: var(--header-height);
 
   @include media-breakpoint-up(lg) {
     justify-content: flex-start;
+    gap: var(--gap-32);
   }
 }
 
