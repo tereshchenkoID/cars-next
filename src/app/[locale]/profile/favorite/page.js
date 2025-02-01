@@ -1,7 +1,7 @@
 import { getServerSession } from 'next-auth'
 import { authOptions } from '@/app/api/auth/[...nextauth]/route'
 
-import SectionFavorites from '@/sections/SectionFavorites'
+import SectionFavorites from '@/sections/profile/SectionFavorites'
 
 async function postData(endpoint, searchParams, cookies) {
   const formData = new FormData()

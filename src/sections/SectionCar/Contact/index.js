@@ -12,7 +12,7 @@ import Reference from '@/components/Reference'
 
 import style from './index.module.scss'
 
-const Contact = ({ data }) => {
+const Contact = ({ data, meta }) => {
   const t = useTranslations()
 
   return (
@@ -33,8 +33,12 @@ const Contact = ({ data }) => {
             {data.name}
           </Link>
         </h6>
-        <p className={style.date}>Registration: {getDate(data.registration, 3)}</p>
-        <p className={style.date}>Last activity: {getDate(data.activity, 3)}</p>
+        <ul>
+          <li className={style.date}>{t('seen')}: <strong>{meta.stats.seen.value}</strong></li>
+          <li className={style.date}>{t('favorites')}: <strong>{meta.stats.favorites.value}</strong></li>
+          <li className={style.date}>{t('registration')}: <strong>{getDate(data.registration, 3)}</strong></li>
+          <li className={style.date}>{t('last_activity')}: <strong>{getDate(data.activity, 3)}</strong></li>
+        </ul>
         <div className={style.meta}>
           <StarRating data={data.rating} />
           <Reference
@@ -45,7 +49,7 @@ const Contact = ({ data }) => {
         </div>
         <div className={style.phones}>
           <div className={style.social}>
-            <Icon 
+            <Icon
               iconName={'phone'}
               width={22}
               height={22}

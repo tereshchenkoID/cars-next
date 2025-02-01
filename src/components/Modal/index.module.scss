@@ -35,6 +35,16 @@
       right: var(--gap-16);
     }
   }
+
+  .close {
+    position: absolute;
+    top: var(--gap-10);
+    right: var(--gap-16);
+  
+    @include media-breakpoint-up(md) {
+      top: var(--gap-24);
+    }
+  }
 }
 
 .content {
@@ -75,15 +85,5 @@
 
   @include media-breakpoint-up(md) {
     @include make-spacer(p, var(--gap-24));
-  }
-}
-
-.close {
-  position: absolute;
-  top: var(--gap-10);
-  right: var(--gap-16);
-
-  @include media-breakpoint-up(md) {
-    top: var(--gap-24);
   }
 }

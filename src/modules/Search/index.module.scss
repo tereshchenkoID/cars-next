@@ -1,0 +1,9 @@
+@use '@/scss/config' as *;
+
+.block {
+  display: grid;
+  grid-template-columns: minmax(rem(150px), rem(380px)) rem(100px);
+  align-items: center;
+  gap: var(--gap-16);
+  flex-shrink: 0;
+}

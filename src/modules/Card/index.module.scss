@@ -18,18 +18,13 @@
     align-items: flex-start;
   }
 
-  &.not_active {
-    opacity: 0.6;
-    // pointer-events: none;
-  }
+  // &.not_active {
+  //   opacity: 0.6;
+  // }
 
-  &.sold {
-
-    .right {
-      opacity: 0.4;
-      // pointer-events: none;
-    }
-  }
+  // &.sold {
+  //   opacity: 0.4;
+  // }
 }
 
 .left,
@@ -47,11 +42,18 @@
   z-index: $z-index-1;
 }
 
-.label {
+.labels {
+  @include flex($direction: column);
+
   position: absolute;
   top: var(--gap-16);
   left: rem(-8px);
   z-index: $z-index-2;
+  gap: var(--gap-8);
+}
+
+.label {
+  position: relative;
 
   &::before {
     @include size(rem(7px));
@@ -79,6 +81,13 @@
       background: var(--gradient-gold);
     }
   }
+
+  &.top {
+
+    &::before {
+      background: var(--color-success);
+    }
+  }
 }
 
 .status {
@@ -99,8 +108,9 @@
 }
 
 .left {
-  @include size(100%);
+  // @include size(100%);
   
+  width: 100%;
   border-radius: var(--border-radius-8);
   overflow: hidden
 }
@@ -111,7 +121,7 @@
   @include make-spacer(pb, var(--gap-12));
   @include flex($direction: column);
 
-  gap: var(--gap-12);
+  gap: var(--gap-8);
 
   @include media-breakpoint-up(lg) {
     height: 100%;
@@ -123,7 +133,7 @@
   @include make-spacer(mb, 0);
   @include flex($align-items: baseline, $wrap: wrap);
 
-  gap: var(--gap-16);
+  gap: var(--gap-8);
 }
 
 .meta {
@@ -263,11 +273,24 @@
   z-index: $z-index-2;
 }
 
-.description {
+.descriptions {
   @include make-spacer(mt, var(--gap-8));
-  @include flex($align-items: center, $wrap: wrap);
+  @include flex($justify-content: flex-end, $align-items: center, $wrap: wrap);
 
-  font-size: rem(12px);
+  font-size: rem(13px);
+  gap: var(--gap-16);
+  opacity: 0.9;
+}
+
+.description {
+  @include flex($align-items: center);
+
+  gap: var(--gap-2);
+  text-decoration: underline
+}
+
+.actions {
+  @include flex(flex-end, center);
+
   gap: var(--gap-8);
-  opacity: 0.8;
 }

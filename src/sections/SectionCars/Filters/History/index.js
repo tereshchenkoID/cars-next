@@ -55,7 +55,7 @@ const History = ({ filtersProps, setActive, setShow }) => {
               className={style.decor}
               src={`/images/previous-filters.svg`}
               priority={true}
-              alt={'Saved filters'}
+              alt={t('actions.save')}
             />
       }
     </div>

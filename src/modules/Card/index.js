@@ -20,11 +20,13 @@ import { Fancybox } from '@fancyapps/ui'
 
 import Link from 'next/link'
 import Image from 'next/image'
+import Button from '@/components/Button'
 import Icon from '@/components/Icon'
 import Loading from '@/components/Loading'
 import Tags from '@/modules/Tags'
 import Option from '@/modules/Option'
 import Discount from '@/modules/Discount'
+import Top from '@/modules/Top'
 import LoginModal from '@/modules/LoginModal'
 
 import style from './index.module.scss'
@@ -38,9 +40,9 @@ const Card = ({ data, isProfile = false }) => {
   const [image, setImage] = useState(false)
   const [favorites, setFavorites] = useState(data.is_favorite)
   const domain = isProfile ? ROUTES_USER.vehicles.link : NAVIGATION.car.link
-  
+
   const handleFavorite = (type) => {
-    if(isAuth) {
+    if (isAuth) {
       const formData = new FormData()
       formData.append('id', data.id)
       formData.append('type', type)
@@ -74,7 +76,7 @@ const Card = ({ data, isProfile = false }) => {
   }
 
   return (
-    <div 
+    <div
       className={
         classNames(
           style.block,
@@ -221,19 +223,10 @@ const Card = ({ data, isProfile = false }) => {
             />
           </li>
         </ul>
-
         {
           data.featured_tags &&
           <Tags data={data.featured_tags} />
         }
-
-        <Option
-          size={'xs'}
-          iconName={'clock'}
-          iconSize={18}
-          text={getDate(data.meta.created_at, 3)}
-        />
-
         <div className={style.footer}>
           <div className={style.meta}>
             <h5>{getFormatPrice(auth?.account?.language?.code, auth?.account?.currency?.code, data?.price_data?.price)}</h5>
@@ -241,57 +234,113 @@ const Card = ({ data, isProfile = false }) => {
               {
                 data.price_data.price_without_vat
                   ?
-                    <><strong>{getFormatPrice(auth?.account?.language?.code, auth?.account?.currency?.code, data.price_data.price_without_vat)}</strong> {t('without_vat')}</>
+                  <><strong>{getFormatPrice(auth?.account?.language?.code, auth?.account?.currency?.code, data.price_data.price_without_vat)}</strong> {t('without_vat')}</>
                   :
-                    <span>{t('not_deductible')}</span>
+                  <span>{t('not_deductible')}</span>
               }
             </p>
-            <ul className={style.description}>
-              <li>Seen: <strong>1</strong></li>
-              <li>Favorites: <strong>1</strong></li>
-              <li>Bargaining: <strong>1</strong></li>
-              <li>Exchange: <strong>1</strong></li>
-              <li>Questions: <strong>1</strong></li>
+
+            <ul className={style.descriptions}>
+              <li className={style.description}>
+                <Icon
+                  iconName={'clock'}
+                  width={16}
+                  height={16}
+                />
+                <strong>{getDate(data.meta.created_at, 3)}</strong>
+              </li>
+              {
+                Object.entries(data.meta.stats).map(([key, { value, visible }]) =>
+                  visible !== 0 &&
+                  <li
+                    key={key}
+                    className={style.description}
+                    title={t(key)}
+                  >
+                    <Icon
+                      iconName={key}
+                      width={16}
+                      height={16}
+                    />
+                    <strong>{value}</strong>
+                  </li>
+                )
+              }
             </ul>
           </div>
         </div>
+        {
+          isProfile &&
+          <div className={style.actions}>
+            <Button
+              icon={'reset'}
+              classes={['success', 'square', style.action]}
+            />
+            <Button
+              icon={'edit'}
+              classes={['info', 'square', style.action]}
+            />
+            <Button
+              icon={'trash'}
+              classes={['warning', 'square', style.action]}
+            />
+          </div>
+        }
       </div>
-      {
-        data.status === '1' 
-        ?
-          data.price_data.discount &&
-            <div 
-              className={
-                classNames(
-                  style.label,
-                  style.discount
-                )
-              }
-            > 
-              <Discount
-                size={'sm'}
-                amount={getFormatPrice(auth?.account?.language?.code, auth?.account?.currency?.code, data.price_data.discount)}
-              />
-            </div>
-        :
-          <div 
+      <div className={style.labels}>
+        {
+          data.meta.top &&
+          <div
             className={
               classNames(
                 style.label,
-                style[CARD_STATUS[data.status]]
+                style.top
               )
             }
-          > 
-            <strong className={style.status}>
-              <Icon 
-                iconName={'warning'}
-                width={14}
-                height={14}
-              />
-              <span>{t(CARD_STATUS[data.status])}</span>
-            </strong>
+          >
+            <Top
+              size={'sm'}
+              count={data.meta.top.level}
+            />
           </div>
-      }
+        }
+        {
+          data.status === '1'
+            ?
+              data.price_data.discount &&
+              <div
+                className={
+                  classNames(
+                    style.label,
+                    style.discount
+                  )
+                }
+              >
+                <Discount
+                  size={'sm'}
+                  amount={getFormatPrice(auth?.account?.language?.code, auth?.account?.currency?.code, data.price_data.discount)}
+                />
+              </div>
+            :
+              <div
+                className={
+                  classNames(
+                    style.label,
+                    style[CARD_STATUS[data.status]]
+                  )
+                }
+              >
+                <strong className={style.status}>
+                  <Icon
+                    iconName={'warning'}
+                    width={14}
+                    height={14}
+                  />
+                  <span>{t(CARD_STATUS[data.status])}</span>
+                </strong>
+              </div>
+        }
+      </div>
     </div>
   )
 }

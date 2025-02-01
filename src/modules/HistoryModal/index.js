@@ -111,7 +111,7 @@ const HistoryModal = ({id = null, type, name = '', data, setData = () => {} }) =
               <Button
                 type={'submit'}
                 classes={['primary', 'wide']}
-                placeholder={t('save')}
+                placeholder={t('actions.save')}
                 isDisabled={!isFormValid}
               />
             </>

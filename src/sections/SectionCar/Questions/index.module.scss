@@ -1,0 +1,89 @@
+@use '@/scss/config' as *;
+
+.block {
+  @include flex($direction: column);
+
+  gap: var(--gap-16);
+}
+
+.form,
+.list {
+  @include flex($direction: column);
+
+  gap: var(--gap-16);
+}
+
+.button {
+  @include make-spacer(ml, auto);
+
+  min-width: rem(100px);
+}
+
+.hr {
+  @include make-spacer(my, var(--gap-32));
+
+  background-color: var(--color-grey-200);
+}
+
+.question {
+  @include make-spacer(p, var(--gap-16));
+
+  position: relative;
+  border-radius: var(--border-radius-4);
+  border-width: rem(1px);
+  border-style: solid;  
+
+  &.alt {
+    @include make-spacer(ml, var(--gap-16));
+
+    &::before {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: rem(-16px);
+      background-color: var(--color-grey-300);
+      width: rem(1px);
+      content: '';
+    }
+  }
+}
+
+.head {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: flex-start;
+  gap: var(--gap-16);
+}
+
+.content {
+  @include flex($direction: column);
+
+  gap: var(--gap-4);
+}
+
+.date {
+  font-size: rem(12px);
+  opacity: 0.8;
+}
+
+.text {
+  font-size: rem(13px);
+}
+
+.badges {
+  @include flex($align-items: center, $wrap: wrap);
+
+  gap: var(--gap-8);
+}
+
+.badge {
+  @include make-spacer(px, var(--gap-6));
+  @include make-spacer(py, var(--gap-4));
+
+  cursor: pointer;
+  border-radius: var(--border-radius-4);
+  background-color: var(--color-secondary);
+  color: var(--color-primary-hover);
+  font-weight: var(--typography-bold);
+  font-size: rem(12px);
+}

@@ -2,6 +2,7 @@
 
 import { useTranslations } from 'next-intl'
 import { useState } from 'react'
+import { useSelector } from 'react-redux'
 
 import classNames from 'classnames'
 
@@ -12,11 +13,14 @@ import Account from './Account'
 import Favorite from './Favorite'
 import Language from './Language'
 import Menu from './Menu'
+import Notifications from './Notifications'
 
 import style from './index.module.scss'
 
 const Header = () => {
   const t = useTranslations()
+  const auth = useSelector((state) => state.auth)
+  const isAuth = auth?.id
   const [show, setShow] = useState(false)
 
   return (
@@ -31,7 +35,7 @@ const Header = () => {
               <button
                 type={'button'}
                 className={classNames(style.toggle, show && style.active)}
-                aria-label="Toggle"
+                aria-label={"Toggle"}
               >
                 <span className={style.line} />
                 <span className={style.line} />
@@ -44,6 +48,10 @@ const Header = () => {
           <Menu setShow={setShow} show={show} />
           <div className={style.wrapper}>
             <Favorite />
+            {
+              isAuth &&
+              <Notifications />
+            }
             <Language />
             <Account />
           </div>

@@ -43,7 +43,7 @@ const Share = ({ data }) => {
         ref={buttonRef}
         icon={'share'}
         classes={['reference', 'sm']}
-        placeholder={(t('share'))}
+        placeholder={(t('actions.share'))}
         onChange={() => setShow(!show)}
       />
       {

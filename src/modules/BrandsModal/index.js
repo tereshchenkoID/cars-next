@@ -94,7 +94,7 @@ const BrandsModal = ({ show, setShow }) => {
                   />
                 </>
               }
-              <span>{activeBrand ? activeBrand.name : t('select_make')}</span>
+              <span>{activeBrand ? activeBrand.name : t('actions.select_make')}</span>
             </h6>
             <Field
               type={"text"}
@@ -224,7 +224,7 @@ const BrandsModal = ({ show, setShow }) => {
               activeBrand
                 ?
                   <Button
-                    placeholder={t('select_model')}
+                    placeholder={t('actions.select_model')}
                     classes={['primary', 'wide']}
                     isDisabled={!activeModels}
                     onChange={() => handleSelectBrand(null)}

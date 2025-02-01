@@ -70,7 +70,7 @@ const SectionAdvancedSearch = ({ options }) => {
               link={NAVIGATION.buy.link}
               icon={'angle-left'}
               classes={['reference', 'sm']}
-              placeholder={(t('back'))}
+              placeholder={(t('actions.back'))}
             />
             <h1>{t('detailed_search')}</h1>
           </div>

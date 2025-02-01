@@ -1,9 +1,9 @@
 "use client"
 
 import dynamic from 'next/dynamic'
-import React, { useEffect, useMemo, useRef, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { useTranslations } from 'next-intl'
+import React, { useEffect, useMemo, useRef, useState } from 'react'
 
 import { NAVIGATION } from '@/constant/config'
 
@@ -20,18 +20,37 @@ import Link from 'next/link'
 import Image from 'next/image'
 import Tags from '@/modules/Tags'
 import Option from '@/modules/Option'
+import Loading from '@/components/Loading'
 import Icon from '@/components/Icon'
 import Button from '@/components/Button'
 import Container from '@/components/Container'
-import Loading from '@/components/Loading'
 import Betslip from './Betslip'
 import Contact from './Contact'
 
-const Share = dynamic(() => import('./Share'), { ssr: false })
-const Favorites = dynamic(() => import('./Favorites'), { ssr: false })
-const History = dynamic(() => import('./History'), { ssr: false, loading: () => <Loading classes={'transparent'} /> })
-const Map = dynamic(() => import('./Map'), { ssr: false, loading: () => <Loading classes={'transparent'} /> })
-const Comparison = dynamic(() => import('@/modules/Comparison'), { ssr: false, loading: () => <Loading classes={'transparent'} /> })
+const Share = dynamic(
+  () => import('./Share'), 
+  { ssr: false }
+)
+const Favorites = dynamic(
+  () => import('./Favorites'), 
+  { ssr: false }
+)
+const History = dynamic(
+  () => import('./History'), 
+  { ssr: false, loading: () => <Loading classes={'transparent'} /> }
+)
+const Map = dynamic(
+  () => import('./Map'), 
+  { ssr: false, loading: () => <Loading classes={'transparent'} /> }
+)
+const Questions = dynamic(
+  () => import('./Questions'), 
+  { ssr: false, loading: () => <Loading classes={'transparent'} /> }
+)
+const Comparison = dynamic(
+  () => import('@/modules/Comparison'),
+  { ssr: false, loading: () => <Loading classes={'transparent'} /> }
+)
 
 import style from './index.module.scss'
 
@@ -47,13 +66,13 @@ const SectionCar = ({ data, next }) => {
     { id: 0, text: 'details' },
     { id: 1, text: 'feature' },
     ...extraTabs,
+    { id: 5, text: 'questions' },
   ]
 
   const router = useRouter()
   const sectionRefs = useRef(TABS.map(() => React.createRef()))
-  const [active, setActive] = useState(0)
-
   const featureTags = data?.featured_tags.map(tag => tag.id)
+  const [active, setActive] = useState(0)
 
   const groupedFeatures = useMemo(() => {
     return data?.features.reduce((acc, item) => {
@@ -95,7 +114,7 @@ const SectionCar = ({ data, next }) => {
           <Button
             icon={'angle-left'}
             classes={['reference', 'sm', style.hide]}
-            placeholder={(t('back'))}
+            placeholder={(t('actions.back'))}
             onChange={() => router.back()}
           />
           <div className={style.meta}>
@@ -221,7 +240,10 @@ const SectionCar = ({ data, next }) => {
 
       <div className={style.contacts}>
         <Container classes={style.social}>
-          <Contact data={data.contact} />
+          <Contact
+            data={data.contact}
+            meta={data.meta}
+          />
         </Container>
       </div>
 
@@ -557,6 +579,25 @@ const SectionCar = ({ data, next }) => {
               </div>
             </div>
           }
+
+          <div
+            ref={sectionRefs.current[5]}
+            className={style.body}
+          >
+            <h3
+              className={
+                classNames(
+                  style.title,
+                  style.lg
+                )
+              }
+            >
+              {t('questions')}
+            </h3>
+            <div className={style.wrapper}>
+              <Questions data={data} />
+            </div>
+          </div>
         </div>
         <Betslip data={data} />
       </Container>

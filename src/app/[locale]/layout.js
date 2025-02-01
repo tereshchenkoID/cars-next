@@ -30,12 +30,9 @@ const poppins = Poppins({
 async function fetchInitialData() {
   try {
     const [settings, filters, brands] = await Promise.all([
-      fetchData('settings/', { cache: 'no-cache' }),
-      fetchData('filters/', { cache: 'no-cache' }),
-      fetchData('filters/brands/', { cache: 'no-cache' })
-      // fetchData('settings/', { cache: 'force-cache' }),
-      // fetchData('filters/', { cache: 'force-cache' }),
-      // fetchData('filters/brands/', { cache: 'force-cache' })
+      fetchData('settings/', { cache: 'force-cache' }),
+      fetchData('filters/', { cache: 'force-cache' }),
+      fetchData('filters/brands/', { cache: 'force-cache' })
     ])
 
     return { settings, filters, brands }

@@ -3,8 +3,9 @@ import { useSelector } from 'react-redux'
 
 import { getFormatPrice } from '@/helpers/getFormatPrice'
 
-import Discount from '@/modules/Discount'
 import Button from '@/components/Button'
+import Discount from '@/modules/Discount'
+import Top from '@/modules/Top'
 
 import style from './index.module.scss'
 
@@ -15,6 +16,13 @@ const Betslip = ({ data }) => {
   return (
     <div className={style.block}>
       <header className={style.header}>
+        {
+          data?.meta?.top &&
+          <Top 
+            size={'lg'} 
+            count={data.meta.top.level} 
+          />
+        }
         {
           data?.price_data?.price_start &&
           <div className={style.discount}>

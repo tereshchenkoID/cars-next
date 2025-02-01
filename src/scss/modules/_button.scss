@@ -132,4 +132,16 @@
 	&.wide {
 		width: 100%;
 	}
+
+	&.warning {
+		background-color: var(--color-warning);
+	}
+
+	&.success {
+		background-color: var(--color-success);
+	}
+
+	&.info {
+		background-color: var(--color-info);
+	}
 }

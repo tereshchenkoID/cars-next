@@ -17,6 +17,9 @@ const MENU = [
   ROUTES_USER.settings,
   ROUTES_USER.favorite,
   ROUTES_USER.vehicles,
+  ROUTES_USER.archive,
+  ROUTES_USER.notification,
+  ROUTES_USER.chat,
 ]
 
 const SectionProfile = () => {

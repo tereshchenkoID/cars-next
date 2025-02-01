@@ -11,6 +11,13 @@ export const USERS_TYPE = {
   1: "user"
 }
 
+export const NOTIFICATIONS_TYPE = {
+  0: 'shares',
+  1: 'selling',
+  2: 'purchase',
+  3: 'info',
+}
+
 export const CARD_STATUS = {
   0: "not_active",
   1: "active",
@@ -103,5 +110,21 @@ export const ROUTES_USER = {
   vehicles: {
     link: '/profile/vehicles',
     text: 'navigation.vehicles',
+    icon: 'drive'
+  },
+  archive: {
+    link: '/profile/archive',
+    text: 'navigation.archive',
+    icon: 'trash'
+  },
+  notification: {
+    link: '/profile/notification',
+    text: 'navigation.notification',
+    icon: 'bell'
+  },
+  chat: {
+    link: '/profile/chat',
+    text: 'navigation.chat',
+    icon: 'mail'
   }
 }

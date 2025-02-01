@@ -40,7 +40,7 @@ const SectionContact = () => {
                 />
               </div>
               <div>
-                <p className={style.label}>{t('call_us')}</p>
+                <p className={style.label}>{t('actions.call_us')}</p>
                 <Reference
                   classes={['reference']} 
                   link={'tel:+000000000000'}

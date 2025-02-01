@@ -33,10 +33,14 @@ const Account = () => {
   const language = params.locale
 
   const MENU = [
-    ROUTES_USER.saved,
-    ROUTES_USER.last,
+    // ROUTES_USER.saved,
+    // ROUTES_USER.last,
+    ROUTES_USER.vehicles,
+    ROUTES_USER.archive,
     ROUTES_USER.favorite,
-    ROUTES_USER.orders
+    ROUTES_USER.notification,
+    // ROUTES_USER.chat,
+    // ROUTES_USER.orders
   ]
 
   const blockRef = useRef(null)
@@ -82,7 +86,7 @@ const Account = () => {
         <button
           ref={buttonRef}
           type="button"
-          aria-label="Toggle"
+          aria-label={"Toggle"}
           className={style.toggle}
           onClick={() => setShow(!show)}
         >

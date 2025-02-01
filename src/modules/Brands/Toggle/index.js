@@ -19,7 +19,7 @@ const Toggle = ({ show, setShow, isWide }) => {
           show && style.active
         )
       }
-      aria-label={t('add_car')}
+      aria-label={t('actions.add_car')}
       onClick={() => setShow(!show)}
     >
       <Icon
@@ -28,7 +28,7 @@ const Toggle = ({ show, setShow, isWide }) => {
         height={16}
         className={style.plus}
       />
-      <span>{t('add_car')}</span>
+      <span>{t('actions.add_car')}</span>
       <Icon
         iconName={'angle-down'}
         width={16}

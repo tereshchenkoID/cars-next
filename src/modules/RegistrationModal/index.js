@@ -229,7 +229,7 @@ const RegistrationModal = () => {
             }
           >
             <Select
-              placeholder={t('select_countries')}
+              placeholder={t('actions.select_countries')}
               options={countries.map(item => ({
                 value: item.alpha_2,
                 label: item.name,

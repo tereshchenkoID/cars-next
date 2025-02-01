@@ -6,8 +6,6 @@ import classNames from 'classnames'
 
 import { DEFAULT } from '@/constant/config'
 
-// import Select from 'react-select'
-
 const createLoadingComponent = (placeholder) => () => (
   <div className={style.loading}>{placeholder}</div>
 )
