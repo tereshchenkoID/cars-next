@@ -15,8 +15,6 @@
 
 .button {
   @include make-spacer(ml, auto);
-
-  min-width: rem(100px);
 }
 
 .hr {

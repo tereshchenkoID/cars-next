@@ -24,6 +24,14 @@
 		user-select: none;
 	}
 
+	&.loading {
+		pointer-events: none;
+
+		.icon {
+			animation: 4s infinite ease-in-out spin;
+		}
+	}
+
 	&.primary {
 		background: linear-gradient(111deg, var(--color-primary) 14%, rgb(38, 42, 153) 85%);
 		background-color: var(--color-primary);
@@ -95,6 +103,10 @@
 		}
 	}
 
+	&:not(.square) {
+		min-width: rem(100px);
+	}
+
 	&.xs {
 		--icon-size: 16px;
 		--button-height: 32px;
@@ -144,4 +156,14 @@
 	&.info {
 		background-color: var(--color-info);
 	}
+}
+
+@keyframes spin {
+  0% {
+    transform: rotateZ(0);
+  }
+
+  100% {
+    transform: rotateZ(360deg);
+  }
 }

@@ -121,10 +121,6 @@
   gap: var(--gap-12);
 }
 
-.button {
-  min-width: rem(100px);
-}
-
 .hr {
   @include make-spacer(my, var(--gap-24));
 

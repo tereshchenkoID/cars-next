@@ -22,6 +22,7 @@ import History from './History'
 import Saved from './Saved'
 
 import style from './index.module.scss'
+import Label from '@/components/Label'
 
 const TABS = [
   { icon: "sliders", text: "all" },
@@ -110,7 +111,7 @@ const Filters = ({
             active === 0 &&
             <>
               <div className={style.section}>
-                <h6 className={style.subtitle}>{t('model')}</h6>
+                <Label data={t('model')} />
                 <Brands
                   show={showBrand}
                   setShow={setShowBrands}
@@ -119,7 +120,7 @@ const Filters = ({
               </div>
 
               <div className={style.section}>
-                <h6 className={style.subtitle}>{t('filters.state.0')}</h6>
+                <Label data={t('filters.state.0')} />
                 <div className={style.wrapper}>
                   <Select
                     id={'select_state'}
@@ -136,7 +137,7 @@ const Filters = ({
               </div>
 
               <div className={style.section}>
-                <h6 className={style.subtitle}>{t('filters.price.0')}</h6>
+                <Label data={t('filters.price.0')} />
                 <div
                   className={style.wrapper}
                   style={{
@@ -174,7 +175,7 @@ const Filters = ({
               </div>
 
               <div className={style.section}>
-                <h6 className={style.subtitle}>{t('filters.category.0')}</h6>
+                <Label data={t('filters.category.0')} />
                 <FiltersMultiSelect
                   placeholder={'category'}
                   options={filters.category.options}
@@ -184,7 +185,7 @@ const Filters = ({
               </div>
 
               <div className={style.section}>
-                <h6 className={style.subtitle}>{t('filters.body.0')}</h6>
+                <Label data={t('filters.body.0')} />
                 <FiltersMultiSelect
                   placeholder={'body'}
                   options={filters.body.options}
@@ -194,7 +195,7 @@ const Filters = ({
               </div>
 
               <div className={style.section}>
-                <h6 className={style.subtitle}>{t('filters.mileage.0')}</h6>
+                <Label data={t('filters.mileage.0')} />
                 <div
                   className={style.wrapper}
                   style={{
@@ -217,7 +218,7 @@ const Filters = ({
               </div>
 
               <div className={style.section}>
-                <h6 className={style.subtitle}>{t('filters.year.0')}</h6>
+                <Label data={t('filters.year.0')} />
                 <div
                   className={style.wrapper}
                   style={{
@@ -250,7 +251,7 @@ const Filters = ({
               </div>
 
               <div className={style.section}>
-                <h6 className={style.subtitle}>{t('filters.fuel_type.0')}</h6>
+                <Label data={t('filters.fuel_type.0')} />
                 <FiltersMultiSelect
                   placeholder={'fuel_type'}
                   options={filters.fuel_type.options}
@@ -260,7 +261,7 @@ const Filters = ({
               </div>
 
               <div className={style.section}>
-                <h6 className={style.subtitle}>{t('filters.transmission.0')}</h6>
+                <Label data={t('filters.transmission.0')} />
                 <FiltersMultiSelect
                   placeholder={'transmission'}
                   options={filters.transmission.options}
@@ -270,7 +271,7 @@ const Filters = ({
               </div>
 
               <div className={style.section}>
-                <h6 className={style.subtitle}>{t('filters.eco.0')}</h6>
+                <Label data={t('filters.eco.0')} />
                 <FiltersMultiSelect
                   placeholder={'eco'}
                   options={filters.eco.options}
@@ -280,7 +281,7 @@ const Filters = ({
               </div>
 
               <div className={style.section}>
-                <h6 className={style.subtitle}>{t('filters.color.0')}</h6>
+                <Label data={t('filters.color.0')} />
                 <FiltersColorSelect
                   placeholder={'color'}
                   options={filters.color.options}

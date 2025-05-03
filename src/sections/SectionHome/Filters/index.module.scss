@@ -25,11 +25,3 @@
 .footer {
   @include flex(space-between);
 }
-
-.button {
-  min-width: rem(80px);
-
-  @include media-breakpoint-up(md) {
-    min-width: rem(100px);
-  }
-}

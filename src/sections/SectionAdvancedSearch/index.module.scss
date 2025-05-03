@@ -38,19 +38,10 @@
   border-bottom-style: solid;
 }
 
-.subtitle {
-  @include make-spacer(mb, var(--gap-8));
-
-  font-size: rem(12px);
-  text-transform: uppercase;
-}
-
 .section {
-  @include make-spacer(mb, var(--gap-16));
-  // border: 1px solid red;
 
-  &:last-child {
-    @include make-spacer(mb, 0);
+  &:not(last-child) {
+    @include make-spacer(mb, var(--gap-16));
   }
 }
 

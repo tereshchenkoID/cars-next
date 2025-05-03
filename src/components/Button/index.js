@@ -10,10 +10,11 @@ const Button = React.forwardRef(({
   type = 'button',
   placeholder,
   classes = ['primary'],
-  onChange = () => {},
+  onChange = () => { },
   icon = false,
   isDisabled = false,
   isActive = false,
+  isLoading = false,
   title = false,
 }, ref
 ) => {
@@ -26,6 +27,7 @@ const Button = React.forwardRef(({
         classNames(
           style.block,
           isActive && style.active,
+          isLoading && style.loading,
           classes && classes.map(el => style[el] || el),
         )
       }
@@ -34,14 +36,25 @@ const Button = React.forwardRef(({
       aria-label={title || placeholder || icon}
       title={title || placeholder || icon}
     >
-       {
-        icon &&
-          <Icon
-            iconName={icon}
-            className={style.icon}
-          />
+      {
+        isLoading
+          ?
+            <Icon
+              iconName={'loading'}
+              className={style.icon}
+            />
+          :
+            <>
+              {
+                icon &&
+                <Icon
+                  iconName={icon}
+                  className={style.icon}
+                />
+              }
+              {placeholder && placeholder}
+            </>
       }
-      {placeholder && placeholder}
     </button>
   )
 })

@@ -13,6 +13,7 @@ import { getYears } from '@/helpers/getYears'
 import Reference from '@/components/Reference'
 import Container from "@/components/Container"
 import Checkbox from '@/components/Checkbox'
+import Label from '@/components/Label'
 import Field from '@/components/Field'
 import Button from '@/components/Button'
 import Select from '@/components/Select'
@@ -80,7 +81,7 @@ const SectionAdvancedSearch = ({ options }) => {
               <h3 className={style.title}>{t('basic_info')}</h3>
             </div>
             <div className={style.section}>
-              <h6 className={style.subtitle}>{t('model')}</h6>
+              <Label data={t('model')} />
               <Brands
                 show={showBrand}
                 setShow={setShowBrands}
@@ -97,7 +98,7 @@ const SectionAdvancedSearch = ({ options }) => {
                 }
               >
                 <div>
-                  <h6 className={style.subtitle}>{t('filters.state.0')}</h6>
+                  <Label data={t('filters.state.0')} />
                   <Select
                     id={`select_state`}
                     options={
@@ -111,7 +112,7 @@ const SectionAdvancedSearch = ({ options }) => {
                   />
                 </div>
                 <div>
-                  <h6 className={style.subtitle}>{t('filters.category.0')}</h6>
+                  <Label data={t('filters.category.0')} />
                   <Select
                     id={`select_category`}
                     options={
@@ -137,7 +138,7 @@ const SectionAdvancedSearch = ({ options }) => {
                 }
               >
                 <div>
-                  <h6 className={style.subtitle}>{t('filters.price.0')} (${auth?.account?.currency?.code})</h6>
+                  <Label data={`${t('filters.price.0')} (${auth?.account?.currency?.code || '$'})`} />
                   <Field
                     type="number"
                     placeholder={t('from')}
@@ -152,7 +153,7 @@ const SectionAdvancedSearch = ({ options }) => {
                   onChange={(value) => handleChange(filters.price_to.type, 'price_to', value)}
                 />
                 <div>
-                  <h6 className={style.subtitle}>{t('filters.mileage.0')}</h6>
+                  <Label data={t('filters.mileage.0')} />
                   <Field
                     type="number"
                     placeholder={t('from')}
@@ -179,7 +180,7 @@ const SectionAdvancedSearch = ({ options }) => {
                 }
               >
                 <div>
-                  <h6 className={style.subtitle}>{t('filters.year.0')}</h6>
+                  <Label data={t('filters.year.0')} />
                   <Select
                     id={`select_year_from`}
                     options={
@@ -241,7 +242,7 @@ const SectionAdvancedSearch = ({ options }) => {
               </div>
             </div>
             <div className={style.section}>
-              <h6 className={style.subtitle}>{t('filters.color.0')}</h6>
+              <Label data={t('filters.color.0')} />
               <div className={style.colors}>
                 {
                   Object.entries(filters.color.options).map(([optionKey, optionValue]) => (
@@ -270,7 +271,7 @@ const SectionAdvancedSearch = ({ options }) => {
               <h3 className={style.title}>{t('engine')}</h3>
             </div>
             <div className={style.section}>
-              <h6 className={style.subtitle}>{t('filters.fuel_type.0')}</h6>
+              <Label data={t('filters.fuel_type.0')} />
               <div className={style.list}>
                 {
                   Object.entries(filters.fuel_type.options).map(([optionKey]) => (
@@ -285,7 +286,7 @@ const SectionAdvancedSearch = ({ options }) => {
               </div>
             </div>
             <div className={style.section}>
-              <h6 className={style.subtitle}>{t('filters.transmission.0')}</h6>
+              <Label data={t('filters.transmission.0')} />
               <div className={style.list}>
                 {
                   Object.entries(filters.transmission.options).map(([optionKey]) => (
@@ -300,7 +301,7 @@ const SectionAdvancedSearch = ({ options }) => {
               </div>
             </div>
             <div className={style.section}>
-              <h6 className={style.subtitle}>{t('filters.eco.0')}</h6>
+              <Label data={t('filters.eco.0')} />
               <div className={style.list}>
                 {
                   Object.entries(filters.eco.options).map(([optionKey]) => (
@@ -326,7 +327,7 @@ const SectionAdvancedSearch = ({ options }) => {
                   key={idx}
                   className={style.section}
                 >
-                  <h6 className={style.subtitle}>{el.name}</h6>
+                  <Label data={t(`features.${el.id}.0`)} />
                   <div className={style.options}>
                     {
                       el.options.map((el_option, idx_option) =>

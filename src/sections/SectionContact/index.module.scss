@@ -42,15 +42,6 @@
   }
 }
 
-.button {
-  width: 100%;
-
-  @include media-breakpoint-up(md) {
-    width: fit-content;
-    min-width: rem(100px);
-  }
-}
-
 .bottom {
   @include flex($justify-content: center, $direction: column);
 
