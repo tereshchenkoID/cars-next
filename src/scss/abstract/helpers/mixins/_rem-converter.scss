@@ -1,10 +1,6 @@
 @use 'sass:meta';
 @use 'sass:math';
-@use "sass:list";
-
-//
-// Ease convert px to rem
-//
+@use 'sass:list';
 
 $rem-baseline: 16px !default;
 $rem-fallback: false !default;
@@ -37,28 +33,37 @@ $rem-px-only: false !default;
   $separator: rem-separator($values);
 
   @each $value in $values {
-    @if meta.type-of($value) == 'number' and math.unit($value) == 'rem' and $to == 'px' {
-      $result: list.append($result, ($value / $rem-baseline) * 1rem, $separator);
-    }
-
-    @else if
+    @if meta.type-of($value) ==
+      'number' and
+      math.unit($value) ==
+      'rem' and
+      $to ==
+      'px'
+    {
+      $result: list.append(
+        $result,
+        ($value / $rem-baseline) * 1rem,
+        $separator
+      );
+    } @else if
       meta.type-of($value) ==
       'number' and
       math.unit($value) ==
       'px' and
       $to ==
-      'rem' {
-      $result: list.append($result, ($value, $rem-baseline) * 1rem, $separator);
-    }
-
-    @else if meta.type-of($value) == 'list' {
+      'rem'
+    {
+      $result: list.append(
+        $result,
+        math.div($value, $rem-baseline) * 1rem,
+        $separator
+      );
+    } @else if meta.type-of($value) == 'list' {
       $value-separator: rem-separator($value);
       $value: rem-convert($to, $value...);
       $value: rem-separator($value, $value-separator);
       $result: list.append($result, $value, $separator);
-    }
-
-    @else {
+    } @else {
       $result: list.append($result, $value, $separator);
     }
   }
@@ -69,9 +74,7 @@ $rem-px-only: false !default;
 @function rem($values...) {
   @if $rem-px-only {
     @return rem-convert(px, $values...);
-  }
-
-  @else {
+  } @else {
     @return rem-convert(rem, $values...);
   }
 }
@@ -81,9 +84,7 @@ $rem-px-only: false !default;
     @each $property in map-keys($properties) {
       @include rem($property, map-get($properties, $property));
     }
-  }
-
-  @else {
+  } @else {
     @each $property in $properties {
       @if $rem-fallback or $rem-px-only {
         #{$property}: rem-convert(px, $values...);
