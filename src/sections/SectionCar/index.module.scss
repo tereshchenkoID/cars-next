@@ -1,9 +1,9 @@
-@use '@/scss/config' as *;
+@use 'scss/config' as *;
+@use 'scss/modules/color' as *;
 @use 'sass:math';
 
 .block {
-  @include make-spacer(pb, var(--gap-24));
-
+  padding-bottom: var(--gap-24);
   letter-spacing: rem(0.5px);
   color: var(--color-grey-600);
 }
@@ -24,22 +24,19 @@
   li {
 
     &:not(:last-child) {
-      @include make-spacer(mb, var(--gap-2));
-
+      margin-bottom: var(--gap-2);
       min-height: rem(26px);
     }
   }
 }
 
 .head {
-  @include make-spacer(pb, var(--gap-24));
-
+  padding-bottom: var(--gap-24);
   background-color: var(--color-white);
   gap: var(--gap-24);
 
   @include media-breakpoint-up(lg) {
-    @include make-spacer(pt, var(--gap-24));
-    @include make-spacer(pb, 0);
+    padding-block: var(--gap-24) 0;
   }
 }
 
@@ -97,34 +94,31 @@
 }
 
 .body {
-  @include make-spacer(py, var(--gap-32));
-
+  padding-block: var(--gap-32);
   scroll-margin-top: rem(140px);
 }
 
-.title {  
+.title {
   width: 100%;
   line-height: 1;
 
   &.sm {
-    @include make-spacer(mb, var(--gap-8));
+    margin-bottom: var(--gap-8);
   }
 
   &.lg {
-    @include make-spacer(mb, var(--gap-32));
+    margin-bottom: var(--gap-32);
   }
 }
 
 .wrapper {
-  @include make-spacer(p, var(--gap-16));
-  
+  padding: var(--gap-16);
   background-color: var(--color-white);
   border-radius: var(--border-radius-8);
   box-shadow: var(--box-shadow-16-24);
-  // min-height: rem(200px);
 
   @include media-breakpoint-up(lg) {
-    @include make-spacer(p, var(--gap-32));
+    padding: var(--gap-32);
   }
 }
 
@@ -177,7 +171,7 @@
   height: rem(73px);
 
   @include media-breakpoint-up(lg) {
-    @include make-spacer(pr, 416px);
+    padding-right: rem(416px);
   }
 }
 
@@ -202,10 +196,7 @@
   }
 
   @include hover {
-
-    &:hover {
-      color: var(--color-primary-hover);  
-    }
+    color: var(--color-primary-hover);
   }
 
   &.active {
@@ -241,11 +232,11 @@
     .swiper-button-next {
       @include transition;
       @include size(rem(56px));
-      @include make-spacer(mt, 0);
 
       display: none;
       top: 50%;
       transform: translateY(-50%);
+      margin-top: 0;
       background-color: var(--color-white);
       border-radius: var(--border-radius-4);
 
@@ -259,10 +250,7 @@
       }
 
       @include hover {
-
-        &:hover {
-          background-color: var(--color-grey-100);
-        }
+        background-color: var(--color-grey-100);
       }
 
       &.swiper-button-disabled {
@@ -271,7 +259,7 @@
     }
 
     .swiper-button-prev {
-      left: var(--gap-24); 
+      left: var(--gap-24);
     }
 
     .swiper-button-next {
@@ -279,12 +267,11 @@
     }
 
     .swiper-pagination {
-      @include make-spacer(px, var(--gap-8));
-
       position: absolute;
       left: auto;
       right: var(--gap-12);
       bottom: var(--gap-12);
+      padding-inline: var(--gap-8);
       width: fit-content;
       background-color: rgba(0, 0, 0, 0.48);
       border-radius: var(--border-radius-4);
@@ -301,12 +288,8 @@
       width: fit-content;
 
       @include hover {
-
-        &:hover {
-    
-          div {
-            opacity: 1
-          }  
+        div {
+          opacity: 1
         }
       }
     }
@@ -317,7 +300,7 @@
   @include transition;
   @include flex(center, center);
   @include absolute-filled;
-  
+
   color: var(--color-white);
   cursor: pointer;
   opacity: 0;
@@ -328,8 +311,8 @@
     @include size(rem(32px));
 
     background-color: var(--color-grey-900);
-    opacity: 0.48;
     border-radius: var(--border-radius-4);
+    opacity: 0.48;
     z-index: 0;
     content: '';
   }
@@ -351,10 +334,8 @@
 }
 
 .feature {
-  @include make-spacer(px, var(--gap-6));
-  @include make-spacer(py, var(--gap-4));
-
   display: inline-flex;
+  padding: var(--gap-4) var(--gap-6);
   border-radius: var(--border-radius-4);
   font-size: rem(12px);
 
@@ -384,71 +365,24 @@
 
   strong {
     @include flex($align-items: center);
-    
+
     gap: var(--gap-8);
   }
 }
 
 .contacts {
-  @include make-spacer(pt, var(--gap-32));
-  @include make-spacer(pb, var(--gap-16));
-
+  padding-block: var(--gap-32) var(--gap-16);
   background-color: var(--color-white);
 }
 
 .social {
   @include media-breakpoint-up(lg) {
-    @include make-spacer(pr, calc(436px + var(--outer-gap)))
+    padding-right: calc(rem(436px) + var(--outer-gap));
   }
 }
 
 .color {
-  @include transition;
-  @include size(rem(20px));
-
-  position: relative;
-  border-radius: 50%;
-  overflow: hidden;
-  overflow: visible;
-  opacity: 0.8;
-
-  &::before,
-  &::after {
-    position: absolute;
-    border-radius: 50%;
-    content: '';
-  }
-
-  &::before {
-    @include transition;
-
-    inset: rem(-3px);
-    background-color: var(--color-white);
-    border: rem(1px) solid var(--color-primary);
-    opacity: 0;
-    content: '';
-  }
-
-  &::after {
-    position: absolute;
-    inset: 0;
-    background-color: inherit;
-    border: rem(1px) solid var(--color-grey-400);
-  }
-
-  @include hover {
-
-    &:hover {
-      opacity: 1;
-    }
-  }
-
-  &.active {
-
-    &::before {
-      opacity: 1;
-    }
-  }
+  @include color;
 }
 
 .link {

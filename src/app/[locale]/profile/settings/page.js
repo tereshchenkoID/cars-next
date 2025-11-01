@@ -1,4 +1,4 @@
-import SectionSettings from '@/sections/profile/SectionSettings'
+import SectionSettings from 'sections/profile/SectionSettings'
 
 const Settings = () => {
 

@@ -2,7 +2,7 @@ import { useTranslations } from 'next-intl'
 import { useMemo } from 'react'
 import { useSelector } from 'react-redux'
 
-import { getFormatPrice } from '@/helpers/getFormatPrice'
+import { getFormatPrice } from 'helpers/getFormatPrice'
 
 import Graph from './Graph'
 import Scale from './Scale'
@@ -42,16 +42,16 @@ const Comparison = ({ data }) => {
       return 1
     }
     if (price >= options[options.length - 1]) {
-      return options.length - 1 
+      return options.length - 1
     }
-  
+
     const index = options.findIndex((value, idx) =>
       price >= value && price < (options[idx + 1] ?? Infinity)
     )
-  
+
     return index + 1
   }, [options, data])
-  
+
   return (
     <div className={style.block}>
       <p className={style.title}>

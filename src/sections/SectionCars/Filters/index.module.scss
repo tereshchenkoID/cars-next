@@ -1,4 +1,4 @@
-@use '@/scss/config' as *;
+@use 'scss/config' as *;
 
 .block {
   @include transition;
@@ -24,7 +24,7 @@
     transform: none;
     z-index: $z-index-9;
   }
-  
+
   &.active {
     transform: translateX(0)
   }
@@ -33,8 +33,8 @@
 .header,
 .content,
 .footer {
-  @include make-spacer(px, var(--gap-16));
-  @include make-spacer(pt, var(--gap-16));
+  padding-top: var(--gap-16);
+  padding-inline: var(--gap-16);
 }
 
 .section,
@@ -56,8 +56,8 @@
 
 .footer {
   @include flex($direction: column);
-  @include make-spacer(pb, var(--gap-16));
 
+  padding-bottom: var(--gap-16);
   border-top-width: rem(1px);
   border-top-style: solid;
   gap: var(--gap-16);
@@ -65,22 +65,21 @@
 
 .content {
   @include scroll;
-  @include make-spacer(pb, var(--gap-8));
   @include flex($direction: column);
-  
+
+  padding-bottom: var(--gap-8);
   gap: var(--gap-16);
   flex-grow: 1;
 }
 
 .tab {
-  @include make-spacer(mx, -16px);
-
   display: grid;
   grid-template-columns: repeat(3, 1fr);
+  margin-inline: rem(-16px);
   height: rem(68px);
 
   @include media-breakpoint-up(lg) {
-    @include make-spacer(mt, var(--gap-8));
+    margin-top: var(--gap-8);
   }
 }
 
@@ -104,11 +103,8 @@
   }
 
   @include hover {
-
-    &:hover {
-      color: var(--color-primary);
-      background-color: var(--color-grey-100);
-    }
+    color: var(--color-primary);
+    background-color: var(--color-grey-100);
   }
 
   &.active {

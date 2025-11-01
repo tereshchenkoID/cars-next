@@ -3,15 +3,15 @@
 import { useTranslations } from 'next-intl'
 import { useSelector } from 'react-redux'
 
-import { NAVIGATION } from '@/constant/config'
+import { NAVIGATION } from 'constant/config'
 
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { Navigation, Pagination, Mousewheel } from 'swiper/modules'
 
-import Container from "@/components/Container"
-import Reference from '@/components/Reference'
-import StarRating from '@/modules/StarRating'
-import Review from '@/modules/Review'
+import Container from "components/Container"
+import Reference from 'components/Reference'
+import StarRating from 'modules/StarRating'
+import Review from 'modules/Review'
 
 import style from './index.module.scss'
 

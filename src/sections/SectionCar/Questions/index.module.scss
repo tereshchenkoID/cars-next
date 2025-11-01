@@ -1,4 +1,4 @@
-@use '@/scss/config' as *;
+@use 'scss/config' as *;
 
 .block {
   @include flex($direction: column);
@@ -14,33 +14,31 @@
 }
 
 .button {
-  @include make-spacer(ml, auto);
+  margin-left: auto;
 }
 
 .hr {
-  @include make-spacer(my, var(--gap-32));
-
+  margin-block: var(--gap-32);
   background-color: var(--color-grey-200);
 }
 
 .question {
-  @include make-spacer(p, var(--gap-16));
-
   position: relative;
+  padding: var(--gap-16);
   border-radius: var(--border-radius-4);
   border-width: rem(1px);
-  border-style: solid;  
+  border-style: solid;
 
   &.alt {
-    @include make-spacer(ml, var(--gap-16));
+    margin-left: var(--gap-16);
 
     &::before {
       position: absolute;
       top: 0;
       bottom: 0;
       left: rem(-16px);
-      background-color: var(--color-grey-300);
       width: rem(1px);
+      background-color: var(--color-grey-300);
       content: '';
     }
   }
@@ -75,9 +73,7 @@
 }
 
 .badge {
-  @include make-spacer(px, var(--gap-6));
-  @include make-spacer(py, var(--gap-4));
-
+  padding: var(--gap-4) var(--gap-6);
   cursor: pointer;
   border-radius: var(--border-radius-4);
   background-color: var(--color-secondary);

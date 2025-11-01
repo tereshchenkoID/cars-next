@@ -2,12 +2,12 @@ import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useSearchParams } from 'next/navigation'
 
-import { getSearch } from '@/helpers/getSearch'
-import { postData } from '@/helpers/api'
-import { setBrands } from '@/store/actions/brandsAction'
-import { setSearch } from '@/store/actions/searchAction'  
+import { getSearch } from 'helpers/getSearch'
+import { postData } from 'helpers/api'
+import { setBrands } from 'store/actions/brandsAction'
+import { setSearch } from 'store/actions/searchAction'  
 
-import { ACTIVE, DEFAULT } from '@/constant/config'
+import { ACTIVE, DEFAULT } from 'constant/config'
 
 const useFilters = (initialData) => {
   const dispatch = useDispatch()

@@ -1,15 +1,15 @@
 import { useTranslations } from 'next-intl'
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { useModal } from '@/context/ModalContext'
+import { useModal } from 'context/ModalContext'
 
-import { ROUTES_USER } from '@/constant/config'
+import { ROUTES_USER } from 'constant/config'
 
-import { setFavorite } from '@/store/actions/favoriteAction'
+import { setFavorite } from 'store/actions/favoriteAction'
 
-import Reference from '@/components/Reference'
-import Button from '@/components/Button'
-import LoginModal from '@/modules/LoginModal'
+import Reference from 'components/Reference'
+import Button from 'components/Button'
+import LoginModal from 'modules/LoginModal'
 
 import style from './index.module.scss'
 

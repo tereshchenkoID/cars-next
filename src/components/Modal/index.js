@@ -1,6 +1,6 @@
 import classNames from 'classnames';
 
-import Button from '@/components/Button';
+import Button from 'components/Button';
 
 import style from './index.module.scss'
 
@@ -15,7 +15,7 @@ const Modal = ({ children, onClose, title }) => {
       }
       onClick={onClose}
     >
-      <div 
+      <div
         className={style.content}
         onClick={e => e.stopPropagation()}
       >

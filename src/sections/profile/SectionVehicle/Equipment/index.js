@@ -5,13 +5,13 @@ import { useTranslations } from 'next-intl'
 
 import classNames from 'classnames'
 
-import { ACTIVE, DEFAULT } from "@/constant/config"
+import { ACTIVE, DEFAULT } from "constant/config"
 
-import Label from '@/components/Label'
-import Field from '@/components/Field'
-import Button from '@/components/Button'
-import Checkbox from '@/components/Checkbox'
-import Accordion from '@/modules/Accordion'
+import Label from 'components/Label'
+import Field from 'components/Field'
+import Button from 'components/Button'
+import Checkbox from 'components/Checkbox'
+import Accordion from 'modules/Accordion'
 
 import style from '../index.module.scss'
 

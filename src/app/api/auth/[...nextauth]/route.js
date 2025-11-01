@@ -3,7 +3,7 @@ import GoogleProvider from 'next-auth/providers/google'
 import FacebookProvider from 'next-auth/providers/facebook'
 import CredentialsProvider from "next-auth/providers/credentials"
 
-import { postData } from '@/helpers/api'
+import { postData } from 'helpers/api'
 
 export const authOptions = {
   providers: [
@@ -39,6 +39,7 @@ export const authOptions = {
     CredentialsProvider({
       id: "login",
       async authorize(credentials) {
+        console.log(credentials)
         return {
           username: credentials.username,
           password: credentials.password,
@@ -81,6 +82,19 @@ export const authOptions = {
   //     },
   //   },
   // },
+  events: {
+    // async signIn({ user }) {
+    //   if (user?.sid) {
+    //     const cookieStore = cookies()
+    //     await cookieStore.set('SID', user.sid, {
+    //       path: '/',
+    //       httpOnly: true,
+    //       sameSite: 'lax',
+    //       // secure: process.env.NODE_ENV === 'production',
+    //     })
+    //   }
+    // },
+  },
   callbacks: {
     async jwt({ token, user, account }) {
       if (user) {
@@ -112,6 +126,8 @@ export const authOptions = {
           token.name = response.name || null
           token.userType = response.userType
           token.account = response.account
+
+          if (user?.sid) token.sid = user.sid
         } else {
           throw new Error('Authentication failed')
         }
@@ -127,9 +143,11 @@ export const authOptions = {
         session.image = token.image
         session.name = token.name
         session.userType = token.userType
-        session.account = token.account  
+        session.account = token.account
       }
-            
+
+      if (token?.sid) session.sid = token.sid
+
       return session
     }
   }

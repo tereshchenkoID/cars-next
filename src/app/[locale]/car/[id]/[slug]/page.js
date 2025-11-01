@@ -1,8 +1,8 @@
-import { NA } from '@/constant/config'
-import { fetchMetaTags } from '@/utils/fetchMetaTags'
-import { fetchData } from '@/utils/fetchData'
+import { NA } from 'constant/config'
+import { fetchMetaTags } from 'utils/fetchMetaTags'
+import { fetchData } from 'utils/fetchData'
 
-import SectionCar from "@/sections/SectionCar"
+import SectionCar from "sections/SectionCar"
 
 export async function generateMetadata() {
   return await fetchMetaTags('car')

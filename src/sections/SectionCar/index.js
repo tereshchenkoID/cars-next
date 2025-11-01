@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation'
 import { useTranslations } from 'next-intl'
 import React, { useEffect, useMemo, useRef, useState } from 'react'
 
-import { NAVIGATION } from '@/constant/config'
+import { NAVIGATION } from 'constant/config'
 
 import classNames from 'classnames'
 
@@ -13,42 +13,42 @@ import { Swiper, SwiperSlide } from 'swiper/react'
 import { Navigation, Pagination, Mousewheel } from 'swiper/modules'
 import { Fancybox } from '@fancyapps/ui'
 
-import { getDate } from '@/helpers/getDate'
-import { getFuelIcon } from '@/helpers/getFuelIcon'
+import { getDate } from 'helpers/getDate'
+import { getFuelIcon } from 'helpers/getFuelIcon'
 
 import Link from 'next/link'
 import Image from 'next/image'
-import Tags from '@/modules/Tags'
-import Option from '@/modules/Option'
-import Loading from '@/components/Loading'
-import Icon from '@/components/Icon'
-import Button from '@/components/Button'
-import Container from '@/components/Container'
+import Tags from 'modules/Tags'
+import Option from 'modules/Option'
+import Loading from 'components/Loading'
+import Icon from 'components/Icon'
+import Button from 'components/Button'
+import Container from 'components/Container'
 import Betslip from './Betslip'
 import Contact from './Contact'
 
 const Share = dynamic(
-  () => import('./Share'), 
+  () => import('./Share'),
   { ssr: false }
 )
 const Favorites = dynamic(
-  () => import('./Favorites'), 
+  () => import('./Favorites'),
   { ssr: false }
 )
 const History = dynamic(
-  () => import('./History'), 
+  () => import('./History'),
   { ssr: false, loading: () => <Loading classes={'transparent'} /> }
 )
 const Map = dynamic(
-  () => import('./Map'), 
+  () => import('./Map'),
   { ssr: false, loading: () => <Loading classes={'transparent'} /> }
 )
 const Questions = dynamic(
-  () => import('./Questions'), 
+  () => import('./Questions'),
   { ssr: false, loading: () => <Loading classes={'transparent'} /> }
 )
 const Comparison = dynamic(
-  () => import('@/modules/Comparison'),
+  () => import('modules/Comparison'),
   { ssr: false, loading: () => <Loading classes={'transparent'} /> }
 )
 

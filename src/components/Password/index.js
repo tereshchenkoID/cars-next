@@ -2,8 +2,8 @@ import { useState } from 'react'
 
 import classNames from 'classnames'
 
-import Field from '@/components/Field'
-import Icon from '@/components/Icon'
+import Field from 'components/Field'
+import Icon from 'components/Icon'
 
 import style from './index.module.scss'
 

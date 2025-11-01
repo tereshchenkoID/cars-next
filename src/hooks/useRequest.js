@@ -1,13 +1,14 @@
 import axios from 'axios'
 // import Cookies from 'js-cookie'
 
-import { API_BASE_URL } from '@/constant/config';
+import { API_BASE_URL } from 'constant/config';
 
 export const useRequest = (link, data, headers) => {
   // const token = Cookies.get('next-auth.session-token') || ''
   const server = axios.create({
     baseURL: `${API_BASE_URL}/${link}`,
-    // withCredentials: true,
+    withCredentials: true,
+    // credentials: 'include',
     // headers: {
     //   ...headers,
     //   // Authorization: `Bearer ${token}`,
@@ -20,7 +21,7 @@ export const useRequest = (link, data, headers) => {
   // const handleSessionExpiry = (response) => {
   //   if (response?.data?.code === "2") {
   //     sessionStorage.clear()
-      
+
   //     window.location.href = '/';
   //   }
   // };

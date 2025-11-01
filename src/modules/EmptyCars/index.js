@@ -2,10 +2,10 @@
 
 import { useTranslations } from 'next-intl'
 
-import { NAVIGATION } from '@/constant/config'
+import { NAVIGATION } from 'constant/config'
 
 import Image from 'next/image'
-import Reference from '@/components/Reference'
+import Reference from 'components/Reference'
 
 import style from './index.module.scss'
 

@@ -1,4 +1,4 @@
-@use '@/scss/config' as *;
+@use 'scss/config' as *;
 
 .block {
   position: relative;
@@ -10,16 +10,14 @@
 }
 
 .count {
-  @include make-spacer(py, var(--gap-2));
-  @include make-spacer(px, var(--gap-4));
-
   position: absolute;
   top: var(--gap-4);
   right: var(--gap-4);
+  padding: var(--gap-2) var(--gap-4);
   border-radius: var(--border-radius-4);
+  background-color: var(--color-primary);
   font-size: rem(10px);
   color: var(--color-white);
-  background-color: var(--color-primary);
 }
 
 .dropdown {
@@ -35,14 +33,12 @@
   border-style: solid;
   max-height: rem(300px);
   min-width: rem(350px);
-
-  // @include media-breakpoint-up(lg) {}
 }
 
 .header,
 .footer,
 .body {
-  @include make-spacer(p, var(--gap-12));
+  padding: var(--gap-12);
 }
 
 .body {
@@ -64,20 +60,19 @@
 }
 
 .item {
-  @include make-spacer(pl, var(--gap-16));
-  @include make-spacer(pr, var(--gap-8));
   @include transition;
 
   display: grid;
   grid-template-columns: 1fr auto;
   align-items: center;
   gap: var(--gap-8);
-  border-radius: var(--border-radius-4);
   position: relative;
-  font-size: rem(14px);
+  padding-inline: var(--gap-16) var(--gap-8);
+  border-radius: var(--border-radius-4);
   min-height: rem(38px);
   border-width: rem(1px);
   border-style: solid;
+  font-size: rem(12px);
   cursor: pointer;
 
   &::before {
@@ -90,11 +85,8 @@
   }
 
   @include hover {
-
-    &:hover {
-      background-color: var(--color-grey-50);
-      color: var(--color-primary);
-    }
+    background-color: var(--color-grey-50);
+    color: var(--color-primary);
   }
 
   &.shares {
@@ -103,21 +95,21 @@
       background-color: rgba(#3e27c4, 0.2);
     }
   }
-  
+
   &.selling {
 
     &::before {
       background-color: rgba(#07bc0c, 0.2);
     }
   }
-  
+
   &.purchase {
 
     &::before {
       background-color: rgba(#3498db, 0.2);
     }
   }
-  
+
   &.info {
 
     &::before {

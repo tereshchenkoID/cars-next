@@ -5,18 +5,18 @@ import { useState } from 'react'
 
 import useData from './useData'
 
-import { ROUTES_USER } from '@/constant/config'
+import { ROUTES_USER } from 'constant/config'
 
-import Container from '@/components/Container'
-import Button from '@/components/Button'
-import Select from '@/components/Select'
-import Checkbox from '@/components/Checkbox'
-import Card from '@/modules/Card'
-import Skeleton from '@/modules/Skeleton'
-import Pagination from '@/modules/Pagination'
-import Sort from '@/modules/Sort'
-import EmptyCars from '@/modules/EmptyCars'
-import Search from '@/modules/Search'
+import Container from 'components/Container'
+import Button from 'components/Button'
+import Select from 'components/Select'
+import Checkbox from 'components/Checkbox'
+import Card from 'modules/Card'
+import Skeleton from 'modules/Skeleton'
+import Pagination from 'modules/Pagination'
+import Sort from 'modules/Sort'
+import EmptyCars from 'modules/EmptyCars'
+import Search from 'modules/Search'
 
 import style from './index.module.scss'
 
@@ -45,9 +45,9 @@ const SectionArchive = ({ initialData }) => {
     setSelected((prev) => {
       const newSelected = prev.includes(id)
         ? prev.filter((item) => item !== id)
-        : [...prev, id]  
+        : [...prev, id]
 
-      setAll(newSelected.length === data?.data?.length ? '1' : '0')  
+      setAll(newSelected.length === data?.data?.length ? '1' : '0')
       return newSelected
     })
   }
@@ -116,7 +116,7 @@ const SectionArchive = ({ initialData }) => {
                           key={idx}
                           className={style.card}
                         >
-                          <Card 
+                          <Card
                             data={el}
                             isProfile={true}
                           />

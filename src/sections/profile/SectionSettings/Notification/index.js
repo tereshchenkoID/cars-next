@@ -1,7 +1,7 @@
 import { useTranslations } from 'next-intl'
 import { useState } from 'react'
 
-import Checkbox from '@/components/Checkbox'
+import Checkbox from 'components/Checkbox'
 
 import style from '../index.module.scss'
 

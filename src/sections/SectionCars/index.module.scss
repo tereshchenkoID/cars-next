@@ -1,13 +1,12 @@
-@use '@/scss/config' as *;
+@use 'scss/config' as *;
 
 .block {
-  @include make-spacer(pb, var(--gap-16));
-
   position: relative;
+  padding-bottom: var(--gap-16);
   min-height: 100vh;
 
   @include media-breakpoint-up(lg) {
-    @include make-spacer(pt, var(--gap-16));
+    padding-top: var(--gap-16);
   }
 }
 
@@ -36,14 +35,11 @@
 
   @include media-breakpoint-up(lg) {
     grid-template-columns: repeat(2, 1fr);
-    align-items: center;
   }
 }
 
 .searches {
   @include flex($align-items: center);
-  @include make-spacer(mx, var(--outer-gap-revert));
-  @include make-spacer(pl, var(--outer-gap));
 
   position: sticky;
   top: var(--header-height);
@@ -51,6 +47,8 @@
   right: 0;
   z-index: $z-index-9;
   gap: var(--gap-8);
+  margin-inline: var(--outer-gap-revert);
+  padding-left: var(--outer-gap);
   background-color: var(--color-white);
   border-bottom-width: rem(1px);
   border-bottom-style: solid;
@@ -58,12 +56,11 @@
   height: rem(51px);
 
   @include media-breakpoint-up(lg) {
-    @include make-spacer(m, 0);
-    @include make-spacer(p, 0);
-
     position: static;
     background-color: transparent;
     z-index: $z-index-1;
+    margin: 0;
+    padding: 0;
     border-bottom: 0;
     height: auto;
   }
@@ -71,15 +68,14 @@
 
 .list {
   @include flex($align-items: center);
-  @include make-spacer(pr, var(--outer-gap));
 
   gap: var(--gap-8);
   overflow-x: auto;
+  padding-right: var(--outer-gap);
   height: 100%;
 
   @include media-breakpoint-up(lg) {
-    @include make-spacer(p, 0);
-    
+    padding: 0;
     flex-wrap: wrap;
     overflow-x: unset;
     height: unset;
@@ -87,15 +83,13 @@
 }
 
 .search {
-  @include make-spacer(px, var(--gap-12));
-  @include make-spacer(py, var(--gap-2));
-  
   display: grid;
   grid-template-columns: 1fr auto;
   align-items: center;
   gap: var(--gap-6);
   border-radius: var(--border-radius-4);
   background-color: var(--color-secondary);
+  padding: var(--gap-2) var(--gap-12);
   height: rem(32px);
   color: var(--color-primary-hover);
   font-size: rem(13px);
@@ -118,10 +112,7 @@
   }
 
   @include hover {
-
-    &:hover {
-      background-color: var(--color-secondary-hover);
-    }
+    background-color: var(--color-secondary-hover);
   }
 }
 
@@ -140,15 +131,14 @@
 }
 
 .empty {
-  @include make-spacer(py, var(--gap-64));
-  @include make-spacer(mx, auto);
-
+  padding-block: var(--gap-64);
+  margin-inline: auto;
   max-width: rem(300px);
   text-align: center;
   line-height: 1.5;
   letter-spacing: rem(1px);
 
-  h6, 
+  h6,
   button {
     color: var(--color-primary);
     letter-spacing: rem(1px);
@@ -164,16 +154,12 @@
 
 
     @include hover {
-
-      &:hover {
-        text-decoration: underline;
-      }
+      text-decoration: underline;
     }
   }
 
   p {
-    @include make-spacer(py, var(--gap-6));
-
+    padding-block: var(--gap-6);
     font-size: rem(14px);
   }
 }

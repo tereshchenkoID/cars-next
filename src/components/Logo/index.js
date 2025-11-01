@@ -3,7 +3,7 @@
 import { useSelector } from 'react-redux'
 
 import Link from 'next/link'
-import Picture from '@/components/Picture'
+import Picture from 'components/Picture'
 
 import style from './index.module.scss'
 

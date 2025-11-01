@@ -1,4 +1,4 @@
-@use '@/scss/config' as *;
+@use 'scss/config' as *;
 
 .block {
   font-size: rem(14px);
@@ -18,9 +18,8 @@
 }
 
 .image {
-  @include make-spacer(mx, auto);
-  @include make-spacer(mb, var(--gap-8));
-
+  margin-inline: auto;
+  margin-bottom: var(--gap-8);
   height: auto;
 }
 
@@ -33,8 +32,7 @@
 }
 
 .pagination {
-  @include make-spacer(my, var(--gap-24));
-
+  margin-block: var(--gap-24);
   text-align: center;
 }
 

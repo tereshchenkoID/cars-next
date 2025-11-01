@@ -1,13 +1,13 @@
 import { useTranslations } from 'next-intl'
 
 import Image from 'next/image'
-import Button from '@/components/Button'
+import Button from 'components/Button'
 
 import style from './index.module.scss'
 
 const Empty = ({ isAuth, handleAction }) => {
   const t = useTranslations()
-  
+
   return (
     <>
       <Image

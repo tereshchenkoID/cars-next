@@ -1,15 +1,15 @@
 import { useState, useMemo } from 'react'
 import { useTranslations } from 'next-intl'
-import { useModal } from '@/context/ModalContext'
+import { useModal } from 'context/ModalContext'
 import { useDispatch, useSelector } from 'react-redux'
 
-import { validationRules } from '@/utils/validationRules'
-import { setToastify } from '@/store/actions/toastifyAction'
-import { postData } from '@/helpers/api'
+import { validationRules } from 'utils/validationRules'
+import { setToastify } from 'store/actions/toastifyAction'
+import { postData } from 'helpers/api'
 
-import Field from '@/components/Field'
-import Button from '@/components/Button'
-import InputGroup from '@/modules/InputGroup'
+import Field from 'components/Field'
+import Button from 'components/Button'
+import InputGroup from 'modules/InputGroup'
 
 import style from './index.module.scss'
 

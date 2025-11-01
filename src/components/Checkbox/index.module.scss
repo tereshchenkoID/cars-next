@@ -1,21 +1,17 @@
-@use '@/scss/config' as *;
+@use 'scss/config' as *;
 
 .block {
   @include flex($align-items: center);
-  @include make-spacer(pl, var(--gap-32));
 
+  padding-left: var(--gap-32);
   position: relative;
   cursor: pointer;
   height: rem(20px);
   font-size: rem(14px);
 
   @include hover {
-
-    &:hover {
-
-      .item {
-        border-color: var(--color-primary);
-      }
+    .item {
+      border-color: var(--color-primary);
     }
   }
 

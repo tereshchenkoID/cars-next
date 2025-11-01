@@ -1,8 +1,7 @@
-@use '@/scss/config' as *;
+@use 'scss/config' as *;
 
 .header {
-  @include make-spacer(py, var(--gap-80));
-
+  padding-block: var(--gap-80);
   position: relative;
 
   &::before {
@@ -30,14 +29,12 @@
 }
 
 .section {
-  @include make-spacer(py, var(--gap-40));
-
+  padding-block: var(--gap-40);
   overflow: hidden;
 }
 
 .grid {
-  @include make-spacer(mx, auto);
-
+  margin-inline: auto;
   column-count: 1;
   max-width: fit-content;
 
@@ -50,23 +47,21 @@
   }
 
   & > div {
-    @include make-spacer(mb, var(--gap-24));
-
+    margin-bottom: var(--gap-24);
     break-inside: avoid;
     height: fit-content;
   }
 }
 
 .banner {
-  @include make-spacer(p, var(--gap-32));
-
+  padding: var(--gap-32);
   border-radius: var(--border-radius-8);
   background-color: var(--color-white);
   overflow: hidden;
   width: fit-content;
 
   @include media-breakpoint-up(md) {
-    @include make-spacer(px, var(--gap-80));
+    padding-inline: var(--gap-80);
   }
 }
 

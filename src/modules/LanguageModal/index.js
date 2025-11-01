@@ -1,5 +1,5 @@
 import { useParams, useSearchParams } from 'next/navigation'
-import { usePathname, useRouter } from '@/i18n/routing'
+import { usePathname, useRouter } from 'i18n/routing'
 import { useTransition } from 'react'
 import { useSelector } from 'react-redux'
 

@@ -2,7 +2,7 @@
 
 import { useTranslations } from 'next-intl'
 
-import Container from "@/components/Container"
+import Container from "components/Container"
 import Filters from './Filters'
 
 import style from './index.module.scss'

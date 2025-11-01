@@ -1,4 +1,4 @@
-@use '@/scss/config' as *;
+@use 'scss/config' as *;
 
 .block {
   @include size(rem(340px), 100%);
@@ -22,7 +22,8 @@
 .content,
 .footer {
   @include flex($direction: column);
-  @include make-spacer(p, var(--gap-24));
+
+  padding: var(--gap-24);
 }
 
 .content {
@@ -37,14 +38,13 @@
   font-size: rem(14px);
 
   &:not(:last-child) {
-    @include make-spacer(mb, var(--gap-8));
+    margin-bottom: var(--gap-8);
   }
 }
 
 .footer {
-  @include make-spacer(mt, auto);
-
   align-items: flex-end;
+  margin-top: auto;
   border-top-width: rem(1px);
   border-top-style: solid;
   font-size: rem(12px);

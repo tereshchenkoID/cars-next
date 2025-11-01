@@ -13,19 +13,19 @@ import {
 
 import classNames from 'classnames'
 
-import { NAVIGATION } from '@/constant/config'
+import { NAVIGATION } from 'constant/config'
 
-import { getData } from '@/helpers/api'
-import { getDate } from '@/helpers/getDate'
-import { getFuelIcon } from '@/helpers/getFuelIcon'
-import { getFormatPrice } from '@/helpers/getFormatPrice'
-import { getFormatNumber } from '@/helpers/getFormatNumber'
+import { getData } from 'helpers/api'
+import { getDate } from 'helpers/getDate'
+import { getFuelIcon } from 'helpers/getFuelIcon'
+import { getFormatPrice } from 'helpers/getFormatPrice'
+import { getFormatNumber } from 'helpers/getFormatNumber'
 
 import Link from 'next/link'
 import Image from 'next/image'
-import Icon from '@/components/Icon'
-import Loading from '@/components/Loading'
-import Tags from '@/modules/Tags'
+import Icon from 'components/Icon'
+import Loading from 'components/Loading'
+import Tags from 'modules/Tags'
 
 import style from './index.module.scss'
 

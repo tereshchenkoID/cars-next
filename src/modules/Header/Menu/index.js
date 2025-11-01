@@ -2,37 +2,37 @@
 
 import { useEffect, useState, useRef } from 'react'
 import { usePathname } from 'next/navigation'
-import { useOutsideClick } from '@/hooks/useOutsideClick'
+import { useOutsideClick } from 'hooks/useOutsideClick'
 import { useTranslations } from 'next-intl'
 
 import classNames from 'classnames'
 
-import { NAVIGATION } from '@/constant/config'
+import { NAVIGATION } from 'constant/config'
 
-import { overflowBody } from '@/helpers/overflowBody'
+import { overflowBody } from 'helpers/overflowBody'
 
 import Link from 'next/link'
-import Reference from '@/components/Reference'
-import Button from '@/components/Button'
-import Logo from '@/components/Logo'
-import Icon from '@/components/Icon'
-import Backdrop from '@/modules/Backdrop'
+import Reference from 'components/Reference'
+import Button from 'components/Button'
+import Logo from 'components/Logo'
+import Icon from 'components/Icon'
+import Backdrop from 'modules/Backdrop'
 
 import style from './index.module.scss'
 
 const MENU = [
   NAVIGATION.buy,
-  NAVIGATION.new_auto,
-  NAVIGATION.how_it_works,
+  // NAVIGATION.new_auto,
+  // NAVIGATION.how_it_works,
   NAVIGATION.reviews,
-  {
-    ...NAVIGATION.services,
-    submenu: [
-      NAVIGATION.new_auto,
-      NAVIGATION.how_it_works,
-    ],
-  },
-  NAVIGATION.about_us
+  // {
+  //   ...NAVIGATION.services,
+  //   submenu: [
+  //     NAVIGATION.new_auto,
+  //     NAVIGATION.how_it_works,
+  //   ],
+  // },
+  // NAVIGATION.about_us
 ]
 
 const Menu = ({ setShow, show }) => {
@@ -74,7 +74,7 @@ const Menu = ({ setShow, show }) => {
       >
         {
           <div className={style.meta}>
-            <Button 
+            <Button
               classes={['secondary', 'square', style.close]}
               icon={'xmark'}
               onChange={() => setShow(false)}
@@ -84,8 +84,8 @@ const Menu = ({ setShow, show }) => {
         }
         {
           MENU.map((el, idx) =>
-            <div 
-              key={idx} 
+            <div
+              key={idx}
               className={style.item}
             >
               {
@@ -130,8 +130,8 @@ const Menu = ({ setShow, show }) => {
               }
               {
                 (active === idx && el.submenu) &&
-                <div 
-                  ref={blockRef} 
+                <div
+                  ref={blockRef}
                   className={style.dropdown}
                 >
                   {

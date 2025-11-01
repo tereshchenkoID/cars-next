@@ -1,5 +1,5 @@
-@use '@/scss/config' as *;
-@use '@/scss/app';
+@use 'scss/config' as *;
+@use 'scss/app';
 
 :root {
   --max-width: 1366px;
@@ -43,7 +43,7 @@
   --gap-80: 80px;
 
   --font-size: 16px;
-  --font-family: 'Poppins', sans-serif;
+  --font-family: 'Poppins';
   --line-height: 1.5;
   --typography-regular: 400;
   --typography-medium: 500;
@@ -62,7 +62,7 @@
   --color-grey-800: #1f2b59;
   --color-grey-900: #131c4a;
 
-  --color-text: var(--color-grey-700);
+  --color-text: #31406f;
   --color-primary: #3e47dd;
   --color-primary-hover: #3e27c4;
 
@@ -72,11 +72,11 @@
   --color-warning: #e74c3c;
   --color-success: #07bc0c;
   --color-info: #3498db;
-  
+
   --color-orange: #ff9d32;
   --color-gold: #ff7300;
   --color-red: #b51632;
-  
+
   --color-background: #edf1f8;
 }
 
@@ -86,7 +86,7 @@
   border-color: var(--color-grey-200);
   user-select: none;
 
-  &::after, 
+  &::after,
   &::before {
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
@@ -97,11 +97,11 @@
 
 body {
   @include scroll;
-  
+
   background-color: var(--color-background);
   line-height: var(--line-height);
   color: var(--color-text);
-  font-family: var(--font-family);
+  font-family: var(--font-family), sans-serif;
   font-size: var(--font-size);
   font-weight: var(--typography-regular);
   overflow-x: hidden;
@@ -117,8 +117,7 @@ h3,
 h4,
 h5,
 h6 {
-  @include make-spacer(m, 0);
-
+  margin: 0;
   font-weight: var(--typography-bold);
   color: var(--color-grey-800);
 }
@@ -186,8 +185,7 @@ input {
 
   &::-webkit-outer-spin-button,
   &::-webkit-inner-spin-button {
-    @include make-spacer(m, 0);
-
+    margin: 0;
     -webkit-appearance: none;
     -moz-appearance: textfield;
   }
@@ -210,8 +208,8 @@ a {
 }
 
 p {
-  @include make-spacer(p, 0);
-  @include make-spacer(m, 0);
+  padding: 0;
+  margin: 0;
 }
 
 ul,
@@ -229,10 +227,10 @@ img {
 }
 
 hr {
-  @include make-spacer(my, 0);
   @include size(100%, rem(1px));
 
   display: block;
+  margin-block: 0;
   border: 0;
   background-color: var(--color-grey-300);
 }

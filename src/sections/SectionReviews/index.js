@@ -3,9 +3,9 @@
 import { useTranslations } from 'next-intl'
 import { useSelector } from 'react-redux'
 
-import Container from "@/components/Container"
-import Review from '@/modules/Review'
-import StarRating from '@/modules/StarRating'
+import Container from "components/Container"
+import Review from 'modules/Review'
+import StarRating from 'modules/StarRating'
 
 import style from './index.module.scss'
 

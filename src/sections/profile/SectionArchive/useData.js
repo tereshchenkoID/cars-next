@@ -2,8 +2,8 @@ import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useSearchParams } from 'next/navigation'
 
-import { postData } from '@/helpers/api'
-import { setFavorite } from '@/store/actions/favoriteAction'
+import { postData } from 'helpers/api'
+import { setFavorite } from 'store/actions/favoriteAction'
 
 const useFavorite = (initialData) => {
   const dispatch = useDispatch()

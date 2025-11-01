@@ -1,11 +1,11 @@
 import { useTranslations } from 'next-intl'
 import { useSelector } from 'react-redux'
 
-import { getFormatPrice } from '@/helpers/getFormatPrice'
+import { getFormatPrice } from 'helpers/getFormatPrice'
 
-import Button from '@/components/Button'
-import Discount from '@/modules/Discount'
-import Top from '@/modules/Top'
+import Button from 'components/Button'
+import Discount from 'modules/Discount'
+import Top from 'modules/Top'
 
 import style from './index.module.scss'
 

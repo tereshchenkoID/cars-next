@@ -1,4 +1,4 @@
-@use '@/scss/config' as *;
+@use 'scss/config' as *;
 
 .block {
   display: grid;
@@ -24,12 +24,11 @@
 }
 
 .body {
-  @include make-spacer(p, var(--gap-16));
-
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   grid-template-rows: 1fr rem(1px) 1fr rem(1px) 1fr;
-  grid-gap: var(--gap-12);  
+  padding: var(--gap-16);
+  grid-gap: var(--gap-12);
 }
 
 .row {
@@ -48,8 +47,8 @@
 
 .hr {
   @include size(100%, rem(1px));
-  
-  background: repeating-linear-gradient(45deg, rgb(215, 225, 239), rgb(215, 225, 239) 9px, transparent 3px, transparent 18px);
+
+  background: repeating-linear-gradient(45deg, rgb(215, 225, 239), rgb(215, 225, 239) rem(9px), transparent rem(3px), transparent rem(18px));
 }
 
 .content {
@@ -63,10 +62,10 @@
 
 @keyframes pulse {
   0% {
-    background-position: 0% 0%;
+    background-position: 0 0;
   }
 
   100% {
-    background-position: -135% 0%;
+    background-position: -135% 0;
   }
 }

@@ -4,15 +4,15 @@ import { useState } from 'react'
 import { useSelector } from 'react-redux'
 import { useTranslations } from 'next-intl'
 
-import { getFormatPrice } from '@/helpers/getFormatPrice'
+import { getFormatPrice } from 'helpers/getFormatPrice'
 
-import Label from '@/components/Label'
-import Field from '@/components/Field'
-import Select from '@/components/Select'
-import Button from '@/components/Button'
-import Checkbox from '@/components/Checkbox'
-import Accordion from '@/modules/Accordion'
-import Comparison from '@/modules/Comparison'
+import Label from 'components/Label'
+import Field from 'components/Field'
+import Select from 'components/Select'
+import Button from 'components/Button'
+import Checkbox from 'components/Checkbox'
+import Accordion from 'modules/Accordion'
+import Comparison from 'modules/Comparison'
 
 import style from '../index.module.scss'
 

@@ -3,8 +3,8 @@
 import { useTranslations } from 'next-intl'
 import { useState } from 'react'
 
-import Container from "@/components/Container"
-import Accordion from '@/modules/Accordion'
+import Container from "components/Container"
+import Accordion from 'modules/Accordion'
 import Contact from './Contact'
 import Security from './Security'
 import Billing from './Billing'

@@ -1,4 +1,4 @@
-@use '@/scss/config' as *;
+@use 'scss/config' as *;
 
 .block {
   @include size(rem(298px), rem(128px));
@@ -27,28 +27,24 @@
   }
 
   @include hover {
-
-    &:hover {
-
-      &::before {
-        right: rem(-32px);
-      }
+    &::before {
+      right: rem(-32px);
     }
   }
 }
 
 .info {
   @include flex($direction: column);
-  @include make-spacer(pt, var(--gap-32));
-  @include make-spacer(pb, var(--gap-16));
-  @include make-spacer(pl, var(--gap-16));
+
+  padding-block: var(--gap-32) var(--gap-16);
+  padding-left: var(--gap-16);
 }
 
 .more {
-  @include make-spacer(mt, auto);
   @include flex($align-items: center);
 
   gap: var(--gap-8);
+  margin-top: auto;
 
   span {
     text-decoration: underline;

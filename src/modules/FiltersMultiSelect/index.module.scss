@@ -1,4 +1,4 @@
-@use '@/scss/config' as *;
+@use 'scss/config' as *;
 
 .block {
   @include size(100%, rem(40px));
@@ -26,26 +26,22 @@
   }
 
   @include hover {
-
-    &:hover {
-
-      .input {
-        border-color: var(--color-primary);
-      }
+    .input {
+      border-color: var(--color-primary);
     }
   }
 }
 
 .input {
   @include flex($align-items: center);
-  @include make-spacer(pl, var(--gap-12));
   @include transition(border-color);
   @include size(100%);
-  
+
   border: rem(1px) solid var(--color-grey-400);
-  font-size: rem(13px);
+  padding-left: var(--gap-12);
   overflow: hidden;
   border-radius: var(--border-radius-4);
+  font-size: rem(13px);
 }
 
 .list {
@@ -82,7 +78,7 @@
 
 .dropdown {
   @include scroll;
-  
+
   display: none;
   position: absolute;
   top: calc(100% + var(--gap-8));
@@ -98,15 +94,12 @@
 }
 
 .item {
-  @include make-spacer(p, var(--gap-8));
   @include transition;
 
+  padding: var(--gap-8);
   cursor: pointer;
 
   @include hover {
-
-    &:hover {
-      background-color: var(--color-grey-200);
-    }
+    background-color: var(--color-grey-200);
   }
 }

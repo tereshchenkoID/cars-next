@@ -1,4 +1,4 @@
-@use '@/scss/config' as *;
+@use 'scss/config' as *;
 
 .block {
   border-radius: var(--border-radius-8);
@@ -23,21 +23,17 @@
 }
 
 .head {
-  @include make-spacer(px, var(--gap-16));
-  @include make-spacer(py, var(--gap-20));
-
   display: grid;
   grid-template-columns: auto 1fr auto;
   align-items: center;
   gap: var(--gap-12);
+  padding: var(--gap-20) var(--gap-16);
   font-weight: var(--typography-bold);
   cursor: pointer;
 
   @include media-breakpoint-up(md) {
-    @include make-spacer(py, var(--gap-24));
-    @include make-spacer(px, var(--gap-32));
-
     gap: var(--gap-16);
+    padding: var(--gap-24) var(--gap-32);
     font-size: rem(18px);
   }
 }
@@ -52,13 +48,11 @@
 }
 
 .content {
-  @include make-spacer(py, var(--gap-24));
-  @include make-spacer(px, var(--gap-16));
-
+  padding: var(--gap-24) var(--gap-16);
   border-top-width: rem(1px);
   border-top-style: solid;
 
   @include media-breakpoint-up(md) {
-    @include make-spacer(p, var(--gap-32));
+    padding: var(--gap-32);
   }
 }

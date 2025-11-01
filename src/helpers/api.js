@@ -1,4 +1,4 @@
-import { useRequest } from '@/hooks/useRequest'
+import { useRequest } from 'hooks/useRequest'
 
 export const getData = async url => {
   const { get } = useRequest(url)

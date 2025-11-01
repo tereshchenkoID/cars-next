@@ -1,161 +1,146 @@
-@use '@/scss/config' as *;
+@use 'scss/config' as *;
 
 @mixin button {
-	--icon-size: 24px;
-	--button-height: 48px;
+  --icon-size: 24px;
+  --button-height: 48px;
 
-	@include make-spacer(px, var(--gap-12));
+  display: inline-flex;
+  position: relative;
+  align-items: center;
+  justify-content: center;
+  height: var(--button-height);
+  gap: var(--gap-12);
+  padding-inline: var(--gap-12);
+  border-radius: var(--border-radius-4);
+  box-shadow: var(--box-shadow-16-24);
+  color: var(--color-white);
+  white-space: nowrap;
 
-	display: inline-flex;
-	position: relative;
-	align-items: center;
-	justify-content: center;
-	height: var(--button-height);
-	gap: var(--gap-12);
-	border-radius: var(--border-radius-4);
-	box-shadow: var(--box-shadow-16-24);
-	color: var(--color-white);
-	white-space: nowrap;
+  &.disabled,
+  &:disabled {
+    opacity: 0.5;
+    pointer-events: none;
+    user-select: none;
+  }
 
-	&.disabled,
-	&:disabled {
-		opacity: 0.5;
-		pointer-events: none;
-		user-select: none;
-	}
+  &.loading {
+    pointer-events: none;
 
-	&.loading {
-		pointer-events: none;
+    .icon {
+      animation: 4s infinite ease-in-out spin;
+    }
+  }
 
-		.icon {
-			animation: 4s infinite ease-in-out spin;
-		}
-	}
+  &.primary {
+    background-color: var(--color-primary);
+    background-image: var(--gradient-blue);
 
-	&.primary {
-		background: linear-gradient(111deg, var(--color-primary) 14%, rgb(38, 42, 153) 85%);
-		background-color: var(--color-primary);
+    &:active,
+    &.active {
+      background: var(--color-primary-hover);
+    }
 
-		&:active,
-		&.active {
-			background: var(--color-primary-hover);
-		}
+    @include hover {
+      background: var(--color-primary-hover);
+      box-shadow: 0 rem(16px) rem(36px) rem(-18px) var(--color-primary-hover);
+    }
+  }
 
-		@include hover {
+  &.secondary {
+    color: var(--color-text);
+    box-shadow: none;
 
-			&:hover {
-				background: var(--color-primary-hover);
-				box-shadow: 0 rem(16px) rem(36px) rem(-18px) var(--color-primary-hover);
-			}
-		}
-	}
+    @include hover {
+      color: var(--color-primary-hover);
+      background-color: var(--color-grey-50);
+    }
+  }
 
-	&.secondary {
-		color: var(--color-text);
-		box-shadow: none;
+  &.alt {
+    background-color: var(--color-white);
+    border: rem(1px) solid var(--color-primary);
+    color: var(--color-primary);
 
-		@include hover {
+    &:active,
+    &.active {
+      background: rgb(235, 237, 254);
+    }
 
-			&:hover {
-				color: var(--color-primary-hover);
-				background-color: var(--color-grey-50);
-			}
-		}
-	}
+    @include hover {
+      color: var(--color-primary-hover);
+      border-color: var(--color-primary-hover);
+      box-shadow: 0 rem(16px) rem(36px) rem(-18px) rgba(72, 88, 133, 0.4);
+    }
+  }
 
-	&.alt {
-		background-color: var(--color-white);
-		border: rem(1px) solid var(--color-primary);
-		color: var(--color-primary);
-
-		&:active,
-		&.active {
-			background: rgb(235, 237, 254);
-		}
-
-		@include hover {
-
-			&:hover {
-				color: var(--color-primary-hover);
-				border-color: var(--color-primary-hover);
-				box-shadow: 0 rem(16px) rem(36px) rem(-18px) rgba(72, 88, 133, 0.4);
-			}
-		}
-	}
-
-	&.reference {
-		@include make-spacer(px, 0);
-
-		height: auto!important;
-		color: var(--color-primary-hover);
-		font-weight: var(--typography-bold);
-		text-decoration-color: var(--color-primary-hover);
+  &.reference {
+    padding-inline: 0;
+    height: auto!important;
+    color: var(--color-primary-hover);
+    font-weight: var(--typography-bold);
+    text-decoration-color: var(--color-primary-hover);
     text-decoration-line: underline;
     text-decoration-thickness: rem(1.5px);
     text-underline-offset: rem(1.75px);
-		box-shadow: none;
+    box-shadow: none;
 
-		@include hover {
+    @include hover {
+      text-decoration-color: transparent;
+    }
+  }
 
-			&:hover {
-				text-decoration-color: transparent;
-			}
-		}
-	}
+  &:not(.square) {
+    min-width: rem(100px);
+  }
 
-	&:not(.square) {
-		min-width: rem(100px);
-	}
+  &.xs {
+    --icon-size: 16px;
+    --button-height: 32px;
 
-	&.xs {
-		--icon-size: 16px;
-		--button-height: 32px;
+    gap: var(--gap-6);
+    font-size: rem(12px);
+  }
 
-		gap: var(--gap-6);
-		font-size: rem(12px);
-	}
+  &.sm {
+    --icon-size: 20px;
+    --button-height: 38px;
 
-	&.sm {
-		--icon-size: 20px;
-		--button-height: 38px;
+    gap: var(--gap-8);
+    font-size: rem(14px);
+  }
 
-		gap: var(--gap-8);
-		font-size: rem(14px);
-	}
+  &.lg {
+    --icon-size: 28px;
+    --button-height: 56px;
 
-	&.lg {
-		--icon-size: 28px;
-		--button-height: 56px;
+    font-size: rem(16px);
+  }
 
-		font-size: rem(16px);
-	}
+  &.square {
+    padding: 0;
+    width: var(--button-height);
+    aspect-ratio: 1 / 1;
+  }
 
-	&.square {
-		@include make-spacer(p, 0);
+  &.left {
+    justify-content: flex-start;
+  }
 
-		width: var(--button-height);
-		aspect-ratio: 1 / 1;
-	}
+  &.wide {
+    width: 100%;
+  }
 
-	&.left {
-		justify-content: flex-start;
-	}
+  &.warning {
+    background-color: var(--color-warning);
+  }
 
-	&.wide {
-		width: 100%;
-	}
+  &.success {
+    background-color: var(--color-success);
+  }
 
-	&.warning {
-		background-color: var(--color-warning);
-	}
-
-	&.success {
-		background-color: var(--color-success);
-	}
-
-	&.info {
-		background-color: var(--color-info);
-	}
+  &.info {
+    background-color: var(--color-info);
+  }
 }
 
 @keyframes spin {

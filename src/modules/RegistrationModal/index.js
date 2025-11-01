@@ -1,20 +1,20 @@
 import { useTranslations } from 'next-intl'
 import { useState, useMemo } from 'react'
 
-import { validationRules } from '@/utils/validationRules'
+import { validationRules } from 'utils/validationRules'
 
-import { useModal } from '@/context/ModalContext'
+import { useModal } from 'context/ModalContext'
 
 // import { getData } from 'helpers/api'
 
-import Phone from '@/components/Phone'
-import Field from '@/components/Field'
-import Button from '@/components/Button'
-import Password from '@/components/Password'
-import Checkbox from '@/components/Checkbox'
-import Select from '@/components/Select'
-import LoginModal from '@/modules/LoginModal'
-import InputGroup from '@/modules/InputGroup'
+import Phone from 'components/Phone'
+import Field from 'components/Field'
+import Button from 'components/Button'
+import Password from 'components/Password'
+import Checkbox from 'components/Checkbox'
+import Select from 'components/Select'
+import LoginModal from 'modules/LoginModal'
+import InputGroup from 'modules/InputGroup'
 
 import style from './index.module.scss'
 

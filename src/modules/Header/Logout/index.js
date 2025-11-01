@@ -1,9 +1,9 @@
 import { signOut } from 'next-auth/react'
 import { useDispatch } from 'react-redux'
 
-import { setAuth } from '@/store/actions/authAction'
+import { setAuth } from 'store/actions/authAction'
 
-import Button from '@/components/Button'
+import Button from 'components/Button'
 
 const Logout = ({ setShow }) => {
   const dispatch = useDispatch()

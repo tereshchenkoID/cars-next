@@ -3,7 +3,7 @@
 import React, { useState } from 'react'
 import { useTranslations } from 'next-intl'
 
-import Container from '@/components/Container'
+import Container from 'components/Container'
 
 import Details from './Details'
 import Photos from './Photos'

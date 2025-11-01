@@ -2,7 +2,7 @@
 
 import { useSelector } from 'react-redux'
 
-import Icon from '@/components/Icon'
+import Icon from 'components/Icon'
 
 import style from './index.module.scss'
 

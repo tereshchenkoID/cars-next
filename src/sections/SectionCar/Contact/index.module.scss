@@ -1,16 +1,15 @@
-@use '@/scss/config' as *;
+@use 'scss/config' as *;
 
 .block {
-  @include make-spacer(p, var(--gap-24));
-
   display: grid;
   gap: var(--gap-16);
   position: relative;
   border-radius: var(--border-radius-8);
   border: rem(1px) solid rgba(179, 184, 251, 0.5);
+  padding: var(--gap-24);
   background: linear-gradient(var(--color-secondary) 0%, var(--color-secondary) 100%);
   overflow: hidden;
-  
+
   &::before {
     @include transition;
 
@@ -30,12 +29,8 @@
   }
 
   @include hover {
-
-    &:hover {
-
-      &::before {
-        right: 0;
-      }
+    &::before {
+      right: 0;
     }
   }
 }

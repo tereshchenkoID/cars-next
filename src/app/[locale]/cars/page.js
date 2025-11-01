@@ -1,8 +1,8 @@
 import { getServerSession } from 'next-auth'
-import { fetchMetaTags } from '@/utils/fetchMetaTags'
-import { authOptions } from '@/app/api/auth/[...nextauth]/route'
+import { fetchMetaTags } from 'utils/fetchMetaTags'
+import { authOptions } from 'app/api/auth/[...nextauth]/route'
 
-import SectionCars from "@/sections/SectionCars"
+import SectionCars from "sections/SectionCars"
 
 function transformInput(input) {
   const result = {}

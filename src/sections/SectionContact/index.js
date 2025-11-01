@@ -2,11 +2,11 @@
 
 import { useTranslations } from 'next-intl'
 
-import { NAVIGATION } from '@/constant/config'
+import { NAVIGATION } from 'constant/config'
 
-import Icon from '@/components/Icon'
-import Container from "@/components/Container"
-import Reference from '@/components/Reference'
+import Icon from 'components/Icon'
+import Container from "components/Container"
+import Reference from 'components/Reference'
 
 import style from './index.module.scss'
 

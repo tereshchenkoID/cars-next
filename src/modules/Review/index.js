@@ -2,11 +2,11 @@ import { useTranslations } from 'next-intl'
 import { useMemo } from 'react'
 import { useSelector } from 'react-redux'
 
-import { NAVIGATION } from '@/constant/config'
+import { NAVIGATION } from 'constant/config'
 
 import Image from 'next/image'
-import Reference from '@/components/Reference'
-import StarRating from '@/modules/StarRating'
+import Reference from 'components/Reference'
+import StarRating from 'modules/StarRating'
 
 import style from './index.module.scss'
 
@@ -49,7 +49,7 @@ const Review = ({ data }) => {
         />
         <div>
           <p>{selectedModel?.name}</p>
-          <Reference 
+          <Reference
             link={`${NAVIGATION.buy.link}?make_${data.make}=${data.model}`}
             classes={['reference']}
             placeholder={t('similar_cars')}

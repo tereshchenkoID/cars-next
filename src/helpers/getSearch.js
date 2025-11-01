@@ -1,4 +1,4 @@
-import { TYPES, DEFAULT } from '@/constant/config'
+import { TYPES, DEFAULT } from 'constant/config'
 
 export const getSearch = (data, type, key, value) => {
   const isDefaultValue = (arr) => arr.length === 0 || arr.includes(DEFAULT)

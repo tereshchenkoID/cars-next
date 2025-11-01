@@ -1,4 +1,4 @@
-@use '@/scss/config' as *;
+@use 'scss/config' as *;
 
 .block {
   @include scroll;
@@ -14,9 +14,9 @@
 
 .wrapper {
   @include flex($direction: column);
-  @include make-spacer(p, var(--gap-24));
   @include size(100%, auto);
 
+  padding: var(--gap-24);
   border-radius: var(--border-radius-8);
   background-color: var(--color-white);
   gap: var(--gap-24);
@@ -42,7 +42,7 @@
   align-items: center;
 
   &:not(:last-child) {
-    @include make-spacer(mb, var(--gap-8));
+    margin-bottom: var(--gap-8);
   }
 
   span {
@@ -78,16 +78,12 @@
     }
 
     @include hover {
+      &::-webkit-slider-thumb {
+        background: var(--color-primary-hover);
+      }
 
-      &:hover {
-  
-        &::-webkit-slider-thumb {
-          background: var(--color-primary-hover);
-        }
-
-        &::-moz-range-thumb {
-          background: var(--color-primary-hover);
-        }
+      &::-moz-range-thumb {
+        background: var(--color-primary-hover);
       }
     }
   }

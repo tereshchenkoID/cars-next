@@ -1,8 +1,7 @@
-@use '@/scss/config' as *;
+@use 'scss/config' as *;
 
 .block {
   @include transition;
-  @include make-spacer(p, var(--gap-12));
 
   display: grid;
   gap: var(--gap-8);
@@ -10,26 +9,23 @@
   border-radius: var(--border-radius-8);
   border-style: solid;
   border-width: rem(1px);
+  padding: var(--gap-12);
   cursor: pointer;
 
   @include hover {
+    border-color: var(--color-primary);
 
-    &:hover {
-      border-color: var(--color-primary);
-
-      .title {
-        color: var(--color-primary);
-      }
+    .title {
+      color: var(--color-primary);
     }
   }
 }
 
 .options {
-  @include make-spacer(p, var(--gap-4));
-
   position: absolute;
   top: calc(100% + var(--gap-8));
   right: 0;
+  padding: var(--gap-4);
   background-color: var(--color-white);
   border-radius: var(--border-radius-4);
   border-style: solid;
@@ -59,14 +55,12 @@
 }
 
 .tag {
-  @include make-spacer(px, var(--gap-8));
-  @include make-spacer(py, var(--gap-2));
-
+  padding: var(--gap-2) var(--gap-8);
   border-radius: var(--border-radius-4);
+  background-color: var(--color-secondary);
   text-transform: capitalize;
   font-size: rem(12px);
   font-weight: var(--typography-bold);
   word-break: break-all;
-  background-color: var(--color-secondary);
   color: var(--color-primary-hover);
 }

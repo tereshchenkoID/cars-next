@@ -1,4 +1,4 @@
-@use '@/scss/config' as *;
+@use 'scss/config' as *;
 
 .block {
   position: relative;
@@ -19,10 +19,7 @@
   border-radius: var(--border-radius-4);
 
   @include hover {
-
-    &:hover {
-      background-color: var(--color-grey-50);
-    }
+    background-color: var(--color-grey-50);
   }
 }
 
@@ -42,11 +39,10 @@
 }
 
 .dropdown {
-  @include make-spacer(p, var(--gap-12));
-
   position: absolute;
   top: calc(100% + var(--gap-4));
   right: 0;
+  padding: var(--gap-12);
   min-width: rem(180px);
   border-width: rem(1px);
   border-style: solid;
@@ -55,13 +51,11 @@
 }
 
 .option {
-  @include make-spacer(py, var(--gap-8));
-  @include make-spacer(px, var(--gap-12));
-
   display: grid;
   grid-template-columns: auto 1fr;
   grid-column-gap: var(--gap-8);
   align-items: center;
+  padding: var(--gap-8) var(--gap-12);
   border-radius: var(--border-radius-4);
   width: 100%;
   overflow: hidden;
@@ -69,14 +63,11 @@
   text-align: left;
 
   @include hover {
-
-    &:hover {
-      background-color: var(--color-grey-50);
-    }
+    background-color: var(--color-grey-50);
   }
 
   &:not(:last-child) {
-    @include make-spacer(mb, var(--gap-4));
+    margin-bottom: var(--gap-4);
   }
 }
 

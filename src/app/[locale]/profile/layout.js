@@ -1,6 +1,6 @@
-import { fetchMetaTags } from '@/utils/fetchMetaTags'
+import { fetchMetaTags } from 'utils/fetchMetaTags'
 
-import SectionProfile from '@/sections/SectionProfile'
+import SectionProfile from 'sections/SectionProfile'
 
 export async function generateMetadata() {
   return await fetchMetaTags('profile')

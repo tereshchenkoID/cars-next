@@ -1,21 +1,17 @@
-@use '@/scss/config' as *;
+@use 'scss/config' as *;
 
 .block {
   @include scroll;
-  // @include flex(center, flex-end);
 
   display: grid;
   align-items: flex-end;
-  // justify-content: center;
-
   position: fixed;
   inset: 0;
   z-index: $z-index-11;
   background-color: rgba(0, 0, 0, 0.15);
 
   @include media-breakpoint-up(md) {
-    @include make-spacer(p, var(--gap-52));
-
+    padding: var(--gap-52);
     align-items: center;
     justify-content: center;
   }
@@ -23,9 +19,9 @@
   &.alt {
 
     .header {
-      @include make-spacer(pr, var(--gap-64));
       @include flex($align-items: center);
 
+      padding-right: var(--gap-64);
       border-bottom-width: rem(1px);
       border-bottom-style: solid;
     }
@@ -40,7 +36,7 @@
     position: absolute;
     top: var(--gap-10);
     right: var(--gap-16);
-  
+
     @include media-breakpoint-up(md) {
       top: var(--gap-24);
     }
@@ -69,21 +65,18 @@
 }
 
 .header {
-  @include make-spacer(px, var(--gap-16));
-  @include make-spacer(py, var(--gap-12));
-
+  padding: var(--gap-12) var(--gap-16);
   gap: rem(16px);
 
   @include media-breakpoint-up(md) {
-    @include make-spacer(px, var(--gap-24));
+    padding-inline: var(--gap-24);
   }
 }
 
 .body {
-  @include make-spacer(p, var(--gap-16));
-
+  padding: var(--gap-16);
 
   @include media-breakpoint-up(md) {
-    @include make-spacer(p, var(--gap-24));
+    padding: var(--gap-24);
   }
 }

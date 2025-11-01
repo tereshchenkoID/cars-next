@@ -1,4 +1,4 @@
-import { DEFAULT } from "@/constant/config"
+import { DEFAULT } from "constant/config"
 
 export const getYears = () => {
   const currentYear = new Date().getFullYear()

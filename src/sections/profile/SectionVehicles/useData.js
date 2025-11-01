@@ -2,8 +2,8 @@ import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useSearchParams } from 'next/navigation'
 
-import { postData } from '@/helpers/api'
-import { setFavorite } from '@/store/actions/favoriteAction'
+import { postData } from 'helpers/api'
+import { setFavorite } from 'store/actions/favoriteAction'
 
 const useFavorite = (initialData) => {
   const dispatch = useDispatch()
@@ -61,7 +61,7 @@ const useFavorite = (initialData) => {
         .filter(([_, value]) => value !== 0)
         .map(([key, value]) => [key, value])
     )
-      
+
     return params.toString()
   }
 
@@ -72,7 +72,7 @@ const useFavorite = (initialData) => {
         acc[key] = paramsObject[key] ? Number(paramsObject[key]) : search[key]
         return acc
       }, {})
-  
+
       setSearch(updatedSearch)
     }
   }
@@ -111,14 +111,14 @@ const useFavorite = (initialData) => {
     const formData = new FormData()
     formData.append('userId', isAuth)
     formData.append('type', '2')
-  
+
     postData('user/favorites/action/', formData).then(json => {
       if (json) {
         setSearch({
           page: 0,
           sort: 0
         })
-    
+
         handleLoad(0, 0)
         dispatch(setFavorite('0', isAuth))
       }
@@ -130,7 +130,7 @@ const useFavorite = (initialData) => {
     handleLoad(search.page, search.sort)
   }, [])
 
-  useEffect(() => { 
+  useEffect(() => {
     window.history.pushState(null, '', `?${generateParams()}`)
   }, [search])
 

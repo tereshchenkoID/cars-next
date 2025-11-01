@@ -1,4 +1,4 @@
-@use '@/scss/config' as *;
+@use 'scss/config' as *;
 
 .block {
   position: relative;
@@ -18,17 +18,14 @@
   overflow: hidden;
 
   @include hover {
-
-    &:hover {
-      opacity: 1;
-    }
+    opacity: 1;
   }
 
   &.active {
 
     &::after {
       @include size(rem(24px), rem(1px));
-      
+
       position: absolute;
       top: 50%;
       left: 50%;

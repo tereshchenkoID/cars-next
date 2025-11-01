@@ -1,9 +1,8 @@
-@use '@/scss/config' as *;
+@use 'scss/config' as *;
 
 .block {
-  @include make-spacer(py, var(--gap-40));
-
   position: relative;
+  padding-block: var(--gap-40);
 }
 
 .container,
@@ -18,9 +17,9 @@
 
   position: relative;
   gap: var(--gap-16);
-  font-size: rem(12px);
   z-index: $z-index-3;
   white-space: nowrap;
+  font-size: rem(12px);
 
   @include media-breakpoint-up(md) {
     flex-direction: row;

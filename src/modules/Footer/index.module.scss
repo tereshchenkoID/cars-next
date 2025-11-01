@@ -1,15 +1,14 @@
-@use '@/scss/config' as *;
+@use 'scss/config' as *;
 
 .block {
-  @include make-spacer(pt, var(--gap-32));
-
   position: relative;
+  padding-top: var(--gap-32);
   border-top-width: rem(1px);
   border-top-style: solid;
   background-color: var(--color-grey-50);
 
   @include media-breakpoint-up(lg) {
-    @include make-spacer(pt, var(--gap-80));
+    padding-top: var(--gap-80);
   }
 }
 
@@ -34,18 +33,16 @@
 }
 
 .bottom {
-  @include make-spacer(mt, var(--gap-32));
-  @include make-spacer(py, var(--gap-32));
-
+  margin-top: var(--gap-32);
+  padding-block: var(--gap-32);
   border-top-width: rem(1px);
   border-top-style: solid;
   align-items: center;
   gap: var(--gap-32);
 
   @include media-breakpoint-up(lg) {
-    @include make-spacer(mt, var(--gap-80));
-
     grid-template-columns: 1fr auto;
+    margin-top: var(--gap-80);
   }
 }
 
@@ -95,16 +92,12 @@
 .link {
 
   @include hover {
-
-    &:hover {
-      transform: translateX(rem(10px));
-      color: var(--color-primary);
-    }
+    transform: translateX(rem(10px));
+    color: var(--color-primary);
   }
 }
 
 .copyright {
-  @include make-spacer(pb, var(--gap-32));
-  
+  padding-bottom: var(--gap-32);
   font-size: rem(12px);
 }

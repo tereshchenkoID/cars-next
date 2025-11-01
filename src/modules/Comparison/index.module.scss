@@ -1,4 +1,4 @@
-@use '@/scss/config' as *;
+@use 'scss/config' as *;
 
 .scale,
 .labels {
@@ -7,15 +7,14 @@
 }
 
 .title {
-  @include make-spacer(mb, var(--gap-80));
-  @include make-spacer(mx, auto);
-
+  margin-bottom: var(--gap-80);
+  margin-inline: auto;
   text-align: center;
   font-size: rem(15px);
   max-width: rem(550px);
 
   @include media-breakpoint-up(lg) {
-    @include make-spacer(mb, var(--gap-32));
+    margin-bottom: var(--gap-32);
   }
 }
 
@@ -79,8 +78,7 @@
 }
 
 .scale {
-  @include make-spacer(my, var(--gap-12));
-
   display: grid;
+  margin-block: var(--gap-12);
   height: rem(8px);
 }

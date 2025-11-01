@@ -7,7 +7,7 @@ import classNames from 'classnames'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { Navigation, Pagination, Mousewheel } from 'swiper/modules'
 
-import Container from "@/components/Container"
+import Container from "components/Container"
 import Car from './Car'
 
 import style from './index.module.scss'

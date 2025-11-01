@@ -1,4 +1,4 @@
-import { types } from '@/store/actionTypes'
+import { types } from 'store/actionTypes'
 
 const initialState = {
   toastify: null,

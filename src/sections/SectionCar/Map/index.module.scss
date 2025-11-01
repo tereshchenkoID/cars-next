@@ -1,4 +1,4 @@
-@use '@/scss/config' as *;
+@use 'scss/config' as *;
 @use 'sass:math';
 
 .block {
@@ -10,10 +10,7 @@
     fill: var(--color-grey-200);
 
     @include hover {
-
-      &:hover {
-        fill: var(--color-primary-hover);
-      }
+      fill: var(--color-primary-hover);
     }
 
     &.active,
@@ -32,19 +29,17 @@
 }
 
 .header {
-  @include make-spacer(pt, var(--gap-16));
-  @include make-spacer(pb, var(--gap-32));
-
+  padding-block: var(--gap-16) var(--gap-32);
   text-align: center;
 
   @include media-breakpoint-up(lg) {
-    @include make-spacer(pt, 0);
+    padding-top: 0;
   }
 }
 
 .body {
-  @include make-spacer(pt, var(--gap-32));
-  @include make-spacer(px, var(--gap-16));
+  padding-top: var(--gap-32);
+  padding-inline: var(--gap-16);
 }
 
 .footer {
@@ -56,7 +51,7 @@
 .hr {
   @include size(100%, rem(1px));
 
-  background: repeating-linear-gradient(45deg, rgb(215, 225, 239), rgb(215, 225, 239) 9px, transparent 3px, transparent 18px);
+  background: repeating-linear-gradient(45deg, rgb(215, 225, 239), rgb(215, 225, 239) rem(9px), transparent rem(3px), transparent rem(18px));
 
   &.vertical {
     @include size(rem(1px), 100%);
@@ -65,15 +60,14 @@
 
 .card {
   @include flex($direction: column);
-  @include make-spacer(px, var(--gap-8));
-  @include make-spacer(py, var(--gap-16));
 
   position: relative;
   gap: var(--gap-12);
   overflow: hidden;
+  padding: var(--gap-16) var(--gap-8);
 
   @include media-breakpoint-up(xl) {
-    @include make-spacer(p, var(--gap-32));
+    padding: (--gap-32);
   }
 
   &.active {
@@ -130,8 +124,7 @@
 }
 
 .list {
-  @include make-spacer(p, var(--gap-12));
-
+  padding: var(--gap-12);
   border-width: rem(1px);
   border-style: solid;
   border-radius: var(--border-radius-4);
@@ -145,7 +138,7 @@
   font-size: rem(14px);
 
   &:not(:last-child) {
-    @include make-spacer(mb, var(--gap-8));
+    margin-bottom: var(--gap-8);
   }
 }
 
@@ -170,7 +163,7 @@
 
 .hiddenDesktop {
   display: block;
-  
+
   @include media-breakpoint-up(xl) {
     display: none;
   }
@@ -178,18 +171,18 @@
 
 
 .prices {
-  @include make-spacer(pb, var(--gap-32));
   @include flex($wrap: wrap);
 
+  padding-bottom: var(--gap-32);
   gap: var(--gap-12);
 }
 
 .button {
   @include flex($align-items: center);
-  @include make-spacer(p, var(--gap-8));
 
   background-color: var(--color-grey-200);
   border-radius: var(--border-radius-4);
+  padding: var(--gap-8);
   gap: var(--gap-4);
   font-size: rem(13px);
 
@@ -211,5 +204,5 @@
 .loading {
   position: absolute;
   inset: 0;
-  z-index: 3;
+  z-index: $z-index-3;
 }

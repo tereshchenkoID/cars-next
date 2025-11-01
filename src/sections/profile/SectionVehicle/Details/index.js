@@ -3,23 +3,23 @@
 import { useSelector } from 'react-redux'
 import { useTranslations } from 'next-intl'
 
-import { DEFAULT } from "@/constant/config"
+import { DEFAULT } from "constant/config"
 
-import Label from '@/components/Label'
-import Field from '@/components/Field'
-import Select from '@/components/Select'
-import Button from '@/components/Button'
-import Textarea from '@/components/Textarea'
-import Accordion from '@/modules/Accordion'
+import Label from 'components/Label'
+import Field from 'components/Field'
+import Select from 'components/Select'
+import Button from 'components/Button'
+import Textarea from 'components/Textarea'
+import Accordion from 'modules/Accordion'
 import DateSelector from './DateSelector'
 
 import style from '../index.module.scss'
 
-const Details = ({ 
+const Details = ({
   data,
   toggle,
-  handleToggle, 
-  handleChange 
+  handleToggle,
+  handleChange
 }) => {
   const t = useTranslations()
   const filters = useSelector((state) => state.filters)

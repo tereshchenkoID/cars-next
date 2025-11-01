@@ -1,4 +1,4 @@
-@use '@/scss/config' as *;
+@use 'scss/config' as *;
 
 .block {
   @include flex($align-items: center, $wrap: wrap);
@@ -9,14 +9,13 @@
 .tag {
   @include transition;
   @include flex($align-items: center);
-  @include make-spacer(px, var(--gap-8));
-  @include make-spacer(py, var(--gap-2));
 
+  padding: var(--gap-2) var(--gap-8);
   border-radius: var(--border-radius-4);
+  background-color: var(--color-secondary);
   font-size: rem(12px);
   font-weight: var(--typography-bold);
   white-space: nowrap;
-  background-color: var(--color-secondary);
   color: var(--color-primary-hover);
   height: rem(24px);
 
@@ -26,10 +25,7 @@
     border: rem(1px) solid transparent;
 
     @include hover {
-
-      &:hover {
-        border-color: var(--color-primary);
-      }
+      border-color: var(--color-primary);
     }
   }
 }

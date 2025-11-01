@@ -5,11 +5,11 @@ import { useSelector } from 'react-redux'
 
 import classNames from 'classnames'
 
-import { DEFAULT, NAVIGATION } from '@/constant/config'
+import { DEFAULT, NAVIGATION } from 'constant/config'
 
 import Image from 'next/image'
 import Link from 'next/link'
-import Container from "@/components/Container"
+import Container from 'components/Container'
 
 import style from './index.module.scss'
 
@@ -45,7 +45,7 @@ const SectionSitemap = () => {
 
   return (
     <>
-      <section 
+      <section
         className={
           classNames(
             style.section,
@@ -94,7 +94,7 @@ const SectionSitemap = () => {
             {
               brands.map((el, idx) =>
                 <Link
-                  href={`${NAVIGATION.car.link}?make_${el.id}=${DEFAULT}`}
+                  href={`${NAVIGATION.buy.link}?make_${el.id}=${DEFAULT}`}
                   key={idx}
                   className={style.brand}
                 >

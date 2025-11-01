@@ -1,15 +1,15 @@
 import { useTranslations } from 'next-intl'
 import { useState, useMemo, useEffect } from 'react'
 
-import { validationRules } from '@/utils/validationRules'
+import { validationRules } from 'utils/validationRules'
 
 import classNames from 'classnames'
 
-import Field from '@/components/Field'
-import Select from '@/components/Select'
-import Button from '@/components/Button'
-import Checkbox from '@/components/Checkbox'
-import InputGroup from '@/modules/InputGroup'
+import Field from 'components/Field'
+import Select from 'components/Select'
+import Button from 'components/Button'
+import Checkbox from 'components/Checkbox'
+import InputGroup from 'modules/InputGroup'
 
 import style from '../index.module.scss'
 
@@ -78,13 +78,13 @@ const Billing = () => {
   useEffect(() => {
     setFilter((prevFilter) => {
       return active === 1
-        ? 
+        ?
           {
             ...prevFilter,
             company_id: { value: '', isValid: false },
             company_name: { value: '', isValid: false }
           }
-        : 
+        :
           Object.fromEntries(
             Object.entries(prevFilter).filter(
               ([key]) => key !== 'company_id' && key !== 'company_name'
@@ -96,12 +96,12 @@ const Billing = () => {
   useEffect(() => {
     setFilter((prevFilter) => {
       return vat === "1"
-        ? 
+        ?
           {
             ...prevFilter,
             vat_id: { value: '', isValid: false },
           }
-        : 
+        :
           Object.fromEntries(
             Object.entries(prevFilter).filter(
               ([key]) => key !== 'vat_id'

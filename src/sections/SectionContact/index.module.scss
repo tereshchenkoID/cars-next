@@ -1,17 +1,16 @@
-@use '@/scss/config' as *;
+@use 'scss/config' as *;
 
 .block {
-  @include make-spacer(py, var(--gap-40));
+  padding-block: var(--gap-40);
 }
 
 .top,
 .bottom {
-  @include make-spacer(p, var(--gap-32));
+  padding: var(--gap-32);
 }
 
 .info {
-  @include make-spacer(mx, auto);
-
+  margin-inline: auto;
   border-radius: var(--border-radius-8);
   box-shadow: var(--box-shadow-4-16);
   background-color: var(--color-white);
@@ -33,7 +32,7 @@
 }
 
 .title {
-  @include make-spacer(mb, var(--gap-32));
+  margin-bottom: var(--gap-32);
 
   max-width: 100%;
 

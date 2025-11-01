@@ -1,20 +1,19 @@
-@use '@/scss/config' as *;
+@use 'scss/config' as *;
 
 .tooltip {
-  @include make-spacer(p, var(--gap-4));
-
   background-color: var(--color-primary);
   border-radius: var(--border-radius-4);
+  padding: var(--gap-4);
   color: var(--color-white);
   line-height: 1;
   font-size: rem(12px);
 }
 
 .header {
-  @include make-spacer(mb, var(--gap-8));
   @include flex($justify-content: space-between, $align-items: center, $wrap: wrap);
 
   gap: var(--gap-8);
+  margin-bottom: var(--gap-8);
 }
 
 .discount {

@@ -1,4 +1,4 @@
-@use '@/scss/config' as *;
+@use 'scss/config' as *;
 
 .block {
   position: relative;
@@ -38,12 +38,12 @@
 
 .value {
   @include flex(center, center, column);
-  @include make-spacer(p, var(--gap-12));
 
   position: absolute;
-  bottom: calc(100% + 4px);
+  bottom: calc(100% + rem(4px));
   left: 0;
   min-width: rem(125px);
+  padding: var(--gap-12);
   border-radius: var(--border-radius-4);
   background: inherit;
   clip-path: polygon(0px 0px, 100% 0px, 100% 90%, 0% 90%, 0% 100%, 6% 90%, 0px 90%);
@@ -63,6 +63,6 @@
   }
 
   @include media-breakpoint-up(lg) {
-    bottom: calc(100% + 32px);
+    bottom: calc(100% + rem(32px));
   }
 }

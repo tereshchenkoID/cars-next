@@ -1,20 +1,18 @@
-@use '@/scss/config' as *;
+@use 'scss/config' as *;
 
 .block {
-  @include make-spacer(p, var(--gap-24));
-
   border-radius: var(--border-radius-8);
   background-color: var(--color-white);
+  padding: var(--gap-24);
   max-width: rem(590px);
 }
 
 .body {
-  @include make-spacer(mb, var(--gap-24));
-
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   align-items: center;
   gap: var(--gap-8);
+  margin-bottom: var(--gap-24);
 
   @include media-breakpoint-up(md) {
     grid-template-columns: repeat(3, 1fr);

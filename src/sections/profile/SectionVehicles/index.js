@@ -4,15 +4,15 @@ import { useTranslations } from 'next-intl'
 
 import useData from './useData'
 
-import { ROUTES_USER } from '@/constant/config'
+import { ROUTES_USER } from 'constant/config'
 
-import Container from '@/components/Container'
-import Reference from '@/components/Reference'
-import Pagination from '@/modules/Pagination'
-import Skeleton from '@/modules/Skeleton'
-import Card from '@/modules/Card'
-import Sort from '@/modules/Sort'
-import EmptyCars from '@/modules/EmptyCars'
+import Container from 'components/Container'
+import Reference from 'components/Reference'
+import Pagination from 'modules/Pagination'
+import Skeleton from 'modules/Skeleton'
+import Card from 'modules/Card'
+import Sort from 'modules/Sort'
+import EmptyCars from 'modules/EmptyCars'
 
 import style from './index.module.scss'
 

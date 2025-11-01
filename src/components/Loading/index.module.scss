@@ -1,9 +1,9 @@
-@use '@/scss/config' as *;
+@use 'scss/config' as *;
 
 .block {
-  @include make-spacer(p, var(--gap-32));
   @include flex(center, center);
 
+  padding: var(--gap-32);
   border-radius: var(--border-radius-8);
   box-shadow: var(--box-shadow-16-24);
   background-color: var(--color-white);

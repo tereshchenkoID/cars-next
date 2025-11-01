@@ -1,4 +1,4 @@
-@use '@/scss/config' as *;
+@use 'scss/config' as *;
 
 .block {
   @include size(100%, rem(40px));
@@ -14,8 +14,8 @@
 
 .loading {
   @include flex($align-items: center);
-  @include make-spacer(pl, rem(14px));
 
+  padding-left: rem(14px);
   height: 100%;
   background-color: var(--color-white);
   border-radius: var(--border-radius-4);

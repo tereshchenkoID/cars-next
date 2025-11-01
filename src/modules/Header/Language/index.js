@@ -1,10 +1,10 @@
 "use client"
 
 import { useParams, useSearchParams } from 'next/navigation'
-import { usePathname, useRouter } from '@/i18n/routing'
+import { usePathname, useRouter } from 'i18n/routing'
 import { useState, useRef, useTransition } from 'react'
 import { useSelector } from 'react-redux'
-import { useOutsideClick } from '@/hooks/useOutsideClick'
+import { useOutsideClick } from 'hooks/useOutsideClick'
 
 import Image from 'next/image'
 

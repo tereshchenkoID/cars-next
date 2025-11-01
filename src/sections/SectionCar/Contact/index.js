@@ -1,14 +1,14 @@
 import { useTranslations } from 'next-intl'
 
-import { NAVIGATION } from '@/constant/config'
+import { NAVIGATION } from 'constant/config'
 
-import { getDate } from '@/helpers/getDate'
+import { getDate } from 'helpers/getDate'
 
 import Link from 'next/link'
-import Avatar from '@/modules/Avatar'
-import StarRating from '@/modules/StarRating'
-import Icon from '@/components/Icon'
-import Reference from '@/components/Reference'
+import Avatar from 'modules/Avatar'
+import StarRating from 'modules/StarRating'
+import Icon from 'components/Icon'
+import Reference from 'components/Reference'
 
 import style from './index.module.scss'
 

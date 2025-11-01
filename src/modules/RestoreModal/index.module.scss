@@ -1,4 +1,4 @@
-@use '@/scss/config' as *;
+@use 'scss/config' as *;
 
 .block {
   display: grid;
@@ -19,18 +19,16 @@
 }
 
 .text {
-  @include make-spacer(mx, -24px);
-  @include make-spacer(mb, -24px);
-  @include make-spacer(p, var(--gap-24));
-
+  margin-inline: rem(-24px);
+  margin-bottom: rem(-24px);
+  padding: var(--gap-24);
   text-align: center;
   font-size: rem(14px);
   background-color: #edf1f8;
 }
 
 .link {
-  @include make-spacer(mx, var(--gap-4));
-
+  margin-inline: var(--gap-4);
   color: var(--color-primary);
   font-weight: var(--typography-medium);
 }

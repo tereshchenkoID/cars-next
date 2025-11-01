@@ -1,4 +1,4 @@
-@use '@/scss/config' as *;
+@use 'scss/config' as *;
 
 .block {
   @include flex;
@@ -11,7 +11,6 @@
 }
 
 .dropdown {
-  @include make-spacer(p, var(--gap-12));
   @include flex($align-items: center);
 
   position: absolute;
@@ -19,6 +18,7 @@
   left: 0;
   gap: var(--gap-8);
   overflow-y: auto;
+  padding: var(--gap-12);
   background-color: var(--color-white);
   border-radius: var(--border-radius-4);
   border-width: rem(1px);

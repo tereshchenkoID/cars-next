@@ -3,42 +3,24 @@
 import { useTranslations } from 'next-intl'
 import { useState } from 'react'
 
-import { DEFAULT, ACTIVE, NAVIGATION } from "@/constant/config"
+import { DEFAULT, ACTIVE, NAVIGATION } from "constant/config"
 
 import classNames from 'classnames'
 
-import useFilters from '@/hooks/useFilters'
-import { getYears } from '@/helpers/getYears'
+import useFilters from 'hooks/useFilters'
+import { getYears } from 'helpers/getYears'
 
-import Reference from '@/components/Reference'
-import Container from "@/components/Container"
-import Checkbox from '@/components/Checkbox'
-import Label from '@/components/Label'
-import Field from '@/components/Field'
-import Button from '@/components/Button'
-import Select from '@/components/Select'
-import Brands from '@/modules/Brands'
-import BrandsModal from '@/modules/BrandsModal'
+import Button from 'components/Button'
+import Reference from 'components/Reference'
+import Container from "components/Container"
+import Checkbox from 'components/Checkbox'
+import Label from 'components/Label'
+import Field from 'components/Field'
+import Select from 'components/Select'
+import Brands from 'modules/Brands'
+import BrandsModal from 'modules/BrandsModal'
 
 import style from './index.module.scss'
-
-// const generateTranslate = () => {
-//   const a = {}
-
-//   options.map((el, idx) => {
-//     let s = {
-//       "0": el.name + " PT"
-//     }
-
-//     el.options.map((el_o, idx_o) => {
-//       s[el_o.id] = el_o.name + " PT"
-//     })
-
-//     a[el.id] = s
-//   })
-
-//   return a
-// }
 
 const SectionAdvancedSearch = ({ options }) => {
   const t = useTranslations()
@@ -70,7 +52,7 @@ const SectionAdvancedSearch = ({ options }) => {
             <Reference
               link={NAVIGATION.buy.link}
               icon={'angle-left'}
-              classes={['reference', 'sm']}
+              classes={['reference', 'sm', style.back]}
               placeholder={(t('actions.back'))}
             />
             <h1>{t('detailed_search')}</h1>

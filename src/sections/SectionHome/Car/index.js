@@ -1,15 +1,15 @@
 import { useTranslations } from 'next-intl'
 import { useSelector } from 'react-redux'
 
-import { NAVIGATION } from '@/constant/config'
+import { NAVIGATION } from 'constant/config'
 
-import { getFormatPrice } from '@/helpers/getFormatPrice'
-import { getFuelIcon } from '@/helpers/getFuelIcon'
-import { getDate } from '@/helpers/getDate'
+import { getFormatPrice } from 'helpers/getFormatPrice'
+import { getFuelIcon } from 'helpers/getFuelIcon'
+import { getDate } from 'helpers/getDate'
 
 import Image from 'next/image'
 import Link from 'next/link'
-import Icon from '@/components/Icon'
+import Icon from 'components/Icon'
 
 import style from './index.module.scss'
 

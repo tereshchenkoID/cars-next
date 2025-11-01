@@ -1,4 +1,4 @@
-@use '@/scss/config' as *;
+@use 'scss/config' as *;
 
 .block {
   position: relative;
@@ -6,14 +6,12 @@
 }
 
 .count {
-  @include make-spacer(py, var(--gap-2));
-  @include make-spacer(px, var(--gap-4));
-
   position: absolute;
   top: var(--gap-4);
   right: var(--gap-4);
+  padding: var(--gap-2) var(--gap-4);
   border-radius: var(--border-radius-4);
+  background-color: var(--color-primary);
   font-size: rem(10px);
   color: var(--color-white);
-  background-color: var(--color-primary);
 }

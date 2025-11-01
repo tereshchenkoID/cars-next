@@ -1,8 +1,8 @@
-import { NAVIGATION } from '@/constant/config'
-import { fetchMetaTags } from '@/utils/fetchMetaTags'
-import { fetchData } from '@/utils/fetchData'
+import { NAVIGATION } from 'constant/config'
+import { fetchMetaTags } from 'utils/fetchMetaTags'
+import { fetchData } from 'utils/fetchData'
 
-import SectionHome from '@/sections/SectionHome'
+import SectionHome from 'sections/SectionHome'
 
 export async function generateMetadata() {
   return await fetchMetaTags('home')

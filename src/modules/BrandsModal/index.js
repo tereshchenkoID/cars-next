@@ -2,14 +2,14 @@ import { useMemo, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useTranslations } from 'next-intl'
 
-import { ACTIVE, DEFAULT } from '@/constant/config'
+import { ACTIVE, DEFAULT } from 'constant/config'
 
-import { selectBrands, updateBrands } from '@/store/actions/brandsAction'
+import { selectBrands, updateBrands } from 'store/actions/brandsAction'
 
 import Image from 'next/image'
-import Button from '@/components/Button'
-import Field from '@/components/Field'
-import Checkbox from '@/components/Checkbox'
+import Button from 'components/Button'
+import Field from 'components/Field'
+import Checkbox from 'components/Checkbox'
 import Brand from './Brand'
 
 import style from './index.module.scss'
@@ -29,7 +29,7 @@ const BrandsModal = ({ show, setShow }) => {
     () => brands?.find(brand => brand.active) || null,
     [brands]
   )
-  
+
   const activeModels = useMemo(
     () => activeBrand?.options?.find(model => model.selected === ACTIVE) || null,
     [activeBrand]
@@ -38,11 +38,11 @@ const BrandsModal = ({ show, setShow }) => {
   const searchBrands = useMemo(
     () => {
       if (query.length < 3) return []
-    
+
       return (activeBrand ? activeBrand.options : brands).filter(brand =>
         brand.name.toString().toLowerCase().includes(query.toLowerCase())
       )
-    }, 
+    },
     [query, brands]
   )
 
@@ -109,9 +109,9 @@ const BrandsModal = ({ show, setShow }) => {
                 ?
                   <ul className={style.models}>
                     {
-                      query.length > 2 
+                      query.length > 2
                       ?
-                        searchBrands.length > 0 
+                        searchBrands.length > 0
                           ?
                             searchBrands.map((el, idx) =>
                               el.visible === ACTIVE &&
@@ -163,8 +163,8 @@ const BrandsModal = ({ show, setShow }) => {
                                       key={idx}
                                       className={style.item}
                                     >
-                                      <Brand 
-                                        data={el} 
+                                      <Brand
+                                        data={el}
                                         isWide={true}
                                         onChange={handleSelectBrand}
                                       />
@@ -188,8 +188,8 @@ const BrandsModal = ({ show, setShow }) => {
                                   key={idx}
                                   className={style.item}
                                 >
-                                  <Brand 
-                                    data={el} 
+                                  <Brand
+                                    data={el}
                                     onChange={handleSelectBrand}
                                   />
                                 </li>
@@ -205,8 +205,8 @@ const BrandsModal = ({ show, setShow }) => {
                                   key={idx}
                                   className={style.item}
                                 >
-                                  <Brand 
-                                    data={el} 
+                                  <Brand
+                                    data={el}
                                     isWide={true}
                                     onChange={handleSelectBrand}
                                   />

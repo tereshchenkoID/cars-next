@@ -2,11 +2,11 @@ import { useTranslations } from 'next-intl'
 import { Fragment } from 'react'
 import { useDispatch } from 'react-redux'
 
-import { getDate } from '@/helpers/getDate'
-import { setBrands } from '@/store/actions/brandsAction'
-import { setSearch } from '@/store/actions/searchAction'
+import { getDate } from 'helpers/getDate'
+import { setBrands } from 'store/actions/brandsAction'
+import { setSearch } from 'store/actions/searchAction'
 
-import Button from '@/components/Button'
+import Button from 'components/Button'
 
 import style from './index.module.scss'
 

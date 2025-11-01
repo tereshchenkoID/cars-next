@@ -4,12 +4,12 @@ import { useTranslations } from 'next-intl'
 
 import useData from './useData'
 
-import Container from '@/components/Container'
-import Card from '@/modules/Card'
-import Skeleton from '@/modules/Skeleton'
-import Pagination from '@/modules/Pagination'
-import Sort from '@/modules/Sort'
-import EmptyCars from '@/modules/EmptyCars'
+import Container from 'components/Container'
+import Card from 'modules/Card'
+import Skeleton from 'modules/Skeleton'
+import Pagination from 'modules/Pagination'
+import Sort from 'modules/Sort'
+import EmptyCars from 'modules/EmptyCars'
 
 import style from './index.module.scss'
 
@@ -35,7 +35,7 @@ const SectionsFavorites = ({ initialData }) => {
             ?
               <>
                 <div className={style.meta}>
-                  <Sort 
+                  <Sort
                     results={pagination.results}
                     search={search}
                     handleChange={handleChange}

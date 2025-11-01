@@ -1,14 +1,14 @@
 import { useTranslations } from 'next-intl'
 import { useState, useMemo } from 'react'
 
-import { validationRules } from '@/utils/validationRules'
+import { validationRules } from 'utils/validationRules'
 
 import classNames from 'classnames'
 
-import Field from '@/components/Field'
-import Phone from '@/components/Phone'
-import Button from '@/components/Button'
-import InputGroup from '@/modules/InputGroup'
+import Field from 'components/Field'
+import Phone from 'components/Phone'
+import Button from 'components/Button'
+import InputGroup from 'modules/InputGroup'
 
 import style from '../index.module.scss'
 
@@ -53,7 +53,7 @@ const Contact = () => {
   return (
     <form className={style.form} onSubmit={handleSubmit}>
       {/* <pre className={style.pre}>{JSON.stringify(filter, null, 2)}</pre> */}
-      
+
       <div className={style.grid}>
         <InputGroup
           label={t('name')}

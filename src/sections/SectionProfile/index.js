@@ -6,10 +6,10 @@ import { useState } from 'react'
 
 import classNames from 'classnames'
 
-import { ROUTES_USER } from '@/constant/config'
+import { ROUTES_USER } from 'constant/config'
 
 import Link from 'next/link'
-import Container from "@/components/Container"
+import Container from "components/Container"
 
 import style from './index.module.scss'
 

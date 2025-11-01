@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux'
 
 import classNames from 'classnames'
 
-import { getFormatPrice } from '@/helpers/getFormatPrice'
+import { getFormatPrice } from 'helpers/getFormatPrice'
 
 import style from './index.module.scss'
 

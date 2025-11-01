@@ -6,7 +6,7 @@ import { useSelector } from 'react-redux'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { Navigation, Pagination, Mousewheel } from 'swiper/modules'
 
-import Container from "@/components/Container"
+import Container from "components/Container"
 import Discount from './Discount'
 import Card from './Card'
 

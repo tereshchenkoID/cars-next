@@ -1,10 +1,10 @@
-@use '@/scss/config' as *;
+@use 'scss/config' as *;
 
 .block {
   @include size(rem(215px), rem(128px));
   @include flex(center, center, column);
-  @include make-spacer(p, var(--gap-16));
 
+  padding: var(--gap-16);
   gap: var(--gap-4);
   border-radius: var(--border-radius-8);
   background-color: var(--color-white);
@@ -14,22 +14,19 @@
   border-style: solid;
 
   @include hover {
+    border-color: var(--color-primary);
 
-    &:hover {
-      border-color: var(--color-primary);
+    .image {
+      transform: translateX(rem(10px));
+    }
 
-      .image {
-        transform: translateX(rem(10px));
-      }
+    .arrow {
+      width: rem(18px);
+    }
 
-      .arrow {
-        width: rem(18px);
-      }
-
-      .text {
-        transform: translateX(0);
-        color: var(--color-primary)
-      }
+    .text {
+      transform: translateX(0);
+      color: var(--color-primary)
     }
   }
 }
@@ -37,7 +34,7 @@
 .image {
   @include transition(all);
 
-  max-height: 80px;
+  max-height: rem(80px);
 }
 
 .headline {
@@ -48,7 +45,7 @@
 
 .text {
   @include transition(all);
-  
+
   transform: translateX(var(--gap-4));
 }
 

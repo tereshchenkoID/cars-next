@@ -1,9 +1,8 @@
-@use '@/scss/config' as *;
+@use 'scss/config' as *;
 
 .block {
-  @include make-spacer(mx, auto);
-  @include make-spacer(px, var(--outer-gap));
-  
+  margin-inline: auto;
+  padding-inline: var(--outer-gap);
   width: 100%;
   max-width: var(--max-width);
 }

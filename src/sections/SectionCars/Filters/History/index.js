@@ -1,10 +1,10 @@
 import { useTranslations } from 'next-intl'
-import { useModal } from '@/context/ModalContext'
+import { useModal } from 'context/ModalContext'
 import { useSelector } from 'react-redux'
 
 import Image from 'next/image'
-import HistoryModal from '@/modules/HistoryModal'
-import LoginModal from '@/modules/LoginModal'
+import HistoryModal from 'modules/HistoryModal'
+import LoginModal from 'modules/LoginModal'
 import SavedCard from './SavedCard'
 
 import style from './index.module.scss'
@@ -16,13 +16,13 @@ const History = ({ filtersProps, setActive, setShow }) => {
   const auth = useSelector((state) => state.auth)
 
   const handleSaveHistory = (type, data) => {
-    auth.id 
+    auth.id
     ?
       showModal(
         <HistoryModal
           type={type}
           data={data}
-        />, 
+        />,
         t('save_search')
       )
     :

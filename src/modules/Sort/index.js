@@ -3,13 +3,13 @@ import { useTranslations } from 'next-intl'
 
 import classNames from 'classnames'
 
-import { useOutsideClick } from '@/hooks/useOutsideClick'
+import { useOutsideClick } from 'hooks/useOutsideClick'
 
-import Icon from '@/components/Icon'
+import Icon from 'components/Icon'
 
 import style from './index.module.scss'
 
-const Sort = ({ 
+const Sort = ({
   results,
   search,
   handleChange

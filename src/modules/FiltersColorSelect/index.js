@@ -1,6 +1,6 @@
 import { useTranslations } from 'next-intl'
 
-import { DEFAULT } from '@/constant/config'
+import { DEFAULT } from 'constant/config'
 
 import classNames from 'classnames'
 
@@ -16,7 +16,7 @@ const FiltersColorSelect = ({
   const t = useTranslations()
 
   return (
-    <div 
+    <div
       className={
         classNames(
           style.block,

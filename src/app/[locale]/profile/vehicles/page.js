@@ -1,7 +1,7 @@
 import { getServerSession } from 'next-auth'
-import { authOptions } from '@/app/api/auth/[...nextauth]/route'
+import { authOptions } from 'app/api/auth/[...nextauth]/route'
 
-import SectionVehicles from '@/sections/profile/SectionVehicles'
+import SectionVehicles from 'sections/profile/SectionVehicles'
 
 async function postData(endpoint, searchParams, cookies) {
   const formData = new FormData()

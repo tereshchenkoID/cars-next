@@ -3,19 +3,19 @@
 import { useTranslations } from 'next-intl'
 import { useSelector } from 'react-redux'
 import { Fragment, useState, useMemo } from 'react'
-import { useModal } from '@/context/ModalContext'
+import { useModal } from 'context/ModalContext'
 
 import classNames from 'classnames'
 
-import { validationRules } from '@/utils/validationRules'
+import { validationRules } from 'utils/validationRules'
 
-import { getDate } from '@/helpers/getDate'
+import { getDate } from 'helpers/getDate'
 
-import Textarea from '@/components/Textarea'
-import Button from '@/components/Button'
-import Avatar from '@/modules/Avatar'
-import LoginModal from '@/modules/LoginModal'
-import InputGroup from '@/modules/InputGroup'
+import Textarea from 'components/Textarea'
+import Button from 'components/Button'
+import Avatar from 'modules/Avatar'
+import LoginModal from 'modules/LoginModal'
+import InputGroup from 'modules/InputGroup'
 
 import style from './index.module.scss'
 

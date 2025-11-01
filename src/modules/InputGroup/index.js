@@ -1,7 +1,7 @@
 import { useState, cloneElement, useEffect } from 'react'
 import classNames from 'classnames'
 
-import Icon from '@/components/Icon'
+import Icon from 'components/Icon'
 
 import style from './index.module.scss'
 

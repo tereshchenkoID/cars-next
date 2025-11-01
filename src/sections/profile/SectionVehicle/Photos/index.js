@@ -2,11 +2,11 @@
 
 import { useTranslations } from 'next-intl'
 import { useState } from 'react'
-import { useModal } from '@/context/ModalContext'
+import { useModal } from 'context/ModalContext'
 
 import Image from 'next/image'
-import Button from '@/components/Button';
-import Accordion from '@/modules/Accordion'
+import Button from 'components/Button';
+import Accordion from 'modules/Accordion'
 
 import ImageUploader from './ImageUploader'
 import RulesModal from './RulesModal'
@@ -113,7 +113,7 @@ const Photos = ({
         }
         {
           showEditor &&
-          <PhotoEditor 
+          <PhotoEditor
             blob={file}
             onClose={hideEditor}
           />

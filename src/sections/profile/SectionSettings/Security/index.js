@@ -3,11 +3,11 @@ import { useState, useMemo } from 'react'
 
 import classNames from 'classnames'
 
-import { validationRules } from '@/utils/validationRules'
+import { validationRules } from 'utils/validationRules'
 
-import Button from '@/components/Button'
-import Password from '@/components/Password'
-import InputGroup from '@/modules/InputGroup'
+import Button from 'components/Button'
+import Password from 'components/Password'
+import InputGroup from 'modules/InputGroup'
 
 import style from '../index.module.scss'
 
@@ -80,7 +80,7 @@ const Security = () => {
           />
         </InputGroup>
       </div>
-      <div 
+      <div
         className={
           classNames(
             style.grid,

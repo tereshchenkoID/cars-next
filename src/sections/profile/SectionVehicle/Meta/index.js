@@ -1,8 +1,8 @@
 import { useTranslations } from 'next-intl'
 
-import Checkbox from '@/components/Checkbox'
-import Button from '@/components/Button'
-import Accordion from '@/modules/Accordion'
+import Checkbox from 'components/Checkbox'
+import Button from 'components/Button'
+import Accordion from 'modules/Accordion'
 
 import style from '../index.module.scss'
 

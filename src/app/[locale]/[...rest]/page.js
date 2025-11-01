@@ -1,11 +1,11 @@
-import { NAVIGATION } from '@/constant/config'
-import { fetchMetaTags } from '@/utils/fetchMetaTags'
+import { NAVIGATION } from 'constant/config'
+import { fetchMetaTags } from 'utils/fetchMetaTags'
 
 export async function generateMetadata() {
   return await fetchMetaTags('not-found')
 }
 
-import SectionNotFound from '@/sections/SectionNotFound'
+import SectionNotFound from 'sections/SectionNotFound'
 
 const NotFound  = async () => {
   const [metaTags] = await Promise.all([

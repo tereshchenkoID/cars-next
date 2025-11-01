@@ -2,10 +2,10 @@
 
 import { useTranslations } from 'next-intl'
 
-import Label from '@/components/Label'
-import Field from '@/components/Field'
-import Accordion from '@/modules/Accordion'
-import Button from '@/components/Button'
+import Label from 'components/Label'
+import Field from 'components/Field'
+import Accordion from 'modules/Accordion'
+import Button from 'components/Button'
 
 import style from '../index.module.scss'
 

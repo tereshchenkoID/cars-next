@@ -1,17 +1,17 @@
-@use '@/scss/config' as *;
+@use 'scss/config' as *;
+@use 'scss/modules/color' as *;
 
 .block {
-  @include make-spacer(py, var(--gap-40));
-  
+  padding-block: var(--gap-40);
   color: var(--color-grey-600);
 }
 
 .container {
-  @include make-spacer(mx, auto);
   @include flex($direction: column);
 
   gap: var(--gap-24);
   max-width: rem(800px);
+  margin-inline: auto;
 
   @include media-breakpoint-up(md) {
     gap: var(--gap-32);
@@ -20,9 +20,9 @@
 
 .head {
   @include flex($justify-content: space-between, $align-items: center, $wrap: wrap);
-  @include make-spacer(mb, var(--gap-24));
 
   gap: var(--gap-8);
+  margin-bottom: var(--gap-24);
 }
 
 .grid {
@@ -32,14 +32,14 @@
 }
 
 .footer {
-  @include make-spacer(mt, var(--gap-24));
   @include flex($justify-content: flex-end);
 
+  margin-top: var(--gap-24);
   border-top-width: rem(1px);
   border-top-style: solid;
 
   @include media-breakpoint-up(md) {
-    @include make-spacer(pt, var(--gap-24));
+    padding-top: var(--gap-24);
   }
 }
 
@@ -62,26 +62,22 @@
   position: relative;
 
   @include hover {
-
-    &:hover {
-
-      .toggle {
-        opacity: 1;
-        visibility: visible;
-      }
+    .toggle {
+      opacity: 1;
+      visibility: visible;
     }
   }
 }
 
 .toggle {
   @include transition;
-  @include make-spacer(p, var(--gap-4));
   @include flex(flex-end, center);
 
   position: absolute;
   left: 0;
   right: 0;
   bottom: 0;
+  padding: var(--gap-4);
   gap: var(--gap-4);
   background-color: rgba(0, 0, 0, 0.7);
 
@@ -101,12 +97,11 @@
 }
 
 .accept {
-  @include make-spacer(p, var(--gap-24));
-
   display: grid;
   align-items: center;
   border-radius: var(--border-radius-8);
   border: rem(1px) dashed var(--color-primary);
+  padding: var(--gap-24);
   gap: var(--gap-8);
 
   @include media-breakpoint-up(sm) {
@@ -115,20 +110,19 @@
 }
 
 .options {
-  @include make-spacer(mt, var(--gap-16));
   @include flex($direction: column);
 
   gap: var(--gap-12);
+  margin-top: var(--gap-16);
 }
 
 .hr {
-  @include make-spacer(my, var(--gap-24));
-
+  margin-block: var(--gap-24);
   border: 0;
   background-color: var(--color-grey-200);
 
   @include media-breakpoint-up(md) {
-    @include make-spacer(my, var(--gap-32));
+    margin-block: var(--gap-32);
   }
 }
 
@@ -139,50 +133,5 @@
 }
 
 .color {
-  @include transition;
-  @include size(rem(20px));
-
-  position: relative;
-  border-radius: 50%;
-  overflow: hidden;
-  overflow: visible;
-  opacity: 0.8;
-
-  &::before,
-  &::after {
-    position: absolute;
-    border-radius: 50%;
-    content: '';
-  }
-
-  &::before {
-    @include transition;
-
-    inset: rem(-3px);
-    background-color: var(--color-white);
-    border: rem(1px) solid var(--color-primary);
-    opacity: 0;
-    content: '';
-  }
-
-  &::after {
-    position: absolute;
-    inset: 0;
-    background-color: inherit;
-    border: rem(1px) solid var(--color-grey-400);
-  }
-
-  @include hover {
-
-    &:hover {
-      opacity: 1;
-    }
-  }
-
-  &.active {
-
-    &::before {
-      opacity: 1;
-    }
-  }
+  @include color;
 }

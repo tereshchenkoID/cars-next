@@ -1,6 +1,6 @@
 import classNames from 'classnames'
 
-import { ACTIVE, DEFAULT } from '@/constant/config'
+import { ACTIVE, DEFAULT } from 'constant/config'
 
 import Image from 'next/image'
 
@@ -44,7 +44,7 @@ const Checkbox = ({
             className={style.image}
             priority={true}
           />
-        }  
+        }
         <span>{placeholder}</span>
       </span>
     </label>

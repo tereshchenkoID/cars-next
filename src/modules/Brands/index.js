@@ -1,9 +1,9 @@
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
-import { ACTIVE, DEFAULT } from '@/constant/config'
+import { ACTIVE, DEFAULT } from 'constant/config'
 
-import { setSearch } from '@/store/actions/searchAction'
+import { setSearch } from 'store/actions/searchAction'
 
 import Toggle from './Toggle'
 import List from './List'

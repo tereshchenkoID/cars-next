@@ -1,8 +1,7 @@
-@use '@/scss/config' as *;
+@use 'scss/config' as *;
 
 .block {
-  @include make-spacer(mb, var(--gap-4));
-
+  margin-bottom: var(--gap-4);
   font-size: rem(10px);
   letter-spacing: rem(0.5px);
   text-transform: uppercase;
@@ -10,8 +9,7 @@
 }
 
 .icon {
-  @include make-spacer(ml, var(--gap-4));
-
+  margin-left: var(--gap-4);
   color: var(--color-warning);
   font-size: rem(12px);
   line-height: 1;

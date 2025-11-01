@@ -1,6 +1,6 @@
-import { useRequest } from '@/hooks/useRequest'
+import { useRequest } from 'hooks/useRequest'
 
-import { types } from '@/store/actionTypes'
+import { types } from 'store/actionTypes'
 
 export const setFilters = () => async dispatch => {
   const { get } = useRequest('filters/')

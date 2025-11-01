@@ -1,23 +1,26 @@
-import { useTranslations } from 'next-intl'
-import { useSelector } from 'react-redux'
-import { useModal } from '@/context/ModalContext'
 import { useEffect, useState } from 'react'
+import { useTranslations } from 'next-intl'
+import { useDispatch, useSelector } from 'react-redux'
+import { useModal } from 'context/ModalContext'
 
-import { postData } from '@/helpers/api'
+import { setToastify } from 'store/actions/toastifyAction'
+import { postData } from 'helpers/api'
+// import { apiFetch } from 'utils/apiFetch'
 
-import LoginModal from '@/modules/LoginModal'
-import HistoryModal from '@/modules/HistoryModal'
+import LoginModal from 'modules/LoginModal'
+import HistoryModal from 'modules/HistoryModal'
 import SavedCard from './SavedCard'
 import Empty from './Empty'
 
 import style from './index.module.scss'
 
-const Saved = ({ 
-  filtersProps, 
-  setActive, 
-  setShow 
+const Saved = ({
+  filtersProps,
+  setActive,
+  setShow
 }) => {
   const t = useTranslations()
+  const dispatch = useDispatch()
   const auth = useSelector((state) => state.auth)
   const isAuth = auth?.id
   const { showModal } = useModal()
@@ -28,13 +31,13 @@ const Saved = ({
     isAuth
     ?
       showModal(
-        <HistoryModal 
-          id={id} 
+        <HistoryModal
+          id={id}
           name={name}
           type={type}
           data={params}
           setData={setData}
-        />, 
+        />,
         t('save_search')
       )
     :
@@ -42,11 +45,33 @@ const Saved = ({
         <LoginModal />
       )
 
-    setShow(false)  
+    setShow(false)
   }
+
+  // async function loadData() {
+  //   setLoading(true)
+  //
+  //   const json = await apiFetch('user/filters/', {
+  //     method: 'POST',
+  //   })
+  //
+  //   if (json) {
+  //     setData(json)
+  //     setLoading(false)
+  //   } else {
+  //     dispatch(
+  //       setToastify({
+  //         type: 'error',
+  //         text: 'Не удалось получить данные фильтров',
+  //       }),
+  //     )
+  //   }
+  // }
 
   useEffect(() => {
     if(isAuth) {
+      // loadData()
+
       setLoading(true)
       const formData = new FormData()
       formData.append('userId', isAuth)
@@ -86,9 +111,9 @@ const Saved = ({
               />
             ))
           :
-            <Empty 
+            <Empty
               isAuth={isAuth}
-              handleAction={handleAction} 
+              handleAction={handleAction}
             />
       }
     </div>

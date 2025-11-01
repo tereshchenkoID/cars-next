@@ -1,28 +1,28 @@
 import { useTranslations } from 'next-intl'
 import { useEffect, useState } from 'react'
 
-import { DEFAULT, NAVIGATION } from '@/constant/config'
+import { DEFAULT, NAVIGATION } from 'constant/config'
 
 import classNames from 'classnames'
 
-import { overflowBody } from '@/helpers/overflowBody'
-import { getYears } from '@/helpers/getYears'
+import { overflowBody } from 'helpers/overflowBody'
+import { getYears } from 'helpers/getYears'
 
-import Icon from '@/components/Icon'
-import Button from '@/components/Button'
-import Field from '@/components/Field'
-import Select from '@/components/Select'
-import Reference from '@/components/Reference'
-import Checkbox from '@/components/Checkbox'
-import Backdrop from '@/modules/Backdrop'
-import Brands from '@/modules/Brands'
-import FiltersMultiSelect from '@/modules/FiltersMultiSelect'
-import FiltersColorSelect from '@/modules/FiltersColorSelect'
+import Button from 'components/Button'
+import Icon from 'components/Icon'
+import Field from 'components/Field'
+import Select from 'components/Select'
+import Reference from 'components/Reference'
+import Checkbox from 'components/Checkbox'
+import Label from 'components/Label'
+import Backdrop from 'modules/Backdrop'
+import Brands from 'modules/Brands'
+import FiltersMultiSelect from 'modules/FiltersMultiSelect'
+import FiltersColorSelect from 'modules/FiltersColorSelect'
 import History from './History'
 import Saved from './Saved'
 
 import style from './index.module.scss'
-import Label from '@/components/Label'
 
 const TABS = [
   { icon: "sliders", text: "all" },
@@ -35,7 +35,8 @@ const Filters = ({
   setShow,
   filtersProps,
   showBrand,
-  setShowBrands
+  setShowBrands,
+  loading
 }) => {
   const t = useTranslations()
   const [active, setActive] = useState(0)
@@ -294,8 +295,8 @@ const Filters = ({
 
           {
             active === 1 &&
-            <Saved 
-              filtersProps={filtersProps} 
+            <Saved
+              filtersProps={filtersProps}
               setActive={setActive}
               setShow={setShow}
             />
@@ -303,8 +304,8 @@ const Filters = ({
 
           {
             active === 2 &&
-            <History 
-              filtersProps={filtersProps} 
+            <History
+              filtersProps={filtersProps}
               setActive={setActive}
               setShow={setShow}
             />
@@ -317,6 +318,7 @@ const Filters = ({
               type={"submit"}
               classes={['primary', 'wide']}
               placeholder={t('search')}
+              isLoading={loading}
             />
             <Reference
               link={NAVIGATION.advanced_search.link}

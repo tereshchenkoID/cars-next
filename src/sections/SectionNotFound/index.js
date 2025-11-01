@@ -2,12 +2,12 @@
 
 import { useTranslations } from 'next-intl'
 
-import { NAVIGATION } from '@/constant/config'
+import { NAVIGATION } from 'constant/config'
 
 import Image from 'next/image'
 import Link from 'next/link'
-import Icon from '@/components/Icon'
-import Container from "@/components/Container"
+import Icon from 'components/Icon'
+import Container from "components/Container"
 
 import style from './index.module.scss'
 

@@ -1,4 +1,4 @@
-@use '@/scss/config' as *;
+@use 'scss/config' as *;
 
 .block {
   @include flex(space-between, center);
@@ -27,11 +27,11 @@
 }
 
 .hr {
-  @include make-spacer(mx, var(--gap-12));
   @include size(rem(1px), rem(20px));
 
   display: none;
   background-color: var(--color-text);
+  margin-inline: var(--gap-12);
 
   @include media-breakpoint-up(lg) {
     display: block;
@@ -54,11 +54,10 @@
 }
 
 .list {
-  @include make-spacer(p, var(--gap-8));
-
   position: absolute;
   top: calc(100% + var(--gap-8));
   right: 0;
+  padding: var(--gap-8);
   border-radius: var(--border-radius-4);
   background-color: var(--color-white);
   border-width: rem(1px);
@@ -73,18 +72,13 @@
 }
 
 .item {
-  @include make-spacer(px, var(--gap-8));
-  @include make-spacer(py, var(--gap-4));
-
+  padding: var(--gap-4) var(--gap-8);
   border-radius: var(--border-radius-4);
   cursor: pointer;
   white-space: nowrap;
 
   @include hover {
-
-    &:hover {
-      background-color: var(--color-grey-50);
-    }
+    background-color: var(--color-grey-50);
   }
 
   &.active {

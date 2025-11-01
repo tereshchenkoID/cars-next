@@ -1,13 +1,12 @@
-@use '@/scss/config' as *;
+@use 'scss/config' as *;
 
 .section {
-  @include make-spacer(py, var(--gap-40));
-
   position: relative;
   overflow: hidden;
+  padding-block: var(--gap-40);
 
   &.right {
-    @include make-spacer(pb, var(--gap-80));
+    padding-bottom: var(--gap-80);
 
     &::before {
       position: absolute;
@@ -24,7 +23,7 @@
 }
 
 .title {
-  @include make-spacer(mb, var(--gap-24));
+  margin-bottom: var(--gap-24);
 }
 
 .grid {
@@ -54,10 +53,7 @@
 .brand,
 .link {
   @include hover {
-
-    &:hover {
-      color: var(--color-primary);
-    }
+    color: var(--color-primary);
   }
 }
 

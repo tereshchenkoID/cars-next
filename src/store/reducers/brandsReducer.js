@@ -1,4 +1,4 @@
-import { types } from '@/store/actionTypes'
+import { types } from 'store/actionTypes'
 
 const initialState = {
   brands: [],
@@ -24,7 +24,7 @@ const brandsReducer = (state = initialState, action) => {
               ...option,
               selected: action.payload.selected === "1" ? "1" : "0",
             };
-          } 
+          }
 
           if (option.id === action.payload.optionId) {
             return { ...option, selected: action.payload.selected }
@@ -94,7 +94,7 @@ const brandsReducer = (state = initialState, action) => {
     case types.DELETE_BRANDS: {
       return state.map(brand => {
         if (brand.id === action.payload) {
-          return { 
+          return {
             ...brand,
             active: false,
             options: brand.options.map(option => ({

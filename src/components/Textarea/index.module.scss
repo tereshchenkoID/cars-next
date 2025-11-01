@@ -1,4 +1,4 @@
-@use '@/scss/config' as *;
+@use 'scss/config' as *;
 
 .block {
   @include flex;
@@ -12,20 +12,16 @@
   }
 
   @include hover {
-
-    &:hover {
-
-      .input {
-        border-color: var(--color-primary);
-      }
+    .input {
+      border-color: var(--color-primary);
     }
   }
 }
 
 .input {
-  @include make-spacer(p, var(--gap-12));
   @include transition(border-color);
-  
+
+  padding: var(--gap-12);
   width: 100%;
   min-height: rem(70px);
   max-height: rem(120px);

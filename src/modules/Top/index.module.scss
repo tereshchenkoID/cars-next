@@ -1,10 +1,9 @@
-@use '@/scss/config' as *;
+@use 'scss/config' as *;
 
 .block {
   @include flex($align-items: center);
-  @include make-spacer(px, var(--gap-4));
-  @include make-spacer(py, var(--gap-2));
 
+  padding: var(--gap-2) var(--gap-4);
   gap: var(--gap-4);
   background-color: var(--color-success);
   border-radius: var(--border-radius-4);
@@ -12,14 +11,12 @@
   color: var(--color-white);
 
   &.lg {
-    @include make-spacer(px, var(--gap-8));
-
+    padding-inline: var(--gap-8);
     font-size: rem(14px);
   }
 
   &.sm {
-    @include make-spacer(px, var(--gap-4));
-
+    padding-inline: var(--gap-4);
     font-size: rem(12px);
   }
 }

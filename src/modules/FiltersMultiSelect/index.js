@@ -1,13 +1,13 @@
 import { useState, useRef, Fragment } from 'react'
 import { useTranslations } from 'next-intl'
-import { useOutsideClick } from '@/hooks/useOutsideClick'
+import { useOutsideClick } from 'hooks/useOutsideClick'
 
-import { ACTIVE, DEFAULT } from '@/constant/config'
+import { ACTIVE, DEFAULT } from 'constant/config'
 
 import classNames from 'classnames'
 
-import Icon from '@/components/Icon'
-import Checkbox from '@/components/Checkbox'
+import Icon from 'components/Icon'
+import Checkbox from 'components/Checkbox'
 
 import style from './index.module.scss'
 

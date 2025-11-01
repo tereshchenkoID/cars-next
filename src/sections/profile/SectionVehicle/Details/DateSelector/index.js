@@ -1,10 +1,10 @@
 import { useTranslations } from "next-intl"
 
-import { DEFAULT } from "@/constant/config"
+import { DEFAULT } from "constant/config"
 
-import { getYears } from "@/helpers/getYears"
+import { getYears } from "helpers/getYears"
 
-import Select from "@/components/Select"
+import Select from "components/Select"
 
 import style from './index.module.scss'
 

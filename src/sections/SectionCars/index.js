@@ -2,22 +2,22 @@
 
 import { useTranslations } from 'next-intl'
 import { useState, useEffect } from 'react'
-import { useModal } from '@/context/ModalContext'
-import useFilters from '@/hooks/useFilters'
+import { useModal } from 'context/ModalContext'
+import useFilters from 'hooks/useFilters'
 
 import classNames from 'classnames'
 
-import { DEFAULT, TYPES } from '@/constant/config'
+import { DEFAULT, TYPES } from 'constant/config'
 
-import { overflowBody } from '@/helpers/overflowBody'
+import { overflowBody } from 'helpers/overflowBody'
 
-import Container from '@/components/Container'
-import Icon from '@/components/Icon'
-import BrandsModal from '@/modules/BrandsModal'
-import HistoryModal from '@/modules/HistoryModal'
-import Skeleton from '@/modules/Skeleton'
-import Card from '@/modules/Card'
-import Pagination from '@/modules/Pagination'
+import Container from 'components/Container'
+import Icon from 'components/Icon'
+import BrandsModal from 'modules/BrandsModal'
+import HistoryModal from 'modules/HistoryModal'
+import Skeleton from 'modules/Skeleton'
+import Card from 'modules/Card'
+import Pagination from 'modules/Pagination'
 import Filters from './Filters'
 import Sort from './Sort'
 
@@ -78,6 +78,7 @@ const SectionsCars = ({ initialData }) => {
           filtersProps={filtersProps}
           showBrand={showBrand}
           setShowBrands={setShowBrands}
+          loading={loading}
         />
         <div className={style.content}>
           <div className={style.searches}>
@@ -191,28 +192,28 @@ const SectionsCars = ({ initialData }) => {
           {
             data.data
               ?
-              <>
-                <div className={style.cards}>
-                  {
-                    data?.data?.map((el, idx) =>
-                      loading
-                        ?
-                        <Skeleton key={idx} />
-                        :
-                        <Card
-                          key={idx}
-                          data={el}
-                        />
-                    )
-                  }
-                </div>
-                <Pagination filtersProps={filtersProps} />
-              </>
+                <>
+                  <div className={style.cards}>
+                    {
+                      data?.data?.map((el, idx) =>
+                        loading
+                          ?
+                            <Skeleton key={idx} />
+                          :
+                            <Card
+                              key={idx}
+                              data={el}
+                            />
+                      )
+                    }
+                  </div>
+                  <Pagination filtersProps={filtersProps} />
+                </>
               :
-              <div className={style.empty}>
-                <h6>Whoops!</h6>
-                <p>None of our cars matches your search parameters.</p>
-              </div>
+                <div className={style.empty}>
+                  <h6>Whoops!</h6>
+                  <p>None of our cars matches your search parameters.</p>
+                </div>
           }
         </div>
       </Container>

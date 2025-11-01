@@ -1,7 +1,7 @@
 import { getServerSession } from 'next-auth'
-import { authOptions } from '@/app/api/auth/[...nextauth]/route'
+import { authOptions } from 'app/api/auth/[...nextauth]/route'
 
-import SectionFavorites from '@/sections/profile/SectionFavorites'
+import SectionFavorites from 'sections/profile/SectionFavorites'
 
 async function postData(endpoint, searchParams, cookies) {
   const formData = new FormData()
@@ -15,7 +15,7 @@ async function postData(endpoint, searchParams, cookies) {
       body: formData,
       cache: 'no-cache',
     })
-    
+
     if (!res.ok) {
       throw new Error(`Failed to fetch data from ${endpoint}: ${res.statusText}`)
     }

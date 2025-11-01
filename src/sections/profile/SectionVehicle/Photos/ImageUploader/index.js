@@ -1,8 +1,8 @@
 import { useTranslations } from 'next-intl'
 import { useState } from "react"
 
-import Button from "@/components/Button"
-import Icon from "@/components/Icon"
+import Button from "components/Button"
+import Icon from "components/Icon"
 
 import style from './index.module.scss'
 
@@ -83,7 +83,7 @@ const ImageUploader = ({ onUpload }) => {
       onDragLeave={handleDragLeave}
       onDrop={handleDrop}
     >
-      <form 
+      <form
         onSubmit={handleSubmit}
         className={style.form}
       >

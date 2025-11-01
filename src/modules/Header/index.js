@@ -6,9 +6,9 @@ import { useSelector } from 'react-redux'
 
 import classNames from 'classnames'
 
-import Container from '@/components/Container'
-import Toastify from '@/components/Toastify'
-import Logo from '@/components/Logo'
+import Container from 'components/Container'
+import Toastify from 'components/Toastify'
+import Logo from 'components/Logo'
 import Account from './Account'
 import Favorite from './Favorite'
 import Language from './Language'

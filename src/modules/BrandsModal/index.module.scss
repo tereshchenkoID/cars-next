@@ -1,4 +1,4 @@
-@use '@/scss/config' as *;
+@use 'scss/config' as *;
 
 .block {
   @include flex(center, center);
@@ -18,8 +18,8 @@
 
 .content {
   @include flex(center, center);
-  @include make-spacer(py, var(--gap-32));
 
+  padding-block: var(--gap-32);
   position: relative;
   height: 100dvh;
 }
@@ -32,11 +32,11 @@
 }
 
 .title {
-  @include make-spacer(mb, var(--gap-16));
-  @include make-spacer(pr, var(--gap-16));
   @include flex(center, center);
 
   position: relative;
+  margin-bottom: var(--gap-16);
+  padding-right: var(--gap-16);
   min-height: rem(32px);
   gap: var(--gap-8);
 }
@@ -50,7 +50,7 @@
 .wrapper {
   @include flex($direction: column);
   @include size(rem(384px), 100%);
-  
+
   position: relative;
   background-color: var(--color-white);
   box-shadow: var(--box-shadow-16-36);
@@ -60,12 +60,12 @@
 .header,
 .footer,
 .body {
-  @include make-spacer(px, var(--gap-32));
+  padding-inline: var(--gap-32);
 }
 
 .header,
 .body {
-  @include make-spacer(py, var(--gap-16));
+  padding-block: var(--gap-16);
 }
 
 .header {
@@ -83,10 +83,9 @@
 }
 
 .footer {
-  @include make-spacer(pb, var(--gap-16));
-
   position: relative;
   z-index: 1;
+  padding-bottom: var(--gap-16);
   background: linear-gradient(rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0.85) 100%);
   border-radius: 0 0 var(--border-radius-8) var(--border-radius-8);
 
@@ -103,26 +102,22 @@
 }
 
 .grid {
-  @include make-spacer(mb, var(--gap-16));
-
   display: grid;
   grid-template-columns: repeat(6, auto);
   align-items: center;
   justify-content: flex-start;
+  margin-bottom: var(--gap-16);
   gap: var(--gap-6);
 }
 
 .subtitle {
-  @include make-spacer(mb, var(--gap-8));
-
+  margin-bottom: var(--gap-8);
   font-size: rem(11px);
   text-transform: uppercase;
 }
 
 .model {
-  @include make-spacer(py, var(--gap-12));
-  @include make-spacer(px, var(--gap-8));
-  
+  padding: var(--gap-12) var(--gap-8);
   border-bottom-width: rem(1px);
   border-bottom-style: solid;
   font-weight: var(--typography-regular);

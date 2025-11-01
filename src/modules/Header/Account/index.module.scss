@@ -1,4 +1,4 @@
-@use '@/scss/config' as *;
+@use 'scss/config' as *;
 
 .block {
   position: relative;
@@ -24,13 +24,13 @@
 
   .close {
     @include flex(center, center);
-    @include make-spacer(m, var(--gap-18));
-    @include make-spacer(p, 0);
     @include size(rem(24px));
 
     align-self: flex-end;
+    margin: var(--gap-18);
+    padding: 0;
     color: var(--color-primary);
-  
+
     @include media-breakpoint-up(lg) {
       display: none;
     }
@@ -41,7 +41,7 @@
 .setting,
 .bottom,
 .center {
-  @include make-spacer(p, var(--gap-12));
+  padding: var(--gap-12);
 }
 
 .name,
@@ -57,11 +57,8 @@
   border-radius: var(--border-radius-4);
 
   @include hover {
-
-    &:hover {
-      color: var(--color-primary-hover);
-      background-color: var(--color-grey-50);
-    }
+    color: var(--color-primary-hover);
+    background-color: var(--color-grey-50);
   }
 
   * {
@@ -111,12 +108,10 @@
 }
 
 .top {
-  @include make-spacer(px, var(--gap-12));
-  @include make-spacer(py, var(--gap-18));
-
   display: grid;
   grid-template-columns: auto 1fr auto;
   align-items: center;
+  padding: var(--gap-18) var(--gap-12);
   grid-column-gap: var(--gap-12);
   border-bottom-width: rem(1px);
   border-bottom-style: solid;
@@ -143,15 +138,13 @@
 }
 
 .text {
-  @include make-spacer(pt, var(--gap-12));
-
+  padding-top: var(--gap-12);
   text-align: center;
   font-size: rem(14px)
 }
 
 .link {
-  @include make-spacer(mx, var(--gap-4));
-
+  margin-inline: var(--gap-4);
   color: var(--color-primary);
   font-weight: var(--typography-medium);
   text-decoration: underline;
@@ -167,12 +160,12 @@
 
 .language {
   @include flex($align-items: center);
-  @include make-spacer(px, var(--gap-24));
 
-  min-height: rem(42px);
+  padding-inline: var(--gap-24);
   gap: var(--gap-8);
   background-color: var(--color-grey-50);
   border-top: rem(1px) solid var(--color-grey-200);
+  min-height: rem(42px);
   flex-shrink: 0;
   text-transform: uppercase;
 

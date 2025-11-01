@@ -1,6 +1,6 @@
-import { fetchData } from '@/utils/fetchData'
+import { fetchData } from 'utils/fetchData'
 
-import SectionVehicle from '@/sections/profile/SectionVehicle'
+import SectionVehicle from 'sections/profile/SectionVehicle'
 
 const Vehicle = async ({ params }) => {
   const { id } = await params

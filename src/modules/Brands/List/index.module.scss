@@ -1,9 +1,9 @@
-@use '@/scss/config' as *;
+@use 'scss/config' as *;
 
 .block {
-  @include make-spacer(mb, var(--gap-12));
   @include flex($wrap: wrap);
 
+  margin-bottom: var(--gap-12);
   gap: var(--gap-6);
 
   &.wide {
@@ -12,12 +12,11 @@
 }
 
 .item {
-  @include make-spacer(p, var(--gap-12));
-
   display: grid;
   grid-template-columns: auto 1fr rem(20px);
   align-items: center;
   gap: var(--gap-12);
+  padding: var(--gap-12);
   border-radius: var(--border-radius-4);
   background-color: var(--color-grey-200);
   color: var(--color-primary);

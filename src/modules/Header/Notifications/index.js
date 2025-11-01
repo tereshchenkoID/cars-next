@@ -1,15 +1,15 @@
 import { useTranslations } from 'next-intl'
 import { useRef, useState } from 'react'
-import { useOutsideClick } from '@/hooks/useOutsideClick'
+import { useOutsideClick } from 'hooks/useOutsideClick'
 
 import classNames from 'classnames'
 
-import { ROUTES_USER, NOTIFICATIONS_TYPE } from '@/constant/config'
+import { ROUTES_USER, NOTIFICATIONS_TYPE } from 'constant/config'
 
-import { getDate } from '@/helpers/getDate'
+import { getDate } from 'helpers/getDate'
 
-import Reference from '@/components/Reference'
-import Button from '@/components/Button'
+import Reference from 'components/Reference'
+import Button from 'components/Button'
 
 import style from './index.module.scss'
 

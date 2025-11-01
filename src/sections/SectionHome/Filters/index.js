@@ -2,16 +2,16 @@ import { useTranslations } from 'next-intl'
 import { useState } from 'react'
 import { useSelector } from 'react-redux'
 
-import { DEFAULT, NAVIGATION } from '@/constant/config'
+import { DEFAULT, NAVIGATION } from 'constant/config'
 
-import { getYears } from '@/helpers/getYears'
+import { getYears } from 'helpers/getYears'
 
-import Reference from '@/components/Reference'
-import Checkbox from '@/components/Checkbox'
-import Select from '@/components/Select'
-import Field from '@/components/Field'
+import Reference from 'components/Reference'
+import Checkbox from 'components/Checkbox'
+import Select from 'components/Select'
+import Field from 'components/Field'
 
-// const Select = dynamic(() => import('@/components/Select'), { ssr: false })
+// const Select = dynamic(() => import('components/Select'), { ssr: false })
 
 import style from './index.module.scss'
 

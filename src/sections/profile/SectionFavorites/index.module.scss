@@ -1,9 +1,8 @@
-@use '@/scss/config' as *;
+@use 'scss/config' as *;
 
 .block {
-  @include make-spacer(py, var(--gap-40));
-
   position: relative;
+  padding-block: var(--gap-40);
 }
 
 .container {

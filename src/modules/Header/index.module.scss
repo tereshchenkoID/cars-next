@@ -1,4 +1,4 @@
-@use '@/scss/config' as *;
+@use 'scss/config' as *;
 
 .block {
   position: sticky;
@@ -61,10 +61,10 @@
 }
 
 .line {
-  @include make-spacer(my, var(--gap-2));
   @include transition;
   @include size(100%, rem(2px));
 
+  margin-block: var(--gap-2);
   background-color: var(--color-text);
 }
 

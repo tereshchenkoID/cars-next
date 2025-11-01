@@ -3,9 +3,9 @@ import { useTranslations } from 'next-intl'
 
 import classNames from 'classnames'
 
-import { useOutsideClick } from '@/hooks/useOutsideClick'
+import { useOutsideClick } from 'hooks/useOutsideClick'
 
-import Icon from '@/components/Icon'
+import Icon from 'components/Icon'
 
 import style from './index.module.scss'
 
@@ -41,7 +41,7 @@ const Sort = ({ filtersProps }) => {
         <>
           <hr className={style.hr} />
           <div className={style.dropdown}>
-            <button 
+            <button
               type="button"
               className={
                 classNames(
@@ -55,7 +55,7 @@ const Sort = ({ filtersProps }) => {
               onClick={() => setShow(!show)}
             >
               <span>{t(`filters.sort.${active}`)}</span>
-              <Icon 
+              <Icon
                 iconName={'angle-down'}
                 width={12}
                 height={12}
@@ -64,13 +64,13 @@ const Sort = ({ filtersProps }) => {
             </button>
             {
               show &&
-              <ul 
+              <ul
                 ref={blockRef}
                 className={style.list}
               >
                 {
-                  Object.entries(filters.sort.options).map(([key]) => 
-                    <li 
+                  Object.entries(filters.sort.options).map(([key]) =>
+                    <li
                       key={key}
                       className={
                         classNames(

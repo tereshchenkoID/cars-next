@@ -3,12 +3,12 @@ import { useTranslations } from 'next-intl'
 
 import classNames from 'classnames'
 
-import { ACTIVE } from '@/constant/config'
+import { ACTIVE } from 'constant/config'
 
-import { deleteBrands } from '@/store/actions/brandsAction'
+import { deleteBrands } from 'store/actions/brandsAction'
 
 import Image from 'next/image'
-import Icon from '@/components/Icon'
+import Icon from 'components/Icon'
 
 import style from './index.module.scss'
 

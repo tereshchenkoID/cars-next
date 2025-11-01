@@ -1,7 +1,7 @@
-@use '@/scss/config' as *;
+@use 'scss/config' as *;
 
 .block {
-  @include make-spacer(py, var(--gap-40));
+  padding-block: var(--gap-40);
 }
 
 .container {
@@ -22,8 +22,7 @@
 }
 
 .info {
-  @include make-spacer(mb, var(--gap-56));
-  
+  margin-bottom: var(--gap-56);
   gap: var(--gap-32);
   text-align: center;
 
@@ -35,11 +34,10 @@
 }
 
 .title {
-  @include make-spacer(my, var(--gap-8));
+  margin-block: var(--gap-8);
 
   @include media-breakpoint-up(xl) {
-    @include make-spacer(mt, var(--gap-16));
-    @include make-spacer(mb, var(--gap-32));
+    margin-block: var(--gap-16) var(--gap-32);
   }
 }
 
@@ -67,27 +65,22 @@
 }
 
 .link {
-  @include make-spacer(py, var(--gap-24));
-  @include make-spacer(pl, var(--gap-24));
-  @include make-spacer(pr, var(--gap-32));
-  
   display: grid;
   grid-template-columns: auto 1fr auto;
   align-items: center;
   gap: var(--gap-16);
+  padding-block: var(--gap-24);
+  padding-inline: var(--gap-24) var(--gap-32);
   border-radius: var(--border-radius-4);
   background-color: var(--color-white);
   box-shadow: var(--box-shadow-4-16);
   font-weight: var(--typography-bold);
 
   @include hover {
+    box-shadow: var(--box-shadow-16-24);
 
-    &:hover {
-      box-shadow: var(--box-shadow-16-24);
-      
-      .arrow {
-        transform: translateX(var(--gap-8));
-      }
+    .arrow {
+      transform: translateX(var(--gap-8));
     }
   }
 }

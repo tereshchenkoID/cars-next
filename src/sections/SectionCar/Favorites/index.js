@@ -1,6 +1,6 @@
 import { useTranslations } from 'next-intl'
 
-import Button from '@/components/Button'
+import Button from 'components/Button'
 
 import style from './index.module.scss'
 

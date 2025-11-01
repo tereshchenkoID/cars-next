@@ -12,11 +12,11 @@ import {
   LabelList
 } from 'recharts'
 
-import { getDate } from '@/helpers/getDate'
-import { getFormatNumber } from '@/helpers/getFormatNumber'
-import { getFormatPrice } from '@/helpers/getFormatPrice'
+import { getDate } from 'helpers/getDate'
+import { getFormatNumber } from 'helpers/getFormatNumber'
+import { getFormatPrice } from 'helpers/getFormatPrice'
 
-import Discount from '@/modules/Discount'
+import Discount from 'modules/Discount'
 
 import style from './index.module.scss'
 

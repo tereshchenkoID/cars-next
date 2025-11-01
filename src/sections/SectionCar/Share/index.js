@@ -1,6 +1,6 @@
 import { useTranslations } from 'next-intl'
 import { useRef, useState } from 'react'
-import { useOutsideClick } from '@/hooks/useOutsideClick'
+import { useOutsideClick } from 'hooks/useOutsideClick'
 
 import {
   EmailShareButton,
@@ -13,7 +13,7 @@ import {
   ViberIcon
 } from 'react-share'
 
-import Button from '@/components/Button'
+import Button from 'components/Button'
 
 import style from './index.module.scss'
 
@@ -35,7 +35,7 @@ const Share = ({ data }) => {
   )
 
   return (
-    <div 
+    <div
       ref={blockRef}
       className={style.block}
     >

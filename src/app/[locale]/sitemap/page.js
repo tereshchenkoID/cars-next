@@ -1,7 +1,7 @@
-import { NAVIGATION } from '@/constant/config'
-import { fetchMetaTags } from '@/utils/fetchMetaTags'
+import { NAVIGATION } from 'constant/config'
+import { fetchMetaTags } from 'utils/fetchMetaTags'
 
-import SectionSitemap from '@/sections/SectionSitemap'
+import SectionSitemap from 'sections/SectionSitemap'
 
 const Reviews = async () => {
   const [metaTags] = await Promise.all([

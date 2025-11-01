@@ -1,4 +1,4 @@
-@use '@/scss/config' as *;
+@use 'scss/config' as *;
 
 .block {
   @include size(100%);
@@ -14,7 +14,7 @@
 
 .content,
 .footer {
-  @include make-spacer(p, var(--gap-24));
+  padding: var(--gap-24);
 }
 
 .picture {
@@ -32,11 +32,10 @@
 }
 
 .footer {
-  @include make-spacer(mt, auto);
-
   display: grid;
   grid-template-columns: auto 1fr;
   align-items: center;
+  margin-top: auto;
   gap: var(--gap-12);
   border-top-width: rem(1px);
   border-top-style: solid;

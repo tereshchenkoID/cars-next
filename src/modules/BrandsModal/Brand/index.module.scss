@@ -1,4 +1,4 @@
-@use '@/scss/config' as *;
+@use 'scss/config' as *;
 
 .block {
   @include flex(center, center);
@@ -8,9 +8,8 @@
   position: relative;
   gap: var(--gap-16);
   border-radius: var(--border-radius-4);
-  border: rem(1px) solid transparent;
+  border: rem(1px) solid var(--color-grey-100);
   background-color: var(--color-grey-100);
-  border-color: var(--color-grey-100);
   color: var(--color-grey-700);
   font-size: rem(14px);
   font-weight: var(--typography-medium);
@@ -19,29 +18,23 @@
   @include hover {
 
     &:not(.active) {
-      &:hover {
-        background-color: var(--color-grey-200);
-        border-color: var(--color-grey-200);
-      }
+      background-color: var(--color-grey-200);
+      border-color: var(--color-grey-200);
     }
   }
 
   &.wide {
-    @include make-spacer(px, var(--gap-12));
-    @include make-spacer(py, var(--gap-2));
     @include size(100%, auto);
 
+    padding: var(--gap-2) var(--gap-12);
     background-color: transparent;
     justify-content: flex-start;
     border-color: transparent;
 
     @include hover {
-
       &:not(.active) {
-        &:hover {
-          background-color: var(--color-grey-100);
-          border-color: var(--color-grey-100);
-        }
+        background-color: var(--color-grey-100);
+        border-color: var(--color-grey-100);
       }
     }
 
@@ -83,8 +76,7 @@
 .remove {
   @include size(rem(32px));
   @include flex(center, center);
-  @include make-spacer(ml, auto);
-  @include make-spacer(mr, 0);
 
+  margin-inline: auto 0;
   color: var(--color-primary);
 }

@@ -1,21 +1,21 @@
 import { useState, useMemo } from 'react'
 import { useTranslations } from 'next-intl'
-import { useModal } from '@/context/ModalContext'
+import { useModal } from 'context/ModalContext'
 import { useDispatch } from 'react-redux'
 import { signIn, getSession } from 'next-auth/react'
 
-import { validationRules } from '@/utils/validationRules'
+import { validationRules } from 'utils/validationRules'
 
-import { setToastify } from '@/store/actions/toastifyAction'
-import { setAuth } from '@/store/actions/authAction'
-import { postData } from '@/helpers/api'
+// import { setToastify } from 'store/actions/toastifyAction'
+import { setAuth } from 'store/actions/authAction'
+import { postData } from 'helpers/api'
 
-import Field from '@/components/Field'
-import Button from '@/components/Button'
-import Password from '@/components/Password'
-import InputGroup from '@/modules/InputGroup'
-import RegistrationModal from '@/modules/RegistrationModal'
-import RestoreModal from '@/modules/RestoreModal'
+import Field from 'components/Field'
+import Button from 'components/Button'
+import Password from 'components/Password'
+import InputGroup from 'modules/InputGroup'
+import RegistrationModal from 'modules/RegistrationModal'
+import RestoreModal from 'modules/RestoreModal'
 
 import style from './index.module.scss'
 
@@ -39,60 +39,68 @@ const LoginModal = () => {
     showModal(<ModalComponent />)
   }
 
-  // const handleSubmit = (e) => {
-  //   e.preventDefault()
-
-  //   const formData = new FormData()
-  //   formData.append('username', filter.username.value)
-  //   formData.append('password', filter.password.value)
-
-  //   postData('login/', formData).then(json => {
-  //     console.log(json)
-  //   })
-  // }
-
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault()
 
-    try {
-      const result = await signIn('login', {
-        redirect: false,
-        username: filter.username.value,
-        password: filter.password.value,
-      })
+    const formData = new FormData()
+    formData.append('username', filter.username.value)
+    formData.append('password', filter.password.value)
 
-      if (result?.ok) {
-        const session = await getSession()
-        dispatch(setAuth(session))
-        dispatch(
-          setToastify({
-            type: 'success',
-            text: `${t('modal.login')} ${filter.username.value}`,
-          }),
-        )
+    postData('login/', formData).then(json => {
+      if (json) {
+        dispatch(setAuth(json))
 
         setTimeout(() => {
           closeModal()
           window.location.reload()
         }, [1000])
       }
-      else {
-        dispatch(
-          setToastify({
-            type: 'error',
-            text: 'An error occurred while logging in.',
-          }),
-        );
-      }
-    } catch (error) {
-      dispatch(
-        setToastify({
-          type: 'error',
-          text: 'An unexpected error occurred.',
-        }),
-      );
-    }
+    })
   }
+
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault()
+  //
+  //   try {
+  //     const result = await signIn('login', {
+  //       redirect: false,
+  //       username: filter.username.value,
+  //       password: filter.password.value,
+  //     })
+  //
+  //     if (result?.ok) {
+  //       const session = await getSession()
+  //
+  //       dispatch(setAuth(session))
+  //       dispatch(
+  //         setToastify({
+  //           type: 'success',
+  //           text: `${t('modal.login')} ${filter.username.value}`,
+  //         }),
+  //       )
+  //
+  //       setTimeout(() => {
+  //         closeModal()
+  //         window.location.reload()
+  //       }, [1000])
+  //     }
+  //     else {
+  //       dispatch(
+  //         setToastify({
+  //           type: 'error',
+  //           text: 'An error occurred while logging in.',
+  //         }),
+  //       );
+  //     }
+  //   } catch (error) {
+  //     dispatch(
+  //       setToastify({
+  //         type: 'error',
+  //         text: 'An unexpected error occurred.',
+  //       }),
+  //     );
+  //   }
+  // }
 
   const handleChange = (field, { value, isValid }) => {
     setFilter((prevData) => ({
@@ -138,7 +146,7 @@ const LoginModal = () => {
         </button>
       </p>
       <div className={style.divider}>{t('notification.via_email')}</div>
-      <form onSubmit={handleSubmit} className={style.form}>        
+      <form onSubmit={handleSubmit} className={style.form}>
         <InputGroup
           label={t('username')}
           value={filter.username.value}
@@ -174,7 +182,7 @@ const LoginModal = () => {
             onChange={(value) => handleChange('password', { value, isValid: filter.password.isValid })}
           />
         </InputGroup>
-        
+
         <button
           type="button"
           className={style.restore}

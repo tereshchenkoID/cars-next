@@ -1,4 +1,4 @@
-@use '@/scss/config' as *;
+@use 'scss/config' as *;
 
 .block {
   @include flex($align-items: center);
@@ -15,9 +15,6 @@
   color: var(--color-white);
 
   @include hover {
-
-    &:hover {
-      background-color: var(--color-primary-hover);
-    }
+    background-color: var(--color-primary-hover);
   }
 }
