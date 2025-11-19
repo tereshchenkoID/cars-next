@@ -18,16 +18,16 @@ const Betslip = ({ data }) => {
       <header className={style.header}>
         {
           data?.meta?.top &&
-          <Top 
-            size={'lg'} 
-            count={data.meta.top.level} 
+          <Top
+            size={'lg'}
+            count={data.meta.top.level}
           />
         }
         {
           data?.price_data?.price_start &&
           <div className={style.discount}>
-            <Discount 
-              size={'lg'} 
+            <Discount
+              size={'lg'}
               amount={getFormatPrice(auth?.account?.language?.code, auth?.account?.currency?.code, data.price_data.discount)}
             />
             <p className={style.old}>{getFormatPrice(auth?.account?.language?.code, auth?.account?.currency?.code, data.price_data.price_start)}</p>
@@ -50,7 +50,7 @@ const Betslip = ({ data }) => {
         <Button
           icon={'order'}
           placeholder={t('buy')}
-          classes={['primary', 'wide']}
+          classes={['primary', 'md', 'wide']}
         />
       </div>
     </div>

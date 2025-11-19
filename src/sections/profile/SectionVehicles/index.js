@@ -9,16 +9,15 @@ import { ROUTES_USER } from 'constant/config'
 import Container from 'components/Container'
 import Reference from 'components/Reference'
 import Pagination from 'modules/Pagination'
-import Skeleton from 'modules/Skeleton'
-import Card from 'modules/Card'
 import Sort from 'modules/Sort'
 import EmptyCars from 'modules/EmptyCars'
+import VehicleCard from 'modules/Cards/VehicleCard'
 
 import style from './index.module.scss'
 
 const SectionVehicles = ({ initialData }) => {
   const t = useTranslations()
-  const favoriteProps = useData(initialData)
+  const vehiclesProps = useData(initialData || [])
 
   const {
     handleReset,
@@ -27,19 +26,18 @@ const SectionVehicles = ({ initialData }) => {
     loading,
     pagination,
     search,
-  } = favoriteProps
+  } = vehiclesProps
 
   return (
     <section className={style.block}>
       <Container classes={style.container}>
         <h1>{t('navigation.vehicles')}</h1>
-        {/* <pre className={style.pre}>{JSON.stringify(search, null, 2)}</pre> */}
         {
-          data?.data?.length > 0
+          data?.length > 0
             ?
               <>
                 <div className={style.meta}>
-                  <Sort 
+                  <Sort
                     results={pagination.results}
                     search={search}
                     handleChange={handleChange}
@@ -49,8 +47,6 @@ const SectionVehicles = ({ initialData }) => {
                     classes={['alt', 'sm']}
                     placeholder={t('add_vehicle')}
                     icon={'circle-plus'}
-                    width={16}
-                    height={16}
                     // onChange={() => handleReset()}
                   />
                   {/* <Button
@@ -60,27 +56,18 @@ const SectionVehicles = ({ initialData }) => {
                   /> */}
                 </div>
                 <div className={style.cards}>
+                  <Pagination filtersProps={vehiclesProps} />
                   {
-                    pagination.pages > 1 &&
-                    <Pagination filtersProps={favoriteProps} />
-                  }
-                  {
-                    data?.data?.map((el, idx) =>
-                      loading
-                        ?
-                          <Skeleton key={idx} />
-                        :
-                          <Card
-                            key={idx}
-                            data={el}
-                            isProfile={true}
-                          />
+                    data?.map((el, idx) =>
+                      <VehicleCard
+                        key={idx}
+                        data={el}
+                        isProfile={true}
+                        isLoading={loading}
+                      />
                     )
                   }
-                  {
-                    pagination.pages > 1 &&
-                    <Pagination filtersProps={favoriteProps} />
-                  }
+                  <Pagination filtersProps={vehiclesProps} />
                 </div>
               </>
             :

@@ -1,5 +1,3 @@
-"use client"
-
 import { useEffect, useState, useRef } from 'react'
 import { usePathname } from 'next/navigation'
 import { useOutsideClick } from 'hooks/useOutsideClick'
@@ -12,11 +10,11 @@ import { NAVIGATION } from 'constant/config'
 import { overflowBody } from 'helpers/overflowBody'
 
 import Link from 'next/link'
-import Reference from 'components/Reference'
 import Button from 'components/Button'
+import Reference from 'components/Reference'
 import Logo from 'components/Logo'
 import Icon from 'components/Icon'
-import Backdrop from 'modules/Backdrop'
+import Backdrop from 'modules/Modals/Backdrop'
 
 import style from './index.module.scss'
 
@@ -35,7 +33,7 @@ const MENU = [
   // NAVIGATION.about_us
 ]
 
-const Menu = ({ setShow, show }) => {
+const Menu = ({ show, setShow }) => {
   const t = useTranslations()
   const pathname = usePathname()
   const [active, setActive] = useState(null)

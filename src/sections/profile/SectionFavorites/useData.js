@@ -1,16 +1,14 @@
 import { useEffect, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { useSearchParams } from 'next/navigation'
 
 import { postData } from 'helpers/api'
-import { setFavorite } from 'store/actions/favoriteAction'
+import { setToastify } from 'store/actions/toastifyAction'
 
 const useFavorite = (initialData) => {
   const dispatch = useDispatch()
   const searchParams = useSearchParams()
-  const auth = useSelector((state) => state.auth)
-  const isAuth = auth?.id
-  const [data, setData] = useState(initialData || [])
+  const [data, setData] = useState(initialData?.data || [])
   const [loading, setLoading] = useState(false)
   const [pagination, setPagination] = useState({
     page: initialData?.page,
@@ -26,14 +24,14 @@ const useFavorite = (initialData) => {
 
   const handleLoad = (page, sort) => {
     setLoading(true)
+
     const formData = new FormData()
-    formData.append('userId', isAuth)
     formData.append('sort', sort)
     formData.append('page', page)
 
     postData('user/favorites/', formData).then(json => {
       if (json) {
-        setData(json)
+        setData(json.data)
         setPagination({
           page: json.page,
           pages: json.pages,
@@ -43,7 +41,7 @@ const useFavorite = (initialData) => {
 
         setTimeout(() => {
           setLoading(false)
-        }, [1000])
+        }, 1000)
       } else {
         dispatch(
           setToastify({
@@ -98,36 +96,16 @@ const useFavorite = (initialData) => {
   }
 
   const handlePrev = () => {
-    const prev = pagination.page > 0 ? pagination.page - 1 : 0
-    handleChange('page', prev)
+    handleChange('page', pagination.page > 0 ? pagination.page - 1 : 0)
   }
 
   const handleNext = () => {
-    const next = pagination.page < pagination.pages ? pagination.page + 1 : pagination.pages
-    handleChange('page', next)
-  }
-
-  const handleReset = () => {
-    const formData = new FormData()
-    formData.append('userId', isAuth)
-    formData.append('type', '2')
-
-    postData('user/favorites/action/', formData).then(json => {
-      if (json) {
-        setSearch({
-          page: 0,
-          sort: 0
-        })
-
-        handleLoad(0, 0)
-        dispatch(setFavorite('0', isAuth))
-      }
-    })
+    handleChange('page', pagination.page < pagination.pages ? pagination.page + 1 : pagination.pages)
   }
 
   useEffect(() => {
     generateSearchFromFilters(searchParams)
-    handleLoad(search.page, search.sort)
+    // handleLoad(search.page, search.sort)
   }, [])
 
   useEffect(() => {
@@ -135,8 +113,8 @@ const useFavorite = (initialData) => {
   }, [search])
 
   return {
+    handleLoad,
     handleChange,
-    handleReset,
     handlePrev,
     handleNext,
     data,

@@ -9,7 +9,7 @@ import Button from 'components/Button'
 
 import style from './index.module.scss'
 
-const steps = [
+const DATA = [
   {
     titleKey: 'title_1',
     textKey: 'text_1',
@@ -50,16 +50,17 @@ const RulesModal = () => {
   const t = useTranslations()
   const { closeModal } = useModal()
   const [show, setShow] = useState(1)
-  const currentStep = steps[show - 1]
+  const currentStep = DATA[show - 1]
 
   return (
     <div className={style.block}>
-      <div className={
-        classNames(
-          style.step,
-          style.active
-        )
-      }
+      <div
+        className={
+          classNames(
+            style.step,
+            style.active
+          )
+        }
       >
         <h5 className={style.title}>{t(`rules.upload_photo.${currentStep.titleKey}`)}</h5>
         <p className={style.text}>{t(`rules.upload_photo.${currentStep.textKey}`)}</p>
@@ -67,47 +68,52 @@ const RulesModal = () => {
           className={style.grid}
           style={currentStep.gridStyle || {}}
         >
-          {currentStep.images.map((image, idx) => (
-            <div key={idx} className={style.cell}>
-              <Image
-                src={image.src}
-                width={200}
-                height={200}
-                className={style.image}
-                priority={true}
-                alt={image.caption || 'Upload'}
-                style={image.style || {}}
-              />
-              {image.caption && <p>{t(`rules.upload_photo.${image.caption}`)}</p>}
-            </div>
-          ))}
+          {
+            currentStep.images.map((image, idx) =>
+              <div key={idx} className={style.cell}>
+                <Image
+                  src={image.src}
+                  width={200}
+                  height={200}
+                  className={style.image}
+                  priority={true}
+                  alt={image.caption || 'Upload'}
+                  style={image.style || {}}
+                />
+                {image.caption && <p>{t(`rules.upload_photo.${image.caption}`)}</p>}
+              </div>
+            )
+          }
         </div>
       </div>
 
-      <p className={style.pagination}>{show} of {steps.length}</p>
+      <p className={style.pagination}>{show} of {DATA.length}</p>
       <div className={style.footer}>
         <div>
-          {show !== 1 && (
+          {
+            show !== 1 &&
             <Button
               classes={['reference']}
               placeholder={t('actions.back')}
               onChange={() => setShow(show - 1)}
             />
-          )}
+          }
         </div>
-        {show === steps.length ? (
-          <Button
-            classes={['primary', 'wide']}
-            placeholder={t('close')}
-            onChange={closeModal}
-          />
-        ) : (
-          <Button
-            classes={['primary', 'wide']}
-            placeholder={t('actions.continue')}
-            onChange={() => setShow(show + 1)}
-          />
-        )}
+        {
+          show === DATA.length
+            ?
+              <Button
+                classes={['primary', 'md', 'wide']}
+                placeholder={t('close')}
+                onChange={closeModal}
+              />
+            :
+              <Button
+                classes={['primary', 'md', 'wide']}
+                placeholder={t('actions.continue')}
+                onChange={() => setShow(show + 1)}
+              />
+        }
       </div>
     </div>
   )

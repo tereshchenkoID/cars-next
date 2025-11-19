@@ -1,6 +1,4 @@
-import { getServerSession } from 'next-auth'
 import { fetchMetaTags } from 'utils/fetchMetaTags'
-import { authOptions } from 'app/api/auth/[...nextauth]/route'
 
 import SectionCars from "sections/SectionCars"
 
@@ -24,11 +22,8 @@ export async function generateMetadata() {
   return await fetchMetaTags('cars')
 }
 
-async function postData(endpoint, searchParams, cookies) {
-  // console.log(JSON.stringify(transformInput(searchParams)), searchParams.page)
-
+async function postData(endpoint, searchParams) {
   const formData = new FormData()
-  formData.append('userId', cookies?.id || null)
   formData.append('data', JSON.stringify(transformInput(searchParams)))
   formData.append('page', Number(searchParams.page || 1))
 
@@ -53,8 +48,7 @@ async function postData(endpoint, searchParams, cookies) {
 }
 
 const Cars = async ({ searchParams }) => {
-  const cookies = await getServerSession(authOptions)
-  const data = await postData('filters/search/', await searchParams, cookies)
+  const data = await postData('filters/search/', await searchParams)
 
   const jsonLd = {
     "@context": "https://schema.org",

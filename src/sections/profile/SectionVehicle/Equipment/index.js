@@ -1,68 +1,76 @@
-"use client"
-
+import { useState } from 'react'
 import { useSelector } from 'react-redux'
 import { useTranslations } from 'next-intl'
 
 import classNames from 'classnames'
 
-import { ACTIVE, DEFAULT } from "constant/config"
+import { ACTIVE, DEFAULT } from 'constant/config'
 
+import Button from 'components/Button'
 import Label from 'components/Label'
 import Field from 'components/Field'
-import Button from 'components/Button'
 import Checkbox from 'components/Checkbox'
 import Accordion from 'modules/Accordion'
 
 import style from '../index.module.scss'
 
-const Equipment = ({
-  options,
-  data,
-  toggle,
-  handleToggle,
-  handleChange,
-  handleFeature,
-  isFeatureExist
-}) => {
+const Equipment = ({ options, filter, setFilter, handlePropsChange }) => {
   const t = useTranslations()
   const filters = useSelector((state) => state.filters)
 
+  const [toggle, setToggle] = useState(false)
+
+  const isFeatureExist = (option) => {
+    return filter.features.some(feature => feature.id === option.id && feature.parentId === option.parentId)
+  }
+
+  const handleFeature = (option) => {
+    setFilter(prev => {
+      const exists = prev.equipment.features.some(
+        f => f.id === option.id && f.parentId === option.parentId
+      )
+
+      const updated = exists
+        ? prev.equipment.features.filter(f => f.id !== option.id)
+        : [...prev.equipment.features, option]
+
+      return {
+        ...prev,
+        equipment: {
+          ...prev.equipment,
+          features: updated
+        }
+      }
+    })
+  }
+
   return (
     <Accordion
-      data={toggle[2]}
-      action={() => handleToggle(2)}
+      data={toggle}
+      action={() => setToggle(!toggle)}
       icon={'filters'}
       placeholder={t('equipment')}
     >
       <div className={style.grid}>
         <div className={style.list}>
-          <div className={style.wrapper}>
-            <Label
-              data={t('number_of_seats')}
-              isRequired={true}
-            />
-            <Field
-              type={'number'}
-              placeholder={t('number_of_seats')}
-              data={data.number_of_seats}
-              onChange={(value) => handleChange('number_of_seats', value)}
-              min={0}
-            />
-          </div>
-
-          <div className={style.wrapper}>
-            <Label
-              data={t('number_of_doors')}
-              isRequired={true}
-            />
-            <Field
-              type={'number'}
-              placeholder={t('number_of_doors')}
-              data={data.number_of_doors}
-              onChange={(value) => handleChange('number_of_doors', value)}
-              min={0}
-            />
-          </div>
+          <Field
+            type={'number'}
+            placeholder={t('number_of_seats')}
+            data={filter.number_of_seats}
+            onChange={(value) => handlePropsChange('equipment.number_of_seats', value)}
+            isRequired={true}
+            isLabel={true}
+            min={0}
+          />
+          <Field
+            type={'number'}
+            placeholder={t('number_of_doors')}
+            data={filter.number_of_doors}
+            onChange={(value) => handlePropsChange('equipment.number_of_doors', value)}
+            isRequired={true}
+            isLabel={true}
+            min={0}
+          />
         </div>
 
         <div className={style.wrapper}>
@@ -72,25 +80,22 @@ const Equipment = ({
           />
           <div className={style.colors}>
             {
-              Object.entries(filters.color.options).map(([optionKey, optionValue]) => (
+              Object.entries(filters.color.options).map(([key, value]) =>
                 <button
-                  key={optionKey}
+                  key={key}
                   type="button"
-                  aria-label={t(`filters.color.${optionKey}`)}
-                  style={{ backgroundColor: optionValue }}
-                  title={optionKey === DEFAULT ? t('all') : t(`filters.color.${optionKey}`)}
+                  aria-label={t(`filters.color.${key}`)}
+                  style={{ backgroundColor: value }}
+                  title={t(key === DEFAULT ? 'all' : `filters.color.${key}`)}
                   className={
                     classNames(
                       style.color,
-                      data.color.id === optionKey && style.active
+                      filter.color.id === key && style.active
                     )
                   }
-                  onClick={() => handleChange('color', {
-                    id: optionKey,
-                    name: optionValue
-                  })}
+                  onClick={() => handlePropsChange('equipment.color', { id: key, name: value })}
                 />
-              ))
+              )
             }
           </div>
         </div>
@@ -98,10 +103,7 @@ const Equipment = ({
         <div className={style.list}>
           {
             options.map((el, idx) =>
-              <div
-                key={idx}
-                className={style.section}
-              >
+              <div key={idx}>
                 <Label data={`${el.name}:`} />
                 <div className={style.options}>
                   {
@@ -123,8 +125,8 @@ const Equipment = ({
 
         <div className={style.footer}>
           <Button
-            classes={['primary', style.button]}
-            placeholder={t('actions.save')}
+            classes={['primary', 'md']}
+            placeholder={t('actions.next')}
           />
         </div>
       </div>

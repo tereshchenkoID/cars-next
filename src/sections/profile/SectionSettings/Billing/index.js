@@ -1,44 +1,38 @@
 import { useTranslations } from 'next-intl'
-import { useState, useMemo, useEffect } from 'react'
+import { useState } from 'react'
 
-import { validationRules } from 'utils/validationRules'
+import { useFilterState } from 'hooks/useFilterState'
 
-import classNames from 'classnames'
-
+import Button from 'components/Button'
 import Field from 'components/Field'
 import Select from 'components/Select'
-import Button from 'components/Button'
 import Checkbox from 'components/Checkbox'
-import InputGroup from 'modules/InputGroup'
+import Label from 'components/Label'
+import Debug from 'modules/Debug'
+import Accordion from 'modules/Accordion'
+import Divider from 'modules/Divider'
 
 import style from '../index.module.scss'
 
-const Billing = () => {
+const INITIAL_FILTER = {
+  billing_info: {
+    street: '',
+    city: "",
+    postal_code: "",
+    house_number: "",
+    country: "GR",
+    vat_id: "",
+    company_id: "",
+    company_name: "",
+  }
+}
+
+const Billing = ({ active }) => {
   const t = useTranslations()
-  const [active, setActive] = useState(0)
+
+  const { filter, handlePropsChange } = useFilterState(INITIAL_FILTER)
+  const [toggle, setToggle] = useState(false)
   const [vat, setVat] = useState("0")
-  const [filter, setFilter] = useState({
-    street: {
-      value: '',
-      isValid: false
-    },
-    city: {
-      value: '',
-      isValid: false
-    },
-    postal_code: {
-      value: '',
-      isValid: false
-    },
-    house_number: {
-      value: '',
-      isValid: false
-    },
-    country: {
-      value: '',
-      isValid: false
-    }
-  })
 
   const [countries, setCountries] = useState([
     {
@@ -58,284 +52,108 @@ const Billing = () => {
     }
   ])
 
-  const handleChange = (field, { value, isValid }) => {
-    setFilter((prevData) => ({
-      ...prevData,
-      [field]: { value, isValid },
-    }))
-  }
-
-  const isFormValid = useMemo(() => {
-    return Object.values(filter).every((field) => field.isValid)
-  }, [filter])
-
-  const handleSubmit = (e) => {
-    e.preventDefault()
-
-    alert("Send")
-  }
-
-  useEffect(() => {
-    setFilter((prevFilter) => {
-      return active === 1
-        ?
-          {
-            ...prevFilter,
-            company_id: { value: '', isValid: false },
-            company_name: { value: '', isValid: false }
-          }
-        :
-          Object.fromEntries(
-            Object.entries(prevFilter).filter(
-              ([key]) => key !== 'company_id' && key !== 'company_name'
-            )
-          )
-    })
-  }, [active])
-
-  useEffect(() => {
-    setFilter((prevFilter) => {
-      return vat === "1"
-        ?
-          {
-            ...prevFilter,
-            vat_id: { value: '', isValid: false },
-          }
-        :
-          Object.fromEntries(
-            Object.entries(prevFilter).filter(
-              ([key]) => key !== 'vat_id'
-            )
-          )
-    })
-  }, [vat])
 
   return (
-    <form className={style.form} onSubmit={handleSubmit}>
-      {/* <pre className={style.pre}>{JSON.stringify(filter, null, 2)}</pre> */}
-
-      <div className={style.switcher}>
-        <button
-          type="button"
-          className={
-            classNames(
-              style.button,
-              active === 0 && style.active
-            )
-          }
-          aria-label={t('consumer')}
-          title={t('consumer')}
-          onClick={() => setActive(0)}
-        >
-          {t('consumer')}
-        </button>
-        <button
-          type="button"
-          className={
-            classNames(
-              style.button,
-              active === 1 && style.active
-            )
-          }
-          aria-label={t('company')}
-          title={t('company')}
-          onClick={() => setActive(1)}
-        >
-          {t('company')}
-        </button>
-      </div>
-
-      {
-        (active === 1 && filter.company_id && filter.company_name) &&
-        <>
-          <div className={style.grid}>
-            <Checkbox
-              placeholder={t('vat_player')}
-              data={vat}
-              onChange={(value) => setVat(value)}
-            />
-          </div>
-          <div className={style.grid}>
-            <InputGroup
-              label={t('company_id')}
-              value={filter.company_id.value}
-              rules={[
-                validationRules.required,
-              ]}
-              onValidationChange={(isValid) =>
-                handleChange('company_id', { value: filter.company_id.value, isValid })
-              }
-            >
+    <Accordion
+      data={toggle}
+      action={() => setToggle(!toggle)}
+      icon={'file'}
+      placeholder={t('billing_information')}
+    >
+      <form className={style.form}>
+        <Debug data={filter} />
+        {
+          active === 1 &&
+          <>
+            <div className={style.grid}>
               <Field
                 placeholder={t('company_id')}
-                data={filter.company_id.value}
-                onChange={(value) => handleChange('company_id', { value, isValid: filter.company_id.isValid })}
+                data={filter.billing_info.company_id}
+                onChange={(value) => handlePropsChange('billing_info.company_id', value)}
+                isRequired={true}
+                isLabel={true}
               />
-            </InputGroup>
-
-            <InputGroup
-              label={t('company_name')}
-              value={filter.company_name.value}
-              rules={[
-                validationRules.required,
-              ]}
-              onValidationChange={(isValid) =>
-                handleChange('company_name', { value: filter.company_name.value, isValid })
-              }
-            >
               <Field
                 placeholder={t('company_name')}
-                data={filter.company_name.value}
-                onChange={(value) => handleChange('company_name', { value, isValid: filter.company_name.isValid })}
+                data={filter.billing_info.company_name}
+                onChange={(value) => handlePropsChange('billing_info.company_name', value)}
+                isRequired={true}
+                isLabel={true}
               />
-            </InputGroup>
-
-            {
-              (vat === "1" && filter.vat_id) &&
-              <InputGroup
-                label={t('vat_id')}
-                value={filter.vat_id.value}
-                rules={[
-                  validationRules.required,
-                ]}
-                onValidationChange={(isValid) =>
-                  handleChange('vat_id', { value: filter.vat_id.value, isValid })
-                }
-              >
+              <div className={style.wrapper}>
+                <Checkbox
+                  placeholder={t('vat_player')}
+                  data={vat}
+                  onChange={(value) => setVat(value)}
+                />
+              </div>
+              <div />
+              {
+                vat === "1" &&
                 <Field
                   placeholder={t('vat_id')}
-                  data={filter.vat_id.value}
-                  onChange={(value) => handleChange('vat_id', { value, isValid: filter.vat_id.isValid })}
+                  data={filter.billing_info.vat_id}
+                  onChange={(value) => handlePropsChange('billing_info.vat_id', value)}
+                  isRequired={true}
+                  isLabel={true}
                 />
-              </InputGroup>
-            }
-          </div>
-        </>
-      }
-
-      <div className={style.divider}>
-        {t('billing_address')}
-      </div>
-
-      <div className={style.grid}>
-        <InputGroup
-          label={t('city')}
-          value={filter.city.value}
-          rules={[
-            validationRules.required,
-            validationRules.minLength(2),
-            validationRules.noNumbers
-          ]}
-          onValidationChange={(isValid) =>
-            handleChange('city', { value: filter.city.value, isValid })
-          }
-        >
+              }
+            </div>
+          </>
+        }
+        <Divider data={'billing_address'} />
+        <div className={style.grid}>
           <Field
             placeholder={t('city')}
-            data={filter.city.value}
-            onChange={(value) => handleChange('city', { value, isValid: filter.city.isValid })}
+            data={filter.billing_info.city}
+            onChange={(value) => handlePropsChange('billing_info.city', value)}
+            isRequired={true}
+            isLabel={true}
           />
-        </InputGroup>
-
-        <InputGroup
-          label={t('country')}
-          value={filter.country.value}
-          rules={[
-            validationRules.required,
-            validationRules.minLength(2),
-          ]}
-          onValidationChange={(isValid) =>
-            handleChange('country', { value: filter.country.value, isValid })
-          }
-        >
           <Select
             placeholder={t('actions.select_countries')}
             options={countries.map(item => ({
               value: item.alpha_2,
               label: item.name,
             }))}
-            data={filter.country.value}
+            onChange={(value) => handlePropsChange('billing_info.country', value)}
+            data={filter.billing_info.country}
             isRequired={true}
-            onChange={(value) => handleChange('country', { value, isValid: filter.country.isValid })}
+            isLabel={true}
           />
-        </InputGroup>
-
-
-        <InputGroup
-          label={t('street')}
-          value={filter.street.value}
-          rules={[
-            validationRules.required,
-            validationRules.minLength(2),
-            validationRules.noNumbers
-          ]}
-          onValidationChange={(isValid) =>
-            handleChange('street', { value: filter.street.value, isValid })
-          }
-        >
           <Field
             placeholder={t('street')}
-            data={filter.street.value}
-            onChange={(value) => handleChange('street', { value, isValid: filter.street.isValid })}
+            data={filter.billing_info.street}
+            onChange={(value) => handlePropsChange('billing_info.street', value)}
+            isRequired={true}
+            isLabel={true}
           />
-        </InputGroup>
-
-        <div className={style.grid}>
-          <InputGroup
-            label={t('house_number')}
-            value={filter.house_number.value}
-            rules={[
-              validationRules.required,
-              validationRules.maxLength(12),
-            ]}
-            onValidationChange={(isValid) =>
-              handleChange('house_number', { value: filter.house_number.value, isValid })
-            }
-          >
+          <div className={style.grid}>
             <Field
               placeholder={t('house_number')}
-              data={filter.house_number.value}
-              onChange={(value) => handleChange('house_number', { value, isValid: filter.house_number.isValid })}
+              data={filter.billing_info.house_number}
+              onChange={(value) => handlePropsChange('billing_info.house_number', value)}
+              isRequired={true}
+              isLabel={true}
             />
-          </InputGroup>
-
-          <InputGroup
-            label={t('postal_code')}
-            value={filter.postal_code.value}
-            rules={[
-              validationRules.required,
-              validationRules.minLength(4),
-              validationRules.maxLength(8),
-              validationRules.noLetters
-            ]}
-            onValidationChange={(isValid) =>
-              handleChange('postal_code', { value: filter.postal_code.value, isValid })
-            }
-          >
             <Field
               placeholder={t('postal_code')}
-              data={filter.postal_code.value}
-              onChange={(value) => handleChange('postal_code', { value, isValid: filter.postal_code.isValid })}
+              data={filter.billing_info.postal_code}
+              onChange={(value) => handlePropsChange('billing_info.postal_code', value)}
+              isRequired={true}
+              isLabel={true}
             />
-          </InputGroup>
+          </div>
         </div>
-      </div>
-      <div
-        className={
-          classNames(
-            style.grid,
-            style.lg
-          )
-        }
-      >
-        <Button
-          type="submit"
-          classes={['primary', 'wide', style.submit]}
-          placeholder={t('actions.save')}
-          isDisabled={!isFormValid}
-        />
-      </div>
-    </form>
+        <div className={style.footer}>
+          <Button
+            type={'submit'}
+            classes={['primary', 'md']}
+            placeholder={t('actions.save')}
+          />
+        </div>
+      </form>
+    </Accordion>
   )
 }
 

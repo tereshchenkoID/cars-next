@@ -1,62 +1,60 @@
 import axios from 'axios'
-// import Cookies from 'js-cookie'
+import { API_BASE_URL } from 'constant/config'
 
-import { API_BASE_URL } from 'constant/config';
+import { signOut } from 'next-auth/react'
 
-export const useRequest = (link, data, headers) => {
-  // const token = Cookies.get('next-auth.session-token') || ''
+export const useRequest = (link = null, data = null, customHeaders = {}) => {
+  const token = typeof window !== 'undefined' ? sessionStorage.getItem('token') : null
+
   const server = axios.create({
     baseURL: `${API_BASE_URL}/${link}`,
     withCredentials: true,
-    // credentials: 'include',
-    // headers: {
-    //   ...headers,
-    //   // Authorization: `Bearer ${token}`,
-    // },
+    headers: {
+      ...customHeaders,
+      ...(token ? { Authorization: `Bearer ${token}` } : {}),
+    },
   })
 
+  const handleLogout = async () => {
+    post(`${API_BASE_URL}/logout/`, null).then(async json => {
+      if (json) {
+        await signOut({redirect: false})
+        sessionStorage.clear()
+        window.location.href = '/'
+        // window.location.reload()
+      }
+    })
+  }
 
-  // console.log(Cookies.get('SID'))
-
-  // const handleSessionExpiry = (response) => {
-  //   if (response?.data?.code === "2") {
-  //     sessionStorage.clear()
-
-  //     window.location.href = '/';
-  //   }
-  // };
-
-  const get = async url => {
+  const get = async (url) => {
     try {
-      const req = await server({
-        method: 'get',
-        url,
-        headers,
-      })
-      // handleSessionExpiry(req)
-      return await req.data
+      const res = await server.get(url)
+
+      if (res?.data?.code === '2') {
+        await handleLogout()
+        return false
+      }
+
+      return res.data
     } catch (e) {
-      return e.response
+      return e.response || { error: e.message }
     }
   }
 
-  const post = async url => {
+  const post = async (url) => {
     try {
-      const req = await server({
-        method: 'post',
-        url,
-        data,
-        headers,
-      })
-      // handleSessionExpiry(req)
-      return await req.data
+      const res = await server.post(url, data)
+
+      if (res?.data?.code === '2') {
+        await handleLogout()
+        return false
+      }
+
+      return res.data
     } catch (e) {
-      return e.response
+      return e.response || { error: e.message }
     }
   }
 
-  return {
-    get,
-    post,
-  }
+  return { get, post, handleLogout }
 }

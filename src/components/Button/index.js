@@ -37,23 +37,22 @@ const Button = React.forwardRef(({
       title={title || placeholder || icon}
     >
       {
-        isLoading
-          ?
-            <Icon
-              iconName={'loading'}
-              className={style.icon}
-            />
-          :
-            <>
-              {
-                icon &&
-                <Icon
-                  iconName={icon}
-                  className={style.icon}
-                />
-              }
-              {placeholder && placeholder}
-            </>
+        isLoading &&
+        <Icon
+          iconName={'loading'}
+          className={style.loading}
+        />
+      }
+      {
+        icon &&
+        <Icon
+          iconName={icon}
+          className={style.icon}
+        />
+      }
+      {
+        placeholder &&
+        <span className={style.text}>{placeholder}</span>
       }
     </button>
   )

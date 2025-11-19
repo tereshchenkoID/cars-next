@@ -2,11 +2,11 @@
 
 .block {
   @include flex($align-items: center);
+  @include size(fit-content, rem(20px));
 
   padding-left: var(--gap-32);
   position: relative;
   cursor: pointer;
-  height: rem(20px);
   font-size: rem(14px);
 
   @include hover {

@@ -1,10 +1,8 @@
 "use client"
 
-import { useTranslations } from 'next-intl'
 import { useState } from 'react'
-import { useSelector } from 'react-redux'
 
-import classNames from 'classnames'
+import { useAuth } from 'hooks/useAuth'
 
 import Container from 'components/Container'
 import Toastify from 'components/Toastify'
@@ -13,45 +11,25 @@ import Account from './Account'
 import Favorite from './Favorite'
 import Language from './Language'
 import Menu from './Menu'
+import Toggle from './Toggle'
 import Notifications from './Notifications'
 
 import style from './index.module.scss'
 
 const Header = () => {
-  const t = useTranslations()
-  const auth = useSelector((state) => state.auth)
-  const isAuth = auth?.id
+  const { isAuth } = useAuth()
   const [show, setShow] = useState(false)
 
   return (
     <>
       <header className={style.block}>
         <Container classes={style.container}>
-          {
-            <div
-              className={style.button}
-              onClick={() => setShow(!show)}
-            >
-              <button
-                type={'button'}
-                className={classNames(style.toggle, show && style.active)}
-                aria-label={"Toggle"}
-              >
-                <span className={style.line} />
-                <span className={style.line} />
-                <span className={style.line} />
-              </button>
-              <p className={style.text}>{t('menu')}</p>
-            </div>
-          }
+          <Toggle show={show} setShow={setShow} />
           <Logo />
-          <Menu setShow={setShow} show={show} />
+          <Menu show={show} setShow={setShow} />
           <div className={style.wrapper}>
             <Favorite />
-            {
-              isAuth &&
-              <Notifications />
-            }
+            { isAuth && <Notifications /> }
             <Language />
             <Account />
           </div>

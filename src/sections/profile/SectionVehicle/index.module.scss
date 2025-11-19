@@ -3,7 +3,14 @@
 
 .block {
   padding-block: var(--gap-40);
-  color: var(--color-grey-600);
+}
+
+.grid,
+.list {
+  display: grid;
+
+  column-gap: var(--gap-24);
+  row-gap: var(--gap-12);
 }
 
 .container {
@@ -25,10 +32,28 @@
   margin-bottom: var(--gap-24);
 }
 
-.grid {
-  @include flex($direction: column);
+.list {
 
+  &.bottom {
+    align-items: flex-end;
+  }
+
+  @include media-breakpoint-up(md) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.row {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
   gap: var(--gap-24);
+  align-items: flex-end;
+}
+
+.phone {
+  @include flex;
+
+  gap: var(--gap-8);
 }
 
 .footer {
@@ -87,15 +112,6 @@
   }
 }
 
-.list {
-  display: grid;
-  gap: var(--gap-24);
-
-  @include media-breakpoint-up(md) {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
 .accept {
   display: grid;
   align-items: center;
@@ -113,7 +129,7 @@
   @include flex($direction: column);
 
   gap: var(--gap-12);
-  margin-top: var(--gap-16);
+  margin-top: var(--gap-8);
 }
 
 .hr {

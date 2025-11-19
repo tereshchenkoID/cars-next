@@ -35,6 +35,7 @@
 
 .grid {
   margin-inline: auto;
+  margin-bottom: var(--gap-16);
   column-count: 1;
   max-width: fit-content;
 
@@ -74,4 +75,10 @@
 .count {
   font-size: rem(12px);
   text-transform: lowercase;
+}
+
+.more {
+  @include flex;
+
+  margin-inline: auto;
 }

@@ -5,14 +5,13 @@ import { useSearchParams } from 'next/navigation'
 import { getSearch } from 'helpers/getSearch'
 import { postData } from 'helpers/api'
 import { setBrands } from 'store/actions/brandsAction'
-import { setSearch } from 'store/actions/searchAction'  
+import { setSearch } from 'store/actions/searchAction'
 
 import { ACTIVE, DEFAULT } from 'constant/config'
 
 const useFilters = (initialData) => {
   const dispatch = useDispatch()
   const searchParams = useSearchParams()
-  const auth = useSelector((state) => state.auth)
   const filters = useSelector((state) => state.filters)
   const brands = useSelector((state) => state.brands)
   const search = useSelector((state) => state.search)
@@ -49,7 +48,6 @@ const useFilters = (initialData) => {
     setLoading(true)
 
     const formData = new FormData()
-    formData.append('userId', auth?.id)
     formData.append('data', JSON.stringify(data || search))
     formData.append('page', page)
 
@@ -151,7 +149,7 @@ const useFilters = (initialData) => {
     return { date, makes }
   }
 
-  const handleChange = (type, key, value, update) => {    
+  const handleChange = (type, key, value, update) => {
     const s = JSON.parse(JSON.stringify(search))
     let a = {}
 

@@ -3,6 +3,7 @@
 .block {
   display: grid;
   grid-gap: var(--gap-6);
+  height: fit-content;
 
   &.warning {
 
@@ -27,9 +28,10 @@
   }
 }
 
-.label,
 .rules {
   display: block;
+  font-size: rem(12px);
+  color: var(--color-warning);
 }
 
 .status {
@@ -42,16 +44,4 @@
 .field {
   position: relative;
   border-radius: var(--border-radius-4);
-}
-
-.label {
-  font-size: rem(10px);
-  letter-spacing: rem(0.5px);
-  text-transform: uppercase;
-  font-weight: var(--typography-bold);
-}
-
-.rules {
-  font-size: rem(12px);
-  color: var(--color-warning);
 }

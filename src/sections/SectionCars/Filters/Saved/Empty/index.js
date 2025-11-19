@@ -22,7 +22,7 @@ const Empty = ({ isAuth, handleAction }) => {
       {
         !isAuth &&
         <Button
-          classes={['primary', 'wide', style.button]}
+          classes={['primary', 'md', 'wide', style.button]}
           placeholder={t('login')}
           onChange={handleAction}
         />

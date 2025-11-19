@@ -1,11 +1,6 @@
 @use 'scss/config' as *;
 
 .block {
-  @include size(100%, rem(40px));
-
-  display: grid;
-  position: relative;
-  cursor: pointer;
 
   &.disabled {
     opacity: 0.5;
@@ -30,6 +25,14 @@
       border-color: var(--color-primary);
     }
   }
+}
+
+.wrapper {
+  @include size(100%, rem(40px));
+
+  display: grid;
+  position: relative;
+  cursor: pointer;
 }
 
 .input {

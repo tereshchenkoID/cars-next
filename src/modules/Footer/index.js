@@ -5,8 +5,8 @@ import { NAVIGATION } from 'constant/config'
 import Image from 'next/image'
 import Link from 'next/link'
 import Container from 'components/Container'
-import Social from 'modules/Social'
 import Logo from 'components/Logo'
+import Social from './Social'
 
 import style from './index.module.scss'
 
@@ -24,23 +24,23 @@ const MENU = [
     title: 'menu',
     submenu: [
       NAVIGATION.buy,
-      NAVIGATION.new_auto,
-      NAVIGATION.about_us,
+      // NAVIGATION.new_auto,
+      // NAVIGATION.about_us,
       NAVIGATION.sitemap
     ]
   },
-  {
-    title: 'services',
-    submenu: [
-      NAVIGATION.new_auto,
-      NAVIGATION.how_it_works,
-    ]
-  },
+  // {
+  //   title: 'services',
+  //   submenu: [
+  //     NAVIGATION.new_auto,
+  //     NAVIGATION.how_it_works,
+  //   ]
+  // },
   {
     title: 'company',
     submenu: [
-      NAVIGATION.about_us,
-      NAVIGATION.how_it_works,
+      // NAVIGATION.about_us,
+      // NAVIGATION.how_it_works,
       NAVIGATION.reviews,
     ]
   }
@@ -90,7 +90,7 @@ const Footer = () => {
           </div>
         </div>
         <div className={style.bottom}>
-          <p className={style.transfer}>{t('notification.payement')}</p>
+          <p className={style.transfer}>{t('notification.payment')}</p>
           <div className={style.payments}>
             {
               PAYMENTS.map((el, idx) =>
@@ -99,7 +99,7 @@ const Footer = () => {
                   width={43}
                   height={28}
                   className={style.payment}
-                  src={`/images/payements/${el}.svg`}
+                  src={`/images/payment/${el}.svg`}
                   priority={false}
                   alt={el}
                 />

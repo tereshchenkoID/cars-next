@@ -1,14 +1,15 @@
 import { useEffect, useState } from 'react'
 import { useTranslations } from 'next-intl'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { useModal } from 'context/ModalContext'
 
+import { useAuth } from 'hooks/useAuth'
 import { setToastify } from 'store/actions/toastifyAction'
 import { postData } from 'helpers/api'
 // import { apiFetch } from 'utils/apiFetch'
 
-import LoginModal from 'modules/LoginModal'
-import HistoryModal from 'modules/HistoryModal'
+import LoginModal from 'modules/Modals/LoginModal'
+import HistoryModal from 'modules/Modals/HistoryModal'
 import SavedCard from './SavedCard'
 import Empty from './Empty'
 
@@ -21,8 +22,7 @@ const Saved = ({
 }) => {
   const t = useTranslations()
   const dispatch = useDispatch()
-  const auth = useSelector((state) => state.auth)
-  const isAuth = auth?.id
+  const { isAuth } = useAuth()
   const { showModal } = useModal()
   const [data, setData] = useState([])
   const [loading, setLoading] = useState(false)
@@ -74,7 +74,6 @@ const Saved = ({
 
       setLoading(true)
       const formData = new FormData()
-      formData.append('userId', isAuth)
 
       postData('user/filters/', formData).then(json => {
         if (json) {

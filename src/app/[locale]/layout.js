@@ -1,16 +1,16 @@
-import "./globals.scss"
+import './globals.scss'
 
 import React from "react"
 import { Poppins } from 'next/font/google'
 import { getMessages } from 'next-intl/server'
 import { getServerSession } from 'next-auth'
 import { NextIntlClientProvider } from 'next-intl'
-import NextTopLoader from "nextjs-toploader"
+import NextTopLoader from 'nextjs-toploader'
 
+import { authOptions } from 'app/api/auth/[...nextauth]/route'
+import { fetchData } from 'utils/fetchData'
 import StoreProvider from 'store/provider'
 import AppProviders from 'context/AppProviders'
-import { authOptions } from 'app/api/auth/[...nextauth]/route'
-import { fetchData } from "utils/fetchData"
 
 import '@fancyapps/ui/dist/fancybox/fancybox.css'
 import 'swiper/css'
@@ -42,7 +42,7 @@ async function fetchInitialData() {
   }
 }
 
-export default async function RootLayout({ children, params, session }) {
+export default async function RootLayout({ children, params }) {
   const { locale } = await params
   const initialData = await fetchInitialData()
   const messages = await getMessages(locale)
@@ -52,8 +52,8 @@ export default async function RootLayout({ children, params, session }) {
     <html lang={locale} className={poppins.className}>
       <body>
         <NextIntlClientProvider messages={messages}>
-          <StoreProvider preloadedState={{...initialData, auth: cookies || session}}>
-            <AppProviders session={session}>
+          <StoreProvider preloadedState={{...initialData, auth: cookies}}>
+            <AppProviders session={cookies}>
               <NextTopLoader
                 color="#3e47dd"
                 crawlSpeed={400}

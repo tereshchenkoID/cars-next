@@ -3,6 +3,10 @@ import { fetchMetaTags } from 'utils/fetchMetaTags'
 
 import SectionSitemap from 'sections/SectionSitemap'
 
+export async function generateMetadata() {
+  return await fetchMetaTags('sitemap')
+}
+
 const Reviews = async () => {
   const [metaTags] = await Promise.all([
     fetchMetaTags('sitemap')

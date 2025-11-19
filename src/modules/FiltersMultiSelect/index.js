@@ -8,6 +8,7 @@ import classNames from 'classnames'
 
 import Icon from 'components/Icon'
 import Checkbox from 'components/Checkbox'
+import Label from 'components/Label'
 
 import style from './index.module.scss'
 
@@ -17,6 +18,8 @@ const FiltersMultiSelect = ({
   data,
   onChange,
   isDisabled = false,
+  isLabel = false,
+  label = null
 }) => {
   const t = useTranslations()
   const blockRef = useRef(null)
@@ -41,51 +44,64 @@ const FiltersMultiSelect = ({
   return (
     <div
       ref={blockRef}
-      className={classNames(
-        style.block,
-        { [style.active]: isShow, [style.disabled]: isDisabled }
-      )}
+      className={
+        classNames(
+          style.block,
+          { [style.active]: isShow, [style.disabled]: isDisabled }
+        )
+      }
     >
-      <div
-        ref={buttonRef}
-        className={style.input}
-        onClick={() => setIsShow((prev) => !prev)}
-      >
-        <div className={style.list}>{renderSelectedValues()}</div>
-      </div>
-      <div className={style.indicators}>
-        {(data && !data?.value?.includes(DEFAULT)) && (
-          <button
-            type="button"
-            className={style.close}
-            onClick={handleReset}
-            aria-label={t('remove')}
-            title={t('remove')}
-          >
-            <Icon iconName="xmark" width={12} height={12} />
-          </button>
-        )}
-        <hr className={style.hr} />
-        <span 
-          className={style.icon}
+      {
+        isLabel &&
+        <Label data={label || placeholder} />
+      }
+      <div className={style.wrapper}>
+        <div
+          ref={buttonRef}
+          className={style.input}
           onClick={() => setIsShow((prev) => !prev)}
         >
-          <Icon iconName="angle-down" width={14} height={14} />
-        </span>
+          <div className={style.list}>{renderSelectedValues()}</div>
+        </div>
+        <div className={style.indicators}>
+          {(data && !data?.value?.includes(DEFAULT)) &&
+            <button
+              type="button"
+              className={style.close}
+              onClick={handleReset}
+              aria-label={t('remove')}
+              title={t('remove')}
+            >
+              <Icon iconName="xmark" width={12} height={12} />
+            </button>
+          }
+          <hr className={style.hr} />
+          <span
+            className={style.icon}
+            onClick={() => setIsShow((prev) => !prev)}
+          >
+            <Icon iconName="angle-down" width={14} height={14} />
+          </span>
+        </div>
+        {
+          isShow &&
+            <ul className={style.dropdown}>
+              {
+                Object.entries(options).map(([key, value]) =>
+                <li
+                  key={key}
+                  className={style.item}
+                >
+                  <Checkbox
+                    placeholder={t(key === DEFAULT ? 'all' : `filters.${placeholder}.${key}`)}
+                    onChange={() => onChange('checkbox', placeholder, key)}
+                    data={data?.value?.includes(key) ? ACTIVE : DEFAULT}
+                  />
+                </li>
+              )}
+            </ul>
+        }
       </div>
-      {isShow && (
-        <ul className={style.dropdown}>
-          {Object.entries(options).map(([key, value]) => (
-            <li key={value} className={style.item}>
-              <Checkbox
-                placeholder={key === DEFAULT ? t('all') : t(`filters.${placeholder}.${key}`)}
-                onChange={() => onChange('checkbox', placeholder, key)}
-                data={data?.value?.includes(key) ? ACTIVE : DEFAULT}
-              />
-            </li>
-          ))}
-        </ul>
-      )}
     </div>
   )
 }

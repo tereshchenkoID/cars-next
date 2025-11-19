@@ -75,6 +75,10 @@ export const NAVIGATION = {
     link: '/sitemap',
     text: 'navigation.sitemap'
   },
+  login: {
+    link: '/login',
+    text: 'navigation.login'
+  },
 }
 
 export const ROUTES_USER = {
@@ -82,9 +86,9 @@ export const ROUTES_USER = {
     link: 'profile',
     text: 'navigation.profile',
   },
-  favorite: {
+  favorites: {
     link: '/profile/favorite',
-    text: 'navigation.favorite',
+    text: 'navigation.favorites',
     icon: 'heart'
   },
   saved: {

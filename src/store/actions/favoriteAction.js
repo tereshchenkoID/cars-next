@@ -1,7 +1,7 @@
 import { types } from 'store/actionTypes'
 import { postData } from 'helpers/api'
 
-export const setFavorite = (value, id) => async dispatch => {
+export const setFavorite = (value) => async dispatch => {
   if(value) {
     dispatch({
       type: types.SET_FAVORITE,
@@ -10,8 +10,6 @@ export const setFavorite = (value, id) => async dispatch => {
   }
   else {
     const formData = new FormData()
-    formData.append('userId', id)
-
     postData('user/favorites/counter/', formData).then(json => {
       if (json) {
         dispatch({

@@ -1,151 +1,203 @@
 import { useTranslations } from 'next-intl'
-import { useState, useMemo } from 'react'
-
-import { validationRules } from 'utils/validationRules'
-
+import { useState } from 'react'
 import classNames from 'classnames'
 
+import { useFilterState } from 'hooks/useFilterState'
+
+import Button from 'components/Button'
 import Field from 'components/Field'
 import Phone from 'components/Phone'
-import Button from 'components/Button'
-import InputGroup from 'modules/InputGroup'
+import Textarea from 'components/Textarea'
+import Accordion from 'modules/Accordion'
+import Debug from 'modules/Debug'
+import Divider from 'modules/Divider'
 
 import style from '../index.module.scss'
 
-const Contact = () => {
-  const t = useTranslations()
-  const [filter, setFilter] = useState({
-    name: {
-      value: '',
-      isValid: false
+const INITIAL_FILTER = {
+  contact: {
+    name: '',
+    surname: "",
+    email: "",
+    phone: [""],
+    messengers: {
+      whatsapp: "",
+      telegram: ""
     },
-    surname: {
-      value: '',
-      isValid: false
-    },
-    email: {
-      value: '',
-      isValid: false
-    },
-    phone: {
-      value: '',
-      isValid: false
-    },
-  })
+    company: {
+      name: "",
+      registration_code: "",
+      tax_code: "",
+      website: "",
+      address: "",
+      schedule: "",
+    }
+  }
+}
 
-  const handleChange = (field, { value, isValid }) => {
-    setFilter((prevData) => ({
-      ...prevData,
-      [field]: { value, isValid },
-    }))
+const Contact = ({ active }) => {
+  const t = useTranslations()
+
+  const { filter, handlePropsChange } = useFilterState(INITIAL_FILTER)
+  const [toggle, setToggle] = useState(false)
+
+  const handleAddPhone = () => {
+    handlePropsChange('contact.phone', [...filter.contact.phone, ''])
   }
 
-  const isFormValid = useMemo(() => {
-    return Object.values(filter).every((field) => field.isValid)
-  }, [filter])
+  const handleRemovePhone = (idx) => {
+    const updated = filter.contact.phone.filter((_, i) => i !== idx)
+    handlePropsChange('contact.phone', updated)
+  }
 
-  const handleSubmit = (e) => {
-    e.preventDefault()
-
-    alert("Send")
+  const handleUpdatePhone = (idx, value) => {
+    const updated = [...filter.contact.phone]
+    updated[idx] = value
+    handlePropsChange('contact.phone', updated)
   }
 
   return (
-    <form className={style.form} onSubmit={handleSubmit}>
-      {/* <pre className={style.pre}>{JSON.stringify(filter, null, 2)}</pre> */}
-
-      <div className={style.grid}>
-        <InputGroup
-          label={t('name')}
-          value={filter.name.value}
-          rules={[
-            validationRules.required,
-            validationRules.minLength(2),
-            validationRules.noNumbers
-          ]}
-          onValidationChange={(isValid) =>
-            handleChange('name', { value: filter.name.value, isValid })
-          }
-        >
+    <Accordion
+      data={toggle}
+      action={() => setToggle(!toggle)}
+      icon={'user'}
+      placeholder={t('contact_information')}
+    >
+      <form className={style.form}>
+        <Debug data={filter} />
+        <div className={style.grid}>
           <Field
             placeholder={t('name')}
-            data={filter.name.value}
-            onChange={(value) => handleChange('name', { value, isValid: filter.name.isValid })}
+            data={filter.contact.name}
+            onChange={(value) => handlePropsChange('contact.name', value)}
+            isRequired={true}
+            isLabel={true}
           />
-        </InputGroup>
-
-        <InputGroup
-          label={t('surname')}
-          value={filter.surname.value}
-          rules={[
-            validationRules.required,
-            validationRules.minLength(2),
-            validationRules.noNumbers
-          ]}
-          onValidationChange={(isValid) =>
-            handleChange('surname', { value: filter.surname.value, isValid })
-          }
-        >
           <Field
             placeholder={t('surname')}
-            data={filter.surname.value}
-            onChange={(value) => handleChange('surname', { value, isValid: filter.surname.isValid })}
+            data={filter.contact.surname}
+            onChange={(value) => handlePropsChange('contact.surname', value)}
+            isRequired={true}
+            isLabel={true}
           />
-        </InputGroup>
-
-        <InputGroup
-          label={t('email')}
-          value={filter.email.value}
-          rules={[
-            validationRules.required,
-            validationRules.email,
-          ]}
-          onValidationChange={(isValid) =>
-            handleChange('email', { value: filter.email.value, isValid })
-          }
-        >
           <Field
             type={'email'}
             placeholder={t('email')}
-            data={filter.email.value}
-            onChange={(value) => handleChange('email', { value, isValid: filter.email.isValid })}
+            data={filter.contact.email}
+            onChange={(value) => handlePropsChange('contact.email', value)}
+            isRequired={true}
+            isLabel={true}
           />
-        </InputGroup>
-
-        <InputGroup
-          label={t('phone')}
-          value={filter.phone.value}
-          rules={[
-            validationRules.required,
-            validationRules.minLength(8),
-            validationRules.maxLength(15),
-          ]}
-          onValidationChange={(isValid) =>
-            handleChange('phone', { value: filter.phone.value, isValid })
+        </div>
+        <div
+          className={
+            classNames(
+              style.grid,
+              style.bottom
+            )
           }
         >
-          <Phone
-            data={filter.phone.value}
-            onChange={(value) => handleChange('phone', { value, isValid: filter.phone.isValid })}
+          <div className={style.list}>
+            {
+              filter.contact.phone.map((el, idx) =>
+                <div
+                  key={idx}
+                  className={style.phone}
+                >
+                  <Phone
+                    data={el}
+                    onChange={(value) => handleUpdatePhone(idx, value)}
+                    isRequired={idx === 0}
+                    isLabel={idx === 0}
+                    label={t('phone')}
+                  />
+                  {
+                    idx > 0 &&
+                    <Button
+                      icon={'trash'}
+                      classes={['secondary', 'square', 'sm']}
+                      title={t('remove')}
+                      onChange={() => handleRemovePhone(idx)}
+                    />
+                  }
+                </div>
+              )
+            }
+          </div>
+          <Button
+            classes={['primary', 'sm']}
+            placeholder={t('actions.add')}
+            onChange={handleAddPhone}
           />
-        </InputGroup>
-      </div>
-      <div
-        className={
-          classNames(
-            style.grid,
-            style.lg
-          )
+        </div>
+        {
+          active === 1 &&
+          <>
+            <Divider data={'about_company'} />
+            <div className={style.grid}>
+              <Field
+                placeholder={t('name')}
+                data={filter.contact.company.name}
+                onChange={(value) => handlePropsChange('contact.company.name', value)}
+                isRequired={true}
+                isLabel={true}
+              />
+              <Field
+                placeholder={t('website')}
+                data={filter.contact.company.website}
+                onChange={(value) => handlePropsChange('contact.company.website', value)}
+                isLabel={true}
+              />
+              <Field
+                placeholder={t('registration_code')}
+                data={filter.contact.company.registration_code}
+                onChange={(value) => handlePropsChange('contact.company.registration_code', value)}
+                isRequired={true}
+                isLabel={true}
+              />
+              <Field
+                placeholder={t('tax_code')}
+                data={filter.contact.company.tax_code}
+                onChange={(value) => handlePropsChange('contact.company.tax_code', value)}
+                isRequired={true}
+                isLabel={true}
+              />
+              <Textarea
+                placeholder={t('address')}
+                data={filter.contact.company.address}
+                onChange={(value) => handlePropsChange('contact.company.address', value)}
+                isLabel={true}
+              />
+              <Textarea
+                placeholder={t('schedule')}
+                data={filter.contact.company.schedule}
+                onChange={(value) => handlePropsChange('contact.company.schedule', value)}
+                isLabel={true}
+              />
+              <Field
+                placeholder={'WhatsApp'}
+                data={filter.contact.messengers.whatsapp}
+                onChange={(value) => handlePropsChange('contact.messengers.whatsapp', value)}
+                isLabel={true}
+              />
+              <Field
+                placeholder={'Telegram'}
+                data={filter.contact.messengers.telegram}
+                onChange={(value) => handlePropsChange('contact.messengers.telegram', value)}
+                isLabel={true}
+              />
+            </div>
+          </>
         }
-      >
-        <Button
-          type="submit"
-          classes={['primary', 'wide', style.submit]}
-          placeholder={t('actions.save')}
-          isDisabled={!isFormValid}
-        />
-      </div>
-    </form>
+        <div className={style.footer}>
+          <Button
+            type={'submit'}
+            classes={['primary', 'md']}
+            placeholder={t('actions.save')}
+          />
+        </div>
+      </form>
+    </Accordion>
   )
 }
 

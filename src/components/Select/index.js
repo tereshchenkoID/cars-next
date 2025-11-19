@@ -4,7 +4,12 @@ import { useEffect, useMemo, useRef, useState } from 'react'
 
 import classNames from 'classnames'
 
+import Label from 'components/Label'
+
 import { DEFAULT } from 'constant/config'
+
+import './default.scss'
+import style from './index.module.scss'
 
 const createLoadingComponent = (placeholder) => () => (
   <div className={style.loading}>{placeholder}</div>
@@ -18,18 +23,17 @@ const CustomDynamicSelect = (placeholder) => dynamic(
   }
 )
 
-import './default.scss'
-
-import style from './index.module.scss'
-
 const CustomSelect = ({
   id,
   placeholder,
-  options, 
-  data, 
+  options,
+  data,
   onChange,
   isAsync = false,
-  isDisabled = false
+  isDisabled = false,
+  isRequired = false,
+  isLabel = false,
+  label = null,
 }) => {
   const t = useTranslations()
   const [search, setSearch] = useState([...options] || [])
@@ -56,7 +60,7 @@ const CustomSelect = ({
   }, [options])
 
   return (
-    <div 
+    <div
       className={
         classNames(
           style.block,
@@ -64,18 +68,28 @@ const CustomSelect = ({
         )
       }
     >
-      <Select
-        ref={selectRef}
-        instanceId={id}
-        placeholder={placeholder || t('all')}
-        options={search}
-        value={selectedOption || DEFAULT}
-        onChange={handleSelectChange}
-        onInputChange={handleSearch}
-        className="react-select-container"
-        classNamePrefix="react-select"
-        isClearable
-      />
+      {
+        isLabel &&
+        <Label
+          data={label || placeholder}
+          isRequired={isRequired}
+        />
+      }
+      <div className={style.wrapper}>
+        <Select
+          ref={selectRef}
+          instanceId={id}
+          placeholder={placeholder || t('all')}
+          options={search}
+          value={selectedOption || DEFAULT}
+          onChange={handleSelectChange}
+          onInputChange={handleSearch}
+          className="react-select-container"
+          classNamePrefix="react-select"
+          required={isRequired}
+          isClearable
+        />
+      </div>
     </div>
   )
 }

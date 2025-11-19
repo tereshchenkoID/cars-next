@@ -1,15 +1,11 @@
 @use 'scss/config' as *;
 
 @mixin button {
-  --icon-size: 24px;
-  --button-height: 48px;
-
   display: inline-flex;
   position: relative;
   align-items: center;
   justify-content: center;
   height: var(--button-height);
-  gap: var(--gap-12);
   padding-inline: var(--gap-12);
   border-radius: var(--border-radius-4);
   box-shadow: var(--box-shadow-16-24);
@@ -26,8 +22,9 @@
   &.loading {
     pointer-events: none;
 
-    .icon {
-      animation: 4s infinite ease-in-out spin;
+    .icon,
+    .text {
+      opacity: 0;
     }
   }
 
@@ -89,7 +86,7 @@
     }
   }
 
-  &:not(.square) {
+  &:not(.square, .reference) {
     min-width: rem(100px);
   }
 
@@ -102,28 +99,40 @@
   }
 
   &.sm {
-    --icon-size: 20px;
-    --button-height: 38px;
+    --icon-size: 16px;
+    --button-height: 40px;
 
     gap: var(--gap-8);
     font-size: rem(14px);
   }
 
+  &.md {
+    --icon-size: 24px;
+    --button-height: 48px;
+
+    gap: var(--gap-12);
+    font-size: rem(16px);
+  }
+
   &.lg {
-    --icon-size: 28px;
+    --icon-size: 20px;
     --button-height: 56px;
 
+    gap: var(--gap-12);
     font-size: rem(16px);
   }
 
   &.square {
     padding: 0;
-    width: var(--button-height);
     aspect-ratio: 1 / 1;
   }
 
   &.left {
     justify-content: flex-start;
+  }
+
+  &.default {
+    @include size(auto);
   }
 
   &.wide {
@@ -141,14 +150,27 @@
   &.info {
     background-color: var(--color-info);
   }
+
+  .loading,
+  .icon {
+    flex-shrink: 0;
+    width: var(--icon-size);
+    height: var(--icon-size);
+  }
+
+  .loading {
+    @include absolute-center;
+
+    animation: 2s infinite ease-in-out spin;
+  }
 }
 
 @keyframes spin {
   0% {
-    transform: rotateZ(0);
+    transform: translate(-50%, -50%) rotateZ(0);
   }
 
   100% {
-    transform: rotateZ(360deg);
+    transform: translate(-50%, -50%) rotateZ(360deg);
   }
 }

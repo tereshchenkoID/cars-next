@@ -1,5 +1,7 @@
 import classNames from 'classnames'
 
+import Label from 'components/Label'
+
 import style from './index.module.scss'
 
 const Textarea = ({
@@ -9,6 +11,8 @@ const Textarea = ({
   classes = null,
   isRequired = false,
   isDisabled = false,
+  isLabel = false,
+  label = null,
 }) => {
 
   return (
@@ -21,6 +25,13 @@ const Textarea = ({
         )
       }
     >
+      {
+        isLabel &&
+        <Label
+          data={label || placeholder}
+          isRequired={isRequired}
+        />
+      }
       <textarea
         className={style.input}
         value={data === null || undefined ? "" : data}

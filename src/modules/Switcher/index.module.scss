@@ -1,0 +1,25 @@
+@use 'scss/config' as *;
+
+.block {
+  @include size(100%, rem(60px));
+  @include flex;
+
+  gap: var(--gap-4);
+  padding: var(--gap-4);
+  background: var(--color-grey-200);
+  border: rem(1px) solid var(--color-grey-300);
+  border-radius: var(--border-radius-8);
+}
+
+.button {
+  flex: 1;
+  border-radius: var(--border-radius-4);
+  font-weight: var(--typography-bold);
+  font-size: rem(14px);
+
+  &.active {
+    background-color: var(--color-primary);
+    background-image: var(--gradient-blue);
+    color: var(--color-white);
+  }
+}

@@ -1,9 +1,6 @@
 @use 'scss/config' as *;
 
 .block {
-  @include flex;
-
-  position: relative;
 
   &.disabled {
     opacity: 0.5;
@@ -16,6 +13,12 @@
       border-color: var(--color-primary);
     }
   }
+}
+
+.wrapper {
+  @include flex;
+
+  position: relative;
 }
 
 .input {
@@ -34,6 +37,7 @@
 
   &::placeholder {
     color: var(--color-text);
+    opacity: 0.5;
   }
 
   &:focus {

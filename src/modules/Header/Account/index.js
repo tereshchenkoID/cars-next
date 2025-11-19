@@ -1,25 +1,25 @@
 import { useState, useRef } from 'react'
 import { useTranslations } from 'next-intl'
 import { useParams } from 'next/navigation'
-import { useOutsideClick } from 'hooks/useOutsideClick'
-import { useModal } from 'context/ModalContext'
-import { useSelector } from 'react-redux'
 
 import { ROUTES_USER } from 'constant/config'
 
 import classNames from 'classnames'
 
-import Image from 'next/image'
-import Reference from 'components/Reference'
-import Button from 'components/Button'
-import Icon from 'components/Icon'
-import Backdrop from 'modules/Backdrop'
-import Avatar from 'modules/Avatar'
+import { useOutsideClick } from 'hooks/useOutsideClick'
+import { useRequest } from 'hooks/useRequest'
+import { useAuth } from 'hooks/useAuth'
+import { useModal } from 'context/ModalContext'
 
-import LoginModal from 'modules/LoginModal'
-import LanguageModal from 'modules/LanguageModal'
-import RegistrationModal from 'modules/RegistrationModal'
-import Logout from '../Logout'
+import Image from 'next/image'
+import Button from 'components/Button'
+import Reference from 'components/Reference'
+import Icon from 'components/Icon'
+import Avatar from 'modules/Avatar'
+import Backdrop from 'modules/Modals/Backdrop'
+import LoginModal from 'modules/Modals/LoginModal'
+import LanguageModal from 'modules/Modals/LanguageModal'
+import RegistrationModal from 'modules/Modals/RegistrationModal'
 
 import style from './index.module.scss'
 
@@ -27,9 +27,9 @@ const Account = () => {
   const t = useTranslations()
   const params = useParams()
   const { showModal } = useModal()
+  const { handleLogout } = useRequest()
+  const { auth, isAuth } = useAuth()
   const [show, setShow] = useState(false)
-  const auth = useSelector((state) => state.auth)
-  const isAuth = auth?.id
   const language = params.locale
 
   const MENU = [
@@ -37,7 +37,7 @@ const Account = () => {
     // ROUTES_USER.last,
     ROUTES_USER.vehicles,
     ROUTES_USER.archive,
-    ROUTES_USER.favorite,
+    ROUTES_USER.favorites,
     ROUTES_USER.notification,
     // ROUTES_USER.chat,
     // ROUTES_USER.orders
@@ -68,7 +68,7 @@ const Account = () => {
         break
     }
   }
-  
+
   return (
     <div ref={blockRef}>
       {
@@ -95,7 +95,7 @@ const Account = () => {
               ?
                 <Avatar
                   size="sm"
-                  src={auth.image}
+                  src={auth.user.image}
                   alt={auth.name || auth.username}
                 />
               :
@@ -105,15 +105,7 @@ const Account = () => {
                   height={28}
                 />
           }
-          <span className={style.hidden}>
-            {
-              isAuth
-                ?
-                  t('profile')
-                :
-                  t('login')
-            }
-          </span>
+          <span className={style.hidden}>{t(isAuth ? 'profile' : 'login')}</span>
           <Icon
             className={
               classNames(
@@ -129,22 +121,26 @@ const Account = () => {
 
         <div className={style.dropdown}>
           <Button
-            classes={['secondary', 'square', style.close]}
+            classes={['secondary', 'md', 'square', style.close]}
             icon="xmark"
             onChange={() => setShow(false)}
           />
           {
-            auth?.user &&
+            isAuth &&
             <div className={style.top}>
               <Avatar
-                src={auth.image}
+                src={auth?.image}
                 alt={auth.name || auth.username}
               />
               <div className={style.meta}>
                 <p className={style.name}>{auth.name || auth.username}</p>
                 <p className={style.email}>{auth.email}</p>
               </div>
-              <Logout setShow={setShow} />
+              <Button
+                icon={'arrow-right-from-bracket'}
+                classes={['secondary', 'md', 'square']}
+                onChange={handleLogout}
+              />
             </div>
           }
           <div className={style.center}>
@@ -185,7 +181,7 @@ const Account = () => {
                 :
                   <div className={style.setting}>
                     <Button
-                      classes={['primary', 'wide']}
+                      classes={['primary', 'md', 'wide']}
                       icon={'circle-user'}
                       placeholder={t('login')}
                       onChange={() => openModal(0)}

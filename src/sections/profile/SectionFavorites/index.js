@@ -5,19 +5,19 @@ import { useTranslations } from 'next-intl'
 import useData from './useData'
 
 import Container from 'components/Container'
-import Card from 'modules/Card'
-import Skeleton from 'modules/Skeleton'
-import Pagination from 'modules/Pagination'
 import Sort from 'modules/Sort'
+import Pagination from 'modules/Pagination'
 import EmptyCars from 'modules/EmptyCars'
+import VehicleCard from 'modules/Cards/VehicleCard'
 
 import style from './index.module.scss'
 
 const SectionsFavorites = ({ initialData }) => {
   const t = useTranslations()
-  const favoriteProps = useData(initialData)
+  const favoriteProps = useData(initialData || [])
 
   const {
+    handleLoad,
     handleChange,
     data,
     loading,
@@ -29,9 +29,8 @@ const SectionsFavorites = ({ initialData }) => {
     <section className={style.block}>
       <Container classes={style.container}>
         <h1>{t('favorite_cars')}</h1>
-        {/* <pre className={style.pre}>{JSON.stringify(search, null, 2)}</pre> */}
         {
-          data?.data?.length > 0
+          data?.length > 0
             ?
               <>
                 <div className={style.meta}>
@@ -42,26 +41,18 @@ const SectionsFavorites = ({ initialData }) => {
                   />
                 </div>
                 <div className={style.cards}>
+                  <Pagination filtersProps={favoriteProps} />
                   {
-                    pagination.pages > 1 &&
-                    <Pagination filtersProps={favoriteProps} />
-                  }
-                  {
-                    data?.data?.map((el, idx) =>
-                      loading
-                        ?
-                        <Skeleton key={idx} />
-                        :
-                        <Card
-                          key={idx}
-                          data={el}
-                        />
+                    data?.map((el, idx) =>
+                      <VehicleCard
+                        key={idx}
+                        data={el}
+                        isLoading={loading}
+                        updateFavorites={() => handleLoad(search.page, search.sort)}
+                      />
                     )
                   }
-                  {
-                    pagination.pages > 1 &&
-                    <Pagination filtersProps={favoriteProps} />
-                  }
+                  <Pagination filtersProps={favoriteProps} />
                 </div>
               </>
             :

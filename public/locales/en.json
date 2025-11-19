@@ -10,7 +10,7 @@
     "about_us": "About us",
     "profile": "Profile",
     "sale": "Sale",
-    "favorite": "Favorite",
+    "favorites": "Favorites",
     "advanced_search": "Detailed search",
     "not_found": "Not found",
     "settings": "Settings",
@@ -21,7 +21,8 @@
     "vehicles": "My vehicles",
     "archive": "Archive",
     "notification": "Notification",
-    "chat": "Chat"
+    "chat": "Chat",
+    "login": "Login"
   },
   "modal": {
     "login": "Welcome back",
@@ -30,27 +31,28 @@
     "restore": "Forgot your password?"
   },
   "month": {
-    "january": "january",
-    "february": "february",
-    "march": "march",
-    "april": "april",
-    "may": "may",
-    "june": "june",
-    "july": "july",
-    "august": "august",
-    "september": "september",
-    "october": "october",
-    "november": "november",
-    "december": "december"
+    "january": "January",
+    "february": "February",
+    "march": "March",
+    "april": "April",
+    "may": "May",
+    "june": "June",
+    "july": "July",
+    "august": "August",
+    "september": "September",
+    "october": "October",
+    "november": "November",
+    "december": "December"
   },
   "notification": {
     "login": "Don’t have an account?",
     "registration": "Have an account?",
+    "wrong_auth": "Wrong username or login",
     "restore": "No worries. We'll send you a link to reset your password.",
     "via_email": "Or via e-mail",
     "forgot_password": "Forgot your password?",
     "terms": "I agree to the processing of personal data",
-    "payement": "We accept online card payments as well as wire transfers.",
+    "payment": "We accept online card payments as well as wire transfers.",
     "not_found": "No matching results...",
     "404_title": "Oops! There was an accident",
     "404_text": "This page may have wandered around somewhere. We'll look after it as soon as possible.",
@@ -112,12 +114,14 @@
     "restore": "Restore",
     "delete": "Delete",
     "send": "Send",
+    "add": "Add",
     "see_all": "See all",
     "call_us": "Call us",
     "cancel": "Cancel",
     "save": "Save",
     "share": "Share",
     "back": "Back",
+    "next": "Next",
     "continue": "Continue",
     "add_car": "Add a car",
     "select_all": "Select all",
@@ -224,6 +228,7 @@
   "location": "Location",
   "vehicle_id": "Vehicle ID",
   "add_vehicle": "Add vehicle",
+  "edit_vehicle": "Edit vehicle",
   "photos": "Photos",
   "make": "Make",
   "doors": "Doors",
@@ -248,11 +253,18 @@
   "day": "Day",
   "days": "Days",
   "sold": "Sold",
+  "currency": "Currency",
   "not_active": "Not active",
   "reviews": "Reviews",
   "similar_cars": "Show similar cars",
   "number_of_seats": "Number of seats",
   "number_of_doors": "Number of doors",
+  "registration_code": "Registration code",
+  "website": "Website",
+  "tax_code": "Tax code",
+  "address": "Address",
+  "schedule": "Schedule",
+  "about_company": "Company info",
   "features": {
     "1": {
       "0": "Other",
@@ -526,7 +538,9 @@
       "0": "Region"
     },
     "drive": {
-      "0": "Drive type"
+      "0": "Drive type",
+      "3": "4x4",
+      "4": "4x2"
     },
     "color": {
       "0": "Colors",

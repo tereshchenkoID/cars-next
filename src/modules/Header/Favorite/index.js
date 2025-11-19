@@ -5,51 +5,49 @@ import { useModal } from 'context/ModalContext'
 
 import { ROUTES_USER } from 'constant/config'
 
+import { useAuth } from 'hooks/useAuth'
 import { setFavorite } from 'store/actions/favoriteAction'
 
-import Reference from 'components/Reference'
 import Button from 'components/Button'
-import LoginModal from 'modules/LoginModal'
+import Reference from 'components/Reference'
+import LoginModal from 'modules/Modals/LoginModal'
 
 import style from './index.module.scss'
 
 const Favorite = () => {
   const t = useTranslations()
   const dispatch = useDispatch()
-  const auth = useSelector((state) => state.auth)
-  const isAuth = auth?.id
-  const favorite = useSelector((state) => state.favorite)
+  const { isAuth } = useAuth()
   const { showModal } = useModal()
+  const favorite = useSelector((state) => state.favorite)
 
   useEffect(() => {
-    if(isAuth) {
-      dispatch(setFavorite(null, auth.id))
-    }
-  }, [])
+    if (isAuth) dispatch(setFavorite(null))
+  }, [isAuth])
 
   return (
     <div className={style.block}>
       {
         isAuth
-        ?
-          <>
-            <Reference
-              link={ROUTES_USER.favorite.link}
-              icon={ROUTES_USER.favorite.icon}
-              classes={['secondary', 'square']}
+          ?
+            <>
+              <Reference
+                link={ROUTES_USER.favorites.link}
+                icon={ROUTES_USER.favorites.icon}
+                classes={['secondary', 'md', 'square']}
+                title={(t('favorites'))}
+              />
+              {
+                (typeof favorite !== 'object' && favorite !== '0') && <span className={style.count}>{favorite}</span>
+              }
+            </>
+          :
+            <Button
+              icon={ROUTES_USER.favorites.icon}
+              classes={['secondary', 'md', 'square']}
               title={(t('favorites'))}
+              onChange={() => showModal(<LoginModal />)}
             />
-            {
-              (typeof favorite !== 'object' && favorite !== '0') && <span className={style.count}>{favorite}</span>
-            }
-          </>
-        :
-          <Button
-            icon={ROUTES_USER.favorite.icon}
-            classes={['secondary', 'square']}
-            title={(t('favorites'))}
-            onChange={() => showModal(<LoginModal />)}
-          />
       }
     </div>
   )

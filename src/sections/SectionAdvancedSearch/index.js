@@ -18,7 +18,7 @@ import Label from 'components/Label'
 import Field from 'components/Field'
 import Select from 'components/Select'
 import Brands from 'modules/Brands'
-import BrandsModal from 'modules/BrandsModal'
+import BrandsModal from 'modules/Modals/BrandsModal'
 
 import style from './index.module.scss'
 
@@ -37,9 +37,6 @@ const SectionAdvancedSearch = ({ options }) => {
     <>
       <section className={style.block}>
         <Container classes={style.container}>
-          {/* <pre className={style.pre}>{JSON.stringify(generateTranslate(), null, 2)}</pre> */}
-          {/* <pre className={style.pre}>{JSON.stringify(search, null, 2)}</pre> */}
-
           {
             showBrand &&
             <BrandsModal
@@ -62,13 +59,12 @@ const SectionAdvancedSearch = ({ options }) => {
             <div className={style.head}>
               <h3 className={style.title}>{t('basic_info')}</h3>
             </div>
-            <div className={style.section}>
-              <Label data={t('model')} />
-              <Brands
-                show={showBrand}
-                setShow={setShowBrands}
-              />
-            </div>
+            <Brands
+              show={showBrand}
+              setShow={setShowBrands}
+              isLabel={true}
+              label={t('model')}
+            />
 
             <div className={style.section}>
               <div
@@ -79,34 +75,32 @@ const SectionAdvancedSearch = ({ options }) => {
                   )
                 }
               >
-                <div>
-                  <Label data={t('filters.state.0')} />
-                  <Select
-                    id={`select_state`}
-                    options={
-                      Object.entries(filters.state.options).map(([optionKey, optionValue]) => ({
-                        value: optionKey,
-                        label: optionKey === DEFAULT ? t('all') : (filters.translation === DEFAULT ? optionValue : t(`filters.state.${optionKey}`)),
-                      }))
-                    }
-                    data={search['state']?.value[0] || DEFAULT}
-                    onChange={(value) => handleChange(filters.state, 'state', value)}
-                  />
-                </div>
-                <div>
-                  <Label data={t('filters.category.0')} />
-                  <Select
-                    id={`select_category`}
-                    options={
-                      Object.entries(filters.category.options).map(([optionKey, optionValue]) => ({
-                        value: optionKey,
-                        label: optionKey === DEFAULT ? t('all') : (filters.translation === DEFAULT ? optionValue : t(`filters.category.${optionKey}`)),
-                      }))
-                    }
-                    data={search['category']?.value[0] || DEFAULT}
-                    onChange={(value) => handleChange(filters.category, 'category', value)}
-                  />
-                </div>
+                <Select
+                  id={`select_state`}
+                  options={
+                    Object.entries(filters.state.options).map(([optionKey, optionValue]) => ({
+                      value: optionKey,
+                      label: optionKey === DEFAULT ? t('all') : (filters.translation === DEFAULT ? optionValue : t(`filters.state.${optionKey}`)),
+                    }))
+                  }
+                  data={search['state']?.value[0] || DEFAULT}
+                  onChange={(value) => handleChange(filters.state, 'state', value)}
+                  isLabel={true}
+                  label={t('filters.state.0')}
+                />
+                <Select
+                  id={`select_category`}
+                  options={
+                    Object.entries(filters.category.options).map(([optionKey, optionValue]) => ({
+                      value: optionKey,
+                      label: optionKey === DEFAULT ? t('all') : (filters.translation === DEFAULT ? optionValue : t(`filters.category.${optionKey}`)),
+                    }))
+                  }
+                  data={search['category']?.value[0] || DEFAULT}
+                  onChange={(value) => handleChange(filters.category, 'category', value)}
+                  isLabel={true}
+                  label={t('filters.category.0')}
+                />
               </div>
             </div>
 
@@ -119,32 +113,30 @@ const SectionAdvancedSearch = ({ options }) => {
                   )
                 }
               >
-                <div>
-                  <Label data={`${t('filters.price.0')} (${auth?.account?.currency?.code || '$'})`} />
-                  <Field
-                    type="number"
-                    placeholder={t('from')}
-                    data={search['price_from']?.value[0] === DEFAULT ? '' : search['price_from']?.value[0]}
-                    onChange={(value) => handleChange(filters.price_from.type, 'price_from', value)}
-                  />
-                </div>
                 <Field
-                  type="number"
+                  type={'number'}
+                  placeholder={t('from')}
+                  data={search['price_from']?.value[0] === DEFAULT ? '' : search['price_from']?.value[0]}
+                  onChange={(value) => handleChange(filters.price_from.type, 'price_from', value)}
+                  isLabel={true}
+                  label={`${t('filters.price.0')} (${auth?.account?.currency?.code || '$'})`}
+                />
+                <Field
+                  type={'number'}
                   placeholder={t('to')}
                   data={search['price_to']?.value[0] === DEFAULT ? '' : search['price_to']?.value[0]}
                   onChange={(value) => handleChange(filters.price_to.type, 'price_to', value)}
                 />
-                <div>
-                  <Label data={t('filters.mileage.0')} />
-                  <Field
-                    type="number"
-                    placeholder={t('from')}
-                    data={search['mileage_from']?.value[0] === DEFAULT ? '' : search['mileage_from']?.value[0]}
-                    onChange={(value) => handleChange(filters.mileage_from.type, 'mileage_from', value)}
-                  />
-                </div>
                 <Field
-                  type="number"
+                  type={'number'}
+                  placeholder={t('from')}
+                  data={search['mileage_from']?.value[0] === DEFAULT ? '' : search['mileage_from']?.value[0]}
+                  onChange={(value) => handleChange(filters.mileage_from.type, 'mileage_from', value)}
+                  isLabel={true}
+                  label={t('filters.mileage.0')}
+                />
+                <Field
+                  type={'number'}
                   placeholder={t('to')}
                   data={search['mileage_to']?.value[0] === DEFAULT ? '' : search['mileage_to']?.value[0]}
                   onChange={(value) => handleChange(filters.mileage_to.type, 'mileage_to', value)}
@@ -161,20 +153,19 @@ const SectionAdvancedSearch = ({ options }) => {
                   )
                 }
               >
-                <div>
-                  <Label data={t('filters.year.0')} />
-                  <Select
-                    id={`select_year_from`}
-                    options={
-                      getYears().map(year => ({
-                        value: year === DEFAULT ? DEFAULT : year,
-                        label: year === DEFAULT ? t('from') : year,
-                      }))
-                    }
-                    data={search['year_from']?.value[0] || DEFAULT}
-                    onChange={(value) => handleChange(filters.year_from, 'year_from', value)}
-                  />
-                </div>
+                <Select
+                  id={`select_year_from`}
+                  options={
+                    getYears().map(year => ({
+                      value: year === DEFAULT ? DEFAULT : year,
+                      label: year === DEFAULT ? t('from') : year,
+                    }))
+                  }
+                  data={search['year_from']?.value[0] || DEFAULT}
+                  onChange={(value) => handleChange(filters.year_from, 'year_from', value)}
+                  isLabel={true}
+                  label={t('filters.year.0')}
+                />
                 <Select
                   id={`select_year_to`}
                   options={
@@ -337,6 +328,7 @@ const SectionAdvancedSearch = ({ options }) => {
             onChange={() => handleReset()}
           />
           <Button
+            classes={['primary', 'md']}
             placeholder={(t('search'))}
           />
         </Container>

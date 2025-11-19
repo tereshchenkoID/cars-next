@@ -9,7 +9,8 @@ const Accordion = ({
   action,
   placeholder,
   icon,
-  children
+  children,
+  isDisabled = false,
 }) => {
 
   return (
@@ -17,7 +18,8 @@ const Accordion = ({
       className={
         classNames(
           style.block,
-          data && style.active
+          data && style.active,
+          isDisabled && style.disabled
         )
       }
     >

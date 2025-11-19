@@ -5,12 +5,19 @@ import { ACTIVE, DEFAULT } from 'constant/config'
 
 import { setSearch } from 'store/actions/searchAction'
 
+import Label from 'components/Label'
 import Toggle from './Toggle'
 import List from './List'
 
 import style from './index.module.scss'
 
-const Brands = ({ show, setShow, isWide = false }) => {
+const Brands = ({
+  show,
+  setShow,
+  isWide = false,
+  isLabel = false,
+  label = null
+}) => {
   const dispatch = useDispatch()
   const brands = useSelector((state) => state.brands)
   const search = useSelector((state) => state.search)
@@ -45,6 +52,12 @@ const Brands = ({ show, setShow, isWide = false }) => {
 
   return (
     <div className={style.block}>
+      {
+        isLabel &&
+        <Label
+          data={label}
+        />
+      }
       <List
         show={show}
         setShow={setShow}

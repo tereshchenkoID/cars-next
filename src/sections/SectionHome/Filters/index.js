@@ -94,7 +94,7 @@ const Filters = () => {
           isDisabled={search.make === DEFAULT}
         />
         <Field
-          type={"number"}
+          type={'number'}
           placeholder={t('home_filters.mileage')}
           data={search.mileage_from !== DEFAULT ? search.mileage_from : ''}
           onChange={(value) => handleChange('mileage_from', value)}
@@ -112,7 +112,7 @@ const Filters = () => {
           onChange={(value) => handleChange('year_from', value)}
         />
         <Field
-          type={"number"}
+          type={'number'}
           placeholder={t('home_filters.price')}
           data={search.price_to !== DEFAULT ? search.price_to : ''}
           onChange={(value) => handleChange('price_to', value)}

@@ -39,7 +39,10 @@ const Reference = ({
           className={style.icon}
         />
       }
-      {placeholder && placeholder}
+      {
+        placeholder &&
+        <span className={style.text}>{placeholder}</span>
+      }
     </Link>
   )
 }

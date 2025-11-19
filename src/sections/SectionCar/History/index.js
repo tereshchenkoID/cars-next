@@ -1,13 +1,13 @@
 import { useTranslations } from 'next-intl'
 import { useSelector } from 'react-redux'
 import {
-  AreaChart,
   Area,
-  Label,
   XAxis,
   YAxis,
-  CartesianGrid,
   Tooltip,
+  AreaChart,
+  Label,
+  CartesianGrid,
   ResponsiveContainer,
   LabelList
 } from 'recharts'

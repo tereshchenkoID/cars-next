@@ -1,75 +1,85 @@
-"use client"
-
 import { useState } from 'react'
 import { useSelector } from 'react-redux'
 import { useTranslations } from 'next-intl'
+import classNames from 'classnames'
+
+import { DEFAULT } from 'constant/config'
 
 import { getFormatPrice } from 'helpers/getFormatPrice'
 
+import Button from 'components/Button'
 import Label from 'components/Label'
 import Field from 'components/Field'
 import Select from 'components/Select'
-import Button from 'components/Button'
 import Checkbox from 'components/Checkbox'
 import Accordion from 'modules/Accordion'
 import Comparison from 'modules/Comparison'
 
 import style from '../index.module.scss'
 
-const Price = ({
-  data,
-  toggle,
-  handleToggle,
-  handleChange
-}) => {
+const Price = ({ filter, handlePropsChange, isDisable }) => {
   const t = useTranslations()
   const auth = useSelector((state) => state.auth)
   const filters = useSelector((state) => state.filters)
+  const settings = useSelector((state) => state.settings)
+
+  const [toggle, setToggle] = useState(false)
   const [vat, setVat] = useState("0")
 
   return (
     <Accordion
-      data={toggle[3]}
-      action={() => handleToggle(3)}
+      data={toggle}
+      action={() => setToggle(!toggle)}
       icon={'file'}
       placeholder={t('price')}
+      isDisabled={isDisable}
     >
       <div className={style.grid}>
         <div
-          className={style.list}
-          style={{
-            alignItems: 'flex-end'
-          }}
+          className={
+            classNames(
+              style.list,
+              style.bottom
+            )
+          }
         >
-          <div className={style.wrapper}>
-            <Label
-              data={t('price')}
-              isRequired={true}
-            />
+          <div className={style.row}>
             <Field
               type={'number'}
               placeholder={t('price')}
-              data={data.price_data.price}
-              onChange={(value) => handleChange('price_data.price', value)}
+              data={filter.price_data.price}
+              onChange={(value) => handlePropsChange('price.price_data.price', value)}
+              isRequired={true}
+              isLabel={true}
             />
-          </div>
-          <div className={style.wrapper}>
             <Select
-              id={'select_mileage_unit'}
+              id={`select_currency`}
               options={
-                Object.entries(filters.price_type.options)
-                  .map(([optionKey, optionValue]) => ({
-                    value: optionKey,
-                    label: optionValue,
-                  }))
+                settings?.currencies.map(item => ({
+                  value: item.code,
+                  label: item.code,
+                }))
               }
-              data={data.price_data.price_type.id}
-              onChange={(value) => handleChange('price_data.price_type', {
-                id: value,
-                name: t(`filters.price_type.${value}`)
-              })}
+              data={filter.currency.code || DEFAULT}
+              onChange={(value) => {
+                const selected = settings.currencies.find(c => c.code === value)
+                handlePropsChange('price.currency', { code: value, text: selected.text, symbol: selected.symbol })
+              }}
+              isRequired={true}
             />
           </div>
+          <Select
+            id={'select_mileage_unit'}
+            options={
+              Object.entries(filters.price_type.options)
+                .map(([key, _]) => ({
+                  value: key,
+                  label: t(`filters.price_type.${key}`),
+                }))
+            }
+            data={filter.price_data.price_type.id}
+            onChange={(value) => handlePropsChange('price.price_data.price_type', { id: value, name: t(`filters.price_type.${value}`) })}
+          />
           <div className={style.wrapper}>
             <Checkbox
               placeholder={t('vat_player')}
@@ -81,40 +91,38 @@ const Price = ({
         {
           vat === '1' &&
           <div className={style.list}>
-            <div className={style.wrapper}>
-              <Label
-                data={`${t('vat')} (%)`}
-                isRequired={true}
-              />
-              <Field
-                type={'number'}
-                placeholder={t('vat')}
-                data={data.price_data.vat_rate}
-                onChange={(value) => handleChange('price_data.vat_rate', value)}
-                max={100}
-              />
-            </div>
+            <Field
+              type={'number'}
+              placeholder={t('vat')}
+              data={filter.price_data.vat_rate}
+              onChange={(value) => handlePropsChange('price.price_data.vat_rate', value)}
+              label={`${t('vat')} (%)`}
+              isLabel={true}
+              max={100}
+            />
           </div>
         }
-        <div className={style.accept}>
-          <div>
-            <p>{t('price_recommendation')}</p>
-            <h5>{getFormatPrice(auth?.account?.language?.code, auth?.account?.currency?.code, data?.price_data?.price_recommended)}</h5>
-          </div>
-          <Button
-            classes={['primary', style.button]}
-            placeholder={t('accept_price')}
-            onChange={() => handleChange('price_data.price', data.price_data.price_recommended)}
-          />
-        </div>
         {
-          data.price_score &&
-          <Comparison data={data} />
+          (filter.price_score && filter.price_data.price_recommended) &&
+          <>
+            <div className={style.accept}>
+              <div>
+                <p>{t('price_recommendation')}</p>
+                <h5>{getFormatPrice(auth?.account?.language?.code, auth?.account?.currency?.code, filter?.price_data?.price_recommended)}</h5>
+              </div>
+              <Button
+                classes={['primary', 'md']}
+                placeholder={t('accept_price')}
+                onChange={() => handlePropsChange('price.price_data.price', filter.price_data.price_recommended)}
+              />
+            </div>
+            <Comparison data={filter} />
+          </>
         }
         <div className={style.footer}>
           <Button
-            classes={['primary', style.button]}
-            placeholder={t('actions.save')}
+            classes={['primary', 'md']}
+            placeholder={t('actions.next')}
           />
         </div>
       </div>

@@ -9,23 +9,18 @@ import { NAVIGATION } from 'constant/config'
 
 import classNames from 'classnames'
 
-import { Swiper, SwiperSlide } from 'swiper/react'
-import { Navigation, Pagination, Mousewheel } from 'swiper/modules'
-import { Fancybox } from '@fancyapps/ui'
-
 import { getDate } from 'helpers/getDate'
 import { getFuelIcon } from 'helpers/getFuelIcon'
 
 import Link from 'next/link'
-import Image from 'next/image'
+import Button from 'components/Button'
+import Loading from 'components/Loading'
+import Container from 'components/Container'
 import Tags from 'modules/Tags'
 import Option from 'modules/Option'
-import Loading from 'components/Loading'
-import Icon from 'components/Icon'
-import Button from 'components/Button'
-import Container from 'components/Container'
 import Betslip from './Betslip'
 import Contact from './Contact'
+import Slider from './Slider'
 
 const Share = dynamic(
   () => import('./Share'),
@@ -56,16 +51,13 @@ import style from './index.module.scss'
 
 const SectionCar = ({ data, next }) => {
   const t = useTranslations()
-  const extraTabs = [
-    data.price_history.options && { id: 2, text: 'price_history' },
-    next && { id: 3, text: 'price_map' },
-    data.price_score.options && { id: 4, text: 'comparison' },
-  ].filter(Boolean)
 
   const TABS = [
     { id: 0, text: 'details' },
     { id: 1, text: 'feature' },
-    ...extraTabs,
+    { id: 2, text: data.price_history.options ? 'price_history' : null },
+    { id: 3, text: next ? 'price_map' : null },
+    { id: 4, text: data.price_score.options ? 'comparison' : null },
     { id: 5, text: 'questions' },
   ]
 
@@ -179,63 +171,7 @@ const SectionCar = ({ data, next }) => {
           </div>
         </Container>
 
-        <div className={style.slider}>
-          <Button
-            icon={'angle-left'}
-            classes={['sm', 'square', style.back]}
-            onChange={() => router.back()}
-          />
-          <Swiper
-            // @TODO Check class
-            className={style.slider}
-            slidesPerView={'auto'}
-            // mousewheel={true}
-            // keyboard={{
-            //   enabled: true,
-            // }}
-            pagination={{
-              type: 'fraction',
-            }}
-            navigation={true}
-            modules={[Mousewheel, Pagination, Navigation]}
-          >
-            {
-              data.images.map((el, idx) =>
-                <SwiperSlide key={idx}>
-                  <Image
-                    src={el}
-                    width={300}
-                    height={300}
-                    className={style.image}
-                    priority={false}
-                    alt={`${t('image')} ${idx}`}
-                  />
-                  <div
-                    className={style.show}
-                    onClick={() => {
-                      Fancybox.show(
-                        data.images.map((src, index) => ({
-                          src,
-                          type: 'image',
-                          caption: `${t('image')} ${index + 1}`,
-                        })),
-                        {
-                          groupAll: true,
-                        }
-                      );
-                    }}
-                  >
-                    <Icon
-                      width={32}
-                      height={32}
-                      iconName={'arrows'}
-                    />
-                  </div>
-                </SwiperSlide>
-              )
-            }
-          </Swiper>
-        </div>
+        <Slider data={data} />
       </div>
 
       <div className={style.contacts}>
@@ -251,6 +187,7 @@ const SectionCar = ({ data, next }) => {
         <Container classes={style.scroll}>
           {
             TABS.map((el, idx) =>
+              el.text &&
               <p
                 key={idx}
                 className={
@@ -446,11 +383,11 @@ const SectionCar = ({ data, next }) => {
               </li>
               <li>
                 <p>{t('doors')}</p>
-                <strong>{data.number_of_doors}</strong>
+                <strong>{data.number_of_doors || '-'}</strong>
               </li>
               <li>
                 <p>{t('seats')}</p>
-                <strong>{data.number_of_seats}</strong>
+                <strong>{data.number_of_seats || '-'}</strong>
               </li>
               <li>
                 <p>{t('description')}</p>
@@ -481,36 +418,40 @@ const SectionCar = ({ data, next }) => {
                 )
               }
             >
-              {Object.entries(groupedFeatures).map(([parentId, group]) => (
-                <div key={parentId}>
-                  <h6
-                    className={
-                      classNames(
-                        style.title,
-                        style.sm
-                      )
-                    }
-                  >
-                    {t(`features.${parentId}.0`)}
-                  </h6>
-                  <ul className={style.features}>
-                    {group.map(item => (
-                      <li key={item.id}>
-                        <p
-                          className={
-                            classNames(
-                              style.feature,
-                              featureTags.includes(item.id) && style.active
-                            )
-                          }
-                        >
-                          {t(`features.${parentId}.${item.id}`)}
-                        </p>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              ))}
+              {
+                Object.entries(groupedFeatures).map(([parentId, group]) =>
+                  <div key={parentId}>
+                    <h6
+                      className={
+                        classNames(
+                          style.title,
+                          style.sm
+                        )
+                      }
+                    >
+                      {t(`features.${parentId}.0`)}
+                    </h6>
+                    <ul className={style.features}>
+                      {
+                        group.map(item =>
+                          <li key={item.id}>
+                            <p
+                              className={
+                                classNames(
+                                  style.feature,
+                                  featureTags.includes(item.id) && style.active
+                                )
+                              }
+                            >
+                              {t(`features.${parentId}.${item.id}`)}
+                            </p>
+                          </li>
+                        )
+                      }
+                    </ul>
+                  </div>
+                )
+              }
             </div>
           </div>
 

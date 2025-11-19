@@ -3,8 +3,8 @@ import { useModal } from 'context/ModalContext'
 import { useSelector } from 'react-redux'
 
 import Image from 'next/image'
-import HistoryModal from 'modules/HistoryModal'
-import LoginModal from 'modules/LoginModal'
+import HistoryModal from 'modules/Modals/HistoryModal'
+import LoginModal from 'modules/Modals/LoginModal'
 import SavedCard from './SavedCard'
 
 import style from './index.module.scss'

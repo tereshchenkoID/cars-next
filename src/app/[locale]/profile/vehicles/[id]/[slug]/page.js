@@ -4,13 +4,17 @@ import SectionVehicle from 'sections/profile/SectionVehicle'
 
 const Vehicle = async ({ params }) => {
   const { id } = await params
-  const [data, options] = await Promise.all([
-    fetchData(`item/${id}`),
-    fetchData('filters/options')
+  const [options, data] = await Promise.all([
+    fetchData('filters/options'),
+    fetchData(`item/${id}`)
   ])
 
   return (
-    <SectionVehicle data={data} options={options} />
+    <SectionVehicle
+      id={id}
+      data={data}
+      options={options}
+    />
   )
 }
 

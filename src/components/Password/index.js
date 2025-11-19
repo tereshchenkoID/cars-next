@@ -14,6 +14,8 @@ const Password = ({
   classes = null,
   isRequired = false,
   isDisabled = false,
+  isLabel = false,
+  label = null,
 }) => {
   const [show, setShow] = useState(false)
 
@@ -35,6 +37,8 @@ const Password = ({
         isRequired={isRequired}
         isDisabled={isDisabled}
         isClear={false}
+        isLabel={isLabel}
+        label={label}
       />
       <button
         type={'button'}

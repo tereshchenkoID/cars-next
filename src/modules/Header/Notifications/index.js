@@ -49,18 +49,18 @@ const Notifications = () => {
   )
 
   return (
-    <div 
+    <div
       className={style.block}
       ref={blockRef}
     >
-      <div 
+      <div
         className={style.toggle}
         ref={buttonRef}
         onClick={() => setShow(!show)}
       >
         <Button
           icon={ROUTES_USER.notification.icon}
-          classes={['secondary', 'square']}
+          classes={['secondary', 'md', 'square']}
           title={(t(ROUTES_USER.notification.text))}
         />
         <span className={style.count}>12</span>
@@ -78,7 +78,7 @@ const Notifications = () => {
           <ul className={style.body}>
             {
               DATA.map((el, idx) =>
-                <li 
+                <li
                   key={idx}
                   className={
                     classNames(
@@ -89,7 +89,7 @@ const Notifications = () => {
                 >
                   <p className={style.text}>{el.text}</p>
                   <p className={style.date}>{getDate(el.date, 3)}</p>
-                </li> 
+                </li>
               )
             }
           </ul>

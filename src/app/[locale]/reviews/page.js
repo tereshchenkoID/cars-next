@@ -1,11 +1,17 @@
 import { NAVIGATION } from 'constant/config'
 import { fetchMetaTags } from 'utils/fetchMetaTags'
+import { fetchData } from 'utils/fetchData'
 
 import SectionReviews from 'sections/SectionReviews'
 
+export async function generateMetadata() {
+  return await fetchMetaTags('reviews')
+}
+
 const Reviews = async () => {
-  const [metaTags] = await Promise.all([
-    fetchMetaTags('reviews')
+  const [metaTags, data] = await Promise.all([
+    fetchMetaTags('reviews'),
+    fetchData('reviews')
   ])
 
   const jsonLd = {
@@ -31,7 +37,7 @@ const Reviews = async () => {
 
   return (
     <>
-      <SectionReviews />
+      <SectionReviews initialData={data} />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}

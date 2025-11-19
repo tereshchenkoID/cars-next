@@ -13,11 +13,10 @@ import { overflowBody } from 'helpers/overflowBody'
 
 import Container from 'components/Container'
 import Icon from 'components/Icon'
-import BrandsModal from 'modules/BrandsModal'
-import HistoryModal from 'modules/HistoryModal'
-import Skeleton from 'modules/Skeleton'
-import Card from 'modules/Card'
 import Pagination from 'modules/Pagination'
+import BrandsModal from 'modules/Modals/BrandsModal'
+import HistoryModal from 'modules/Modals/HistoryModal'
+import VehicleCard from 'modules/Cards/VehicleCard'
 import Filters from './Filters'
 import Sort from './Sort'
 
@@ -196,14 +195,11 @@ const SectionsCars = ({ initialData }) => {
                   <div className={style.cards}>
                     {
                       data?.data?.map((el, idx) =>
-                        loading
-                          ?
-                            <Skeleton key={idx} />
-                          :
-                            <Card
-                              key={idx}
-                              data={el}
-                            />
+                        <VehicleCard
+                          key={idx}
+                          data={el}
+                          isLoading={loading}
+                        />
                       )
                     }
                   </div>

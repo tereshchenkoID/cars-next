@@ -4,7 +4,7 @@ import SectionCategories from './SectionCategories'
 import SectionReviews from './SectionReviews'
 import SectionNew from './SectionNew'
 import SectionHero from './SectionHero'
-import SectionContact from '../SectionContact'
+import SectionContact from 'sections/SectionContact'
 
 const SectionHome = ({ initialData }) => {
   const { reviews, cars } = initialData

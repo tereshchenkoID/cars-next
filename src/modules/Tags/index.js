@@ -14,26 +14,29 @@ const Tags = ({ data, isOpen = false }) => {
   const hiddenItemsCount = totalItems - COUNT
 
   if(!data)
-    return 
+    return
 
   return (
     <ul className={style.block}>
-      {data.slice(0, show ? totalItems : COUNT).map((el, idx) => (
-        <li 
-          key={idx} 
-          className={style.tag}
-        >
-          {t(`features.${el.parentId}.${el.id}`)}
-        </li>
-      ))}
-      {hiddenItemsCount > 0 && (
+      {
+        data.slice(0, show ? totalItems : COUNT).map((el, idx) =>
+          <li
+            key={idx}
+            className={style.tag}
+          >
+            {t(`features.${el.parentId}.${el.id}`)}
+          </li>
+        )
+      }
+      {
+        hiddenItemsCount > 0 &&
         <li
           className={classNames(style.tag, style.alt)}
           onClick={() => setShow(!show)}
         >
           {show ? `- ${t('hide')}` : `+ ${hiddenItemsCount} ${t('more')}`}
         </li>
-      )}
+      }
     </ul>
   )
 }

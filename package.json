@@ -3,8 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "NEXT_PUBLIC_ENV=local next dev",
-    "build": "NEXT_PUBLIC_ENV=production next build",
+    "dev": "sudo NEXT_PUBLIC_ENV=local next dev",
+    "build": "sudo NEXT_PUBLIC_ENV=production next build",
     "start": "NEXT_PUBLIC_ENV=production next start",
     "lint": "next lint"
   },

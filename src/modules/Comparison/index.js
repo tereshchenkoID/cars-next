@@ -1,6 +1,6 @@
-import { useTranslations } from 'next-intl'
 import { useMemo } from 'react'
 import { useSelector } from 'react-redux'
+import { useTranslations } from 'next-intl'
 
 import { getFormatPrice } from 'helpers/getFormatPrice'
 

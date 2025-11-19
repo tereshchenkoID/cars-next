@@ -18,22 +18,22 @@ const MENU = [
     title: 'menu',
     submenu: [
       NAVIGATION.buy,
-      NAVIGATION.new_auto,
-      NAVIGATION.about_us,
+      // NAVIGATION.new_auto,
+      // NAVIGATION.about_us,
     ]
   },
-  {
-    title: 'services',
-    submenu: [
-      NAVIGATION.new_auto,
-      NAVIGATION.how_it_works,
-    ]
-  },
+  // {
+  //   title: 'services',
+  //   submenu: [
+  //     NAVIGATION.new_auto,
+  //     NAVIGATION.how_it_works,
+  //   ]
+  // },
   {
     title: 'company',
     submenu: [
-      NAVIGATION.about_us,
-      NAVIGATION.how_it_works,
+      // NAVIGATION.about_us,
+      // NAVIGATION.how_it_works,
       NAVIGATION.reviews,
     ]
   }

@@ -1,9 +1,10 @@
 "use client"
 
-import { useParams, useSearchParams } from 'next/navigation'
-import { usePathname, useRouter } from 'i18n/routing'
 import { useState, useRef, useTransition } from 'react'
+import { useParams, useSearchParams } from 'next/navigation'
 import { useSelector } from 'react-redux'
+import { usePathname, useRouter } from 'i18n/routing'
+
 import { useOutsideClick } from 'hooks/useOutsideClick'
 
 import Image from 'next/image'
@@ -30,7 +31,7 @@ const Language = () => {
     { buttonRef }
   )
 
-  const handleLanguageChange = (newLocale) => {
+  const handleChange = (newLocale) => {
     const url = searchParams.size > 0 ? `${pathname}?${searchParams}` : pathname
 
     setShow(false)
@@ -66,15 +67,14 @@ const Language = () => {
         </span>
       </button>
       {
-        show &&
+        (show && settings?.languages?.length > 1) &&
         <ul className={style.dropdown}>
           {
             settings.languages.map((el, idx) =>
               active !== el.code &&
               <li
                 key={idx}
-                className={style.item}
-                onClick={() => handleLanguageChange(el.code)}
+                onClick={() => handleChange(el.code)}
               >
                 <button
                   type={'button'}

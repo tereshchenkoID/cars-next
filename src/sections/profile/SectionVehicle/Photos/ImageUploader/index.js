@@ -17,6 +17,8 @@ const ImageUploader = ({ onUpload }) => {
     handleFiles(files)
   }
 
+  console.log(selectedFiles)
+
   const handleFiles = (files) => {
     const validFiles = files.filter((file) => file.type.startsWith("image/"))
 
@@ -103,32 +105,35 @@ const ImageUploader = ({ onUpload }) => {
           <p>{t('upload_photo')}</p>
         </label>
 
-        {previewImages.length > 0 &&
+        {
+          previewImages.length > 0 &&
           <>
             <div className={style.previews}>
-              {previewImages.map((src, index) => (
-                <div
-                  key={index}
-                  className={style.preview}
-                >
-                  <img
-                    src={src}
-                    alt={`Preview ${index}`}
-                  />
-                  <div className={style.remove}>
-                    <Button
-                      classes={['primary', 'sm', 'square']}
-                      icon={'xmark'}
-                      onChange={() => handleRemoveImage(index)}
+              {
+                previewImages.map((src, index) =>
+                  <div
+                    key={index}
+                    className={style.preview}
+                  >
+                    <img
+                      src={src}
+                      alt={`Preview ${index}`}
                     />
+                    <div className={style.remove}>
+                      <Button
+                        classes={['primary', 'sm', 'square']}
+                        icon={'xmark'}
+                        onChange={() => handleRemoveImage(index)}
+                      />
+                    </div>
                   </div>
-                </div>
-              ))}
+                )
+              }
             </div>
             <Button
               type={'submit'}
               placeholder={t('upload')}
-              classes={['primary', style.button]}
+              classes={['primary', 'md']}
             />
           </>
         }

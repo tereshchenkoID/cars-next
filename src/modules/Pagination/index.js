@@ -9,22 +9,28 @@ const Pagination = ({ filtersProps }) => {
     handleNext,
   } = filtersProps
 
+  if (pagination?.pages < 2) return
+
+  const handleScrollTop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" })
+  }
+
   return (
     <div className={style.block}>
-      <Button 
+      <Button
         icon={"angle-down"}
         classes={['primary', 'square', 'xs', style.prev]}
         onChange={() => {
-          window.scrollTo({ top: 0, behavior: 'smooth' })
+          handleScrollTop()
           handlePrev()
         }}
         isDisabled={pagination.page === 0 || pagination.page === 1}
       />
       <p className={style.count}>{pagination.page} / {pagination.pages}</p>
-      <Button 
+      <Button
         icon={"angle-down"}
         onChange={() => {
-          window.scrollTo({ top: 0, behavior: 'smooth' })
+          handleScrollTop()
           handleNext()
         }}
         classes={['primary', 'square', 'xs', style.next]}

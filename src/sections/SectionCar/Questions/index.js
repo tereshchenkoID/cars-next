@@ -1,21 +1,16 @@
-"use client"
-
 import { useTranslations } from 'next-intl'
-import { useSelector } from 'react-redux'
-import { Fragment, useState, useMemo } from 'react'
+import { Fragment, useState } from 'react'
 import { useModal } from 'context/ModalContext'
 
 import classNames from 'classnames'
 
-import { validationRules } from 'utils/validationRules'
-
+import { useAuth } from 'hooks/useAuth'
 import { getDate } from 'helpers/getDate'
 
-import Textarea from 'components/Textarea'
 import Button from 'components/Button'
+import Textarea from 'components/Textarea'
 import Avatar from 'modules/Avatar'
-import LoginModal from 'modules/LoginModal'
-import InputGroup from 'modules/InputGroup'
+import LoginModal from 'modules/Modals/LoginModal'
 
 import style from './index.module.scss'
 
@@ -36,22 +31,9 @@ const DATA = [
 
 const Questions = ({ data }) => {
   const t = useTranslations()
-  const auth = useSelector((state) => state.auth)
-  const isAuth = auth?.id
+  const { isAuth } = useAuth()
   const { showModal } = useModal()
-  const [filter, setFilter] = useState({
-    question: {
-      value: '',
-      isValid: false
-    }
-  })
-
-  const handleChange = (field, { value, isValid }) => {
-    setFilter((prevData) => ({
-      ...prevData,
-      [field]: { value, isValid },
-    }))
-  }
+  const [filter, setFilter] = useState('')
 
   const handleSubmit = (e) => {
     e.preventDefault()
@@ -65,21 +47,15 @@ const Questions = ({ data }) => {
         )
   }
 
-  const isFormValid = useMemo(() => {
-    return Object.values(filter).every((field) => field.isValid)
-  }, [filter])
-
   return (
     <div className={style.block}>
-      {/* <pre className={style.pre}>{JSON.stringify(filter, null, 2)}</pre> */}
-
       <ul className={style.badges}>
         {
           Array.from({ length: 5 }, (_, idx) =>
             <li
               key={idx}
               className={style.badge}
-              onClick={() => handleChange('question', { value: `${t(`rules.questions.${idx}`)}?`, isValid: true })}
+              onClick={() => setFilter(`${t(`rules.questions.${idx}`)}?`)}
             >
               {t(`rules.questions.${idx}`)}?
             </li>
@@ -91,33 +67,17 @@ const Questions = ({ data }) => {
         className={style.form}
         onSubmit={handleSubmit}
       >
-         <InputGroup
-          value={filter.question.value}
-          rules={[
-            validationRules.required,
-            validationRules.minLength(5)
-          ]}
-          onValidationChange={(isValid) =>
-            handleChange('question', { value: filter.question.value, isValid })
-          }
-        >
-          <Textarea
-            placeholder={t('question')}
-            data={filter.question.value}
-            onChange={(value) => handleChange('question', { value, isValid: filter.question.isValid })}
-          />
-        </InputGroup>
-
-        {/* <Textarea
+        <Textarea
           placeholder={t('question')}
-          data={search}
-          onChange={(value) => setSearch(value)}
-        /> */}
+          data={filter}
+          onChange={(value) => setFilter(value)}
+          isRequired={true}
+        />
         <Button
           type={'submit'}
           placeholder={t('actions.send')}
-          classes={['primary', style.button]}
-          isDisabled={!isFormValid}
+          classes={['primary', 'md', style.button]}
+          isDisabled={filter.length < 10}
         />
       </form>
       <hr className={style.hr} />

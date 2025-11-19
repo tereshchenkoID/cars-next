@@ -1,58 +1,126 @@
-"use client"
-
+import { useState } from 'react'
 import { useTranslations } from 'next-intl'
 
-import Label from 'components/Label'
-import Field from 'components/Field'
-import Accordion from 'modules/Accordion'
+import classNames from 'classnames'
+
 import Button from 'components/Button'
+import Field from 'components/Field'
+import Phone from 'components/Phone'
+import Accordion from 'modules/Accordion'
 
 import style from '../index.module.scss'
 
-const Contact = ({
-  data,
-  toggle,
-  handleToggle,
-  handleChange
-}) => {
+const Contact = ({ filter, handlePropsChange }) => {
   const t = useTranslations()
+  const [toggle, setToggle] = useState(false)
+
+  const handleAddPhone = () => {
+    handlePropsChange('contact.phone', [...filter.phone, ''])
+  }
+
+  const handleRemovePhone = (idx) => {
+    const updated = filter.phone.filter((_, i) => i !== idx)
+    handlePropsChange('contact.phone', updated)
+  }
+
+  const handleUpdatePhone = (idx, value) => {
+    const updated = [...filter.phone]
+    updated[idx] = value
+    handlePropsChange('contact.phone', updated)
+  }
 
   return (
     <Accordion
-      data={toggle[4]}
-      action={() => handleToggle(4)}
+      data={toggle}
+      action={() => setToggle(!toggle)}
       icon={'user'}
       placeholder={t('contact')}
     >
       <div className={style.grid}>
         <div className={style.list}>
-          <div className={style.wrapper}>
-            <Label
-              data={t('name')}
-              isRequired={true}
-            />
-            <Field
-              placeholder={t('name')}
-              data={data.contact.name}
-              onChange={(value) => handleChange('contact.name', value)}
-            />
+          <Field
+            placeholder={t('name')}
+            data={filter.name}
+            onChange={(value) => handlePropsChange('contact.name', value)}
+            isRequired={true}
+            isLabel={true}
+          />
+          <Field
+            placeholder={t('surname')}
+            data={filter.surname}
+            onChange={(value) => handlePropsChange('contact.surname', value)}
+            isRequired={true}
+            isLabel={true}
+          />
+        </div>
+        <div
+          className={
+            classNames(
+              style.list,
+              style.bottom
+            )
+          }
+        >
+          <div className={style.grid}>
+            {
+              filter.phone.map((el, idx) =>
+                <div
+                  key={idx}
+                  className={style.phone}
+                >
+                  <Phone
+                    data={el}
+                    onChange={(value) => handleUpdatePhone(idx, value)}
+                    isRequired={idx === 0}
+                    isLabel={idx === 0}
+                    label={t('phone')}
+                  />
+                  {
+                    idx > 0 &&
+                    <Button
+                      icon={'trash'}
+                      classes={['secondary', 'square', 'sm']}
+                      title={t('remove')}
+                      onChange={() => handleRemovePhone(idx)}
+                    />
+                  }
+                </div>
+              )
+            }
           </div>
-          <div className={style.wrapper}>
-            <Label
-              data={t('surname')}
-              isRequired={true}
-            />
-            <Field
-              placeholder={t('surname')}
-              data={data.contact.surname}
-              onChange={(value) => handleChange('contact.surname', value)}
-            />
-          </div>
+          <Button
+            classes={['primary', 'sm']}
+            placeholder={t('actions.add')}
+            onChange={handleAddPhone}
+          />
+        </div>
+        <div className={style.list}>
+          <Field
+            type={'email'}
+            placeholder={t('email')}
+            data={filter.email}
+            onChange={(value) => handlePropsChange('contact.email', value)}
+            isRequired={true}
+            isLabel={true}
+          />
+          <div className={style.wrapper} />
+          <Field
+            placeholder={'WhatsApp'}
+            data={filter.messengers.whatsapp}
+            onChange={(value) => handlePropsChange('contact.messengers.whatsapp', value)}
+            isLabel={true}
+          />
+          <Field
+            placeholder={'Telegram'}
+            data={filter.messengers.telegram}
+            onChange={(value) => handlePropsChange('contact.messengers.telegram', value)}
+            isLabel={true}
+          />
         </div>
         <div className={style.footer}>
           <Button
-            classes={['primary', style.button]}
-            placeholder={t('actions.save')}
+            classes={['primary', 'md']}
+            placeholder={t('actions.next')}
           />
         </div>
       </div>

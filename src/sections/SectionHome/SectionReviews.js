@@ -11,7 +11,7 @@ import { Navigation, Pagination, Mousewheel } from 'swiper/modules'
 import Container from "components/Container"
 import Reference from 'components/Reference'
 import StarRating from 'modules/StarRating'
-import Review from 'modules/Review'
+import ReviewCard from 'modules/Cards/ReviewCard'
 
 import style from './index.module.scss'
 
@@ -51,9 +51,9 @@ const SectionReviews = ({ data }) => {
           modules={[Mousewheel, Pagination, Navigation]}
         >
           {
-            data.map((el, idx) =>
+            data?.data.map((el, idx) =>
               <SwiperSlide key={idx}>
-                <Review data={el} />
+                <ReviewCard data={el} />
               </SwiperSlide>
             )
           }

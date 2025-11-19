@@ -125,5 +125,7 @@
 }
 
 .wrapper {
+  grid-template-columns: repeat(2, 1fr);
   gap: var(--gap-8);
+  align-items: flex-end;
 }

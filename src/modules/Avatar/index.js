@@ -3,7 +3,6 @@ import classNames from 'classnames'
 import style from './index.module.scss'
 
 const Avatar = ({ size, src, alt }) => {
-
   return (
     <div
       className={
@@ -14,11 +13,11 @@ const Avatar = ({ size, src, alt }) => {
       }
     >
       {
-        src 
+        src
           ?
             <img
               className={style.image}
-              src={src} 
+              src={src}
               loading={'lazy'}
               alt={alt}
             />

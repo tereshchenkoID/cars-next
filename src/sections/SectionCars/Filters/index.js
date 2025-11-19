@@ -15,8 +15,8 @@ import Select from 'components/Select'
 import Reference from 'components/Reference'
 import Checkbox from 'components/Checkbox'
 import Label from 'components/Label'
-import Backdrop from 'modules/Backdrop'
 import Brands from 'modules/Brands'
+import Backdrop from 'modules/Modals/Backdrop'
 import FiltersMultiSelect from 'modules/FiltersMultiSelect'
 import FiltersColorSelect from 'modules/FiltersColorSelect'
 import History from './History'
@@ -111,55 +111,42 @@ const Filters = ({
           {
             active === 0 &&
             <>
-              <div className={style.section}>
-                <Label data={t('model')} />
-                <Brands
-                  show={showBrand}
-                  setShow={setShowBrands}
-                  isWide={true}
+              <Brands
+                show={showBrand}
+                setShow={setShowBrands}
+                isWide={true}
+                isLabel={true}
+                label={t('model')}
+              />
+              <Select
+                id={'select_state'}
+                options={
+                  Object.entries(filters.state.options).map(([optionKey, _]) => ({
+                    value: optionKey,
+                    label: optionKey === DEFAULT ? t('all') : t(`filters.state.${optionKey}`),
+                  }))
+                }
+                data={search.state?.value[0] || DEFAULT}
+                onChange={(value) => handleChange('select', 'state', value)}
+                isLabel={true}
+                label={t('filters.state.0')}
+              />
+              <div className={style.wrapper}>
+                <Field
+                  type={'number'}
+                  placeholder={t('from')}
+                  data={search.price_from?.value[0] !== DEFAULT ? search.price_from?.value[0] : ''}
+                  onChange={(value) => handleChange('field', 'price_from', value)}
+                  isLabel={true}
+                  label={t('filters.price.0')}
+                />
+                <Field
+                  type={'number'}
+                  placeholder={t('to')}
+                  data={search.price_to?.value[0] !== DEFAULT ? search.price_to?.value[0] : ''}
+                  onChange={(value) => handleChange('field', 'price_to', value)}
                 />
               </div>
-
-              <div className={style.section}>
-                <Label data={t('filters.state.0')} />
-                <div className={style.wrapper}>
-                  <Select
-                    id={'select_state'}
-                    options={
-                      Object.entries(filters.state.options).map(([optionKey, _]) => ({
-                        value: optionKey,
-                        label: optionKey === DEFAULT ? t('all') : t(`filters.state.${optionKey}`),
-                      }))
-                    }
-                    data={search.state?.value[0] || DEFAULT}
-                    onChange={(value) => handleChange('select', 'state', value)}
-                  />
-                </div>
-              </div>
-
-              <div className={style.section}>
-                <Label data={t('filters.price.0')} />
-                <div
-                  className={style.wrapper}
-                  style={{
-                    gridTemplateColumns: 'repeat(2, 1fr)',
-                  }}
-                >
-                  <Field
-                    type={"number"}
-                    placeholder={t('from')}
-                    data={search.price_from?.value[0] !== DEFAULT ? search.price_from?.value[0] : ''}
-                    onChange={(value) => handleChange('field', 'price_from', value)}
-                  />
-                  <Field
-                    type={"number"}
-                    placeholder={t('to')}
-                    data={search.price_to?.value[0] !== DEFAULT ? search.price_to?.value[0] : ''}
-                    onChange={(value) => handleChange('field', 'price_to', value)}
-                  />
-                </div>
-              </div>
-
               <div className={style.section}>
                 <Checkbox
                   placeholder={t('filters.vat_reclaimable.0')}
@@ -174,122 +161,97 @@ const Filters = ({
                   onChange={(value) => handleChange('select', 'discount', value)}
                 />
               </div>
-
-              <div className={style.section}>
-                <Label data={t('filters.category.0')} />
-                <FiltersMultiSelect
-                  placeholder={'category'}
-                  options={filters.category.options}
-                  data={search.category}
-                  onChange={handleChange}
+              <FiltersMultiSelect
+                placeholder={'category'}
+                options={filters.category.options}
+                data={search.category}
+                onChange={handleChange}
+                isLabel={true}
+                label={t('filters.category.0')}
+              />
+              <FiltersMultiSelect
+                placeholder={'body'}
+                options={filters.body.options}
+                data={search.body}
+                onChange={handleChange}
+                isLabel={true}
+                label={t('filters.body.0')}
+              />
+              <div className={style.wrapper}>
+                <Field
+                  type={'number'}
+                  placeholder={t('from')}
+                  data={search.mileage_from?.value[0] !== DEFAULT ? search.mileage_from?.value[0] : ''}
+                  onChange={(value) => handleChange('field', 'mileage_from', value)}
+                  isLabel={true}
+                  label={t('filters.mileage.0')}
+                />
+                <Field
+                  type={'number'}
+                  placeholder={t('to')}
+                  data={search.mileage_to?.value[0] !== DEFAULT ? search.mileage_to?.value[0] : ''}
+                  onChange={(value) => handleChange('field', 'mileage_to', value)}
                 />
               </div>
 
-              <div className={style.section}>
-                <Label data={t('filters.body.0')} />
-                <FiltersMultiSelect
-                  placeholder={'body'}
-                  options={filters.body.options}
-                  data={search.body}
-                  onChange={handleChange}
+              <div className={style.wrapper}>
+                <Select
+                  id={'select_year_from'}
+                  options={
+                    getYears().map(year => ({
+                      value: year === DEFAULT ? DEFAULT : year,
+                      label: year === DEFAULT ? t('from') : year,
+                    }))
+                  }
+                  data={search.year_from?.value[0] || DEFAULT}
+                  onChange={(value) => handleChange('select', 'year_from', value)}
+                  isLabel={true}
+                  label={t('filters.year.0')}
+                />
+                <Select
+                  id={'select_year_to'}
+                  options={
+                    getYears().map(year => ({
+                      value: year === DEFAULT ? DEFAULT : year,
+                      label: year === DEFAULT ? t('to') : year,
+                    }))
+                  }
+                  data={search.year_to?.value[0] || DEFAULT}
+                  onChange={(value) => handleChange('select', 'year_to', value)}
                 />
               </div>
-
-              <div className={style.section}>
-                <Label data={t('filters.mileage.0')} />
-                <div
-                  className={style.wrapper}
-                  style={{
-                    gridTemplateColumns: 'repeat(2, 1fr)',
-                  }}
-                >
-                  <Field
-                    type={"number"}
-                    placeholder={t('from')}
-                    data={search.mileage_from?.value[0] !== DEFAULT ? search.mileage_from?.value[0] : ''}
-                    onChange={(value) => handleChange('field', 'mileage_from', value)}
-                  />
-                  <Field
-                    type={"number"}
-                    placeholder={t('to')}
-                    data={search.mileage_to?.value[0] !== DEFAULT ? search.mileage_to?.value[0] : ''}
-                    onChange={(value) => handleChange('field', 'mileage_to', value)}
-                  />
-                </div>
-              </div>
-
-              <div className={style.section}>
-                <Label data={t('filters.year.0')} />
-                <div
-                  className={style.wrapper}
-                  style={{
-                    gridTemplateColumns: 'repeat(2, 1fr)',
-                  }}
-                >
-                  <Select
-                    id={'select_year_from'}
-                    options={
-                      getYears().map(year => ({
-                        value: year === DEFAULT ? DEFAULT : year,
-                        label: year === DEFAULT ? t('from') : year,
-                      }))
-                    }
-                    data={search.year_from?.value[0] || DEFAULT}
-                    onChange={(value) => handleChange('select', 'year_from', value)}
-                  />
-                  <Select
-                    id={'select_year_to'}
-                    options={
-                      getYears().map(year => ({
-                        value: year === DEFAULT ? DEFAULT : year,
-                        label: year === DEFAULT ? t('to') : year,
-                      }))
-                    }
-                    data={search.year_to?.value[0] || DEFAULT}
-                    onChange={(value) => handleChange('select', 'year_to', value)}
-                  />
-                </div>
-              </div>
-
-              <div className={style.section}>
-                <Label data={t('filters.fuel_type.0')} />
-                <FiltersMultiSelect
-                  placeholder={'fuel_type'}
-                  options={filters.fuel_type.options}
-                  data={search.fuel_type}
-                  onChange={handleChange}
-                />
-              </div>
-
-              <div className={style.section}>
-                <Label data={t('filters.transmission.0')} />
-                <FiltersMultiSelect
-                  placeholder={'transmission'}
-                  options={filters.transmission.options}
-                  data={search.transmission}
-                  onChange={handleChange}
-                />
-              </div>
-
-              <div className={style.section}>
-                <Label data={t('filters.eco.0')} />
-                <FiltersMultiSelect
-                  placeholder={'eco'}
-                  options={filters.eco.options}
-                  data={search.eco}
-                  onChange={handleChange}
-                />
-              </div>
-
-              <div className={style.section}>
-                <Label data={t('filters.color.0')} />
-                <FiltersColorSelect
-                  placeholder={'color'}
-                  options={filters.color.options}
-                  data={search.color}
-                  onChange={handleChange}
-                />
-              </div>
+              <FiltersMultiSelect
+                placeholder={'fuel_type'}
+                options={filters.fuel_type.options}
+                data={search.fuel_type}
+                onChange={handleChange}
+                isLabel={true}
+                label={t('filters.fuel_type.0')}
+              />
+              <FiltersMultiSelect
+                placeholder={'transmission'}
+                options={filters.transmission.options}
+                data={search.transmission}
+                onChange={handleChange}
+                isLabel={true}
+                label={t('filters.transmission.0')}
+              />
+              <FiltersMultiSelect
+                placeholder={'eco'}
+                options={filters.eco.options}
+                data={search.eco}
+                onChange={handleChange}
+                isLabel={true}
+                label={t('filters.eco.0')}
+              />
+              <FiltersColorSelect
+                placeholder={'color'}
+                options={filters.color.options}
+                data={search.color}
+                onChange={handleChange}
+                isLabel={true}
+                label={t('filters.color.0')}
+              />
             </>
           }
 
@@ -316,13 +278,13 @@ const Filters = ({
           <div className={style.footer}>
             <Button
               type={"submit"}
-              classes={['primary', 'wide']}
+              classes={['primary', 'md', 'wide']}
               placeholder={t('search')}
               isLoading={loading}
             />
             <Reference
               link={NAVIGATION.advanced_search.link}
-              classes={['alt', 'wide']}
+              classes={['alt', 'md', 'wide']}
               placeholder={t(NAVIGATION.advanced_search.text)}
             />
           </div>
