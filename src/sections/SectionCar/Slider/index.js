@@ -21,8 +21,7 @@ const Slider = ({ data }) => {
         onChange={() => router.back()}
       />
       <Swiper
-        // @TODO Check class
-        className={style.block}
+        className={style.slider}
         slidesPerView={'auto'}
         // mousewheel={true}
         // keyboard={{
