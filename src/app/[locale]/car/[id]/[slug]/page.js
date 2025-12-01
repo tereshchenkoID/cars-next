@@ -11,29 +11,29 @@ export async function generateMetadata() {
 const Car = async ({ params }) => {
   const { id } = await params
   const data = await fetchData(`item/${id}`)
-  const nextId = data.price_map?.find(option => option.selected)?.id
+  const nextId = data.price.price_map?.find(option => option.selected)?.id
   const next = nextId ? await fetchData(`item/${nextId}`) : null
 
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "Product",
-    "name": data.meta.name,
-    "description": data.meta.description,
+    "name": data.details.meta.name,
+    "description": data.details.meta.description,
     "image": data.images || [],
     "brand": {
       "@type": "Brand",
-      "name": data.make || NA,
+      "name": data.details.make || NA,
     },
-    "model": data.model.name || NA,
-    "vehicleModelDate": data.date.manufacture || NA,
+    "model": data.details.model.name || NA,
+    "vehicleModelDate": data.details.date.manufacture_registration || NA,
     "manufacturer": {
       "@type": "Organization",
-      "name": data.make.name || NA,
+      "name": data.details.make.name || NA,
     },
     "offers": {
       "@type": "Offer",
-      "priceCurrency": data.currency.name || NA,
-      "price": data.price_data.price || NA,
+      "priceCurrency": data.price.currency.name || NA,
+      "price": data.price.price_data.price || NA,
       "itemCondition": "https://schema.org/UsedCondition",
       "availability": "https://schema.org/InStock",
       "url": `${process.env.BASE_URL}/car/${id}`,
@@ -43,23 +43,23 @@ const Car = async ({ params }) => {
         "url": process.env.BASE_URL,
       },
     },
-    "sku": data.meta.name || NA,
+    "sku": data.details.meta.name || NA,
     "vehicleEngine": {
       "@type": "EngineSpecification",
-      "name": data.power_data.power || NA,
-      "fuelType": data.fuel_type.name || NA,
+      "name": data.details.power_data.power || NA,
+      "fuelType": data.details.fuel_type.name || NA,
     },
     "mileageFromOdometer": {
       "@type": "QuantitativeValue",
-      "value": data.mileage_data.mileage || NA,
-      "unitCode": data.mileage_data.mileage_unit,
+      "value": data.details.mileage_data.mileage || NA,
+      "unitCode": data.details.mileage_data.mileage_unit,
     },
-    "color": data.color.name || NA,
-    "bodyType": data.body.name || NA,
-    "fuelType": data.fuel_type.name || NA,
-    "vehicleTransmission": data.transmission.name || NA,
-    "numberOfDoors": data.number_of_doors || NA,
-    "seatingCapacity": data.number_of_seats || 5,
+    "color": data.equipment.color.name || NA,
+    "bodyType": data.details.body.name || NA,
+    "fuelType": data.details.fuel_type.name || NA,
+    "vehicleTransmission": data.details.transmission.name || NA,
+    "numberOfDoors": data.equipment.number_of_doors || NA,
+    "seatingCapacity": data.equipment.number_of_seats || 5,
   }
 
   return (

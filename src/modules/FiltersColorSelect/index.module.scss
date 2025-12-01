@@ -1,7 +1,7 @@
 @use 'scss/config' as *;
 @use 'scss/modules/color' as *;
 
-.block {
+.wrapper {
   @include flex($align-items: center, $wrap: wrap);
 
   padding-top: var(--gap-4);

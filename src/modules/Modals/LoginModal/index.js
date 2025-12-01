@@ -1,4 +1,4 @@
-import { useState, useMemo } from 'react'
+import { useMemo } from 'react'
 import { useTranslations } from 'next-intl'
 import { useModal } from 'context/ModalContext'
 import { useDispatch } from 'react-redux'
@@ -6,6 +6,7 @@ import { signIn } from 'next-auth/react'
 
 import { validationRules } from 'utils/validationRules'
 
+import { useFilterState } from 'hooks/useFilterState'
 import { setToastify } from 'store/actions/toastifyAction'
 
 import Button from 'components/Button'
@@ -18,20 +19,22 @@ import RestoreModal from 'modules/Modals/RestoreModal'
 
 import style from './index.module.scss'
 
+const INITIAL_FILTER = {
+  username: {
+    value: '',
+    isValid: false
+  },
+  password: {
+    value: '',
+    isValid: false
+  },
+}
+
 const LoginModal = () => {
   const t = useTranslations()
   const dispatch = useDispatch()
   const { showModal } = useModal()
-  const [filter, setFilter] = useState({
-    username: {
-      value: '',
-      isValid: false
-    },
-    password: {
-      value: '',
-      isValid: false
-    },
-  })
+  const { filter, handlePropsChange } = useFilterState(INITIAL_FILTER)
 
   const openModal = (type) => {
     const ModalComponent = type === 0 ? RegistrationModal : RestoreModal
@@ -58,13 +61,6 @@ const LoginModal = () => {
         })
       )
     }
-  }
-
-  const handleChange = (field, { value, isValid }) => {
-    setFilter((prevData) => ({
-      ...prevData,
-      [field]: { value, isValid },
-    }))
   }
 
   const isFormValid = useMemo(() => {
@@ -113,13 +109,13 @@ const LoginModal = () => {
             validationRules.minLength(5),
           ]}
           onValidationChange={(isValid) =>
-            handleChange('username', { value: filter.username.value, isValid })
+            handlePropsChange('username', { value: filter.username.value, isValid })
           }
         >
           <Field
             placeholder={t('username')}
             data={filter.username.value}
-            onChange={(value) => handleChange('username', { value, isValid: filter.username.isValid })}
+            onChange={(value) => handlePropsChange('username', { value, isValid: filter.username.isValid })}
           />
         </InputGroup>
 
@@ -131,13 +127,13 @@ const LoginModal = () => {
             validationRules.minLength(5),
           ]}
           onValidationChange={(isValid) =>
-            handleChange('password', { value: filter.password.value, isValid })
+            handlePropsChange('password', { value: filter.password.value, isValid })
           }
         >
           <Password
             placeholder={t('password')}
             data={filter.password.value}
-            onChange={(value) => handleChange('password', { value, isValid: filter.password.isValid })}
+            onChange={(value) => handlePropsChange('password', { value, isValid: filter.password.isValid })}
           />
         </InputGroup>
 

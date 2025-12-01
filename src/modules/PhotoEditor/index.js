@@ -131,7 +131,7 @@ const PhotoEditor = ({ blob, onClose }) => {
 
         <div className={style.options}>
           <Button
-            icon={'reset'}
+            icon={'reload'}
             classes={['primary', 'square', 'sm']}
             onChange={resetFilters}
           />

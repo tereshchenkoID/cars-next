@@ -39,6 +39,21 @@
   top: rem(-8px);
   right: rem(-8px);
   z-index: $z-index-1;
+  border-radius: 50%;
+
+  &::before {
+    position: absolute;
+    inset: 1px;
+    border-radius: inherit;
+    background-color: currentColor;
+    z-index: -1;
+    content: '';
+  }
+
+  svg {
+    display: block;
+    color: var(--color-white);
+  }
 }
 
 .field {

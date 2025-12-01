@@ -43,9 +43,9 @@ const SectionsFavorites = ({ initialData }) => {
                 <div className={style.cards}>
                   <Pagination filtersProps={favoriteProps} />
                   {
-                    data?.map((el, idx) =>
+                    data?.map((el, _) =>
                       <VehicleCard
-                        key={idx}
+                        key={el.id}
                         data={el}
                         isLoading={loading}
                         updateFavorites={() => handleLoad(search.page, search.sort)}

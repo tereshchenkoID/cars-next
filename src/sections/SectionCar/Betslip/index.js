@@ -20,28 +20,28 @@ const Betslip = ({ data }) => {
           data?.meta?.top &&
           <Top
             size={'lg'}
-            count={data.meta.top.level}
+            count={data.details.meta.top.level}
           />
         }
         {
-          data?.price_data?.price_start &&
+          data?.price?.price_data?.price_start &&
           <div className={style.discount}>
             <Discount
               size={'lg'}
-              amount={getFormatPrice(auth?.account?.language?.code, auth?.account?.currency?.code, data.price_data.discount)}
+              amount={getFormatPrice(auth?.account?.language?.code, data.price.currency.code, data.price.price_data.discount)}
             />
-            <p className={style.old}>{getFormatPrice(auth?.account?.language?.code, auth?.account?.currency?.code, data.price_data.price_start)}</p>
+            <p className={style.old}>{getFormatPrice(auth?.account?.language?.code, data.price.currency.code, data.price.price_data.price_start)}</p>
           </div>
         }
         <h6 className={style.prize}>
           <span>Car price</span>
-          <span>{getFormatPrice(auth?.account?.language?.code, auth?.account?.currency?.code, data?.price_data?.price)} </span>
+          <span>{getFormatPrice(auth?.account?.language?.code, data.price.currency.code, data?.price.price_data?.price)} </span>
         </h6>
         {
-          data?.price_data?.price_without_vat &&
+          data?.price.price_data?.price_without_vat &&
           <p className={style.prize}>
             <span>Total price excluding VAT</span>
-            <span>{getFormatPrice(auth?.account?.language?.code, auth?.account?.currency?.code, data?.price_data?.price_without_vat)} </span>
+            <span>{getFormatPrice(auth?.account?.language?.code, data.price.currency.code, data?.price.price_data?.price_without_vat)} </span>
           </p>
         }
       </header>

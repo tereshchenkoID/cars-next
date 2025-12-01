@@ -7,6 +7,7 @@ export async function fetchData(url, options = {}) {
         // credentials: 'include',
       }
     )
+
     if (!res.ok) {
       // throw new Error(`Failed to fetch data from ${url}`)
     }

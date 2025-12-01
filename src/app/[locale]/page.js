@@ -51,6 +51,7 @@ const Home = async () => {
   const [metaTags] = await Promise.all([
     fetchMetaTags('home')
   ])
+
   const initialData = await fetchInitialData()
 
   const jsonLd = {

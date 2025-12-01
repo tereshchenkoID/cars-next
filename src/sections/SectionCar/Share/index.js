@@ -21,8 +21,8 @@ const Share = ({ data }) => {
   const t = useTranslations()
   const meta = {
     url: window.location.href,
-    title: data?.meta.name,
-    description: data?.meta.description
+    title: data?.details.meta.name,
+    description: data?.details.meta.description
   }
   const [show, setShow] = useState(false)
   const blockRef = useRef(null)

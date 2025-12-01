@@ -72,7 +72,7 @@ const SavedCard = ({
         <Button
           ref={buttonRef}
           classes={['secondary', 'sm', 'square']}
-          icon={'dots'}
+          icon={'dots-vertical'}
           onChange={(e) => {
             e.stopPropagation()
             setToggle(!toggle)

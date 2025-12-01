@@ -43,7 +43,7 @@ const SectionVehicles = ({ initialData }) => {
                     handleChange={handleChange}
                   />
                   <Reference
-                    link={`${ROUTES_USER.vehicles.link}/0/add-cars`}
+                    link={`${ROUTES_USER.vehicles.link}/add/add-cars`}
                     classes={['alt', 'sm']}
                     placeholder={t('add_vehicle')}
                     icon={'circle-plus'}

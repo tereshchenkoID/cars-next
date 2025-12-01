@@ -4,6 +4,8 @@ import { DEFAULT } from 'constant/config'
 
 import classNames from 'classnames'
 
+import Label from 'components/Label'
+
 import style from './index.module.scss'
 
 const FiltersColorSelect = ({
@@ -12,6 +14,8 @@ const FiltersColorSelect = ({
   data,
   onChange,
   isDisabled = false,
+  isLabel = false,
+  label = null
 }) => {
   const t = useTranslations()
 
@@ -25,23 +29,29 @@ const FiltersColorSelect = ({
       }
     >
       {
-        Object.entries(options).map(([optionKey, optionValue]) => (
-          <button
-            key={optionKey}
-            type="button"
-            aria-label={t(`filters.${placeholder}.${optionKey}`)}
-            style={{ backgroundColor: optionValue }}
-            title={optionKey === DEFAULT ? t('all') : t(`filters.${placeholder}.${optionKey}`)}
-            className={
-              classNames(
-                style.color,
-                data?.value?.includes(optionKey) && style.active
-              )
-            }
-            onClick={() => onChange('color', placeholder, optionKey)}
-          />
-        ))
+        isLabel &&
+        <Label data={label || placeholder} />
       }
+      <div className={style.wrapper}>
+        {
+          Object.entries(options).map(([optionKey, optionValue]) => (
+            <button
+              key={optionKey}
+              type="button"
+              aria-label={t(`filters.${placeholder}.${optionKey}`)}
+              style={{ backgroundColor: optionValue }}
+              title={optionKey === DEFAULT ? t('all') : t(`filters.${placeholder}.${optionKey}`)}
+              className={
+                classNames(
+                  style.color,
+                  data?.value?.includes(optionKey) && style.active
+                )
+              }
+              onClick={() => onChange('color', placeholder, optionKey)}
+            />
+          ))
+        }
+      </div>
     </div>
   )
 }

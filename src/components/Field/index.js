@@ -7,9 +7,9 @@ import Label from 'components/Label'
 import style from './index.module.scss'
 
 const Field = ({
-  type,
+  type = 'text',
   placeholder,
-  data,
+  data = '',
   onChange,
   classes = null,
   isRequired = false,
@@ -42,8 +42,8 @@ const Field = ({
       <div className={style.wrapper}>
         <input
           className={style.input}
-          type={type || 'text'}
-          value={data || ''}
+          type={type}
+          value={data}
           // value={data === null || undefined ? "" : data}
           onChange={e => {
             onChange(e.currentTarget.value)

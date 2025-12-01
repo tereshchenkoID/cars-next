@@ -10,6 +10,7 @@ import Image from 'next/image'
 import Button from 'components/Button'
 import Field from 'components/Field'
 import Checkbox from 'components/Checkbox'
+import Backdrop from 'modules/Modals/Backdrop'
 import Brand from './Brand'
 
 import style from './index.module.scss'
@@ -63,52 +64,52 @@ const BrandsModal = ({ show, setShow }) => {
 
   return (
     <div className={style.block}>
-      <div
-        className={style.backdrop}
-        onClick={handleClose}
+      <Backdrop
+        data={true}
+        onChange={() => handleClose()}
+        size={'lg'}
       />
-      <div className={style.content}>
-        <div className={style.wrapper}>
-          <Button
-            icon={'xmark'}
-            classes={['primary', 'md', 'square', style.close]}
-            onChange={handleClose}
-          />
-          <div className={style.header}>
-            <h6 className={style.title}>
-              {
-                activeBrand &&
-                <>
-                  <Button
-                    icon={'angle-down'}
-                    classes={['secondary', 'square', 'sm', style.arrow]}
-                    onChange={() => handleSelectBrand(null)}
-                  />
-                  <Image
-                    width={32}
-                    height={32}
-                    className={style.img}
-                    src={`/images/brands/${activeBrand.id}.webp`}
-                    priority={true}
-                    alt={activeBrand.name}
-                  />
-                </>
-              }
-              <span>{activeBrand ? activeBrand.name : t('actions.select_make')}</span>
-            </h6>
-            <Field
-              placeholder={t('make_or_model')}
-              data={query}
-              onChange={(value) => setQuery(value)}
-            />
-          </div>
-          <div className={style.body}>
+      <div className={style.wrapper}>
+        <div className={style.header}>
+          <h6 className={style.title}>
             {
-              activeBrand
-                ?
-                  <ul className={style.models}>
-                    {
-                      query.length > 2
+              activeBrand &&
+              <>
+                <Button
+                  icon={'angle-left'}
+                  classes={['secondary', 'square', 'sm', style.arrow]}
+                  onChange={() => handleSelectBrand(null)}
+                />
+                <Image
+                  width={32}
+                  height={32}
+                  className={style.img}
+                  src={`/images/brands/${activeBrand.id}.webp`}
+                  priority={true}
+                  alt={activeBrand.name}
+                />
+              </>
+            }
+            <span>{activeBrand ? activeBrand.name : t('actions.select_make')}</span>
+            <Button
+              icon={'xmark'}
+              classes={['secondary', 'square', 'sm', style.close]}
+              onChange={handleClose}
+            />
+          </h6>
+          <Field
+            placeholder={t('make_or_model')}
+            data={query}
+            onChange={(value) => setQuery(value)}
+          />
+        </div>
+        <div className={style.body}>
+          {
+            activeBrand
+              ?
+                <ul className={style.models}>
+                  {
+                    query.length > 2
                       ?
                         searchBrands.length > 0
                           ?
@@ -143,12 +144,12 @@ const BrandsModal = ({ show, setShow }) => {
                             />
                           </li>
                         )
-                    }
-                  </ul>
-                :
-                  <>
-                    {
-                      query.length > 2
+                  }
+                </ul>
+              :
+                <>
+                  {
+                    query.length > 2
                       ?
                         <>
                           <p className={style.subtitle}>{t('found_brands')}</p>
@@ -156,23 +157,23 @@ const BrandsModal = ({ show, setShow }) => {
                             {
                               searchBrands.length > 0
                                 ?
-                                  searchBrands.map((el, idx) =>
-                                    el.visible === "1" &&
-                                    <li
-                                      key={idx}
-                                      className={style.item}
-                                    >
-                                      <Brand
-                                        data={el}
-                                        isWide={true}
-                                        onChange={handleSelectBrand}
-                                      />
-                                    </li>
-                                  )
-                                :
-                                  <li className={style.item}>
-                                    {t('notification.not_found')}
+                                searchBrands.map((el, idx) =>
+                                  el.visible === ACTIVE &&
+                                  <li
+                                    key={idx}
+                                    className={style.item}
+                                  >
+                                    <Brand
+                                      data={el}
+                                      isWide={true}
+                                      onChange={handleSelectBrand}
+                                    />
                                   </li>
+                                )
+                                :
+                                <li className={style.item}>
+                                  {t('notification.not_found')}
+                                </li>
                             }
                           </ul>
                         </>
@@ -182,7 +183,7 @@ const BrandsModal = ({ show, setShow }) => {
                           <ul className={style.grid}>
                             {
                               mostBrands.map((el, idx) =>
-                                el.visible === "1" &&
+                                el.visible === ACTIVE &&
                                 <li
                                   key={idx}
                                   className={style.item}
@@ -199,7 +200,7 @@ const BrandsModal = ({ show, setShow }) => {
                           <ul className={style.list}>
                             {
                               brands.map((el, idx) =>
-                                el.visible === "1" &&
+                                el.visible === ACTIVE &&
                                 <li
                                   key={idx}
                                   className={style.item}
@@ -214,29 +215,28 @@ const BrandsModal = ({ show, setShow }) => {
                             }
                           </ul>
                         </>
-                    }
-                  </>
-            }
-          </div>
-          <div className={style.footer}>
-            {
-              activeBrand
-                ?
-                  <Button
-                    placeholder={t('actions.select_model')}
-                    classes={['primary', 'md', 'wide']}
-                    isDisabled={!activeModels}
-                    onChange={() => handleSelectBrand(null)}
-                  />
-                :
-                  <Button
-                    placeholder={t('offers')}
-                    classes={['primary', 'md', 'wide']}
-                    isDisabled={true}
-                    // onChange={() => handleSelectBrand(null)}
-                  />
-            }
-          </div>
+                  }
+                </>
+          }
+        </div>
+        <div className={style.footer}>
+          {
+            activeBrand
+              ?
+                <Button
+                  placeholder={t('actions.select_model')}
+                  classes={['primary', 'md', 'wide']}
+                  isDisabled={!activeModels}
+                  onChange={() => handleSelectBrand(null)}
+                />
+              :
+                <Button
+                  placeholder={t('offers')}
+                  classes={['primary', 'md', 'wide']}
+                  isDisabled={true}
+                  // onChange={() => handleSelectBrand(null)}
+                />
+          }
         </div>
       </div>
     </div>

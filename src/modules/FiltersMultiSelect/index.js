@@ -47,7 +47,8 @@ const FiltersMultiSelect = ({
       className={
         classNames(
           style.block,
-          { [style.active]: isShow, [style.disabled]: isDisabled }
+          isShow && style.active,
+          isDisabled && style.disabled,
         )
       }
     >

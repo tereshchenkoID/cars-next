@@ -7,8 +7,22 @@ export const NA = "n/a"
 export const TYPES = ["checkbox", "color"]
 
 export const USERS_TYPE = {
-  0: "dealer",
-  1: "user"
+  0: 'consumer',
+  1: 'company'
+}
+
+export const DOCUMENTS_TYPE = {
+  0: 'passport',
+  1: 'other',
+  2: 'vat',
+  3: 'registration_certificate'
+}
+
+export const DOCUMENTS_VERIFICATIONS = {
+  0: "not_verified",
+  1: "verified",
+  2: "pending",
+  3: "rejected",
 }
 
 export const NOTIFICATIONS_TYPE = {
@@ -22,12 +36,6 @@ export const CARD_STATUS = {
   0: "not_active",
   1: "active",
   2: "sold"
-}
-
-export const USER_VERIFICATIONS = {
-  0: "not_verified",
-  1: "basic_verified",
-  2: "full_verified"
 }
 
 export const NAVIGATION = {

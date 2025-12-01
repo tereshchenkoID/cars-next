@@ -27,18 +27,18 @@
     }
 
     .close {
-      top: var(--gap-12);
-      right: var(--gap-16);
+      top: var(--gap-8);
+      right: var(--gap-12);
     }
   }
 
   .close {
     position: absolute;
-    top: var(--gap-10);
-    right: var(--gap-16);
+    top: var(--gap-6);
+    right: var(--gap-12);
 
     @include media-breakpoint-up(md) {
-      top: var(--gap-24);
+      top: var(--gap-16);
     }
   }
 }

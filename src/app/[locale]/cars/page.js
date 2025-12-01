@@ -38,9 +38,7 @@ async function postData(endpoint, searchParams) {
       throw new Error(`Failed to fetch data from ${endpoint}: ${res.statusText}`)
     }
 
-    const data = await res.json()
-
-    return data
+    return await res.json()
   } catch (error) {
     console.error('Error posting data:', error)
     return null

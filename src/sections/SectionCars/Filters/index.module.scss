@@ -5,9 +5,8 @@
   @include flex($direction: column);
 
   position: fixed;
-  top: 0;
+  inset-block: 0;
   left: 0;
-  bottom: 0;
   width: rem(320px);
   z-index: $z-index-11;
   background-color: var(--color-white);
@@ -37,15 +36,10 @@
   padding-inline: var(--gap-16);
 }
 
-.section,
-.wrapper {
-  display: grid;
-}
-
 .title {
   @include flex(space-between, center);
 
-  min-height: rem(38px);
+  min-height: rem(40px);
 }
 
 .header {
@@ -57,17 +51,17 @@
 .footer {
   @include flex($direction: column);
 
+  gap: var(--gap-16);
   padding-bottom: var(--gap-16);
   border-top-width: rem(1px);
   border-top-style: solid;
-  gap: var(--gap-16);
 }
 
 .content {
   @include scroll;
   @include flex($direction: column);
 
-  padding-bottom: var(--gap-8);
+  padding-bottom: var(--gap-16);
   gap: var(--gap-16);
   flex-grow: 1;
 }
@@ -122,10 +116,4 @@
 
 .icon {
   @include size(rem(24px));
-}
-
-.wrapper {
-  grid-template-columns: repeat(2, 1fr);
-  gap: var(--gap-8);
-  align-items: flex-end;
 }

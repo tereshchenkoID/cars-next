@@ -28,8 +28,7 @@ const Saved = ({
   const [loading, setLoading] = useState(false)
 
   const handleAction = (id, type, name, params) => {
-    isAuth
-    ?
+    if (isAuth) {
       showModal(
         <HistoryModal
           id={id}
@@ -40,10 +39,12 @@ const Saved = ({
         />,
         t('save_search')
       )
-    :
+    }
+    else {
       showModal(
         <LoginModal />
       )
+    }
 
     setShow(false)
   }
@@ -91,8 +92,7 @@ const Saved = ({
     }
   }, [])
 
-  if(loading)
-    return
+  if(loading) return
 
   return (
     <div className={style.block}>

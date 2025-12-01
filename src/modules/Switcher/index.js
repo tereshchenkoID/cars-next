@@ -4,13 +4,14 @@ import classNames from 'classnames'
 
 import style from './index.module.scss'
 
-const Switcher = ({ data, active, setActive }) => {
+const Switcher = ({ data, active, setActive, disabled = [] }) => {
   const t = useTranslations()
 
   return (
     <div className={style.block}>
       {
         data.map((el, idx) =>
+          !disabled.includes(idx) &&
           <button
             key={idx}
             type="button"

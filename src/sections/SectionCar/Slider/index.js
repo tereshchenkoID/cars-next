@@ -60,9 +60,9 @@ const Slider = ({ data }) => {
                 }}
               >
                 <Icon
-                  width={32}
-                  height={32}
-                  iconName={'arrows'}
+                  width={24}
+                  height={24}
+                  iconName={'arrows-expand'}
                 />
               </div>
             </SwiperSlide>

@@ -61,12 +61,13 @@ const InputGroup = ({
       <div className={style.field}>
         {
           touched &&
-          <Icon
-            className={style.status}
-            iconName={error ? 'warning' : 'success'}
-            width={16}
-            height={16}
-          />
+          <span className={style.status}>
+            <Icon
+              iconName={error ? 'warning' : 'success'}
+              width={16}
+              height={16}
+            />
+          </span>
         }
         {
           cloneElement(children)

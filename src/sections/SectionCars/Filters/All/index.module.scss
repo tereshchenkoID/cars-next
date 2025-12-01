@@ -1,0 +1,8 @@
+@use 'scss/config' as *;
+
+.wrapper {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--gap-8);
+  align-items: flex-end;
+}

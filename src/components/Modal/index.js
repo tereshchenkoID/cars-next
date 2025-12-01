@@ -1,10 +1,17 @@
-import classNames from 'classnames';
+import { useEffect } from 'react'
+import classNames from 'classnames'
 
-import Button from 'components/Button';
+import { overflowBody } from 'helpers/overflowBody'
+
+import Button from 'components/Button'
 
 import style from './index.module.scss'
 
 const Modal = ({ children, onClose, title }) => {
+  useEffect(() => {
+    overflowBody(children)
+  }, [children])
+
   return (
     <div
       className={
@@ -21,7 +28,7 @@ const Modal = ({ children, onClose, title }) => {
       >
         <div className={style.wrapper}>
           <Button
-            classes={['secondary', 'square', 'sm', style.close]}
+            classes={['secondary', 'square', 'md', style.close]}
             icon={'xmark'}
             onChange={onClose}
           />

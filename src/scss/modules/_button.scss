@@ -11,6 +11,7 @@
   box-shadow: var(--box-shadow-16-24);
   color: var(--color-white);
   white-space: nowrap;
+  font-weight: var(--typography-medium);
 
   &.disabled,
   &:disabled {
@@ -70,6 +71,23 @@
     }
   }
 
+  &.gold {
+    background: var(--gradient-gold);
+  }
+
+  &.blue {
+    background-color: var(--color-secondary);
+    color: var(--color-primary-hover);
+
+    @include hover {
+      background-color: var(--color-secondary-hover);
+    }
+  }
+
+  &.reverse {
+    flex-direction: row-reverse;
+  }
+
   &.reference {
     padding-inline: 0;
     height: auto!important;
@@ -86,9 +104,9 @@
     }
   }
 
-  &:not(.square, .reference) {
-    min-width: rem(100px);
-  }
+  //&:not(.square, .reference) {
+  //  min-width: rem(100px);
+  //}
 
   &.xs {
     --icon-size: 16px;
@@ -99,7 +117,7 @@
   }
 
   &.sm {
-    --icon-size: 16px;
+    --icon-size: 18px;
     --button-height: 40px;
 
     gap: var(--gap-8);

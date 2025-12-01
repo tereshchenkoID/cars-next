@@ -1,21 +1,20 @@
 "use client"
 
+import { useState } from 'react'
 import { useTranslations } from 'next-intl'
-import { useState, useEffect } from 'react'
 import { useModal } from 'context/ModalContext'
-import useFilters from 'hooks/useFilters'
-
-import classNames from 'classnames'
 
 import { DEFAULT, TYPES } from 'constant/config'
 
-import { overflowBody } from 'helpers/overflowBody'
+import { useFilters } from 'hooks/useFilters'
+import { useAuth } from 'hooks/useAuth'
 
+import Button from 'components/Button'
 import Container from 'components/Container'
-import Icon from 'components/Icon'
 import Pagination from 'modules/Pagination'
 import BrandsModal from 'modules/Modals/BrandsModal'
 import HistoryModal from 'modules/Modals/HistoryModal'
+import LoginModal from 'modules/Modals/LoginModal'
 import VehicleCard from 'modules/Cards/VehicleCard'
 import Filters from './Filters'
 import Sort from './Sort'
@@ -40,12 +39,32 @@ const TYPE = {
   color: 'color'
 }
 
+const formatPlaceholderText = (key, el, filters, t) => {
+  let prefix = ''
+
+  if (key.includes('_to') || key.includes('_from')) {
+    prefix = `${t(`filters.${key.split('_')[0]}.0`)} ${t(key.split('_')[1])}: `
+  }
+
+  if (key === 'page') {
+    prefix = `${t(`filters.${key}.0`)}: `
+  }
+
+  const value = (key === 'vat_reclaimable' || key === 'discount')
+    ? t(`filters.${key}.0`)
+    : filters[key].options?.[el] || el
+
+  return `${prefix}${value}`
+}
+
 const SectionsCars = ({ initialData }) => {
   const t = useTranslations()
   const filtersProps = useFilters(initialData)
+  const { isAuth } = useAuth()
   const { showModal } = useModal()
   const {
     handleChange,
+    handleReset,
     getSearchParams,
     filters,
     search,
@@ -57,9 +76,22 @@ const SectionsCars = ({ initialData }) => {
   const [show, setShow] = useState(false)
   const [showBrand, setShowBrands] = useState(false)
 
-  useEffect(() => {
-    overflowBody(showBrand)
-  }, [showBrand])
+  const handleSaveSearch = () => {
+    if (isAuth) {
+      showModal(
+        <HistoryModal
+          type={'0'}
+          data={{
+            params: getSearchParams()
+          }}
+        />,
+        t('save_search')
+      )
+    }
+    else {
+      showModal(<LoginModal />)
+    }
+  }
 
   return (
     <section className={style.block}>
@@ -81,97 +113,36 @@ const SectionsCars = ({ initialData }) => {
         />
         <div className={style.content}>
           <div className={style.searches}>
-            <button
-              type="button"
-              className={
-                classNames(
-                  style.search,
-                  style.blue
-                )
-              }
-              onClick={() => setShow(!show)}
-              aria-label={t('filter')}
-              title={t('filter')}
-            >
-              <Icon
-                iconName="filters"
-                width={14}
-                height={14}
-              />
-              <span>{t('filter')}</span>
-            </button>
+            <Button
+              classes={['primary', 'xs', style.toggle]}
+              icon={'sliders'}
+              placeholder={t('filter')}
+              onChange={() => setShow(!show)}
+            />
             {
               searchParams.size > 0 &&
               <div className={style.list}>
-                <button
-                  type="button"
-                  className={
-                    classNames(
-                      style.search,
-                      style.gold
-                    )
-                  }
-                  aria-label={t('save_search')}
-                  title={t('save_search')}
-                  onClick={() => {
-                    showModal(
-                      <HistoryModal
-                        type={'0'}
-                        data={{
-                          params: getSearchParams()
-                        }}
-                      />,
-                      t('save_search')
-                    )
-                  }}
-                >
-                  <Icon
-                    iconName="bell"
-                    width={16}
-                    height={16}
-                  />
-                  <span>{t('save_search')}</span>
-                </button>
+                <Button
+                  classes={['gold', 'xs']}
+                  icon={'bell'}
+                  placeholder={t('save_search')}
+                  onChange={handleSaveSearch}
+                />
                 {
-                  Object.keys(search)?.map((key) =>
-                    !key.includes('make') &&
-                    search[key]?.value?.map((el, idx) =>
-                      el !== DEFAULT && (
-                        <button
-                          key={idx}
-                          type="button"
-                          className={style.search}
-                          aria-label={key}
-                          title={t('remove')}
-                          onClick={() => handleChange(TYPE[key], key, TYPES.includes(TYPE[key]) ? el : DEFAULT, true)}
-                        >
-                          <span>
-                            {
-                              (key.indexOf('_to') !== -1 || key.indexOf('_from') !== -1) &&
-                              <>{t(`filters.${key.split('_')[0]}.0`)} {t(key.split('_')[1])}: </>
-                            }
-                            {
-                              key === 'page' && <>{t(`filters.${key}.0`)}: </>
-                            }
-                            <strong>
-                              {
-                                (key === 'vat_reclaimable' || key === 'discount')
-                                  ?
-                                  <>{t(`filters.${key}.0`)}</>
-                                  :
-                                  <>{filters[key].options?.[el] || el}</>
-                              }
-                            </strong>
-                          </span>
-                          <Icon
-                            iconName="xmark"
-                            className={style.close}
-                            width={12}
-                            height={12}
-                          />
-                        </button>
-                      )
-                    )
+                  Object.entries(search)
+                  .filter(([key]) => !key.includes('make'))
+                  .flatMap(([key, item]) =>
+                    item?.value
+                      .filter((v) => v !== DEFAULT)
+                      .map((el, idx) => (
+                        <Button
+                          key={`${key}-${idx}`}
+                          classes={['blue', 'xs', 'reverse']}
+                          icon="xmark"
+                          placeholder={formatPlaceholderText(key, el, filters, t)}
+                          onChange={() => handleChange(TYPE[key], key, TYPES.includes(TYPE[key]) ? el : DEFAULT, true)}
+                        />
+                      ))
                   )
                 }
               </div>
@@ -179,14 +150,9 @@ const SectionsCars = ({ initialData }) => {
           </div>
 
           <h4>{t('verified_cars')}</h4>
-          {/* <pre className={style.pre}>{JSON.stringify(search.color, null, 2)}</pre> */}
-
           <div className={style.meta}>
             <Sort filtersProps={filtersProps} />
-            {
-              data?.data?.length > 0 &&
-              <Pagination filtersProps={filtersProps} />
-            }
+            <Pagination filtersProps={filtersProps} />
           </div>
           {
             data.data
@@ -207,8 +173,13 @@ const SectionsCars = ({ initialData }) => {
                 </>
               :
                 <div className={style.empty}>
-                  <h6>Whoops!</h6>
-                  <p>None of our cars matches your search parameters.</p>
+                  <h6>{t('notification.whoops')}</h6>
+                  <p>{t('notification.not_found_car')}</p>
+                  <Button
+                    classes={['reference', 'sm']}
+                    placeholder={t('actions.reset_filters')}
+                    onChange={handleReset}
+                  />
                 </div>
           }
         </div>

@@ -4,7 +4,7 @@ import { useTranslations } from 'next-intl'
 import { useFilterState } from 'hooks/useFilterState'
 import { useDispatch } from 'react-redux'
 
-import { postData } from 'helpers/api'
+import {getData, postData} from 'helpers/api'
 import { setToastify } from 'store/actions/toastifyAction'
 
 import Container from 'components/Container'
@@ -19,7 +19,17 @@ import Contact from './Contact'
 import style from './index.module.scss'
 
 const INITIAL_FILTER = {
-  images: [],
+  images: {
+    data: [
+      "https://storage.alpha-analytics.cz/get/ad545fed-4982-4e86-9e33-04c9685fec64?ts=1730375600",
+      "https://storage.alpha-analytics.cz/get/1a08761d-86b8-4596-b7e7-892c5a2736b6?ts=1730376905",
+      "https://storage.alpha-analytics.cz/get/2673ddeb-d792-43d6-bbd5-ecde502cbb41?ts=1730376903",
+      "https://storage.alpha-analytics.cz/get/129f0443-b4f1-4abb-9cc9-3830a966f11d?ts=1730375890",
+      "https://storage.alpha-analytics.cz/get/89ee3dba-ccd3-4167-9af9-e7f193aa68b1?ts=1730375464",
+      "https://storage.alpha-analytics.cz/get/000213c2-3c98-48d4-8931-2ba5e4e277d8?ts=1730369222",
+    ],
+    uploaded: [],
+  },
   details: {
     meta: {
       name: '',
@@ -105,18 +115,18 @@ const INITIAL_FILTER = {
         name: "fixed"
       }
     },
-    // price_score: {
-    //   cars: 72,
-    //   counts: 102,
-    //   options: [
-    //     "21755",
-    //     "25241",
-    //     "28727",
-    //     "32213",
-    //     "35699",
-    //     "39184"
-    //   ]
-    // },
+    price_score: {
+      cars: 72,
+      counts: 102,
+      options: [
+        "21755",
+        "25241",
+        "28727",
+        "32213",
+        "35699",
+        "39184"
+      ]
+    },
     currency: {
       code: "USD",
       text: "US Dollar",
@@ -151,8 +161,6 @@ const SectionVehicle = ({ id, data, options }) => {
   const t = useTranslations()
   const dispatch = useDispatch()
   const { filter, setFilter, handlePropsChange } = useFilterState(INITIAL_FILTER)
-
-  console.log(data)
 
   const handleSave = () => {
     const formData = new FormData()
@@ -195,7 +203,7 @@ const SectionVehicle = ({ id, data, options }) => {
           <Price
             filter={filter.price}
             handlePropsChange={handlePropsChange}
-            isDisable={!filter.price.price_recommended}
+            // isDisable={!filter.price.price_recommended}
             handleSave={handleSave}
           />
           <Contact

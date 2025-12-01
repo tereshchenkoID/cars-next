@@ -58,10 +58,10 @@ const Menu = ({ show, setShow }) => {
 
   return (
     <>
-      {
-        show &&
-        <Backdrop onChange={() => setShow(false)} />
-      }
+      <Backdrop
+        data={show}
+        onChange={() => setShow(false)}
+      />
       <menu
         className={
           classNames(

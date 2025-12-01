@@ -1,26 +1,14 @@
-import { useTranslations } from 'next-intl'
 import { useState } from 'react'
-
-import { useFilterState } from 'hooks/useFilterState'
+import { useTranslations } from 'next-intl'
 
 import Button from 'components/Button'
 import Password from 'components/Password'
 import Accordion from 'modules/Accordion'
-import Debug from 'modules/Debug'
 
 import style from '../index.module.scss'
 
-const INITIAL_FILTER = {
-  security: {
-    old: "",
-    new: ""
-  }
-}
-
-const Security = () => {
+const Security = ({ filter, handlePropsChange, handleSave }) => {
   const t = useTranslations()
-
-  const { filter, handlePropsChange } = useFilterState(INITIAL_FILTER)
   const [toggle, setToggle] = useState(false)
 
   return (
@@ -30,19 +18,18 @@ const Security = () => {
       icon={'unlock'}
       placeholder={t('change_password')}
     >
-      <form className={style.form}>
-        <Debug data={filter} />
+      <div className={style.form}>
         <div className={style.grid}>
           <Password
             placeholder={t('current_password')}
-            data={filter.security.old}
+            data={filter.old}
             onChange={(value) => handlePropsChange('security.old', value)}
             isRequired={true}
             isLabel={true}
           />
           <Password
             placeholder={t('new_password')}
-            data={filter.security.new}
+            data={filter.new}
             onChange={(value) => handlePropsChange('security.new', value)}
             isRequired={true}
             isLabel={true}
@@ -50,12 +37,11 @@ const Security = () => {
         </div>
         <div className={style.footer}>
           <Button
-            type={'submit'}
             classes={['primary', 'md']}
             placeholder={t('actions.save')}
           />
         </div>
-      </form>
+      </div>
     </Accordion>
   )
 }

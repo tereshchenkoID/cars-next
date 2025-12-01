@@ -1,25 +1,14 @@
-import { useTranslations } from 'next-intl'
 import { useState } from 'react'
+import { useTranslations } from 'next-intl'
 
-import { useFilterState } from 'hooks/useFilterState'
-
+import Button from 'components/Button'
 import Checkbox from 'components/Checkbox'
 import Accordion from 'modules/Accordion'
-import Debug from 'modules/Debug'
 
 import style from '../index.module.scss'
 
-const INITIAL_FILTER = {
-  notification: {
-    favorite: '0',
-    saved: '0'
-  }
-}
-
-const Notification = () => {
+const Notification = ({ filter, handlePropsChange, handleSave }) => {
   const t = useTranslations()
-
-  const { filter, handlePropsChange } = useFilterState(INITIAL_FILTER)
   const [toggle, setToggle] = useState(false)
 
   return (
@@ -30,14 +19,13 @@ const Notification = () => {
       placeholder={t('notification_settings')}
     >
       <div className={style.form}>
-        <Debug data={filter} />
         <div className={style.group}>
           <div>
             <h6>Favourite vehicles</h6>
             <p>Send notifications about discounts on favourite vehicles</p>
           </div>
           <Checkbox
-            data={filter.notification.favorite}
+            data={filter.favorite}
             onChange={(value) => handlePropsChange('notification.favorite', value)}
           />
         </div>
@@ -47,8 +35,14 @@ const Notification = () => {
             <p>Send notifications of new offers based on saved search filters.</p>
           </div>
           <Checkbox
-            data={filter.notification.saved}
+            data={filter.saved}
             onChange={(value) => handlePropsChange('notification.saved', value)}
+          />
+        </div>
+        <div className={style.footer}>
+          <Button
+            classes={['primary', 'md']}
+            placeholder={t('actions.save')}
           />
         </div>
       </div>

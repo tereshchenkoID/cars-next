@@ -1,0 +1,37 @@
+@use 'scss/config' as *;
+
+.block {
+  @include flex($align-items: center);
+
+  gap: var(--gap-4);
+  position: relative;
+  padding: var(--gap-8) var(--gap-12);
+  border-radius: var(--border-radius-8);
+  border: rem(1px) dashed currentColor;
+  overflow: hidden;
+
+  &:after {
+    position: absolute;
+    inset: 0;
+    opacity: 0.1;
+    background-color: currentColor;
+    content: '';
+  }
+
+  &.rejected,
+  &.not_verified {
+    color: var(--color-warning)
+  }
+
+  &.verified {
+    color: var(--color-success)
+  }
+
+  &.pending {
+    color: var(--color-orange)
+  }
+}
+
+.icon {
+  color: currentColor;
+}

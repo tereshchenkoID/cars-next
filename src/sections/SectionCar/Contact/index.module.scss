@@ -26,6 +26,7 @@
 
   @include media-breakpoint-up(md) {
     grid-template-columns: auto 1fr;
+    align-content: flex-start;
   }
 
   @include hover {
@@ -41,24 +42,25 @@
   gap: var(--gap-4);
 }
 
+.image {
+  max-width: rem(100px);
+  height: auto;
+  border-radius: var(--border-radius-4);
+}
+
 .date {
+  margin-bottom: var(--gap-8);
   font-size: rem(12px);
 }
 
-.social {
-  @include size(rem(42px));
-  @include flex(center, center);
+.dropdown {
+  @include flex($align-items: center, $wrap: wrap);
 
-  background-color: var(--color-white);
-  border-radius: 50%;
-  color: var(--color-primary);
+  gap: var(--gap-8)
 }
 
-.phones {
-  display: grid;
-  grid-template-columns: auto 1fr;
-  align-items: center;
-  gap: var(--gap-16)
+.toggle {
+  width: fit-content;
 }
 
 .meta {

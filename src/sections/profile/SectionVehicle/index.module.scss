@@ -72,13 +72,14 @@
   display: grid;
   align-items: center;
   gap: var(--gap-8);
+  grid-template-columns: repeat(2, 1fr);
 
   @include media-breakpoint-up(sm) {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(3, 1fr);
   }
 
   @include media-breakpoint-up(md) {
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(4, 1fr);
     gap: var(--gap-16);
   }
 }
@@ -134,8 +135,6 @@
 
 .hr {
   margin-block: var(--gap-24);
-  border: 0;
-  background-color: var(--color-grey-200);
 
   @include media-breakpoint-up(md) {
     margin-block: var(--gap-32);

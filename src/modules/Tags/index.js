@@ -10,7 +10,7 @@ const COUNT = 4
 const Tags = ({ data, isOpen = false }) => {
   const t = useTranslations()
   const [show, setShow] = useState(isOpen)
-  const totalItems = data.length
+  const totalItems = data?.length
   const hiddenItemsCount = totalItems - COUNT
 
   if(!data)
@@ -31,7 +31,12 @@ const Tags = ({ data, isOpen = false }) => {
       {
         hiddenItemsCount > 0 &&
         <li
-          className={classNames(style.tag, style.alt)}
+          className={
+            classNames(
+              style.tag,
+              style.alt
+            )
+          }
           onClick={() => setShow(!show)}
         >
           {show ? `- ${t('hide')}` : `+ ${hiddenItemsCount} ${t('more')}`}

@@ -53,7 +53,7 @@ const Map = ({ data, next }) => {
 
   const handleLoad = (index) => {
     setLoading(true)
-    
+
     getData(`item/${index || active}`).then(json => {
       setCars((prevState) => [
         prevState[0],
@@ -72,7 +72,7 @@ const Map = ({ data, next }) => {
 
     const value1 = Number(getNestedValue(cars[idx === 0 ? 0 : 1], field))
     const value2 = Number(getNestedValue(cars[idx === 0 ? 1 : 0], field))
-    
+
     if (value2 > value1) {
       return 'lower'
     }
@@ -84,7 +84,7 @@ const Map = ({ data, next }) => {
       <div className={style.header}>{t('notification.price_map_title')}</div>
       <hr className={style.hr} />
 
-      <div 
+      <div
         className={
           classNames(
             style.body,
@@ -94,7 +94,7 @@ const Map = ({ data, next }) => {
       >
         <ResponsiveContainer width="100%" height={300}>
           <ScatterChart
-            data={data.price_map}
+            data={data.price.price_map}
             margin={{
               top: 40,
               right: 10,
@@ -102,8 +102,8 @@ const Map = ({ data, next }) => {
               bottom: 24,
             }}
           >
-            <CartesianGrid 
-              vertical={false} 
+            <CartesianGrid
+              vertical={false}
               stroke={'var(--color-grey-100)'}
               strokeWidth={1}
             />
@@ -113,8 +113,8 @@ const Map = ({ data, next }) => {
               type={'number'}
               dataKey={'mileage'}
               tick={{ fill: '#979fad', fontSize: 12 }}
-              tickFormatter={(mileage) => 
-                `${getFormatNumber(auth?.account?.language?.code, mileage)} ${t(`filters.mileage.${data.mileage_data.mileage_unit.id}`)}`
+              tickFormatter={(mileage) =>
+                `${getFormatNumber(auth?.account?.language?.code, mileage)} ${t(`filters.mileage.${data.details.mileage_data.mileage_unit.id}`)}`
               }
             />
             <YAxis
@@ -123,14 +123,14 @@ const Map = ({ data, next }) => {
               type={'number'}
               dataKey={'price'}
               tick={{ fill: '#979fad', fontSize: 12 }}
-              tickFormatter={(price) => 
+              tickFormatter={(price) =>
                 getFormatNumber(auth?.account?.language?.code, price)
               }
             >
-              <Label 
-                value={data.currency.name}
-                position="top" 
-                offset={24} 
+              <Label
+                value={data.price.currency.code}
+                position="top"
+                offset={24}
                 fill={'#979fad'}
                 fontSize={12}
               />
@@ -156,7 +156,7 @@ const Map = ({ data, next }) => {
       </div>
 
 
-      <div 
+      <div
         className={
           classNames(
             style.body,
@@ -166,8 +166,8 @@ const Map = ({ data, next }) => {
       >
         <div className={style.prices}>
           {
-            data.price_map.map((el, idx) =>
-              <button 
+            data.price.price_map.map((el, idx) =>
+              <button
                 key={idx}
                 type={'button'}
                 className={
@@ -181,10 +181,10 @@ const Map = ({ data, next }) => {
                 aria-label={`${t('price_map')} ${el.id}`}
                 title={`${t('price_map')} ${el.id}`}
               >
-                <strong>{getFormatNumber(auth?.account?.language?.code, el.mileage)}</strong> 
-                <span>{t(`filters.mileage.${data.mileage_data.mileage_unit.id}`)}</span>
+                <strong>{getFormatNumber(auth?.account?.language?.code, el.mileage)}</strong>
+                <span>{t(`filters.mileage.${data.details.mileage_data.mileage_unit.id}`)}</span>
                 <span>-</span>
-                <strong>{getFormatPrice(auth?.account?.language?.code, auth?.account?.currency?.code, el.price)}</strong>
+                <strong>{getFormatPrice(auth?.account?.language?.code, data.price.currency.code, el.price)}</strong>
               </button>
             )
           }
@@ -194,10 +194,10 @@ const Map = ({ data, next }) => {
       <hr className={style.hr} />
       <div className={style.footer}>
         {
-          cars?.map((el, idx) => 
+          cars?.map((el, idx) =>
             <Fragment key={idx}>
               <Link
-                href={`${NAVIGATION.car.link}/${el.id}/${el.meta.slug}`}
+                href={`${NAVIGATION.car.link}/${el.id}/${el.details.meta.slug}`}
                 rel="noreferrer"
                 target='_blank'
                 className={
@@ -207,8 +207,8 @@ const Map = ({ data, next }) => {
                     idx === 1 && style.next
                   )
                 }
-                aria-label={el.meta.name}
-                title={el.meta.name}
+                aria-label={el.details.meta.name}
+                title={el.details.meta.name}
               >
                 {
                   (idx === 1 && loading) &&
@@ -221,34 +221,34 @@ const Map = ({ data, next }) => {
                   height={270}
                   className={style.image}
                   priority={false}
-                  alt={el.meta.name}
+                  alt={el.details.meta.name}
                 />
-                <h6 className={style.title}>{el.meta.name}</h6>
+                <h6 className={style.title}>{el.details.meta.name}</h6>
 
                 <div className={style.price}>
-                  <h5 
+                  <h5
                     className={
-                      style[compareValues('price_data.price', idx)]
+                      style[compareValues('price.price_data.price', idx)]
                     }
                   >
-                    {getFormatPrice(auth?.account?.language?.code, auth?.account?.currency?.code, el.price_data.price)}
+                    {getFormatPrice(auth?.account?.language?.code, el.price.currency.code, el.price.price_data.price)}
                   </h5>
                   <p className={style.vat}>
                     {
-                      el.price_data.price_without_vat
+                      el.price.price_data.price_without_vat
                         ?
-                        <><strong>{getFormatPrice(auth?.account?.language?.code, auth?.account?.currency?.code, el.price_data.price_without_vat)}</strong> {t('without_vat')}</>
+                          <><strong>{getFormatPrice(auth?.account?.language?.code, el.price.currency.code, el.price.price_data.price_without_vat)}</strong> {t('without_vat')}</>
                         :
-                        <span>{t('not_deductible')}</span>
+                          <span>{t('not_deductible')}</span>
                     }
                   </p>
                 </div>
                 <ul className={style.list}>
-                  <li 
+                  <li
                     className={
                       classNames(
                         style.option,
-                        style[compareValues('mileage_data.mileage', idx)]
+                        style[compareValues('details.mileage_data.mileage', idx)]
                       )
                     }
                   >
@@ -258,13 +258,13 @@ const Map = ({ data, next }) => {
                       height={16}
                       className={style.icon}
                     />
-                    <p>{el.mileage_data.mileage} ({t(`filters.mileage.${el.mileage_data.mileage_unit.id}`)})</p>
+                    <p>{el.details.mileage_data.mileage} ({t(`filters.mileage.${el.details.mileage_data.mileage_unit.id}`)})</p>
                   </li>
-                  <li 
+                  <li
                     className={
                       classNames(
                         style.option,
-                        style[compareValues('date.manufacture', idx)]
+                        style[compareValues('price.date.manufacture_registration', idx)]
                       )
                     }
                   >
@@ -274,13 +274,13 @@ const Map = ({ data, next }) => {
                       height={16}
                       className={style.icon}
                     />
-                    <p>{getDate(el.date.manufacture, 3)}</p>
+                    <p>{getDate(el.details.date.manufacture_registration, 3)}</p>
                   </li>
-                  <li 
+                  <li
                     className={
                       classNames(
                         style.option,
-                        style[compareValues('date.first_registration', idx)]
+                        style[compareValues('price.date.first_registration', idx)]
                       )
                     }
                   >
@@ -290,7 +290,7 @@ const Map = ({ data, next }) => {
                       height={16}
                       className={style.icon}
                     />
-                    <p>{getDate(el.date.first_registration, 3)}</p>
+                    <p>{getDate(el.details.date.first_registration, 3)}</p>
                   </li>
                   <li className={style.option}>
                     <Icon
@@ -299,7 +299,7 @@ const Map = ({ data, next }) => {
                       height={16}
                       className={style.icon}
                     />
-                    <p>{el.power_data.power} ({t(`filters.power.${el.power_data.power_unit.id}`)})</p>
+                    <p>{el.details.power_data.power} ({t(`filters.power.${el.details.power_data.power_unit.id}`)})</p>
                   </li>
                   <li className={style.option}>
                     <Icon
@@ -308,29 +308,29 @@ const Map = ({ data, next }) => {
                       height={16}
                       className={style.icon}
                     />
-                    <p>{t(`filters.transmission.${el.transmission.id}`)}</p>
+                    <p>{t(`filters.transmission.${el.details.transmission.id}`)}</p>
                   </li>
                   <li className={style.option}>
                     <Icon
-                      iconName={getFuelIcon(el.fuel_type.id)}
+                      iconName={getFuelIcon(el.details.fuel_type.id)}
                       width={16}
                       height={16}
                       className={style.icon}
                     />
-                    <p>{t(`filters.fuel_type.${el.fuel_type.id}`)}</p>
+                    <p>{t(`filters.fuel_type.${el.details.fuel_type.id}`)}</p>
                   </li>
                 </ul>
-                <Tags data={el.featured_tags} isOpen={true}/>
+                <Tags data={el.equipment.featured_tags} isOpen={true} />
               </Link>
               {
                 idx === 0 &&
-                <hr 
+                <hr
                   className={
                     classNames(
                       style.hr,
                       style.vertical
                     )
-                  } 
+                  }
                 />
               }
             </Fragment>

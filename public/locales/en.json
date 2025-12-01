@@ -72,7 +72,11 @@
     "empty": "It is still empty, but you can see new ads",
     "reviews": "If you're not happy, neither are we!",
     "contact": "Your next car is waiting for you here",
-    "footer": "All prices include VAT."
+    "footer": "All prices include VAT.",
+    "upload_image": "Only image files are allowed!",
+    "whoops": "Whoops!",
+    "not_found_car": "None of our cars matches your search parameters.",
+    "not_found_history": "Here you can see your search results"
   },
   "sections": {
     "hero": "You choose your car online. We inspect it and deliver it.",
@@ -128,7 +132,8 @@
     "select_make": "Select make",
     "select_model": "Select model",
     "select_action": "Select action",
-    "select_countries": "Select countries"
+    "select_countries": "Select countries",
+    "reset_filters": "Reset filters"
   },
   "registration": "Registration",
   "last_activity": "Last activity",
@@ -265,6 +270,23 @@
   "address": "Address",
   "schedule": "Schedule",
   "about_company": "Company info",
+  "verified": "Verified",
+  "send": "Send",
+  "code": "Code",
+  "verify": "Verify",
+  "show_contacts": "Show contacts",
+  "documents": {
+    "registration_certificate": "Registration certificate",
+    "vat": "Vat",
+    "other": "Other",
+    "passport": "Passport"
+  },
+  "verification": {
+    "not_verified": "Not verified",
+    "verified": "Verified",
+    "pending": "Pending",
+    "rejected": "Rejected"
+  },
   "features": {
     "1": {
       "0": "Other",

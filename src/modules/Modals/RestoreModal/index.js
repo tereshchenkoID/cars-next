@@ -1,32 +1,28 @@
-import { useState, useMemo } from 'react'
+import { useMemo } from 'react'
 import { useTranslations } from 'next-intl'
 import { useModal } from 'context/ModalContext'
 
 import { validationRules } from 'utils/validationRules'
+import { useFilterState } from 'hooks/useFilterState'
 
-import Field from 'components/Field'
 import Button from 'components/Button'
+import Field from 'components/Field'
 import InputGroup from 'modules/InputGroup'
 import RegistrationModal from 'modules/Modals/RegistrationModal'
 
 import style from './index.module.scss'
 
+const INITIAL_FILTER = {
+  email: {
+    value: '',
+    isValid: false
+  },
+}
+
 const RestoreModal = () => {
   const t = useTranslations()
   const { showModal } = useModal()
-  const [filter, setFilter] = useState({
-    email: {
-      value: '',
-      isValid: false
-    },
-  })
-
-  const handleChange = (field, { value, isValid }) => {
-    setFilter((prevData) => ({
-      ...prevData,
-      [field]: { value, isValid },
-    }))
-  }
+  const { filter, handlePropsChange } = useFilterState(INITIAL_FILTER)
 
   const isFormValid = useMemo(() => {
     return Object.values(filter).every((field) => field.isValid)
@@ -51,14 +47,14 @@ const RestoreModal = () => {
             validationRules.email,
           ]}
           onValidationChange={(isValid) =>
-            handleChange('email', { value: filter.email.value, isValid })
+            handlePropsChange('email', { value: filter.email.value, isValid })
           }
         >
           <Field
             type={'email'}
             placeholder={t('email')}
             data={filter.email.value}
-            onChange={(value) => handleChange('email', { value, isValid: filter.email.isValid })}
+            onChange={(value) => handlePropsChange('email', { value, isValid: filter.email.isValid })}
           />
         </InputGroup>
         <Button

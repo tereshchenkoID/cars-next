@@ -14,10 +14,9 @@ import Accordion from 'modules/Accordion'
 
 import style from '../index.module.scss'
 
-const Equipment = ({ options, filter, setFilter, handlePropsChange }) => {
+const Equipment = ({ options, filter, setFilter, handlePropsChange, handleSave }) => {
   const t = useTranslations()
   const filters = useSelector((state) => state.filters)
-
   const [toggle, setToggle] = useState(false)
 
   const isFeatureExist = (option) => {
@@ -48,10 +47,16 @@ const Equipment = ({ options, filter, setFilter, handlePropsChange }) => {
     <Accordion
       data={toggle}
       action={() => setToggle(!toggle)}
-      icon={'filters'}
+      icon={'sliders'}
       placeholder={t('equipment')}
     >
-      <div className={style.grid}>
+      <form
+        className={style.grid}
+        onSubmit={(e) => {
+          e.preventDefault()
+          handleSave()
+        }}
+      >
         <div className={style.list}>
           <Field
             type={'number'}
@@ -125,11 +130,12 @@ const Equipment = ({ options, filter, setFilter, handlePropsChange }) => {
 
         <div className={style.footer}>
           <Button
+            type={'submit'}
             classes={['primary', 'md']}
             placeholder={t('actions.next')}
           />
         </div>
-      </div>
+      </form>
     </Accordion>
   )
 }

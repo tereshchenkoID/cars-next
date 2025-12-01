@@ -1,13 +1,14 @@
 "use client"
 
-import { useTranslations } from 'next-intl'
 import { useState } from 'react'
+import { useTranslations } from 'next-intl'
 
 import { DEFAULT, ACTIVE, NAVIGATION } from "constant/config"
 
 import classNames from 'classnames'
 
-import useFilters from 'hooks/useFilters'
+import { useFilters } from 'hooks/useFilters'
+import { useAuth } from 'hooks/useAuth'
 import { getYears } from 'helpers/getYears'
 
 import Button from 'components/Button'
@@ -24,10 +25,10 @@ import style from './index.module.scss'
 
 const SectionAdvancedSearch = ({ options }) => {
   const t = useTranslations()
+  const { auth } = useAuth()
   const {
     handleChange,
     handleReset,
-    auth,
     filters,
     search,
   } = useFilters()

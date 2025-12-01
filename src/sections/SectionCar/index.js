@@ -48,6 +48,7 @@ const Comparison = dynamic(
 )
 
 import style from './index.module.scss'
+import Icon from "../../components/Icon";
 
 const SectionCar = ({ data, next }) => {
   const t = useTranslations()
@@ -55,19 +56,19 @@ const SectionCar = ({ data, next }) => {
   const TABS = [
     { id: 0, text: 'details' },
     { id: 1, text: 'feature' },
-    { id: 2, text: data.price_history.options ? 'price_history' : null },
+    { id: 2, text: data.price.price_history.options ? 'price_history' : null },
     { id: 3, text: next ? 'price_map' : null },
-    { id: 4, text: data.price_score.options ? 'comparison' : null },
+    { id: 4, text: data.price.price_score.options ? 'comparison' : null },
     { id: 5, text: 'questions' },
   ]
 
   const router = useRouter()
   const sectionRefs = useRef(TABS.map(() => React.createRef()))
-  const featureTags = data?.featured_tags.map(tag => tag.id)
+  const featureTags = data.equipment.featured_tags.map(tag => tag.id)
   const [active, setActive] = useState(0)
 
   const groupedFeatures = useMemo(() => {
-    return data?.features.reduce((acc, item) => {
+    return data.equipment.features.reduce((acc, item) => {
       if (!acc[item.parentId]) {
         acc[item.parentId] = []
       }
@@ -107,11 +108,14 @@ const SectionCar = ({ data, next }) => {
             icon={'angle-left'}
             classes={['reference', 'sm', style.hide]}
             placeholder={(t('actions.back'))}
-            onChange={() => router.back()}
+            onChange={() => {
+              router.back()
+              router.refresh()
+            }}
           />
           <div className={style.meta}>
             <div className={style.details}>
-              <h2 className={style.title}>{data.meta.name}</h2>
+              <h2 className={style.title}>{data.details.meta.name}</h2>
               <Favorites data={data} />
               <Share data={data} />
             </div>
@@ -122,7 +126,7 @@ const SectionCar = ({ data, next }) => {
                   size={'sm'}
                   iconName={'road'}
                   iconSize={20}
-                  text={`${data.mileage_data.mileage} (${t(`filters.mileage.${data.mileage_data.mileage_unit.id}`)})`}
+                  text={`${data.details.mileage_data.mileage} (${t(`filters.mileage.${data.details.mileage_data.mileage_unit.id}`)})`}
                 />
               </li>
               <li>
@@ -130,7 +134,7 @@ const SectionCar = ({ data, next }) => {
                   size={'sm'}
                   iconName={'calendar'}
                   iconSize={20}
-                  text={getDate(data.date.manufacture, 5)}
+                  text={getDate(data.details.date.manufacture_registration, 5)}
                 />
               </li>
               <li>
@@ -138,7 +142,7 @@ const SectionCar = ({ data, next }) => {
                   size={'sm'}
                   iconName={'calendar'}
                   iconSize={20}
-                  text={getDate(data.date.first_registration, 3)}
+                  text={getDate(data.details.date.first_registration, 3)}
                 />
               </li>
               <li>
@@ -146,7 +150,7 @@ const SectionCar = ({ data, next }) => {
                   size={'sm'}
                   iconName={'engine'}
                   iconSize={20}
-                  text={`${data.power_data.power} (${t(`filters.power.${data.power_data.power_unit.id}`)})`}
+                  text={`${data.details.power_data.power} (${t(`filters.power.${data.details.power_data.power_unit.id}`)})`}
                 />
               </li>
               <li>
@@ -154,33 +158,54 @@ const SectionCar = ({ data, next }) => {
                   size={'sm'}
                   iconName={'transmission'}
                   iconSize={20}
-                  text={t(`filters.transmission.${data.transmission.id}`)}
+                  text={t(`filters.transmission.${data.details.transmission.id}`)}
                 />
               </li>
               <li>
                 <Option
                   size={'sm'}
-                  iconName={getFuelIcon(data.fuel_type.id)}
+                  iconName={getFuelIcon(data.details.fuel_type.id)}
                   iconSize={20}
-                  text={t(`filters.fuel_type.${data.fuel_type.id}`)}
+                  text={t(`filters.fuel_type.${data.details.fuel_type.id}`)}
                 />
               </li>
             </ul>
 
-            <Tags data={data.featured_tags} />
+            <Tags data={data.equipment.featured_tags} />
+
+            <ul className={style.stats}>
+              <li
+                className={style.stat}
+                title={t('registration')}
+              >
+                <Icon
+                  iconName={'clock'}
+                  width={16}
+                  height={16}
+                />
+                <strong>{getDate(data.contact.registration, 3)}</strong>
+              </li>
+              {
+                Object.entries(data.stats).map(([key, item]) =>
+                  item.visible === '1' &&
+                  <li
+                    key={key}
+                    className={style.stat}
+                    title={t(key)}
+                  >
+                    <Icon
+                      iconName={key}
+                      width={16}
+                      height={16}
+                    />
+                    <strong>{item.value}</strong>
+                  </li>
+                )
+              }
+            </ul>
           </div>
         </Container>
-
         <Slider data={data} />
-      </div>
-
-      <div className={style.contacts}>
-        <Container classes={style.social}>
-          <Contact
-            data={data.contact}
-            meta={data.meta}
-          />
-        </Container>
       </div>
 
       <div className={style.tabs}>
@@ -207,6 +232,10 @@ const SectionCar = ({ data, next }) => {
 
       <Container classes={style.main}>
         <div className={style.column}>
+          <div className={style.body}>
+            <Contact data={data.contact}/>
+          </div>
+
           <div
             ref={sectionRefs.current[0]}
             className={style.body}
@@ -235,7 +264,7 @@ const SectionCar = ({ data, next }) => {
                   iconName={'road'}
                   iconSize={32}
                   label={t('filters.mileage.0')}
-                  text={`${Number(data.mileage_data.mileage)} (${t(`filters.mileage.${data.mileage_data.mileage_unit.id}`)})`}
+                  text={`${Number(data.details.mileage_data.mileage)} (${t(`filters.mileage.${data.details.mileage_data.mileage_unit.id}`)})`}
                 />
               </li>
               <li>
@@ -244,7 +273,7 @@ const SectionCar = ({ data, next }) => {
                   iconName={'calendar'}
                   iconSize={32}
                   label={t('manufacture_registration')}
-                  text={getDate(data.date.manufacture, 5)}
+                  text={getDate(data.details.date.manufacture_registration, 5)}
                 />
               </li>
               <li>
@@ -253,7 +282,7 @@ const SectionCar = ({ data, next }) => {
                   iconName={'calendar'}
                   iconSize={32}
                   label={t('first_registration')}
-                  text={getDate(data.date.first_registration, 3)}
+                  text={getDate(data.details.date.first_registration, 3)}
                 />
               </li>
               <li>
@@ -262,7 +291,7 @@ const SectionCar = ({ data, next }) => {
                   iconName={'engine'}
                   iconSize={32}
                   label={t('power')}
-                  text={`${data.power_data.power} (${t(`filters.power.${data.power_data.power_unit.id}`)})`}
+                  text={`${data.details.power_data.power} (${t(`filters.power.${data.details.power_data.power_unit.id}`)})`}
                 />
               </li>
               <li>
@@ -271,7 +300,7 @@ const SectionCar = ({ data, next }) => {
                   iconName={'transmission'}
                   iconSize={32}
                   label={t('filters.transmission.0')}
-                  text={t(`filters.transmission.${data.transmission.id}`)}
+                  text={t(`filters.transmission.${data.details.transmission.id}`)}
                 />
               </li>
               <li>
@@ -280,7 +309,7 @@ const SectionCar = ({ data, next }) => {
                   iconName={'hybrid'}
                   iconSize={32}
                   label={t('filters.fuel_type.0')}
-                  text={t(`filters.fuel_type.${data.fuel_type.id}`)}
+                  text={t(`filters.fuel_type.${data.details.fuel_type.id}`)}
                 />
               </li>
               <li>
@@ -289,7 +318,7 @@ const SectionCar = ({ data, next }) => {
                   iconName={'drive'}
                   iconSize={32}
                   label={t('filters.drive.0')}
-                  text={data.drive.name}
+                  text={data.details.drive.name}
                 />
               </li>
               <li>
@@ -329,69 +358,69 @@ const SectionCar = ({ data, next }) => {
                     wordBreak: 'break-all'
                   }}
                 >
-                  {data.meta.vin}
+                  {data.details.meta.vin}
                 </strong>
               </li>
               <li>
                 <p>{t('make')}</p>
                 <Link
-                  href={`${NAVIGATION.buy.link}?make_${data.make.id}=0`}
+                  href={`${NAVIGATION.buy.link}?make_${data.details.make.id}=0`}
                   rel="noreferrer"
                   className={style.link}
-                  aria-label={data.make.name}
-                  title={data.make.name}
+                  aria-label={data.details.make.name}
+                  title={data.details.make.name}
                 >
-                  {data.make.name}
+                  {data.details.make.name}
                 </Link>
               </li>
               <li>
                 <p>{t('model')}</p>
                 <Link
-                  href={`${NAVIGATION.buy.link}?make_${data.make.id}=${data.model.id}`}
+                  href={`${NAVIGATION.buy.link}?make_${data.details.make.id}=${data.details.model.id}`}
                   rel="noreferrer"
                   className={style.link}
-                  aria-label={data.model.name}
-                  title={data.model.name}
+                  aria-label={data.details.model.name}
+                  title={data.details.model.name}
                 >
-                  {data.model.name}
+                  {data.details.model.name}
                 </Link>
               </li>
               <li>
                 <p>{t('engine_capacity')}</p>
-                <strong>{data.power_data.capacity} (cm)</strong>
+                <strong>{data.details.power_data.capacity} (cm)</strong>
               </li>
               <li>
                 <p>{t('filters.body.0')}</p>
-                <strong>{t(`filters.body.${data.body.id}`)}</strong>
+                <strong>{t(`filters.body.${data.details.body.id}`)}</strong>
               </li>
               <li>
                 <p>{t('body_color')}</p>
                 <strong>
                   <span
                     className={style.color}
-                    style={{ backgroundColor: t(`filters.color.${data.color.id}`) }}
-                    title={t(`filters.color.${data.color.id}`)}
+                    style={{ backgroundColor: t(`filters.color.${data.equipment.color.id}`) }}
+                    title={t(`filters.color.${data.equipment.color.id}`)}
                   />
                   <span
                     style={{
                       textTransform: 'capitalize'
                     }}
                   >
-                    {t(`filters.color.${data.color.id}`)}
+                    {t(`filters.color.${data.equipment.color.id}`)}
                   </span>
                 </strong>
               </li>
               <li>
                 <p>{t('doors')}</p>
-                <strong>{data.number_of_doors || '-'}</strong>
+                <strong>{data.equipment.number_of_doors || '-'}</strong>
               </li>
               <li>
                 <p>{t('seats')}</p>
-                <strong>{data.number_of_seats || '-'}</strong>
+                <strong>{data.equipment.number_of_seats || '-'}</strong>
               </li>
               <li>
                 <p>{t('description')}</p>
-                <p>{data.meta.description}</p>
+                <p>{data.details.meta.description}</p>
               </li>
             </ul>
           </div>
@@ -456,7 +485,7 @@ const SectionCar = ({ data, next }) => {
           </div>
 
           {
-            data.price_history.options &&
+            data.price.price_history.options &&
             <div
               ref={sectionRefs.current[2]}
               className={style.body}
@@ -500,7 +529,7 @@ const SectionCar = ({ data, next }) => {
           }
 
           {
-            data.price_score.options &&
+            data.price.price_score.options &&
             <div
               ref={sectionRefs.current[4]}
               className={style.body}

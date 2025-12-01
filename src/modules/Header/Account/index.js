@@ -71,10 +71,10 @@ const Account = () => {
 
   return (
     <div ref={blockRef}>
-      {
-        show &&
-        <Backdrop onChange={() => setShow(false)} />
-      }
+      <Backdrop
+        data={show}
+        onChange={() => setShow(false)}
+      />
       <div
         className={
           classNames(
@@ -100,7 +100,7 @@ const Account = () => {
                 />
               :
                 <Icon
-                  iconName={'circle-user'}
+                  iconName={'user-circle'}
                   width={28}
                   height={28}
                 />
@@ -137,7 +137,7 @@ const Account = () => {
                 <p className={style.email}>{auth.email}</p>
               </div>
               <Button
-                icon={'arrow-right-from-bracket'}
+                icon={'logout'}
                 classes={['secondary', 'md', 'square']}
                 onChange={handleLogout}
               />
@@ -182,7 +182,7 @@ const Account = () => {
                   <div className={style.setting}>
                     <Button
                       classes={['primary', 'md', 'wide']}
-                      icon={'circle-user'}
+                      icon={'user-circle'}
                       placeholder={t('login')}
                       onChange={() => openModal(0)}
                     />

@@ -6,9 +6,9 @@ import { useModal } from 'context/ModalContext'
 import Image from 'next/image'
 import Button from 'components/Button';
 import Accordion from 'modules/Accordion'
-import ImageUploader from './ImageUploader'
+import PhotoEditor from 'modules/PhotoEditor'
+import ImageUploader from 'modules/ImageUploader'
 import RulesModal from './RulesModal'
-import PhotoEditor from './PhotoEditor'
 
 import style from '../index.module.scss'
 
@@ -28,6 +28,11 @@ const Photos = ({ filter, handlePropsChange }) => {
     return new File([blob], 'editor', { type: blob.type })
   }
 
+  const handleDelete = (idx) => {
+    const updatedImages = filter.data.filter((_, index) => index !== idx)
+    handlePropsChange(`images.data`, updatedImages)
+  }
+
   const openEditor = async (image) => {
     const blob = await urlToFile(image)
     setFile(blob)
@@ -36,19 +41,6 @@ const Photos = ({ filter, handlePropsChange }) => {
 
   const hideEditor = () => {
     setShowEditor(false)
-  }
-
-  const handleSave = async (editedDataURL) => {
-    if (!file) return
-
-    const editedBlob = await fetch(editedDataURL).then((res) => res.blob())
-
-    console.log(editedBlob, editedDataURL)
-  }
-
-  const handleDelete = (idx) => {
-    const updatedImages = filter.filter((_, index) => index !== idx)
-    handlePropsChange('images', updatedImages)
   }
 
   return (
@@ -66,14 +58,17 @@ const Photos = ({ filter, handlePropsChange }) => {
           onChange={() => showModal(<RulesModal />)}
         />
       </div>
-      <ImageUploader />
+      <ImageUploader
+        uploaded={filter.uploaded}
+        handlePropsChange={(images) => handlePropsChange(`images.uploaded`, images)}
+      />
       {
-        filter.length > 0 &&
+        filter.data.length > 0 &&
         <>
           <hr className={style.hr} />
           <div className={style.images}>
             {
-              filter.map((el, idx) =>
+              filter.data.map((el, idx) =>
                 <div
                   key={idx}
                   className={style.picture}

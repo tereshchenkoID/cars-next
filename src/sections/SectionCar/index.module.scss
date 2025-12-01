@@ -177,7 +177,7 @@
     @include transition;
 
     position: absolute;
-    left: 0px;
+    left: 0;
     right: 0;
     bottom: 0;
     background-color: var(--color-primary-hover);
@@ -242,15 +242,18 @@
   }
 }
 
-.contacts {
-  padding-block: var(--gap-32) var(--gap-16);
-  background-color: var(--color-white);
+.stats {
+  @include flex($align-items: center, $wrap: wrap);
+
+  gap: var(--gap-8);
 }
 
-.social {
-  @include media-breakpoint-up(lg) {
-    padding-right: calc(rem(436px) + var(--outer-gap));
-  }
+.stat {
+  @include flex($align-items: center);
+
+  gap: var(--gap-4);
+  font-size: rem(12px);
+  text-decoration: underline
 }
 
 .color {

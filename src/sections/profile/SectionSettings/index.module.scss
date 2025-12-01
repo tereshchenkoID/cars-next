@@ -64,3 +64,53 @@
   border-style: solid;
   border-radius: var(--border-radius-8);
 }
+
+.document {
+  display: grid;
+  gap: var(--gap-12);
+}
+
+.images {
+  display: grid;
+  align-items: center;
+  gap: var(--gap-8);
+  grid-template-columns: repeat(2, 1fr);
+
+  @include media-breakpoint-up(sm) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  @include media-breakpoint-up(md) {
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--gap-16);
+  }
+}
+
+.picture {
+  position: relative;
+
+  @include hover {
+    .toggle {
+      opacity: 1;
+      visibility: visible;
+    }
+  }
+}
+
+.toggle {
+  @include transition;
+  @include flex(flex-end, center);
+
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: var(--gap-4);
+  gap: var(--gap-4);
+  background-color: rgba(0, 0, 0, 0.7);
+
+  @include media-breakpoint-up(xl) {
+    opacity: 0;
+    visibility: hidden;
+  }
+}

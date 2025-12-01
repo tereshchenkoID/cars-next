@@ -1,6 +1,7 @@
 import { useTranslations } from 'next-intl'
+
+import { useAuth } from 'hooks/useAuth'
 import { useModal } from 'context/ModalContext'
-import { useSelector } from 'react-redux'
 
 import Image from 'next/image'
 import HistoryModal from 'modules/Modals/HistoryModal'
@@ -12,12 +13,11 @@ import style from './index.module.scss'
 const History = ({ filtersProps, setActive, setShow }) => {
   const t = useTranslations()
   const { showModal } = useModal()
+  const { isAuth } = useAuth()
   const { history } = filtersProps
-  const auth = useSelector((state) => state.auth)
 
   const handleSaveHistory = (type, data) => {
-    auth.id
-    ?
+    if(isAuth) {
       showModal(
         <HistoryModal
           type={type}
@@ -25,10 +25,12 @@ const History = ({ filtersProps, setActive, setShow }) => {
         />,
         t('save_search')
       )
-    :
+    }
+    else {
       showModal(
         <LoginModal />
       )
+    }
 
     setShow(false)
   }
@@ -49,14 +51,16 @@ const History = ({ filtersProps, setActive, setShow }) => {
               />
             ))
           :
-            <Image
-              width={327}
-              height={262}
-              className={style.decor}
-              src={`/images/previous-filters.svg`}
-              priority={true}
-              alt={t('actions.save')}
-            />
+            <>
+              <Image
+                width={327}
+                height={262}
+                src={`/images/previous-filters.svg`}
+                priority={true}
+                alt={t('actions.save')}
+              />
+              <p className={style.text}>{t('notification.not_found_history')}</p>
+            </>
       }
     </div>
   )

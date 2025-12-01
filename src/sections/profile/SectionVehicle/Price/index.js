@@ -8,7 +8,6 @@ import { DEFAULT } from 'constant/config'
 import { getFormatPrice } from 'helpers/getFormatPrice'
 
 import Button from 'components/Button'
-import Label from 'components/Label'
 import Field from 'components/Field'
 import Select from 'components/Select'
 import Checkbox from 'components/Checkbox'
@@ -17,7 +16,7 @@ import Comparison from 'modules/Comparison'
 
 import style from '../index.module.scss'
 
-const Price = ({ filter, handlePropsChange, isDisable }) => {
+const Price = ({ filter, handlePropsChange, isDisable, handleSave }) => {
   const t = useTranslations()
   const auth = useSelector((state) => state.auth)
   const filters = useSelector((state) => state.filters)
@@ -34,7 +33,13 @@ const Price = ({ filter, handlePropsChange, isDisable }) => {
       placeholder={t('price')}
       isDisabled={isDisable}
     >
-      <div className={style.grid}>
+      <form
+        className={style.grid}
+        onSubmit={(e) => {
+          e.preventDefault()
+          handleSave()
+        }}
+      >
         <div
           className={
             classNames(
@@ -121,11 +126,12 @@ const Price = ({ filter, handlePropsChange, isDisable }) => {
         }
         <div className={style.footer}>
           <Button
+            type={'submit'}
             classes={['primary', 'md']}
             placeholder={t('actions.next')}
           />
         </div>
-      </div>
+      </form>
     </Accordion>
   )
 }

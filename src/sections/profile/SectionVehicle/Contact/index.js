@@ -10,12 +10,18 @@ import Accordion from 'modules/Accordion'
 
 import style from '../index.module.scss'
 
-const Contact = ({ filter, handlePropsChange }) => {
+const Contact = ({ filter, handlePropsChange, handleSave }) => {
   const t = useTranslations()
   const [toggle, setToggle] = useState(false)
 
   const handleAddPhone = () => {
-    handlePropsChange('contact.phone', [...filter.phone, ''])
+    handlePropsChange('contact.phone', [
+      ...filter.phone,
+      {
+        isVerified: false,
+        data: ""
+      }
+    ])
   }
 
   const handleRemovePhone = (idx) => {
@@ -25,7 +31,12 @@ const Contact = ({ filter, handlePropsChange }) => {
 
   const handleUpdatePhone = (idx, value) => {
     const updated = [...filter.phone]
-    updated[idx] = value
+
+    updated[idx] = {
+      ...updated[idx],
+      data: value
+    }
+
     handlePropsChange('contact.phone', updated)
   }
 
@@ -36,7 +47,13 @@ const Contact = ({ filter, handlePropsChange }) => {
       icon={'user'}
       placeholder={t('contact')}
     >
-      <div className={style.grid}>
+      <form
+        className={style.grid}
+        onSubmit={(e) => {
+          e.preventDefault()
+          handleSave()
+        }}
+      >
         <div className={style.list}>
           <Field
             placeholder={t('name')}
@@ -69,7 +86,7 @@ const Contact = ({ filter, handlePropsChange }) => {
                   className={style.phone}
                 >
                   <Phone
-                    data={el}
+                    data={el.data}
                     onChange={(value) => handleUpdatePhone(idx, value)}
                     isRequired={idx === 0}
                     isLabel={idx === 0}
@@ -98,8 +115,8 @@ const Contact = ({ filter, handlePropsChange }) => {
           <Field
             type={'email'}
             placeholder={t('email')}
-            data={filter.email}
-            onChange={(value) => handlePropsChange('contact.email', value)}
+            data={filter.email.data}
+            onChange={(value) => handlePropsChange('contact.email.data', value)}
             isRequired={true}
             isLabel={true}
           />
@@ -119,11 +136,12 @@ const Contact = ({ filter, handlePropsChange }) => {
         </div>
         <div className={style.footer}>
           <Button
+            type={'submit'}
             classes={['primary', 'md']}
             placeholder={t('actions.next')}
           />
         </div>
-      </div>
+      </form>
     </Accordion>
   )
 }

@@ -1,0 +1,18 @@
+@use 'scss/config' as *;
+
+.block {
+  display: grid;
+  align-items: flex-end;
+  row-gap: var(--gap-12);
+  column-gap: var(--gap-24);
+
+  @include media-breakpoint-up(md) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.wrapper {
+  @include flex;
+
+  gap: var(--gap-8);
+}

@@ -1,50 +1,12 @@
 @use 'scss/config' as *;
 
 .block {
-  @include flex(center, center);
+  @include flex(center);
 
   position: fixed;
   inset: 0;
-  z-index: $z-index-12;
-  width: 100vw;
-}
-
-.backdrop {
-  position: absolute;
-  inset: 0;
-  background: var(--color-grey-800);
-  opacity: 0.5;
-}
-
-.content {
-  @include flex(center, center);
-
+  z-index: $z-index-11;
   padding-block: var(--gap-32);
-  position: relative;
-  height: 100dvh;
-}
-
-.close {
-  position: absolute!important;
-  top: 0;
-  right: 0;
-  transform: translate(50%, -50%);
-}
-
-.title {
-  @include flex(center, center);
-
-  position: relative;
-  margin-bottom: var(--gap-16);
-  padding-right: var(--gap-16);
-  min-height: rem(32px);
-  gap: var(--gap-8);
-}
-
-.arrow {
-  position: absolute;
-  left: rem(-16px);
-  transform: rotateZ(90deg)
 }
 
 .wrapper {
@@ -55,6 +17,28 @@
   background-color: var(--color-white);
   box-shadow: var(--box-shadow-16-36);
   border-radius: var(--border-radius-8);
+  overflow: hidden;
+  z-index: inherit;
+}
+
+.title {
+  @include flex($align-items: center);
+
+  position: relative;
+  margin-bottom: var(--gap-16);
+  min-height: rem(32px);
+  gap: var(--gap-12);
+}
+
+.close,
+.arrow {
+  @include size(fit-content);
+
+  padding: 0;
+}
+
+.close {
+  margin-left: auto;
 }
 
 .header,
@@ -69,36 +53,21 @@
 }
 
 .header {
-  border-radius: var(--border-radius-8) var(--border-radius-8) 0 0;
   background-color: var(--color-grey-50);
   border-bottom-width: rem(1px);
   border-bottom-style: solid;
 }
 
 .body {
-  overflow-y: auto;
+  @include scroll;
+
   color: var(--color-grey-700);
   font-weight: var(--typography-bold);
   flex-grow: 1;
 }
 
 .footer {
-  position: relative;
-  z-index: 1;
   padding-bottom: var(--gap-16);
-  background: linear-gradient(rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0.85) 100%);
-  border-radius: 0 0 var(--border-radius-8) var(--border-radius-8);
-
-  &::after {
-    background: linear-gradient(rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.5) 100%);
-    position: absolute;
-    top: rem(-40px);
-    left: 0;
-    right: 0;
-    height: rem(40px);
-    pointer-events: none;
-    content: '';
-  }
 }
 
 .grid {

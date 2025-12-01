@@ -1,0 +1,62 @@
+@use 'scss/config' as *;
+
+.form {
+  @include flex($direction: column);
+
+  gap: var(--gap-12);
+}
+
+.label {
+  @include flex(center, center);
+
+  padding: var(--gap-24);
+  border-radius: var(--border-radius-8);
+  border: rem(1px) dashed var(--color-primary);
+  gap: var(--gap-8);
+  color: var(--color-primary);
+  cursor: pointer;
+}
+
+.input {
+  @include size(0);
+
+  visibility: hidden;
+  opacity: 0;
+}
+
+.previews {
+  display: grid;
+  align-items: center;
+  gap: var(--gap-8);
+  grid-template-columns: repeat(2, 1fr);
+  border: rem(1px) dashed var(--color-primary);
+  padding: var(--gap-8);
+  border-radius: var(--border-radius-8);
+
+  @include media-breakpoint-up(sm) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  @include media-breakpoint-up(md) {
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--gap-16);
+    padding: var(--gap-16);
+  }
+}
+
+.preview {
+  @include size(rem(150px));
+
+  position: relative;
+  background-image:
+    linear-gradient(45deg, rgba(0, 0, 0, 0.1) 25%, transparent 25%, transparent 74%, rgba(0, 0, 0, 0.1) 75%, rgba(0, 0, 0, 0.1)),
+    linear-gradient(45deg, rgba(0, 0, 0, 0.1) 25%, transparent 25%, transparent 74%, rgba(0, 0, 0, 0.1) 75%, rgba(0, 0, 0, 0.1));
+  background-size: rem(20px) rem(20px);
+  background-position: 0 0, rem(10px) rem(10px);
+}
+
+.remove {
+  position: absolute;
+  top: rem(-16px);
+  right: rem(-16px);
+}

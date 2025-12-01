@@ -1,19 +1,15 @@
-import { useTranslations } from 'next-intl'
-import { useDispatch } from 'react-redux'
 import { useState } from 'react'
+import { useTranslations } from 'next-intl'
 
 import classNames from 'classnames'
 
 import { CARD_STATUS, NAVIGATION, ROUTES_USER } from 'constant/config'
 
-import { useModal } from 'context/ModalContext'
 import { useAuth } from 'hooks/useAuth'
-import { postData } from 'helpers/api'
+import { useFavourite } from 'hooks/useFavourite'
 import { getDate } from 'helpers/getDate'
 import { getFormatPrice } from 'helpers/getFormatPrice'
 import { getFuelIcon } from 'helpers/getFuelIcon'
-import { setToastify } from 'store/actions/toastifyAction'
-import { setFavorite } from 'store/actions/favoriteAction'
 
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { Pagination, Navigation, Mousewheel } from 'swiper/modules'
@@ -28,7 +24,6 @@ import Top from 'modules/Top'
 import Tags from 'modules/Tags'
 import Option from 'modules/Option'
 import Discount from 'modules/Discount'
-import LoginModal from 'modules/Modals/LoginModal'
 import Skeleton from './Skeleton'
 
 import style from './index.module.scss'
@@ -40,46 +35,15 @@ const VehicleCard = ({
   updateFavorites = () => {},
 }) => {
   const t = useTranslations()
-  const dispatch = useDispatch()
-  const { showModal } = useModal()
-  const { auth, isAuth } = useAuth()
+  const { auth } = useAuth()
   const [image, setImage] = useState(false)
-  const [favorites, setFavorites] = useState(data.is_favorite)
   const domain = isProfile ? ROUTES_USER.vehicles.link : NAVIGATION.car.link
 
-  const handleFavorite = (type) => {
-    if (isAuth) {
-      const formData = new FormData()
-      formData.append('id', data.id)
-      formData.append('type', type)
-
-      postData('user/favorites/action/', formData).then(json => {
-        if (json) {
-          setFavorites(type === '0' ? '1' : '0')
-
-          dispatch(
-            setToastify({
-              type: 'success',
-              text: t( type === '1' ? 'notification.removed_favorites' : 'notification.added_favorites'),
-            })
-          )
-          dispatch(setFavorite(json.counts))
-          updateFavorites()
-        }
-        else {
-          dispatch(
-            setToastify({
-              type: 'error',
-              text: json.error_message,
-            })
-          )
-        }
-      })
-    }
-    else {
-      showModal(<LoginModal />)
-    }
-  }
+  const { favorites, toggleFavorite } = useFavourite(
+    data.is_favorite,
+    data.id,
+    updateFavorites
+  )
 
   if (isLoading)
     return <Skeleton />
@@ -167,14 +131,12 @@ const VehicleCard = ({
           }
           aria-label={t('favorite')}
           title={t('favorite')}
-          onClick={() => handleFavorite(favorites === '0' ? '0' : '1')}
+          onClick={() => toggleFavorite(favorites === '0' ? '0' : '1')}
         >
           <Icon
             iconName={'heart-filled'}
             width={24}
             height={24}
-            stroke={'var(--color-white)'}
-            strokeWidth={2}
           />
         </button>
       </div>
@@ -285,7 +247,7 @@ const VehicleCard = ({
           isProfile &&
           <div className={style.actions}>
             <Button
-              icon={'reset'}
+              icon={'reload'}
               classes={['success', 'md', 'square', style.action]}
             />
             <Button

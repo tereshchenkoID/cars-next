@@ -5,7 +5,7 @@ import React from 'react'
 import { SessionProvider } from 'next-auth/react'
 import { ModalProvider } from './ModalContext'
 
-const AppProviders = ({ children, session }) => {
+const AppProviders = ({ children, session, meta }) => {
   return (
     <SessionProvider session={session}>
       <ModalProvider>

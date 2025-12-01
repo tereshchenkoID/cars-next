@@ -24,7 +24,7 @@ const CustomTooltip = ({ data, active, payload, label, auth }) => {
   if (active && payload && payload.length) {
     return (
       <div className={style.tooltip}>
-        <p>{`${getFormatPrice(auth?.account?.language?.code, auth?.account?.currency?.code, payload[0].value)} - ${getDate(label, 3)}`}</p>
+        <p>{`${getFormatPrice(auth?.account?.language?.code, data.price.currency.code, payload[0].value)} - ${getDate(label, 3)}`}</p>
       </div>
     )
   }
@@ -46,7 +46,7 @@ const CustomDot = (props) => {
   )
 }
 
-const CustomLabel = ({ x, y, value, index, dataLength, chartHeight }) => {
+const CustomLabel = ({ x, y, value, index, dataLength }) => {
   const labelText = parseFloat(value).toLocaleString();
   const labelHeight = 18
   const adjustedY = y - 25 < 0 ? y + labelHeight / 2 : y - 25
@@ -76,20 +76,20 @@ const History = ({ data }) => {
     <div className={style.block}>
       <div className={style.header}>
         <div>
-          <p className={style.discount}><strong>{data.price_history.counts}</strong> {t('change')}</p>
-          <h6 className={style.days}>{data.price_history.days || 1} {t('days')}</h6>
+          <p className={style.discount}><strong>{data.price.price_history.counts}</strong> {t('change')}</p>
+          <h6 className={style.days}>{data.price.price_history.days || 1} {t('days')}</h6>
         </div>
         {
-          data.price_data.discount &&
+          data.price.price_data.discount &&
           <Discount
             size={'sm'}
-            amount={getFormatPrice(auth?.account?.language?.code, auth?.account?.currency?.code, data.price_data.discount)}
+            amount={getFormatPrice(auth?.account?.language?.code, data.price.currency.code, data.price.price_data.discount)}
           />
         }
       </div>
       <ResponsiveContainer width="100%" height={200}>
         <AreaChart
-          data={data.price_history.options}
+          data={data.price.price_history.options}
           margin={{
             top: 40,
             right: 10,
@@ -128,7 +128,7 @@ const History = ({ data }) => {
             }
           >
             <Label
-              value={data.currency.name}
+              value={data.price.currency.code}
               position="top"
               offset={24}
               fill={'#979fad'}
@@ -137,7 +137,7 @@ const History = ({ data }) => {
           </YAxis>
           <Tooltip
             content={
-              <CustomTooltip data={data} auth={auth} />
+              <CustomTooltip data={data} />
             }
           />
           <Area
@@ -156,7 +156,7 @@ const History = ({ data }) => {
                   y={y}
                   value={value}
                   index={index}
-                  dataLength={data.price_history.options.length}
+                  dataLength={data.price.price_history.options.length}
                 />
               )}
             />

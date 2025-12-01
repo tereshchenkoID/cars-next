@@ -15,7 +15,7 @@
   background-color: var(--color-white);
   overflow-y: auto;
   font-weight: var(--typography-medium);
-  z-index: $z-index-10;
+  z-index: $z-index-11;
 
   @include media-breakpoint-up(lg) {
     @include size(100%);
@@ -26,7 +26,6 @@
     gap: var(--gap-12);
     background-color: transparent;
     transform: translateX(0);
-    background-color: transparent;
     overflow-y: unset;
   }
 

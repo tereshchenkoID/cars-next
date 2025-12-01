@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { useSelector } from 'react-redux'
 import { useTranslations } from 'next-intl'
 
-import { DEFAULT } from "constant/config"
+import { DEFAULT } from 'constant/config'
 
 import Button from 'components/Button'
 import Field from 'components/Field'
@@ -51,10 +51,9 @@ import style from '../index.module.scss'
 //   return Math.round((filled / total) * 100)
 // }
 
-const Details = ({ filter, handlePropsChange }) => {
+const Details = ({ filter, handlePropsChange, handleSave }) => {
   const t = useTranslations()
   const brands = useSelector((state) => state.brands)
-
   const [toggle, setToggle] = useState(false)
 
   const searchMake = (id) => {
@@ -73,7 +72,13 @@ const Details = ({ filter, handlePropsChange }) => {
       icon={'file'}
       placeholder={t('details')}
     >
-      <div className={style.grid}>
+      <form
+        className={style.grid}
+        onSubmit={(e) => {
+          e.preventDefault()
+          handleSave()
+        }}
+      >
         <Field
           placeholder={t('name')}
           data={filter.meta.name}
@@ -211,11 +216,12 @@ const Details = ({ filter, handlePropsChange }) => {
 
         <div className={style.footer}>
           <Button
+            type={'submit'}
             classes={['primary', 'md']}
             placeholder={t('actions.next')}
           />
         </div>
-      </div>
+      </form>
     </Accordion>
   )
 }

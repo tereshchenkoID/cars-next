@@ -4,17 +4,21 @@ import { useSearchParams } from 'next/navigation'
 
 import { getSearch } from 'helpers/getSearch'
 import { postData } from 'helpers/api'
+
 import { setBrands } from 'store/actions/brandsAction'
 import { setSearch } from 'store/actions/searchAction'
+import { setToastify } from 'store/actions/toastifyAction'
 
 import { ACTIVE, DEFAULT } from 'constant/config'
 
-const useFilters = (initialData) => {
+export const useFilters = (initialData) => {
   const dispatch = useDispatch()
   const searchParams = useSearchParams()
+
   const filters = useSelector((state) => state.filters)
   const brands = useSelector((state) => state.brands)
   const search = useSelector((state) => state.search)
+
   const [data, setData] = useState(initialData || [])
   const [loading, setLoading] = useState(false)
   const [history, setHistory] = useState([])
@@ -25,30 +29,27 @@ const useFilters = (initialData) => {
     results: initialData?.results,
   })
 
+  const getSearchParams = () => Object.fromEntries(searchParams.entries())
+
   const saveHistory = (results) => {
-    const params = Object.fromEntries(searchParams.entries())
-    const name = Date.now()
-    const entry = { params, name, results }
+    const entry = [
+      { params: getSearchParams(), name: Date.now(), results },
+      ...history
+    ]
 
-    let updatedHistory = [entry, ...history]
-
-    if (updatedHistory.length > 10) {
-      updatedHistory.pop()
+    if (entry.length > 10) {
+      entry.pop()
     }
 
-    localStorage.setItem('historySearch', JSON.stringify(updatedHistory))
-    setHistory(updatedHistory)
+    localStorage.setItem('historySearch', JSON.stringify(entry))
+    setHistory(entry)
   }
 
-  const getSearchParams = () => {
-    return Object.fromEntries(searchParams.entries())
-  }
-
-  const handleLoad = (page, data) => {
+  const handleLoad = (page, data = search) => {
     setLoading(true)
 
     const formData = new FormData()
-    formData.append('data', JSON.stringify(data || search))
+    formData.append('data', JSON.stringify(data))
     formData.append('page', page)
 
     postData('filters/search/', formData).then(json => {
@@ -63,9 +64,7 @@ const useFilters = (initialData) => {
 
         saveHistory(json.results)
 
-        setTimeout(() => {
-          setLoading(false)
-        }, 1000)
+        setTimeout(() => setLoading(false), 500)
       } else {
         dispatch(
           setToastify({
@@ -229,5 +228,3 @@ const useFilters = (initialData) => {
     searchParams,
   }
 }
-
-export default useFilters

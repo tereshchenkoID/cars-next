@@ -84,7 +84,7 @@
   width: rem(320px);
   overflow-y: auto;
   background-color: var(--color-white);
-  z-index: $z-index-10;
+  z-index: $z-index-11;
 
   @include media-breakpoint-up(lg) {
     display: none;

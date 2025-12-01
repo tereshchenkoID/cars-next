@@ -11,7 +11,6 @@
 }
 
 .container {
-
   @include media-breakpoint-up(lg) {
     display: grid;
     grid-template-columns: rem(320px) 1fr;
@@ -21,7 +20,6 @@
 }
 
 .content {
-  position: relative;
   display: grid;
   gap: var(--gap-16);
   align-self: flex-start;
@@ -30,11 +28,11 @@
 .meta {
   display: grid;
   gap: var(--gap-16);
-  position: relative;
   z-index: $z-index-3;
 
   @include media-breakpoint-up(lg) {
     grid-template-columns: repeat(2, 1fr);
+    min-height: rem(32px);
   }
 }
 
@@ -43,8 +41,7 @@
 
   position: sticky;
   top: var(--header-height);
-  left: 0;
-  right: 0;
+  inset-inline: 0;
   z-index: $z-index-9;
   gap: var(--gap-8);
   margin-inline: var(--outer-gap-revert);
@@ -59,8 +56,8 @@
     position: static;
     background-color: transparent;
     z-index: $z-index-1;
-    margin: 0;
-    padding: 0;
+    margin-inline: 0;
+    padding-left: 0;
     border-bottom: 0;
     height: auto;
   }
@@ -75,44 +72,21 @@
   height: 100%;
 
   @include media-breakpoint-up(lg) {
-    padding: 0;
+    padding-right: 0;
     flex-wrap: wrap;
     overflow-x: unset;
     height: unset;
   }
+
+  & > * {
+    flex-shrink: 0;
+  }
 }
 
-.search {
-  display: grid;
-  grid-template-columns: 1fr auto;
-  align-items: center;
-  gap: var(--gap-6);
-  border-radius: var(--border-radius-4);
-  background-color: var(--color-secondary);
-  padding: var(--gap-2) var(--gap-12);
-  height: rem(32px);
-  color: var(--color-primary-hover);
-  font-size: rem(13px);
-  font-weight: var(--typography-medium);
-  white-space: nowrap;
-  text-transform: capitalize;
+.toggle {
 
-  &.gold {
-    background: var(--gradient-gold);
-    color: var(--color-white);
-  }
-
-  &.blue {
-    background: var(--gradient-blue);
-    color: var(--color-white);
-
-    @include media-breakpoint-up(lg) {
-      display: none;
-    }
-  }
-
-  @include hover {
-    background-color: var(--color-secondary-hover);
+  @include media-breakpoint-up(lg) {
+    display: none;
   }
 }
 
@@ -138,24 +112,11 @@
   line-height: 1.5;
   letter-spacing: rem(1px);
 
-  h6,
-  button {
-    color: var(--color-primary);
-    letter-spacing: rem(1px);
-  }
-
   h6 {
+    color: var(--color-primary);
     font-size: rem(16px);
     text-transform: uppercase;
-  }
-
-  button {
-    font-weight: var(--typography-bold);
-
-
-    @include hover {
-      text-decoration: underline;
-    }
+    letter-spacing: rem(1px);
   }
 
   p {
