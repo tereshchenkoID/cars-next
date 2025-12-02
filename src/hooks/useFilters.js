@@ -1,23 +1,22 @@
 import { useEffect, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
 import { useSearchParams } from 'next/navigation'
 
 import { getSearch } from 'helpers/getSearch'
 import { postData } from 'helpers/api'
 
-import { setBrands } from 'store/actions/brandsAction'
-import { setSearch } from 'store/actions/searchAction'
-import { setToastify } from 'store/actions/toastifyAction'
+import { useToastifyStore } from 'stores/toastifyStore'
+import { useBrandsStore } from 'stores/brandsStore'
+import { useFiltersStore } from 'stores/filtersStore'
+import { useSearchStore } from 'stores/searchStore'
 
 import { ACTIVE, DEFAULT } from 'constant/config'
 
 export const useFilters = (initialData) => {
-  const dispatch = useDispatch()
   const searchParams = useSearchParams()
-
-  const filters = useSelector((state) => state.filters)
-  const brands = useSelector((state) => state.brands)
-  const search = useSelector((state) => state.search)
+  const showToast = useToastifyStore(state => state.showToast)
+  const { filters} = useFiltersStore()
+  const { brands, setBrands } = useBrandsStore()
+  const { search, setSearch } = useSearchStore()
 
   const [data, setData] = useState(initialData || [])
   const [loading, setLoading] = useState(false)
@@ -65,12 +64,11 @@ export const useFilters = (initialData) => {
         saveHistory(json.results)
 
         setTimeout(() => setLoading(false), 500)
-      } else {
-        dispatch(
-          setToastify({
-            type: 'error',
-            text: json.error_message,
-          })
+      }
+      else {
+        showToast(
+          'error',
+          json.error_message
         )
       }
     })
@@ -173,7 +171,7 @@ export const useFilters = (initialData) => {
       }
     }
 
-    dispatch(setSearch(a))
+    setSearch(a)
 
     if (update) (
       handleLoad(a.page.value[0], a)
@@ -192,16 +190,16 @@ export const useFilters = (initialData) => {
 
   const handleReset = () => {
     const { date, makes } = generateSearchFromFilters(filters, null)
-    dispatch(setBrands(makes))
-    dispatch(setSearch(date))
+    setBrands(makes)
+    setSearch(date)
     handleLoad(0, date)
   }
 
   useEffect(() => {
     setHistory(JSON.parse(localStorage.getItem('historySearch')) || [])
     const { date, makes } = generateSearchFromFilters(filters, searchParams)
-    dispatch(setBrands(makes))
-    dispatch(setSearch(date))
+    setBrands(makes)
+    setSearch(date)
   }, [])
 
   useEffect(() => {

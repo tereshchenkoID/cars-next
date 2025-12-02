@@ -1,7 +1,8 @@
 "use client"
 
 import { useTranslations } from 'next-intl'
-import { useSelector } from 'react-redux'
+
+import { useSettingsStore } from 'stores/settingsStore'
 
 import useData from './useData'
 
@@ -14,7 +15,7 @@ import style from './index.module.scss'
 
 const SectionReviews = ({ initialData }) => {
   const t = useTranslations()
-  const settings = useSelector(state => state.settings)
+  const { settings } = useSettingsStore()
   const reviewsProps = useData(initialData || [])
 
   const {
@@ -33,10 +34,10 @@ const SectionReviews = ({ initialData }) => {
             <div className={style.banner}>
               <div className={style.rate}>
                 <StarRating
-                  data={settings.rate.value}
+                  data={settings?.rate?.value}
                   size={'lg'}
                 />
-                <p className={style.count}>{settings.rate.votes} {t('reviews')}</p>
+                <p className={style.count}>{settings?.rate?.votes} {t('reviews')}</p>
               </div>
               <i>“{t('notification.reviews')}”</i>
             </div>

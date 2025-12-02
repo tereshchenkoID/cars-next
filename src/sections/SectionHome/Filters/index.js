@@ -1,9 +1,9 @@
-import { useTranslations } from 'next-intl'
 import { useState } from 'react'
-import { useSelector } from 'react-redux'
+import { useTranslations } from 'next-intl'
 
 import { DEFAULT, NAVIGATION } from 'constant/config'
 
+import { useBrandsStore } from 'stores/brandsStore'
 import { getYears } from 'helpers/getYears'
 
 import Reference from 'components/Reference'
@@ -17,7 +17,8 @@ import style from './index.module.scss'
 
 const Filters = () => {
   const t = useTranslations()
-  const brands = useSelector((state) => state.brands)
+  const { brands } = useBrandsStore()
+
   const [search, setSearch] = useState({
     vat_reclaimable: DEFAULT,
     year_from: DEFAULT,
@@ -29,7 +30,7 @@ const Filters = () => {
 
   const generateParams = () => {
     const params = new URLSearchParams();
-  
+
     Object.entries(search).forEach(([key, value]) => {
       if (value !== DEFAULT) {
         if (key === "make") {

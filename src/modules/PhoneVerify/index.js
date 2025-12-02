@@ -1,11 +1,10 @@
 import { useState } from 'react'
-import { useDispatch } from 'react-redux'
 import { useTranslations } from 'next-intl'
 
 import { DOCUMENTS_VERIFICATIONS } from 'constant/config'
 
+import { useToastifyStore } from 'stores/toastifyStore'
 import { postData } from 'helpers/api'
-import { setToastify } from 'store/actions/toastifyAction'
 
 import Button from 'components/Button'
 import Field from 'components/Field'
@@ -21,7 +20,7 @@ const PhoneVerify = ({
   handlePropsChange,
 }) => {
   const t = useTranslations()
-  const dispatch = useDispatch()
+  const showToast = useToastifyStore(state => state.showToast)
   const [code, setCode] = useState('')
   const action = filter.status === 0 ? 'getCode' : 'verify'
 
@@ -35,21 +34,17 @@ const PhoneVerify = ({
 
     postData('profile/email/', formData).then(json => {
       if (json.code === "0") {
-        dispatch(
-          setToastify({
-            type: 'success',
-            text: json.message,
-          }),
-        ).then(() => {
-          handlePropsChange(json.status || '2')
-          setCode('')
-        })
-      } else {
-        dispatch(
-          setToastify({
-            type: 'error',
-            text: json.error_message,
-          }),
+        showToast(
+          'success',
+          json.message
+        )
+        handlePropsChange(json.status || '2')
+        setCode('')
+      }
+      else {
+        showToast(
+          'error',
+          json.error_message,
         )
       }
     })

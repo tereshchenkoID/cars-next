@@ -1,8 +1,8 @@
 import { useTranslations } from 'next-intl'
-import { useSelector } from 'react-redux'
 
 import { NAVIGATION } from 'constant/config'
 
+import { useAuth } from 'hooks/useAuth'
 import { getFormatPrice } from 'helpers/getFormatPrice'
 import { getFuelIcon } from 'helpers/getFuelIcon'
 import { getDate } from 'helpers/getDate'
@@ -15,7 +15,7 @@ import style from './index.module.scss'
 
 const Car = ({ data }) => {
   const t = useTranslations()
-  const auth = useSelector((state) => state.auth)
+  const { auth } = useAuth()
 
   return (
     <Link

@@ -9,7 +9,6 @@ import NextTopLoader from 'nextjs-toploader'
 
 import { authOptions } from 'app/api/auth/[...nextauth]/route'
 import { fetchData } from 'utils/fetchData'
-import StoreProvider from 'store/provider'
 import AppProviders from 'context/AppProviders'
 
 import '@fancyapps/ui/dist/fancybox/fancybox.css'
@@ -19,6 +18,7 @@ import 'swiper/css/navigation'
 
 import Header from 'modules/Header'
 import Footer from 'modules/Footer'
+import ZustandProvider from 'stores/ZustandProvider'
 
 const poppins = Poppins({
   weight: ['400', '500', '700'],
@@ -52,7 +52,7 @@ export default async function RootLayout({ children, params }) {
     <html lang={locale} className={poppins.className}>
       <body>
         <NextIntlClientProvider messages={messages}>
-          <StoreProvider preloadedState={{...initialData, auth: cookies}}>
+          <ZustandProvider initialData={{...initialData, auth: cookies}}>
             <AppProviders session={cookies}>
               <NextTopLoader
                 color="#3e47dd"
@@ -73,7 +73,7 @@ export default async function RootLayout({ children, params }) {
               </main>
               <Footer />
             </AppProviders>
-          </StoreProvider>
+          </ZustandProvider>
         </NextIntlClientProvider>
       </body>
     </html>

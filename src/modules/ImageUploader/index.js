@@ -1,8 +1,7 @@
 import { useState } from 'react'
-import { useDispatch } from 'react-redux'
 import { useTranslations } from 'next-intl'
 
-import { setToastify } from 'store/actions/toastifyAction'
+import { useToastifyStore } from 'stores/toastifyStore'
 
 import Button from 'components/Button'
 import Icon from 'components/Icon'
@@ -11,7 +10,7 @@ import style from './index.module.scss'
 
 const ImageUploader = ({ uploaded, handlePropsChange }) => {
   const t = useTranslations()
-  const dispatch = useDispatch()
+  const showToast = useToastifyStore(state => state.showToast)
   const [isDragging, setIsDragging] = useState(false)
 
   const handleFileChange = (event) => {
@@ -23,11 +22,9 @@ const ImageUploader = ({ uploaded, handlePropsChange }) => {
     const validFiles = files.filter((file) => file.type.startsWith('image/'))
 
     if (validFiles.length < files.length) {
-      dispatch(
-        setToastify({
-          type: 'error',
-          text: t('notification.upload_image'),
-        })
+      showToast(
+        'error',
+        t('notification.upload_image')
       )
     }
 

@@ -1,8 +1,9 @@
 import { useState } from 'react'
-import { useSelector } from 'react-redux'
 import { useTranslations } from 'next-intl'
 
 import { DEFAULT } from 'constant/config'
+
+import { useBrandsStore } from 'stores/brandsStore'
 
 import Button from 'components/Button'
 import Field from 'components/Field'
@@ -53,7 +54,8 @@ import style from '../index.module.scss'
 
 const Details = ({ filter, handlePropsChange, handleSave }) => {
   const t = useTranslations()
-  const brands = useSelector((state) => state.brands)
+  const { brands } = useBrandsStore()
+
   const [toggle, setToggle] = useState(false)
 
   const searchMake = (id) => {

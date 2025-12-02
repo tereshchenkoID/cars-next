@@ -1,16 +1,16 @@
 import { useMemo } from 'react'
 import { useTranslations } from 'next-intl'
-import { useSelector } from 'react-redux'
-
 import classNames from 'classnames'
 
+import { useAuth } from 'hooks/useAuth'
 import { getFormatPrice } from 'helpers/getFormatPrice'
 
 import style from './index.module.scss'
 
 const Scale = ({min, max, data, idx, period}) => {
   const t = useTranslations()
-  const auth = useSelector((state) => state.auth)
+  const { auth } = useAuth()
+
   const value = useMemo(() => {
     if (data < min) return 0
     if (data > max) return 100
@@ -27,7 +27,7 @@ const Scale = ({min, max, data, idx, period}) => {
           }}
           className={style.marker}
         >
-          <div 
+          <div
             className={
               classNames(
                 style.value,

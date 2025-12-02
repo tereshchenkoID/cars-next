@@ -1,5 +1,4 @@
 import { useTranslations } from 'next-intl'
-import { useSelector } from 'react-redux'
 import {
   Area,
   XAxis,
@@ -12,6 +11,7 @@ import {
   LabelList
 } from 'recharts'
 
+import { useAuth } from 'hooks/useAuth'
 import { getDate } from 'helpers/getDate'
 import { getFormatNumber } from 'helpers/getFormatNumber'
 import { getFormatPrice } from 'helpers/getFormatPrice'
@@ -70,7 +70,7 @@ const CustomLabel = ({ x, y, value, index, dataLength }) => {
 
 const History = ({ data }) => {
   const t = useTranslations()
-  const auth = useSelector((state) => state.auth)
+  const { auth } = useAuth()
 
   return (
     <div className={style.block}>

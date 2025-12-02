@@ -1,11 +1,11 @@
 "use client"
 
 import { useTranslations } from 'next-intl'
-import { useSelector } from 'react-redux'
-
 import classNames from 'classnames'
 
 import { DEFAULT, NAVIGATION } from 'constant/config'
+
+import { useBrandsStore } from 'stores/brandsStore'
 
 import Image from 'next/image'
 import Link from 'next/link'
@@ -41,7 +41,7 @@ const MENU = [
 
 const SectionSitemap = () => {
   const t = useTranslations()
-  const brands = useSelector(state => state.brands)
+  const { brands } = useBrandsStore()
 
   return (
     <>

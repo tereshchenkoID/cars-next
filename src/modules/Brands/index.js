@@ -1,9 +1,9 @@
 import { useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
 
 import { ACTIVE, DEFAULT } from 'constant/config'
 
-import { setSearch } from 'store/actions/searchAction'
+import { useBrandsStore } from 'stores/brandsStore'
+import { useSearchStore } from 'stores/searchStore'
 
 import Label from 'components/Label'
 import Toggle from './Toggle'
@@ -18,9 +18,8 @@ const Brands = ({
   isLabel = false,
   label = null
 }) => {
-  const dispatch = useDispatch()
-  const brands = useSelector((state) => state.brands)
-  const search = useSelector((state) => state.search)
+  const { brands } = useBrandsStore()
+  const { search, setSearch } = useSearchStore()
 
   useEffect(() => {
     const updatedFilters = JSON.parse(JSON.stringify(search))
@@ -47,7 +46,7 @@ const Brands = ({
       }
     })
 
-    dispatch(setSearch(updatedFilters))
+    setSearch(updatedFilters)
   }, [brands])
 
   return (

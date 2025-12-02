@@ -1,6 +1,6 @@
 import { useTranslations } from 'next-intl'
-import { useSelector } from 'react-redux'
 
+import { useAuth } from 'hooks/useAuth'
 import { getFormatPrice } from 'helpers/getFormatPrice'
 
 import Button from 'components/Button'
@@ -11,7 +11,7 @@ import style from './index.module.scss'
 
 const Betslip = ({ data }) => {
   const t = useTranslations()
-  const auth = useSelector((state) => state.auth)
+  const { auth } = useAuth()
 
   return (
     <div className={style.block}>

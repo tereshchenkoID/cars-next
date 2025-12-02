@@ -1,10 +1,9 @@
 import { useTranslations } from 'next-intl'
-import { useDispatch } from 'react-redux'
 import { Fragment, useState, useRef } from 'react'
 import { useOutsideClick } from 'hooks/useOutsideClick'
 
-import { setBrands } from 'store/actions/brandsAction'
-import { setSearch } from 'store/actions/searchAction'
+import { useBrandsStore } from 'stores/brandsStore'
+import { useSearchStore } from 'stores/searchStore'
 
 import Button from 'components/Button'
 
@@ -18,7 +17,8 @@ const SavedCard = ({
   filtersProps,
 }) => {
   const t = useTranslations()
-  const dispatch = useDispatch()
+  const { setBrands } = useBrandsStore()
+  const { setSearch } = useSearchStore()
 
   const {
     handleLoad,
@@ -36,8 +36,8 @@ const SavedCard = ({
     window.history.pushState(null, '', `?${queryParams.toString()}`)
 
     const { date, makes } = generateSearchFromFilters(filters, queryParams)
-    dispatch(setBrands(makes))
-    dispatch(setSearch(date))
+    setBrands(makes)
+    setSearch(date)
     handleLoad(0, date)
     setActive(0)
     setShow(false)

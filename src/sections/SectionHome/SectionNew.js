@@ -1,13 +1,11 @@
-"use client"
+'use client'
 
 import { useTranslations } from 'next-intl'
-
-import classNames from 'classnames'
-
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { Navigation, Pagination, Mousewheel } from 'swiper/modules'
+import classNames from 'classnames'
 
-import Container from "components/Container"
+import Container from 'components/Container'
 import Car from './Car'
 
 import style from './index.module.scss'

@@ -1,15 +1,14 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
 import { useSession } from 'next-auth/react'
 
-import { setAuth } from 'store/actions/authAction'
+import { useAuthStore } from 'stores/authStore'
 
 export const useAuth = () => {
-  const dispatch = useDispatch()
   const { data: session, status } = useSession()
-  const auth = useSelector((state) => state.auth)
+  const { auth, setAuth } = useAuthStore()
+
   const [isReady, setIsReady] = useState(false)
   const isAuth = Boolean(auth?.SID) && isReady
 
@@ -19,18 +18,18 @@ export const useAuth = () => {
 
       if(session?.SID) {
         sessionStorage.setItem('token', session?.SID)
-        dispatch(setAuth(session))
+        setAuth(session)
         setIsReady(true)
       }
     }
   }, [])
 
   const deleteAuth = () => {
-    dispatch(setAuth(null))
+    setAuth(null)
   }
 
   const updateAuth = (data) => {
-    dispatch(setAuth({ ...auth, ...data }))
+    setAuth({ ...auth, ...data })
   }
 
   return {

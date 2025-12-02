@@ -37,12 +37,12 @@ const All = ({
       <Select
         id={'select_state'}
         options={
-          Object.entries(filters.state.options).map(([optionKey, _]) => ({
+          Object.entries(filters?.state?.options).map(([optionKey, _]) => ({
             value: optionKey,
             label: optionKey === DEFAULT ? t('all') : t(`filters.state.${optionKey}`),
           }))
         }
-        data={search.state?.value[0] || DEFAULT}
+        data={search?.state?.value[0] || DEFAULT}
         onChange={(value) => handleChange('select', 'state', value)}
         isLabel={true}
         label={t('filters.state.0')}
@@ -51,7 +51,7 @@ const All = ({
         <Field
           type={'number'}
           placeholder={t('from')}
-          data={search.price_from?.value[0] !== DEFAULT ? search.price_from?.value[0] : ''}
+          data={search?.price_from?.value[0] !== DEFAULT ? search?.price_from?.value[0] : ''}
           onChange={(value) => handleChange('field', 'price_from', value)}
           isLabel={true}
           label={t('filters.price.0')}
@@ -59,24 +59,24 @@ const All = ({
         <Field
           type={'number'}
           placeholder={t('to')}
-          data={search.price_to?.value[0] !== DEFAULT ? search.price_to?.value[0] : ''}
+          data={search?.price_to?.value[0] !== DEFAULT ? search?.price_to?.value[0] : ''}
           onChange={(value) => handleChange('field', 'price_to', value)}
         />
       </div>
       <Checkbox
         placeholder={t('filters.vat_reclaimable.0')}
-        data={search.vat_reclaimable?.value[0]}
+        data={search?.vat_reclaimable?.value[0]}
         onChange={(value) => handleChange('select', 'vat_reclaimable', value)}
       />
       <Checkbox
         placeholder={t('filters.discount.0')}
-        data={search.discount?.value[0]}
+        data={search?.discount?.value[0]}
         onChange={(value) => handleChange('select', 'discount', value)}
       />
       <FiltersMultiSelect
         placeholder={'category'}
         options={filters.category.options}
-        data={search.category}
+        data={search?.category}
         onChange={handleChange}
         isLabel={true}
         label={t('filters.category.0')}
@@ -84,7 +84,7 @@ const All = ({
       <FiltersMultiSelect
         placeholder={'body'}
         options={filters.body.options}
-        data={search.body}
+        data={search?.body}
         onChange={handleChange}
         isLabel={true}
         label={t('filters.body.0')}
@@ -93,7 +93,7 @@ const All = ({
         <Field
           type={'number'}
           placeholder={t('from')}
-          data={search.mileage_from?.value[0] !== DEFAULT ? search.mileage_from?.value[0] : ''}
+          data={search?.mileage_from?.value[0] !== DEFAULT ? search?.mileage_from?.value[0] : ''}
           onChange={(value) => handleChange('field', 'mileage_from', value)}
           isLabel={true}
           label={t('filters.mileage.0')}
@@ -101,7 +101,7 @@ const All = ({
         <Field
           type={'number'}
           placeholder={t('to')}
-          data={search.mileage_to?.value[0] !== DEFAULT ? search.mileage_to?.value[0] : ''}
+          data={search?.mileage_to?.value[0] !== DEFAULT ? search?.mileage_to?.value[0] : ''}
           onChange={(value) => handleChange('field', 'mileage_to', value)}
         />
       </div>
@@ -114,7 +114,7 @@ const All = ({
               label: year === DEFAULT ? t('from') : year,
             }))
           }
-          data={search.year_from?.value[0] || DEFAULT}
+          data={search?.year_from?.value[0] || DEFAULT}
           onChange={(value) => handleChange('select', 'year_from', value)}
           isLabel={true}
           label={t('filters.year.0')}
@@ -127,38 +127,38 @@ const All = ({
               label: year === DEFAULT ? t('to') : year,
             }))
           }
-          data={search.year_to?.value[0] || DEFAULT}
+          data={search?.year_to?.value[0] || DEFAULT}
           onChange={(value) => handleChange('select', 'year_to', value)}
         />
       </div>
       <FiltersMultiSelect
         placeholder={'fuel_type'}
-        options={filters.fuel_type.options}
-        data={search.fuel_type}
+        options={filters?.fuel_type?.options}
+        data={search?.fuel_type}
         onChange={handleChange}
         isLabel={true}
         label={t('filters.fuel_type.0')}
       />
       <FiltersMultiSelect
         placeholder={'transmission'}
-        options={filters.transmission.options}
-        data={search.transmission}
+        options={filters?.transmission?.options}
+        data={search?.transmission}
         onChange={handleChange}
         isLabel={true}
         label={t('filters.transmission.0')}
       />
       <FiltersMultiSelect
         placeholder={'eco'}
-        options={filters.eco.options}
-        data={search.eco}
+        options={filters?.eco?.options}
+        data={search?.eco}
         onChange={handleChange}
         isLabel={true}
         label={t('filters.eco.0')}
       />
       <FiltersColorSelect
         placeholder={'color'}
-        options={filters.color.options}
-        data={search.color}
+        options={filters?.color?.options}
+        data={search?.color}
         onChange={handleChange}
         isLabel={true}
         label={t('filters.color.0')}

@@ -1,10 +1,13 @@
 import { useState } from 'react'
-import { useSelector } from 'react-redux'
 import { useTranslations } from 'next-intl'
 import classNames from 'classnames'
 
 import { DEFAULT } from 'constant/config'
 
+import { useSettingsStore } from 'stores/settingsStore'
+import { useFiltersStore } from 'stores/filtersStore'
+
+import { useAuth } from 'hooks/useAuth'
 import { getFormatPrice } from 'helpers/getFormatPrice'
 
 import Button from 'components/Button'
@@ -18,9 +21,9 @@ import style from '../index.module.scss'
 
 const Price = ({ filter, handlePropsChange, isDisable, handleSave }) => {
   const t = useTranslations()
-  const auth = useSelector((state) => state.auth)
-  const filters = useSelector((state) => state.filters)
-  const settings = useSelector((state) => state.settings)
+  const { auth } = useAuth()
+  const { settings } = useSettingsStore()
+  const { filters} = useFiltersStore()
 
   const [toggle, setToggle] = useState(false)
   const [vat, setVat] = useState("0")
@@ -60,14 +63,14 @@ const Price = ({ filter, handlePropsChange, isDisable, handleSave }) => {
             <Select
               id={`select_currency`}
               options={
-                settings?.currencies.map(item => ({
+                settings?.currencies?.map(item => ({
                   value: item.code,
                   label: item.code,
                 }))
               }
               data={filter.currency.code || DEFAULT}
               onChange={(value) => {
-                const selected = settings.currencies.find(c => c.code === value)
+                const selected = settings?.currencies?.find(c => c.code === value)
                 handlePropsChange('price.currency', { code: value, text: selected.text, symbol: selected.symbol })
               }}
               isRequired={true}
@@ -76,13 +79,13 @@ const Price = ({ filter, handlePropsChange, isDisable, handleSave }) => {
           <Select
             id={'select_mileage_unit'}
             options={
-              Object.entries(filters.price_type.options)
+              Object.entries(filters?.price_type?.options)
                 .map(([key, _]) => ({
                   value: key,
                   label: t(`filters.price_type.${key}`),
                 }))
             }
-            data={filter.price_data.price_type.id}
+            data={filter?.price_data?.price_type?.id}
             onChange={(value) => handlePropsChange('price.price_data.price_type', { id: value, name: t(`filters.price_type.${value}`) })}
           />
           <div className={style.wrapper}>

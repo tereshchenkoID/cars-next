@@ -1,6 +1,6 @@
 "use client"
 
-import { useSelector } from 'react-redux'
+import { useSettingsStore } from 'stores/settingsStore'
 
 import Link from 'next/link'
 import Picture from 'components/Picture'
@@ -8,7 +8,7 @@ import Picture from 'components/Picture'
 import style from './index.module.scss'
 
 const Logo = () => {
-  const settings = useSelector((state) => state.settings)
+  const { settings } = useSettingsStore()
 
   return (
     <Link
@@ -18,7 +18,7 @@ const Logo = () => {
       aria-label="Logo"
     >
       <Picture
-        src={settings.assets.logo}
+        src={settings?.assets?.logo}
         alt={"logo"}
       />
     </Link>

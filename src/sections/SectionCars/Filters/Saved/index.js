@@ -1,12 +1,11 @@
 import { useEffect, useState } from 'react'
 import { useTranslations } from 'next-intl'
-import { useDispatch } from 'react-redux'
-import { useModal } from 'context/ModalContext'
 
+import { useToastifyStore } from 'stores/toastifyStore'
+
+import { useModal } from 'context/ModalContext'
 import { useAuth } from 'hooks/useAuth'
-import { setToastify } from 'store/actions/toastifyAction'
 import { postData } from 'helpers/api'
-// import { apiFetch } from 'utils/apiFetch'
 
 import LoginModal from 'modules/Modals/LoginModal'
 import HistoryModal from 'modules/Modals/HistoryModal'
@@ -21,7 +20,7 @@ const Saved = ({
   setShow
 }) => {
   const t = useTranslations()
-  const dispatch = useDispatch()
+  const showToast = useToastifyStore(state => state.showToast)
   const { isAuth } = useAuth()
   const { showModal } = useModal()
   const [data, setData] = useState([])
@@ -49,30 +48,8 @@ const Saved = ({
     setShow(false)
   }
 
-  // async function loadData() {
-  //   setLoading(true)
-  //
-  //   const json = await apiFetch('user/filters/', {
-  //     method: 'POST',
-  //   })
-  //
-  //   if (json) {
-  //     setData(json)
-  //     setLoading(false)
-  //   } else {
-  //     dispatch(
-  //       setToastify({
-  //         type: 'error',
-  //         text: 'Не удалось получить данные фильтров',
-  //       }),
-  //     )
-  //   }
-  // }
-
   useEffect(() => {
     if(isAuth) {
-      // loadData()
-
       setLoading(true)
       const formData = new FormData()
 
@@ -80,26 +57,25 @@ const Saved = ({
         if (json) {
           setData(json)
           setLoading(false)
-        } else {
-          dispatch(
-            setToastify({
-              type: 'error',
-              text: json.error_message,
-            })
+        }
+        else {
+          showToast(
+            'error',
+            json.error_message,
           )
         }
       })
     }
-  }, [])
+  }, [isAuth])
 
-  if(loading) return
+  if (loading) return
 
   return (
     <div className={style.block}>
       {
         data.length > 0
           ?
-            data.map((el, idx) => (
+            data.map((el, idx) =>
               <SavedCard
                 key={idx}
                 data={el}
@@ -108,7 +84,7 @@ const Saved = ({
                 filtersProps={filtersProps}
                 handleAction={handleAction}
               />
-            ))
+            )
           :
             <Empty
               isAuth={isAuth}

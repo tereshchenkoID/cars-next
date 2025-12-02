@@ -1,19 +1,19 @@
-"use client"
-
 import { useEffect } from 'react'
-import { useSelector } from 'react-redux'
+
+import { useToastifyStore } from 'stores/toastifyStore'
 
 import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 
 const Toastify = () => {
-  const toastify = useSelector(state => state.toastify)
+  const { toastData, clearToast } = useToastifyStore()
 
   useEffect(() => {
-    if (toastify?.toastify) {
-      toast[toastify?.toastify.type](toastify?.toastify.text, {})
+    if (toastData) {
+      toast[toastData?.type](toastData.text, {})
+      clearToast()
     }
-  }, [toastify])
+  }, [toastData])
 
   return (
     <ToastContainer position="top-right" autoClose={3000} theme="colored" />

@@ -1,10 +1,8 @@
 import { useMemo, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
 import { useTranslations } from 'next-intl'
 
 import { ACTIVE, DEFAULT } from 'constant/config'
-
-import { selectBrands, updateBrands } from 'store/actions/brandsAction'
+import { useBrandsStore } from 'stores/brandsStore'
 
 import Image from 'next/image'
 import Button from 'components/Button'
@@ -17,8 +15,7 @@ import style from './index.module.scss'
 
 const BrandsModal = ({ show, setShow }) => {
   const t = useTranslations()
-  const dispatch = useDispatch()
-  const brands = useSelector((state) => state.brands)
+  const { brands, selectBrands, updateBrands } = useBrandsStore()
   const [query, setQuery] = useState('')
 
   const mostBrands = useMemo(
@@ -48,11 +45,12 @@ const BrandsModal = ({ show, setShow }) => {
   )
 
   const handleChecked = (model) => {
-    dispatch(updateBrands(activeBrand.id, model.id, model.selected === ACTIVE ? DEFAULT : ACTIVE))
+    updateBrands(activeBrand.id, model.id, model.selected === ACTIVE ? DEFAULT : ACTIVE)
   }
 
   const handleSelectBrand = (id) => {
-    dispatch(selectBrands(id))
+    console.log(id)
+    selectBrands(id)
     setQuery('')
   }
 

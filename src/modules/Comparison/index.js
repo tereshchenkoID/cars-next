@@ -1,7 +1,7 @@
 import { useMemo } from 'react'
-import { useSelector } from 'react-redux'
 import { useTranslations } from 'next-intl'
 
+import { useAuth } from 'hooks/useAuth'
 import { getFormatPrice } from 'helpers/getFormatPrice'
 
 import Graph from './Graph'
@@ -34,7 +34,7 @@ const LABELS = [
 
 const Comparison = ({ data }) => {
   const t = useTranslations()
-  const auth = useSelector((state) => state.auth)
+  const { auth } = useAuth()
   const price = Number(data.price_data.price)
   const options = data.price_score.options.map(Number)
   const period = useMemo(() => {

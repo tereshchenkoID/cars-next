@@ -1,10 +1,10 @@
 import { useState } from 'react'
-import { useSelector } from 'react-redux'
 import { useTranslations } from 'next-intl'
 
 import classNames from 'classnames'
 
 import { ACTIVE, DEFAULT } from 'constant/config'
+import { useFiltersStore } from 'stores/filtersStore'
 
 import Button from 'components/Button'
 import Label from 'components/Label'
@@ -16,7 +16,7 @@ import style from '../index.module.scss'
 
 const Equipment = ({ options, filter, setFilter, handlePropsChange, handleSave }) => {
   const t = useTranslations()
-  const filters = useSelector((state) => state.filters)
+  const { filters} = useFiltersStore()
   const [toggle, setToggle] = useState(false)
 
   const isFeatureExist = (option) => {
@@ -85,7 +85,7 @@ const Equipment = ({ options, filter, setFilter, handlePropsChange, handleSave }
           />
           <div className={style.colors}>
             {
-              Object.entries(filters.color.options).map(([key, value]) =>
+              Object.entries(filters?.color?.options).map(([key, value]) =>
                 <button
                   key={key}
                   type="button"

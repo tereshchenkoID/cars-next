@@ -1,8 +1,9 @@
 import { useTranslations } from 'next-intl'
 import { useMemo } from 'react'
-import { useSelector } from 'react-redux'
 
 import { NAVIGATION } from 'constant/config'
+
+import { useBrandsStore } from 'stores/brandsStore'
 
 import Image from 'next/image'
 import Reference from 'components/Reference'
@@ -12,7 +13,8 @@ import style from './index.module.scss'
 
 const ReviewCard = ({ data }) => {
   const t = useTranslations()
-  const brands = useSelector((state) => state.brands)
+  const { brands } = useBrandsStore()
+
   const selectedModel = useMemo(() => {
     const selectedMake = brands.find((brand) => brand.id === data.make)
     if (selectedMake && selectedMake.options) {

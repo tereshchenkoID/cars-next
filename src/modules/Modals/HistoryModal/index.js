@@ -1,10 +1,9 @@
 import { useState, useMemo } from 'react'
 import { useTranslations } from 'next-intl'
 import { useModal } from 'context/ModalContext'
-import { useDispatch, useSelector } from 'react-redux'
 
 import { validationRules } from 'utils/validationRules'
-import { setToastify } from 'store/actions/toastifyAction'
+import { useToastifyStore } from 'stores/toastifyStore'
 import { postData } from 'helpers/api'
 
 import Field from 'components/Field'
@@ -13,10 +12,9 @@ import InputGroup from 'modules/InputGroup'
 
 import style from './index.module.scss'
 
-const HistoryModal = ({id = null, type, name = '', data, setData = () => {} }) => {
+const HistoryModal = ({ id = null, type, name = '', data, setData = () => {} }) => {
   const t = useTranslations()
-  const dispatch = useDispatch()
-  const auth = useSelector((state) => state.auth)
+  const showToast = useToastifyStore(state => state.showToast)
   const { closeModal } = useModal()
   const [filter, setFilter] = useState({
     name: {
@@ -38,20 +36,17 @@ const HistoryModal = ({id = null, type, name = '', data, setData = () => {} }) =
 
     postData('user/filters/', formData).then(json => {
       if (json) {
-        dispatch(
-          setToastify({
-            type: 'success',
-            text: type === '2' ? t('notification.history_saved') : t('notification.history_remove'),
-          })
+        showToast(
+          'success',
+          type === '2' ? t('notification.history_saved') : t('notification.history_remove')
         )
         setData(json)
         closeModal()
-      } else {
-        dispatch(
-          setToastify({
-            type: 'error',
-            text: json.error_message,
-          })
+      }
+      else {
+        showToast(
+          'error',
+          json.error_message,
         )
       }
     })

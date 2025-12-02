@@ -6,6 +6,7 @@ import { ROUTES_USER } from 'constant/config'
 
 import classNames from 'classnames'
 
+import { useSettingsStore } from 'stores/settingsStore'
 import { useOutsideClick } from 'hooks/useOutsideClick'
 import { useRequest } from 'hooks/useRequest'
 import { useAuth } from 'hooks/useAuth'
@@ -26,9 +27,10 @@ import style from './index.module.scss'
 const Account = () => {
   const t = useTranslations()
   const params = useParams()
-  const { showModal } = useModal()
   const { handleLogout } = useRequest()
+  const { showModal } = useModal()
   const { auth, isAuth } = useAuth()
+  const { settings } = useSettingsStore()
   const [show, setShow] = useState(false)
   const language = params.locale
 
@@ -145,7 +147,7 @@ const Account = () => {
           }
           <div className={style.center}>
             {
-              MENU.map((el, idx) => (
+              MENU.map((el, idx) =>
                 isAuth
                   ?
                     <Reference
@@ -164,7 +166,7 @@ const Account = () => {
                       placeholder={t(el.text)}
                       onChange={() => openModal(0)}
                     />
-              ))
+              )
             }
           </div>
           <div className={style.bottom}>
@@ -191,7 +193,7 @@ const Account = () => {
                       <button
                         type="button"
                         className={style.link}
-                        aria-label="Registration"
+                        aria-label={t('modal.registration')}
                         onClick={() => openModal(1)}
                       >
                         {t('register')}
@@ -204,7 +206,10 @@ const Account = () => {
             type="button"
             aria-label={t('modal.language')}
             className={style.language}
-            onClick={() => openModal(2)}
+            onClick={() => {
+              settings?.languages?.length > 1 &&
+              openModal(2)
+            }}
           >
             <span className={style.flag}>
               <Image

@@ -18,7 +18,7 @@ const Sort = ({ filtersProps }) => {
     search,
   } = filtersProps
 
-  const active = search.sort?.value[0]
+  const active = search?.sort?.value[0]
   const [show, setShow] = useState(false)
 
   const blockRef = useRef(null)

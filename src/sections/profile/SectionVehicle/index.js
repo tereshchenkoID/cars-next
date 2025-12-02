@@ -2,10 +2,9 @@
 
 import { useTranslations } from 'next-intl'
 import { useFilterState } from 'hooks/useFilterState'
-import { useDispatch } from 'react-redux'
 
-import {getData, postData} from 'helpers/api'
-import { setToastify } from 'store/actions/toastifyAction'
+import { getData, postData } from 'helpers/api'
+import { useToastifyStore } from 'stores/toastifyStore'
 
 import Container from 'components/Container'
 import Debug from 'modules/Debug'
@@ -159,7 +158,7 @@ const INITIAL_FILTER = {
 
 const SectionVehicle = ({ id, data, options }) => {
   const t = useTranslations()
-  const dispatch = useDispatch()
+  const showToast = useToastifyStore(state => state.showToast)
   const { filter, setFilter, handlePropsChange } = useFilterState(INITIAL_FILTER)
 
   const handleSave = () => {
@@ -168,11 +167,9 @@ const SectionVehicle = ({ id, data, options }) => {
 
     postData('/', formData).then(json => {
       if (json) {
-        dispatch(
-          setToastify({
-            type: 'success',
-            text: t('saved'),
-          })
+        showToast(
+          'success',
+          t('saved')
         )
       }
     })

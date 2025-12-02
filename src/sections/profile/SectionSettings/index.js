@@ -1,12 +1,10 @@
 "use client"
 
 import { useState } from 'react'
-import { useDispatch } from 'react-redux'
 import { useTranslations } from 'next-intl'
 import { useFilterState } from 'hooks/useFilterState'
 
-import { setToastify } from 'store/actions/toastifyAction'
-
+import { useToastifyStore } from 'stores/toastifyStore'
 import { postData } from 'helpers/api'
 
 import Container from 'components/Container'
@@ -112,7 +110,7 @@ const INITIAL_FILTER = {
 
 const SectionSettings = () => {
   const t = useTranslations()
-  const dispatch = useDispatch()
+  const showToast = useToastifyStore(state => state.showToast)
   const { filter, handlePropsChange } = useFilterState(INITIAL_FILTER)
   const [type, setType] = useState(0)
 
@@ -122,11 +120,9 @@ const SectionSettings = () => {
 
     postData('/', formData).then(json => {
       if (json) {
-        dispatch(
-          setToastify({
-            type: 'success',
-            text: t('saved'),
-          })
+        showToast(
+          'success',
+          t('saved')
         )
       }
     })

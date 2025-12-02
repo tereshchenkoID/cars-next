@@ -1,12 +1,9 @@
 import { useMemo } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
 import { useTranslations } from 'next-intl'
-
 import classNames from 'classnames'
 
 import { ACTIVE, DEFAULT } from 'constant/config'
-
-import { selectBrands, deleteBrands } from 'store/actions/brandsAction'
+import { useBrandsStore } from 'stores/brandsStore'
 
 import Image from 'next/image'
 import Icon from 'components/Icon'
@@ -15,8 +12,7 @@ import style from './index.module.scss'
 
 const List = ({ show, setShow, isWide }) => {
   const t = useTranslations()
-  const dispatch = useDispatch()
-  const brands = useSelector((state) => state.brands)
+  const { brands, selectBrands, deleteBrands } = useBrandsStore()
 
   const selected = useMemo(() => {
     const selectedOptions = []
@@ -40,7 +36,7 @@ const List = ({ show, setShow, isWide }) => {
     return
 
   return (
-    <ul 
+    <ul
       className={
         classNames(
           style.block,
@@ -54,7 +50,7 @@ const List = ({ show, setShow, isWide }) => {
             key={idx}
             className={style.item}
             onClick={() => {
-              dispatch(selectBrands(el.id))
+              selectBrands(el.id)
               setShow(!show)
             }}
             title={el.options}
@@ -78,7 +74,7 @@ const List = ({ show, setShow, isWide }) => {
               title={t('remove')}
               onClick={(e) => {
                 e.stopPropagation()
-                dispatch(deleteBrands(el.id))
+                deleteBrands(el.id)
               }}
             >
               <Icon

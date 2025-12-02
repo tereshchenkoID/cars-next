@@ -1,13 +1,12 @@
 import { useMemo } from 'react'
 import { useTranslations } from 'next-intl'
 import { useModal } from 'context/ModalContext'
-import { useDispatch } from 'react-redux'
 import { signIn } from 'next-auth/react'
 
 import { validationRules } from 'utils/validationRules'
 
+import { useToastifyStore } from 'stores/toastifyStore'
 import { useFilterState } from 'hooks/useFilterState'
-import { setToastify } from 'store/actions/toastifyAction'
 
 import Button from 'components/Button'
 import Field from 'components/Field'
@@ -32,7 +31,7 @@ const INITIAL_FILTER = {
 
 const LoginModal = () => {
   const t = useTranslations()
-  const dispatch = useDispatch()
+  const showToast = useToastifyStore(state => state.showToast)
   const { showModal } = useModal()
   const { filter, handlePropsChange } = useFilterState(INITIAL_FILTER)
 
@@ -54,11 +53,9 @@ const LoginModal = () => {
       window.location.reload()
     }
     else {
-      dispatch(
-        setToastify({
-          type: 'error',
-          text: t('notification.wrong_auth'),
-        })
+      showToast(
+        'error',
+        t('notification.wrong_auth')
       )
     }
   }

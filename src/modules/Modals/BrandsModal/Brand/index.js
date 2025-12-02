@@ -1,11 +1,9 @@
-import { useDispatch } from 'react-redux'
 import { useTranslations } from 'next-intl'
-
 import classNames from 'classnames'
 
 import { ACTIVE } from 'constant/config'
 
-import { deleteBrands } from 'store/actions/brandsAction'
+import { useBrandsStore } from 'stores/brandsStore'
 
 import Image from 'next/image'
 import Icon from 'components/Icon'
@@ -14,7 +12,7 @@ import style from './index.module.scss'
 
 const Brand = ({ data, onChange, isWide = false }) => {
   const t = useTranslations()
-  const dispatch = useDispatch()
+  const { deleteBrands } = useBrandsStore()
   const length = data?.options.length
   const counts = data?.options.filter(option => option.selected === ACTIVE).length
 
@@ -68,7 +66,7 @@ const Brand = ({ data, onChange, isWide = false }) => {
                 title={t('remove')}
                 onClick={(e) => {
                   e.stopPropagation()
-                  dispatch(deleteBrands(data.id))
+                  deleteBrands(data.id)
                 }}
               >
                 <Icon

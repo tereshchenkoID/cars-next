@@ -1,7 +1,7 @@
 import { useParams, useSearchParams } from 'next/navigation'
-import { usePathname, useRouter } from 'i18n/routing'
 import { useTransition } from 'react'
-import { useSelector } from 'react-redux'
+import { usePathname, useRouter } from 'i18n/routing'
+import { useSettingsStore } from 'stores/settingsStore'
 
 import Image from 'next/image'
 
@@ -12,7 +12,7 @@ const LanguageModal = () => {
   const pathname = usePathname()
   const params = useParams()
   const searchParams = useSearchParams()
-  const settings = useSelector(state => state.settings)
+  const { settings } = useSettingsStore()
   const [isPending, startTransition] = useTransition()
   const active = params.locale
 
@@ -27,7 +27,7 @@ const LanguageModal = () => {
   return (
     <ul className={style.block}>
       {
-        settings.languages.map((el, idx) =>
+        settings?.languages?.map((el, idx) =>
           active !== el.code &&
           <li
             key={idx}

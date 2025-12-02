@@ -1,7 +1,8 @@
 import { useTranslations } from 'next-intl'
-import { useSelector } from 'react-redux'
 
 import { DEFAULT } from 'constant/config'
+
+import { useFiltersStore } from 'stores/filtersStore'
 
 import Select from 'components/Select'
 
@@ -12,7 +13,7 @@ const FilterSelect = ({
   isRequired= false
 }) => {
   const t = useTranslations()
-  const filters = useSelector((state) => state.filters)
+  const { filters} = useFiltersStore()
 
   const createOptions = (t, filters, key) =>
     Object.entries(filters[key].options).map(([optionKey, optionValue]) => ({

@@ -1,12 +1,10 @@
 import { useState } from 'react'
-import { useDispatch } from 'react-redux'
 
+import { useToastifyStore } from 'stores/toastifyStore'
 import { postData } from 'helpers/api'
 
-import { setToastify } from 'store/actions/toastifyAction'
-
 const useReviews = (initialData) => {
-  const dispatch = useDispatch()
+  const showToast = useToastifyStore(state => state.showToast)
   const [data, setData] = useState(initialData?.data || [])
   const [loading, setLoading] = useState(false)
   const [pagination, setPagination] = useState({
@@ -40,11 +38,9 @@ const useReviews = (initialData) => {
         }, 500)
       }
       else {
-        dispatch(
-          setToastify({
-            type: 'error',
-            text: json.error_message,
-          })
+        showToast(
+          'error',
+          json.error_message
         )
       }
     })

@@ -1,6 +1,5 @@
 import { useTranslations } from 'next-intl'
 import { useState, Fragment } from 'react'
-import { useSelector } from 'react-redux'
 import {
   ScatterChart,
   Scatter,
@@ -14,6 +13,8 @@ import {
 import classNames from 'classnames'
 
 import { NAVIGATION } from 'constant/config'
+
+import { useAuth } from 'hooks/useAuth'
 
 import { getData } from 'helpers/api'
 import { getDate } from 'helpers/getDate'
@@ -31,7 +32,7 @@ import style from './index.module.scss'
 
 const Map = ({ data, next }) => {
   const t = useTranslations()
-  const auth = useSelector((state) => state.auth)
+  const { auth } = useAuth()
   const [cars, setCars] = useState([data, next])
   const [active, setActive] = useState(next.id)
   const [loading, setLoading] = useState(false)

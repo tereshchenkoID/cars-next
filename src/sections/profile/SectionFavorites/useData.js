@@ -1,13 +1,12 @@
 import { useEffect, useState } from 'react'
-import { useDispatch } from 'react-redux'
 import { useSearchParams } from 'next/navigation'
 
+import { useToastifyStore } from 'stores/toastifyStore'
 import { postData } from 'helpers/api'
-import { setToastify } from 'store/actions/toastifyAction'
 
 const useFavorite = (initialData) => {
-  const dispatch = useDispatch()
   const searchParams = useSearchParams()
+  const showToast = useToastifyStore(state => state.showToast)
   const [data, setData] = useState(initialData?.data || [])
   const [loading, setLoading] = useState(false)
   const [pagination, setPagination] = useState({
@@ -39,15 +38,12 @@ const useFavorite = (initialData) => {
           results: json.results,
         })
 
-        setTimeout(() => {
-          setLoading(false)
-        }, 1000)
-      } else {
-        dispatch(
-          setToastify({
-            type: 'error',
-            text: json.error_message,
-          })
+        setTimeout(() => setLoading(false), 500)
+      }
+      else {
+        showToast(
+          'error',
+          json.error_message
         )
       }
     })

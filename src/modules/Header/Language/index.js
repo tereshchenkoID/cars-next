@@ -2,8 +2,9 @@
 
 import { useState, useRef, useTransition } from 'react'
 import { useParams, useSearchParams } from 'next/navigation'
-import { useSelector } from 'react-redux'
 import { usePathname, useRouter } from 'i18n/routing'
+
+import { useSettingsStore } from 'stores/settingsStore'
 
 import { useOutsideClick } from 'hooks/useOutsideClick'
 
@@ -15,8 +16,8 @@ const Language = () => {
   const router = useRouter()
   const pathname = usePathname()
   const params = useParams()
+  const { settings } = useSettingsStore()
   const searchParams = useSearchParams()
-  const settings = useSelector((state) => state.settings)
 
   const [show, setShow] = useState(false)
   const [isPending, startTransition] = useTransition()
@@ -70,7 +71,7 @@ const Language = () => {
         (show && settings?.languages?.length > 1) &&
         <ul className={style.dropdown}>
           {
-            settings.languages.map((el, idx) =>
+            settings?.languages?.map((el, idx) =>
               active !== el.code &&
               <li
                 key={idx}

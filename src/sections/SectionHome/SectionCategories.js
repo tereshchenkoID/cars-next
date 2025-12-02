@@ -1,10 +1,10 @@
 "use client"
 
 import { useTranslations } from 'next-intl'
-import { useSelector } from 'react-redux'
-
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { Navigation, Pagination, Mousewheel } from 'swiper/modules'
+
+import { useFiltersStore } from 'stores/filtersStore'
 
 import Container from 'components/Container'
 import Card from './Card'
@@ -14,7 +14,7 @@ import style from './index.module.scss'
 
 const SectionCategories = () => {
   const t = useTranslations()
-  const filters = useSelector((state) => state.filters)
+  const { filters} = useFiltersStore()
 
   return (
     <section className={style.section}>

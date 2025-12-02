@@ -45,6 +45,7 @@
     "december": "December"
   },
   "notification": {
+    "error": "Error!",
     "login": "Don’t have an account?",
     "registration": "Have an account?",
     "wrong_auth": "Wrong username or login",
