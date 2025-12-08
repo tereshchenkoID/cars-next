@@ -14,6 +14,7 @@ import { getFuelIcon } from 'helpers/getFuelIcon'
 
 import Link from 'next/link'
 import Button from 'components/Button'
+import Icon from 'components/Icon'
 import Loading from 'components/Loading'
 import Container from 'components/Container'
 import Tags from 'modules/Tags'
@@ -48,7 +49,6 @@ const Comparison = dynamic(
 )
 
 import style from './index.module.scss'
-import Icon from "../../components/Icon";
 
 const SectionCar = ({ data, next }) => {
   const t = useTranslations()
