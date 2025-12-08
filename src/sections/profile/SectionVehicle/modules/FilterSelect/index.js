@@ -7,34 +7,36 @@ import { useFiltersStore } from 'stores/filtersStore'
 import Select from 'components/Select'
 
 const FilterSelect = ({
+  category,
   filter,
-  handlePropsChange,
   name,
-  isRequired= false
+  handlePropsChange,
+  isRequired= false,
+  isLabel = true
 }) => {
   const t = useTranslations()
   const { filters} = useFiltersStore()
 
-  const createOptions = (t, filters, key) =>
-    Object.entries(filters[key].options).map(([optionKey, optionValue]) => ({
+  const createOptions = () =>
+    Object.entries(filters[name].options).map(([optionKey, optionValue]) => ({
       value: optionKey,
       label: optionKey === DEFAULT
         ? t('all')
         : (filters.translation === DEFAULT
           ? optionValue
-          : t(`filters.${key}.${optionKey}`))
+          : t(`filters.${name}.${optionKey}`))
     }))
 
   return (
     <Select
       id={`select_${name}`}
-      options={createOptions(t, filters, name)}
+      options={createOptions()}
       data={filter[name].id || DEFAULT}
       onChange={(value) =>
-        handlePropsChange(`details.${name}`, { id: value, name: t(`filters.${name}.${value}`) })
+        handlePropsChange(`${category}.${name}`, { id: value, name: t(`filters.${name}.${value}`) })
       }
       isRequired={isRequired}
-      isLabel={true}
+      isLabel={isLabel}
       label={t(`filters.${name}.0`)}
     />
   )

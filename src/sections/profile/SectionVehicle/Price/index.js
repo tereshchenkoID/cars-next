@@ -77,7 +77,7 @@ const Price = ({ filter, handlePropsChange, isDisable, handleSave }) => {
             />
           </div>
           <Select
-            id={'select_mileage_unit'}
+            id={'select_price_type'}
             options={
               Object.entries(filters?.price_type?.options)
                 .map(([key, _]) => ({

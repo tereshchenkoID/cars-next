@@ -86,7 +86,7 @@
 .toggle {
 
   @include media-breakpoint-up(lg) {
-    display: none;
+    display: none!important;
   }
 }
 

@@ -77,6 +77,7 @@ const PhoneVerify = ({
             type={'text'}
             placeholder={t('code')}
             data={code}
+            classes={[style.field]}
             onChange={value => setCode(value)}
             isRequired={true}
           />

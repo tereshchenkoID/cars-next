@@ -39,7 +39,7 @@ const FiltersColorSelect = ({
               key={optionKey}
               type="button"
               aria-label={t(`filters.${placeholder}.${optionKey}`)}
-              style={{ backgroundColor: optionValue }}
+              style={{ backgroundColor: optionValue.toLowerCase() }}
               title={optionKey === DEFAULT ? t('all') : t(`filters.${placeholder}.${optionKey}`)}
               className={
                 classNames(

@@ -90,8 +90,18 @@ const INITIAL_FILTER = {
       id: "0",
       name: "All"
     },
-    number_of_seats: '',
-    number_of_doors: '',
+    seats: {
+      id: "0",
+      name: "All"
+    },
+    doors: {
+      id: "0",
+      name: "All"
+    },
+    interior_material: {
+      id: "0",
+      name: "All"
+    },
     features: []
   },
   contact: {

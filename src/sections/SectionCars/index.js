@@ -32,6 +32,7 @@ const TYPE = {
   mileage_from: 'field',
   mileage_to: 'field',
   category: 'checkbox',
+  drive: 'checkbox',
   body: 'checkbox',
   fuel_type: 'checkbox',
   transmission: 'checkbox',
@@ -39,14 +40,22 @@ const TYPE = {
   color: 'color'
 }
 
+const getLastPart = (key) => {
+  const parts = key.split('_')
+  return parts[parts.length - 1]
+}
+
 const formatPlaceholderText = (key, el, filters, t) => {
   let prefix = ''
 
-  if (key.includes('_to') || key.includes('_from')) {
-    prefix = `${t(`filters.${key.split('_')[0]}.0`)} ${t(key.split('_')[1])}: `
+  if (key.endsWith('_to') || key.endsWith('_from')) {
+    const base = key.split('_').slice(0, -1).join('_')
+    const last = getLastPart(key)
+
+    prefix = `${t(`filters.${base}.0`)} ${t(last)}: `
   }
 
-  if (key === 'page') {
+  if (key === 'page' || key === 'doors' || key === 'seats') {
     prefix = `${t(`filters.${key}.0`)}: `
   }
 

@@ -62,7 +62,6 @@ const Filters = () => {
 
   return (
     <div className={style.block}>
-      {/* <pre className={style.pre}>{JSON.stringify(search, null, 2)}</pre> */}
       <div className={style.body}>
         <Select
           id={'select_make'}

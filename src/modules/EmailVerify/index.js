@@ -46,22 +46,26 @@ const EmailVerify = ({ name, filter, handlePropsChange }) => {
 
   return (
     <div className={style.block}>
-      <Field
-        type={'email'}
-        placeholder={t('email')}
-        data={filter.data}
-        onChange={(value) => handlePropsChange(`${name}.data`, value)}
-        isRequired={true}
-        isLabel={true}
-        isDisabled={filter.status === 1}
-      />
-      <div className={style.wrapper}>
+      <div className={style.left}>
+        <Field
+          type={'email'}
+          placeholder={t('email')}
+          data={filter.data}
+          classes={[style.field]}
+          onChange={(value) => handlePropsChange(`${name}.data`, value)}
+          isRequired={true}
+          isLabel={true}
+          isDisabled={filter.status === 1}
+        />
+      </div>
+      <div className={style.right}>
         {
           filter.status === '2' &&
           <Field
             type={'text'}
             placeholder={t('code')}
             data={code}
+            classes={[style.field]}
             onChange={value => setCode(value)}
             isRequired={true}
           />

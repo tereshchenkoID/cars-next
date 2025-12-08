@@ -10,8 +10,8 @@ import Field from 'components/Field'
 import Select from 'components/Select'
 import Textarea from 'components/Textarea'
 import Accordion from 'modules/Accordion'
-import FilterDate from './FilterDate'
-import FilterSelect from './FilterSelect'
+import FilterDate from '../modules/FilterDate'
+import FilterSelect from '../modules/FilterSelect'
 
 import style from '../index.module.scss'
 
@@ -140,13 +140,13 @@ const Details = ({ filter, handlePropsChange, handleSave }) => {
             isLabel={true}
           />
 
-          <FilterSelect filter={filter} handlePropsChange={handlePropsChange} name="category" isRequired={true} />
+          <FilterSelect category={'details'} filter={filter} handlePropsChange={handlePropsChange} name="category" isRequired={true} />
           <FilterDate filter={filter} handlePropsChange={handlePropsChange} name="manufacture_registration" />
           <FilterDate filter={filter} handlePropsChange={handlePropsChange} name="first_registration" />
-          <FilterSelect filter={filter} handlePropsChange={handlePropsChange} name="body" isRequired={true} />
-          <FilterSelect filter={filter} handlePropsChange={handlePropsChange} name="transmission" isRequired={true} />
-          <FilterSelect filter={filter} handlePropsChange={handlePropsChange} name="drive" isRequired={true} />
-          <FilterSelect filter={filter} handlePropsChange={handlePropsChange} name="fuel_type" isRequired={true} />
+          <FilterSelect category={'details'} filter={filter} handlePropsChange={handlePropsChange} name="body" isRequired={true} />
+          <FilterSelect category={'details'} filter={filter} handlePropsChange={handlePropsChange} name="transmission" isRequired={true} />
+          <FilterSelect category={'details'} filter={filter} handlePropsChange={handlePropsChange} name="drive" isRequired={true} />
+          <FilterSelect category={'details'} filter={filter} handlePropsChange={handlePropsChange} name="fuel_type" isRequired={true} />
 
           <div className={style.row}>
             <Field
@@ -159,21 +159,7 @@ const Details = ({ filter, handlePropsChange, handleSave }) => {
               label={`${t('filters.mileage.0')} (${filter.mileage_data.mileage_unit.name})`}
               min={0}
             />
-            <Select
-              id={'select_mileage_unit'}
-              options={
-                Object.entries({
-                  1: 'km',
-                  2: 'm'
-                })
-                  .map(([optionKey, optionValue]) => ({
-                    value: optionKey,
-                    label: optionValue,
-                  }))
-              }
-              data={filter.mileage_data.mileage_unit.id}
-              onChange={(value) => handlePropsChange('details.mileage_data.mileage_unit', { id: value, name: t(`filters.mileage.${value}`) })}
-            />
+            <FilterSelect category={'details.mileage_data'} filter={filter.mileage_data} handlePropsChange={handlePropsChange} name="mileage_unit" isLabel={false} />
           </div>
 
           <div className={style.row}>
@@ -187,31 +173,17 @@ const Details = ({ filter, handlePropsChange, handleSave }) => {
               label={`${t('power')} (${filter.power_data.power_unit.name})`}
               min={0}
             />
-            <Select
-              id={'select_power_unit'}
-              options={
-                Object.entries({
-                  1: 'hp',
-                  2: 'kw'
-                })
-                  .map(([optionKey, optionValue]) => ({
-                    value: optionKey,
-                    label: optionValue,
-                  }))
-              }
-              data={filter.power_data.power_unit.id}
-              onChange={(value) => handlePropsChange('details.power_data.power_unit', { id: value, name: t(`filters.power.${value}`) })}
-            />
+            <FilterSelect category={'details.power_data'} filter={filter.power_data} handlePropsChange={handlePropsChange} name="power_unit" isLabel={false} />
           </div>
 
           <Field
             type={'number'}
-            placeholder={t('engine_capacity')}
+            placeholder={t('filters.engine_capacity.0')}
             data={filter.power_data.capacity}
             onChange={(value) => handlePropsChange('details.power_data.capacity', value)}
             isRequired={true}
             isLabel={true}
-            label={`${t('engine_capacity')} (cm)`}
+            label={t('filters.engine_capacity.0')}
             min={0}
           />
         </div>

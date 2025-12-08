@@ -28,7 +28,7 @@ const Field = ({
         classNames(
           style.block,
           isDisabled && style.disabled,
-          classes && classes.map(el => style[el]),
+          classes && classes.map(el => style[el] || el),
         )
       }
     >

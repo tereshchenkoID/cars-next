@@ -153,7 +153,7 @@ const VehicleCard = ({
               size={'xs'}
               iconName={'road'}
               iconSize={18}
-              text={`${Number(data.mileage_data.mileage)} (${t(`filters.mileage.${data.mileage_data.mileage_unit.id}`)})`}
+              text={`${Number(data.mileage_data.mileage)} (${t(`filters.mileage_unit.${data.mileage_data.mileage_unit.id}`)})`}
             />
           </li>
           <li>
@@ -177,7 +177,7 @@ const VehicleCard = ({
               size={'xs'}
               iconName={'engine'}
               iconSize={18}
-              text={`${data.power_data.power} (${t(`filters.power.${data.power_data.power_unit.id}`)})`}
+              text={`${data.power_data.power} (${t(`filters.power_unit.${data.power_data.power_unit.id}`)})`}
             />
           </li>
           <li>

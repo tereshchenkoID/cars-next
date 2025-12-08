@@ -3,7 +3,6 @@
 import { useTranslations } from 'next-intl'
 
 import { useSettingsStore } from 'stores/settingsStore'
-
 import useData from './useData'
 
 import Button from 'components/Button'

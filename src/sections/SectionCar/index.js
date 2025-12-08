@@ -126,7 +126,7 @@ const SectionCar = ({ data, next }) => {
                   size={'sm'}
                   iconName={'road'}
                   iconSize={20}
-                  text={`${data.details.mileage_data.mileage} (${t(`filters.mileage.${data.details.mileage_data.mileage_unit.id}`)})`}
+                  text={`${data.details.mileage_data.mileage} (${t(`filters.mileage_unit.${data.details.mileage_data.mileage_unit.id}`)})`}
                 />
               </li>
               <li>
@@ -150,7 +150,7 @@ const SectionCar = ({ data, next }) => {
                   size={'sm'}
                   iconName={'engine'}
                   iconSize={20}
-                  text={`${data.details.power_data.power} (${t(`filters.power.${data.details.power_data.power_unit.id}`)})`}
+                  text={`${data.details.power_data.power} (${t(`filters.power_unit.${data.details.power_data.power_unit.id}`)})`}
                 />
               </li>
               <li>
@@ -264,7 +264,7 @@ const SectionCar = ({ data, next }) => {
                   iconName={'road'}
                   iconSize={32}
                   label={t('filters.mileage.0')}
-                  text={`${Number(data.details.mileage_data.mileage)} (${t(`filters.mileage.${data.details.mileage_data.mileage_unit.id}`)})`}
+                  text={`${Number(data.details.mileage_data.mileage)} (${t(`filters.mileage_unit.${data.details.mileage_data.mileage_unit.id}`)})`}
                 />
               </li>
               <li>
@@ -291,7 +291,7 @@ const SectionCar = ({ data, next }) => {
                   iconName={'engine'}
                   iconSize={32}
                   label={t('power')}
-                  text={`${data.details.power_data.power} (${t(`filters.power.${data.details.power_data.power_unit.id}`)})`}
+                  text={`${data.details.power_data.power} (${t(`filters.power_unit.${data.details.power_data.power_unit.id}`)})`}
                 />
               </li>
               <li>
@@ -386,15 +386,15 @@ const SectionCar = ({ data, next }) => {
                 </Link>
               </li>
               <li>
-                <p>{t('engine_capacity')}</p>
-                <strong>{data.details.power_data.capacity} (cm)</strong>
+                <p>{t('filters.engine_capacity.0')}</p>
+                <strong>{data.details.power_data.capacity}</strong>
               </li>
               <li>
                 <p>{t('filters.body.0')}</p>
                 <strong>{t(`filters.body.${data.details.body.id}`)}</strong>
               </li>
               <li>
-                <p>{t('body_color')}</p>
+                <p>{t('filters.color.0')}</p>
                 <strong>
                   <span
                     className={style.color}
@@ -412,11 +412,11 @@ const SectionCar = ({ data, next }) => {
               </li>
               <li>
                 <p>{t('doors')}</p>
-                <strong>{data.equipment.number_of_doors || '-'}</strong>
+                <strong>{data.equipment.doors || '-'}</strong>
               </li>
               <li>
                 <p>{t('seats')}</p>
-                <strong>{data.equipment.number_of_seats || '-'}</strong>
+                <strong>{data.equipment.seats || '-'}</strong>
               </li>
               <li>
                 <p>{t('description')}</p>

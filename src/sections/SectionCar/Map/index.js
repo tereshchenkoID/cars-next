@@ -115,7 +115,7 @@ const Map = ({ data, next }) => {
               dataKey={'mileage'}
               tick={{ fill: '#979fad', fontSize: 12 }}
               tickFormatter={(mileage) =>
-                `${getFormatNumber(auth?.account?.language?.code, mileage)} ${t(`filters.mileage.${data.details.mileage_data.mileage_unit.id}`)}`
+                `${getFormatNumber(auth?.account?.language?.code, mileage)} ${t(`filters.mileage_unit.${data.details.mileage_data.mileage_unit.id}`)}`
               }
             />
             <YAxis
@@ -183,7 +183,7 @@ const Map = ({ data, next }) => {
                 title={`${t('price_map')} ${el.id}`}
               >
                 <strong>{getFormatNumber(auth?.account?.language?.code, el.mileage)}</strong>
-                <span>{t(`filters.mileage.${data.details.mileage_data.mileage_unit.id}`)}</span>
+                <span>{t(`filters.mileage_unit.${data.details.mileage_data.mileage_unit.id}`)}</span>
                 <span>-</span>
                 <strong>{getFormatPrice(auth?.account?.language?.code, data.price.currency.code, el.price)}</strong>
               </button>
@@ -259,7 +259,7 @@ const Map = ({ data, next }) => {
                       height={16}
                       className={style.icon}
                     />
-                    <p>{el.details.mileage_data.mileage} ({t(`filters.mileage.${el.details.mileage_data.mileage_unit.id}`)})</p>
+                    <p>{el.details.mileage_data.mileage} ({t(`filters.mileage_unit.${el.details.mileage_data.mileage_unit.id}`)})</p>
                   </li>
                   <li
                     className={
@@ -300,7 +300,7 @@ const Map = ({ data, next }) => {
                       height={16}
                       className={style.icon}
                     />
-                    <p>{el.details.power_data.power} ({t(`filters.power.${el.details.power_data.power_unit.id}`)})</p>
+                    <p>{el.details.power_data.power} ({t(`filters.power_unit.${el.details.power_data.power_unit.id}`)})</p>
                   </li>
                   <li className={style.option}>
                     <Icon

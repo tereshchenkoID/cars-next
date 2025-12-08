@@ -8,9 +8,9 @@ import { useFiltersStore } from 'stores/filtersStore'
 
 import Button from 'components/Button'
 import Label from 'components/Label'
-import Field from 'components/Field'
 import Checkbox from 'components/Checkbox'
 import Accordion from 'modules/Accordion'
+import FilterSelect from '../modules/FilterSelect'
 
 import style from '../index.module.scss'
 
@@ -58,29 +58,14 @@ const Equipment = ({ options, filter, setFilter, handlePropsChange, handleSave }
         }}
       >
         <div className={style.list}>
-          <Field
-            type={'number'}
-            placeholder={t('number_of_seats')}
-            data={filter.number_of_seats}
-            onChange={(value) => handlePropsChange('equipment.number_of_seats', value)}
-            isRequired={true}
-            isLabel={true}
-            min={0}
-          />
-          <Field
-            type={'number'}
-            placeholder={t('number_of_doors')}
-            data={filter.number_of_doors}
-            onChange={(value) => handlePropsChange('equipment.number_of_doors', value)}
-            isRequired={true}
-            isLabel={true}
-            min={0}
-          />
+          <FilterSelect category={'equipment'} filter={filter} handlePropsChange={handlePropsChange} name="seats" isRequired={true} />
+          <FilterSelect category={'equipment'} filter={filter} handlePropsChange={handlePropsChange} name="doors" isRequired={true} />
+          <FilterSelect category={'equipment'} filter={filter} handlePropsChange={handlePropsChange} name="interior_material" />
         </div>
 
         <div className={style.wrapper}>
           <Label
-            data={t('body_color')}
+            data={t('filters.color.0')}
             isRequired={true}
           />
           <div className={style.colors}>
