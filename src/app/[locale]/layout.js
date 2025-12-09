@@ -38,7 +38,7 @@ async function fetchInitialData() {
     return { settings, filters, brands }
   } catch (error) {
     console.error('Error fetching initial data:', error)
-    return { settings: null, filters: null, brands: null }
+    return { settings: {}, filters: {}, brands: {} }
   }
 }
 

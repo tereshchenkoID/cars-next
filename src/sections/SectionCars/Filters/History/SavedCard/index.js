@@ -1,4 +1,5 @@
 import { useTranslations } from 'next-intl'
+import { useRouter} from 'next/navigation'
 import { Fragment } from 'react'
 
 import { useBrandsStore } from 'stores/brandsStore'
@@ -17,6 +18,7 @@ const SavedCard = ({
   handleSaveHistory
 }) => {
   const t = useTranslations()
+  const router = useRouter()
   const { setBrands } = useBrandsStore()
   const { setSearch } = useSearchStore()
 
@@ -29,7 +31,8 @@ const SavedCard = ({
 
   const handleChecked = () => {
     const queryParams = new URLSearchParams(data.params)
-    window.history.pushState(null, '', `?${queryParams.toString()}`)
+    router.replace(`?${queryParams.toString()}`, { scroll: false })
+    // window.history.pushState(null, '', `?${queryParams.toString()}`)
 
     const { date, makes } = generateSearchFromFilters(filters, queryParams)
     setBrands(makes)

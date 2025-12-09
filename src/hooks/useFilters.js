@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react'
-import { useSearchParams } from 'next/navigation'
+import { useRouter, useSearchParams } from 'next/navigation'
+
+import { ACTIVE, DEFAULT } from 'constant/config'
 
 import { getSearch } from 'helpers/getSearch'
 import { postData } from 'helpers/api'
@@ -9,9 +11,8 @@ import { useBrandsStore } from 'stores/brandsStore'
 import { useFiltersStore } from 'stores/filtersStore'
 import { useSearchStore } from 'stores/searchStore'
 
-import { ACTIVE, DEFAULT } from 'constant/config'
-
 export const useFilters = (initialData) => {
+  const router = useRouter()
   const searchParams = useSearchParams()
   const showToast = useToastifyStore(state => state.showToast)
   const { filters} = useFiltersStore()
@@ -203,7 +204,8 @@ export const useFilters = (initialData) => {
   }, [])
 
   useEffect(() => {
-    window.history.pushState(null, '', `?${generateParams()}`)
+    router.replace(`?${generateParams()}`, { scroll: false })
+    // window.history.pushState(null, '', `?${generateParams()}`)
   }, [search])
 
   return {
