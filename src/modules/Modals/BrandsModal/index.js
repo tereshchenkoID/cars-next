@@ -49,7 +49,6 @@ const BrandsModal = ({ show, setShow }) => {
   }
 
   const handleSelectBrand = (id) => {
-    console.log(id)
     selectBrands(id)
     setQuery('')
   }

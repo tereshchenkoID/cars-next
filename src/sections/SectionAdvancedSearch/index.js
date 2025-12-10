@@ -87,10 +87,11 @@ const SectionAdvancedSearch = ({ options }) => {
                   isLabel={true}
                   label={t('filters.state.0')}
                 />
-                <FiltersSelect
+                <FiltersMultiSelect
                   placeholder={'category'}
+                  options={filters?.category?.options}
                   data={search?.category}
-                  onChange={(value) => handleChange(filters.category.type, 'category', value)}
+                  onChange={handleChange}
                   isLabel={true}
                   label={t('filters.category.0')}
                 />

@@ -21,25 +21,6 @@ import Sort from './Sort'
 
 import style from './index.module.scss'
 
-const TYPE = {
-  state: 'select',
-  vat_reclaimable: 'select',
-  discount: 'select',
-  year_from: 'select',
-  year_to: 'select',
-  price_from: 'field',
-  price_to: 'field',
-  mileage_from: 'field',
-  mileage_to: 'field',
-  category: 'checkbox',
-  drive: 'checkbox',
-  body: 'checkbox',
-  fuel_type: 'checkbox',
-  transmission: 'checkbox',
-  eco: 'checkbox',
-  color: 'color'
-}
-
 const getLastPart = (key) => {
   const parts = key.split('_')
   return parts[parts.length - 1]
@@ -149,7 +130,7 @@ const SectionsCars = ({ initialData }) => {
                           classes={['blue', 'xs', 'reverse']}
                           icon="xmark"
                           placeholder={formatPlaceholderText(key, el, filters, t)}
-                          onChange={() => handleChange(TYPE[key], key, TYPES.includes(TYPE[key]) ? el : DEFAULT, true)}
+                          onChange={() => handleChange(filters[key].type, key, TYPES.includes(filters[key].type) ? el : DEFAULT, true)}
                         />
                       ))
                   )

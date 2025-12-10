@@ -203,8 +203,9 @@
       transform: translateY(-50%);
       background-color: rgba(19, 28, 74, 0.56);
 
-      &::after {
-        font-size: rem(12px);
+      svg {
+        @include size(rem(16px));
+
         color: var(--color-white);
       }
 
