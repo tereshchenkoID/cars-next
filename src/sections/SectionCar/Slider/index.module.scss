@@ -36,8 +36,9 @@
       background-color: var(--color-white);
       border-radius: var(--border-radius-4);
 
-      &::after {
-        font-size: rem(24px);
+      svg {
+        @include size(rem(28px));
+
         color: var(--color-primary);
       }
 
