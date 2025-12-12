@@ -8,9 +8,7 @@ export async function generateMetadata() {
 }
 
 const Reviews = async () => {
-  const [metaTags] = await Promise.all([
-    fetchMetaTags('sitemap')
-  ])
+  const metaTags = await fetchMetaTags('home')
 
   const jsonLd = {
     "@context": "https://schema.org",

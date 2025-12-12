@@ -1,6 +1,6 @@
 import { NA } from 'constant/config'
 import { fetchMetaTags } from 'utils/fetchMetaTags'
-import { fetchData } from 'utils/fetchData'
+import { apiRequest } from 'utils/apiRequest'
 
 import SectionCar from "sections/SectionCar"
 
@@ -8,11 +8,22 @@ export async function generateMetadata() {
   return await fetchMetaTags('car')
 }
 
+async function fetchCarData(id) {
+  const data = await apiRequest(`item/${id}`)
+  if (!data) return { data: null, next: null }
+
+  const nextId = data.price.price_map?.find(option => option.selected)?.id
+  const next = nextId ? await apiRequest(`item/${nextId}`) : null
+
+  return { data, next }
+}
+
 const Car = async ({ params }) => {
   const { id } = await params
-  const data = await fetchData(`item/${id}`)
-  const nextId = data.price.price_map?.find(option => option.selected)?.id
-  const next = nextId ? await fetchData(`item/${nextId}`) : null
+  const [metaTags, { data, next }] = await Promise.all([
+    fetchMetaTags('car'),
+    fetchCarData(id)
+  ])
 
   const jsonLd = {
     "@context": "https://schema.org",

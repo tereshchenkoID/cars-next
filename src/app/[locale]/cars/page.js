@@ -1,6 +1,7 @@
 import { fetchMetaTags } from 'utils/fetchMetaTags'
+import { apiRequest } from 'utils/apiRequest'
 
-import SectionCars from "sections/SectionCars"
+import SectionCars from 'sections/SectionCars'
 
 function transformInput(input) {
   const result = {}
@@ -22,31 +23,21 @@ export async function generateMetadata() {
   return await fetchMetaTags('cars')
 }
 
-async function postData(endpoint, searchParams) {
-  const formData = new FormData()
-  formData.append('data', JSON.stringify(transformInput(searchParams)))
-  formData.append('page', Number(searchParams.page || 1))
-
-  try {
-    const res = await fetch(`${process.env.API_BASE_URL}/${endpoint}`, {
-      method: 'POST',
-      body: formData,
-      cache: 'no-cache'
-    })
-
-    if (!res.ok) {
-      throw new Error(`Failed to fetch data from ${endpoint}: ${res.statusText}`)
-    }
-
-    return await res.json()
-  } catch (error) {
-    console.error('Error posting data:', error)
-    return null
+async function fetchCars(searchParams) {
+  const params = {
+    data: JSON.stringify(transformInput(searchParams)),
+    page: Number(searchParams.page || 1)
   }
+
+  return await apiRequest('filters/search/', {
+    method: 'POST',
+    params
+  })
 }
 
 const Cars = async ({ searchParams }) => {
-  const data = await postData('filters/search/', await searchParams)
+  const resolvedParams = await searchParams
+  const data = await fetchCars(resolvedParams)
 
   const jsonLd = {
     "@context": "https://schema.org",

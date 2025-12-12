@@ -8,9 +8,7 @@ export async function generateMetadata() {
 }
 
 const NotFound  = async () => {
-  const [metaTags] = await Promise.all([
-    fetchMetaTags('not-found')
-  ])
+  const metaTags = fetchMetaTags('not-found')
 
   const jsonLd = {
     "@context": "https://schema.org",

@@ -24,7 +24,7 @@ export default async function middleware(req) {
       const localeMatch = pathname.match(/^\/([a-z]{2})\//)
       const locale = localeMatch ? localeMatch[1] : routing.defaultLocale || "en"
 
-      const loginUrl = new URL(`/${locale}/`, req.url) // можно заменить на `/${locale}/login`
+      const loginUrl = new URL(`/${locale}/`, req.url)
       response.cookies.delete("next-auth.session-token")
       response.cookies.delete("__Secure-next-auth.session-token")
 

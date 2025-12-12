@@ -1,6 +1,6 @@
 import { NAVIGATION } from 'constant/config'
-import { fetchData } from 'utils/fetchData'
 import { fetchMetaTags } from 'utils/fetchMetaTags'
+import { apiRequest } from 'utils/apiRequest'
 
 import SectionAdvancedSearch from 'sections/SectionAdvancedSearch'
 
@@ -8,10 +8,14 @@ export async function generateMetadata() {
   return await fetchMetaTags('home')
 }
 
+async function fetchOptions() {
+  return apiRequest('filters/options', { method: 'GET' })
+}
+
 const AdvancedSearch = async () => {
   const [metaTags, options] = await Promise.all([
     fetchMetaTags('advanced-search'),
-    fetchData('filters/options')
+    fetchOptions()
   ])
 
   const jsonLd = {
@@ -37,7 +41,7 @@ const AdvancedSearch = async () => {
 
   return (
     <>
-      <SectionAdvancedSearch 
+      <SectionAdvancedSearch
         options={options}
       />
       <script

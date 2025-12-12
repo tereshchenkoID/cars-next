@@ -41,10 +41,9 @@ export const apiRequest = async (endpoint, {
     const json = await res.json()
 
     if (!res.ok) {
-      console.error(`❌ ${method} ${url} failed: ${res.status} ${res.statusText}`)
+      console.log(`${method} ${url} failed: ${res.status} ${res.statusText}`)
       return null
     }
-
 
     if (json?.code === '2') {
       return { expired: true }
@@ -52,7 +51,7 @@ export const apiRequest = async (endpoint, {
 
     return json
   } catch (error) {
-    console.error('🔥 API error:', error)
+    console.log('API error:', error)
     return null
   }
 }

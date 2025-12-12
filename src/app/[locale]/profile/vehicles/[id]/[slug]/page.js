@@ -1,12 +1,13 @@
-import { fetchData } from 'utils/fetchData'
+import { apiRequest } from 'utils/apiRequest'
 
 import SectionVehicle from 'sections/profile/SectionVehicle'
 
 const Vehicle = async ({ params }) => {
   const { id } = await params
+
   const [options, data] = await Promise.all([
-    fetchData('filters/options'),
-    fetchData(`item/${id}`)
+    apiRequest('filters/options'),
+    apiRequest(`item/${id}`)
   ])
 
   return (

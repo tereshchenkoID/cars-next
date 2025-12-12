@@ -9,7 +9,7 @@ const Vehicles = async ({ searchParams }) => {
   const data = await apiRequest(
     'user/favorites/', {
       method: 'POST',
-      params: await searchParams,
+      params: searchParams,
       cookies
     }
   )

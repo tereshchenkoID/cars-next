@@ -29,11 +29,11 @@ import Skeleton from './Skeleton'
 import style from './index.module.scss'
 
 const VehicleCard = ({
-                       data,
-                       isProfile = false,
-                       isLoading = true,
-                       updateFavorites = () => {},
-                     }) => {
+  data,
+  isProfile = false,
+  isLoading = true,
+  updateFavorites = () => {},
+}) => {
   const t = useTranslations()
   const { auth } = useAuth()
   const [image, setImage] = useState(false)
@@ -45,8 +45,7 @@ const VehicleCard = ({
     updateFavorites
   )
 
-  if (isLoading)
-    return <Skeleton />
+  if (isLoading) return <Skeleton />
 
   return (
     <div
@@ -86,8 +85,9 @@ const VehicleCard = ({
                       height={207}
                       className={style.image}
                       priority={idx === 0}
+                      fetchPriority={idx === 0 ? 'high' : 'low'}
                       style={{ aspectRatio: 277 / 207 }}
-                      alt={`${data.slug} ${idx}`}
+                      alt={`${data.meta.slug} ${idx}`}
                       onLoad={() => {
                         if (idx === 0) setImage(true)
                       }}

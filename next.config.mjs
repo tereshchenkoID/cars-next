@@ -4,12 +4,14 @@ const withNextIntl = createNextIntlPlugin();
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  experimental: { 
+  experimental: {
     nextScriptWorkers: true,
   },
   // For test remove after
   images: {
-    formats: ['image/avif', 'image/webp'], 
+    formats: ['image/avif', 'image/webp'],
+    deviceSizes: [320, 576, 768, 992, 1280],
+    minimumCacheTTL: 60 * 60 * 24,
     remotePatterns: [
       {
         protocol: 'https',
@@ -43,11 +45,10 @@ const nextConfig = {
       }
     ],
   },
-  // next.config.js 
   webpack(config, options) {
     return config;
   },
-  reactStrictMode: false,
+  reactStrictMode: true
 };
 
 export default withNextIntl(nextConfig);

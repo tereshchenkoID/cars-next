@@ -1,6 +1,6 @@
 import { NAVIGATION } from 'constant/config'
 import { fetchMetaTags } from 'utils/fetchMetaTags'
-import { fetchData } from 'utils/fetchData'
+import { apiRequest } from 'utils/apiRequest'
 
 import SectionReviews from 'sections/SectionReviews'
 
@@ -8,10 +8,14 @@ export async function generateMetadata() {
   return await fetchMetaTags('reviews')
 }
 
+async function fetchInitialData() {
+  return apiRequest('reviews', { method: 'GET' })
+}
+
 const Reviews = async () => {
   const [metaTags, data] = await Promise.all([
     fetchMetaTags('reviews'),
-    fetchData('reviews')
+    fetchInitialData()
   ])
 
   const jsonLd = {
