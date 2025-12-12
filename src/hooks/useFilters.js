@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { useSearchParams } from 'next/navigation'
+import { useRouter, useSearchParams } from 'next/navigation'
+
+import { ACTIVE, DEFAULT } from 'constant/config'
 
 import { getSearch } from 'helpers/getSearch'
 import { postData } from 'helpers/api'
@@ -9,9 +11,8 @@ import { setBrands } from 'store/actions/brandsAction'
 import { setSearch } from 'store/actions/searchAction'
 import { setToastify } from 'store/actions/toastifyAction'
 
-import { ACTIVE, DEFAULT } from 'constant/config'
-
 export const useFilters = (initialData) => {
+  const router = useRouter()
   const dispatch = useDispatch()
   const searchParams = useSearchParams()
 
@@ -205,7 +206,8 @@ export const useFilters = (initialData) => {
   }, [])
 
   useEffect(() => {
-    window.history.pushState(null, '', `?${generateParams()}`)
+    router.replace(`?${generateParams()}`, { scroll: false })
+    // window.history.pushState(null, '', `?${generateParams()}`)
   }, [search])
 
   return {

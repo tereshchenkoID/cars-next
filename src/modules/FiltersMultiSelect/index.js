@@ -95,8 +95,8 @@ const FiltersMultiSelect = ({
                 >
                   <Checkbox
                     placeholder={t(key === DEFAULT ? 'all' : `filters.${placeholder}.${key}`)}
-                    onChange={() => onChange('checkbox', placeholder, key)}
                     data={data?.value?.includes(key) ? ACTIVE : DEFAULT}
+                    onChange={() => onChange('checkbox', placeholder, key)}
                   />
                 </li>
               )}

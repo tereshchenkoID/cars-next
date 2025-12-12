@@ -45,6 +45,7 @@
     "december": "December"
   },
   "notification": {
+    "error": "Error!",
     "login": "Don’t have an account?",
     "registration": "Have an account?",
     "wrong_auth": "Wrong username or login",
@@ -196,8 +197,8 @@
   "all": "All",
   "saved": "Saved",
   "history": "History",
-  "from": "From",
-  "to": "To",
+  "from": "from",
+  "to": "to",
   "model": "Model",
   "filter": "Filter",
   "remove": "Remove",
@@ -238,7 +239,6 @@
   "make": "Make",
   "doors": "Doors",
   "seats": "Seats",
-  "body_color": "Body color",
   "description": "Description",
   "this_car": "This car",
   "top_offer": "Top offer",
@@ -247,7 +247,6 @@
   "higher_price": "Higher price",
   "high_price": "High price",
   "vin_code": "VIN code",
-  "engine_capacity": "Engine capacity",
   "engine": "Engine",
   "basic_info": "Basic information",
   "equipment": "Equipment",
@@ -262,8 +261,6 @@
   "not_active": "Not active",
   "reviews": "Reviews",
   "similar_cars": "Show similar cars",
-  "number_of_seats": "Number of seats",
-  "number_of_doors": "Number of doors",
   "registration_code": "Registration code",
   "website": "Website",
   "tax_code": "Tax code",
@@ -513,32 +510,47 @@
       "2": "Negotiable"
     },
     "mileage": {
-      "0": "Mileage",
+      "0": "Mileage"
+    },
+    "mileage_unit": {
+      "0": "Mileage unit",
       "1": "km",
       "2": "m"
     },
-    "power": {
-      "0": "Power",
+    "power_unit": {
+      "0": "Power unit",
       "1": "hp",
       "2": "kw"
     },
     "fuel_type": {
       "0": "Fuel",
-      "1": "Petrol",
-      "2": "Diesel",
+      "1": "Diesel",
+      "2": "Petrol",
       "3": "Electric",
-      "4": "LPG",
+      "4": "Hybrid",
       "5": "CNG",
-      "6": "Hybrid",
-      "7": "Other fuel type",
-      "8": "Hydrogen"
+      "6": "Hydrogen",
+      "7": "LPG",
+      "8": "Other fuel type"
     },
     "eco": {
       "0": "Eco standart",
-      "1": "EURO-6",
-      "2": "EURO-5",
-      "3": "EURO-4",
-      "4": "EURO-3"
+      "1": "EURO-1",
+      "2": "EURO-2",
+      "3": "EURO-3",
+      "4": "EURO-4",
+      "5": "EURO-5",
+      "6": "EURO-6",
+      "7": "EURO-6c",
+      "8": "EURO-6d",
+      "9": "EURO-6d TEMP",
+      "10": "EURO-6e"
+    },
+    "doors": {
+      "0": "Doors",
+      "1": "2/3",
+      "2": "4/5",
+      "3": "6/7"
     },
     "transmission": {
       "0": "Transmission",
@@ -559,24 +571,52 @@
     "region": {
       "0": "Region"
     },
+    "engine_capacity": {
+      "0": "Engine capacity, (ccl)"
+    },
     "drive": {
       "0": "Drive type",
-      "3": "4x4",
-      "4": "4x2"
+      "1": "Full",
+      "2": "Front",
+      "3": "Rear",
+      "4": "Cardan",
+      "5": "Belt",
+      "6": "Chain"
     },
     "color": {
-      "0": "Colors",
-      "1": "beige",
-      "2": "white",
-      "3": "black",
-      "4": "red",
-      "6": "brown",
-      "7": "blue",
-      "8": "orange",
-      "9": "silver",
-      "10": "grey",
-      "11": "green",
-      "13": "yellow"
+      "0": "Body color",
+      "1": "Beige",
+      "2": "White",
+      "3": "Black",
+      "4": "Red",
+      "6": "Brown",
+      "7": "Blue",
+      "8": "Orange",
+      "9": "Silver",
+      "10": "Grey",
+      "11": "Green",
+      "13": "Yellow"
+    },
+    "seats": {
+      "0": "Seats",
+      "1": "2",
+      "2": "3",
+      "3": "4",
+      "4": "5",
+      "5": "6",
+      "6": "7",
+      "7": "8",
+      "8": "9",
+      "9": "10"
+    },
+    "interior_material": {
+      "0": "Interior material",
+      "1": "Alcantara",
+      "2": "Cloth",
+      "3": "Full leather",
+      "4": "Part leather",
+      "5": "Velour",
+      "6": "Other"
     }
   },
   "home_filters": {

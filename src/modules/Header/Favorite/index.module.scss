@@ -9,9 +9,11 @@
   position: absolute;
   top: var(--gap-4);
   right: var(--gap-4);
+  min-width: rem(16px);
   padding: var(--gap-2) var(--gap-4);
   border-radius: var(--border-radius-4);
   background-color: var(--color-primary);
+  text-align: center;
   font-size: rem(10px);
   color: var(--color-white);
 }

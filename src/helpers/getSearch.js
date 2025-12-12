@@ -8,12 +8,14 @@ export const getSearch = (data, type, key, value) => {
 
     if (value === DEFAULT) {
       data[key].value = [DEFAULT]
-    } else {
+    }
+    else {
       values = values.filter((item) => item !== value && item !== DEFAULT)
       if (!data[key].value.includes(value)) values.push(value)
       data[key].value = isDefaultValue(values) ? [DEFAULT] : values
     }
-  } else {
+  }
+  else {
     const lastIndex = data[key].value.length - 1
     data[key].value[lastIndex] = value.length === 0 ? DEFAULT : value
   }

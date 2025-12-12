@@ -22,9 +22,12 @@
   //   opacity: 0.6;
   // }
 
-  // &.sold {
-  //   opacity: 0.4;
-  // }
+  &.sold {
+
+    .right {
+      opacity: 0.4;
+    }
+  }
 }
 
 .left,
@@ -98,12 +101,8 @@
   background: var(--color-warning);
   border-radius: var(--border-radius-4);
   width: fit-content;
-  color: var(--color-red);
   font-size: rem(12px);
-
-  span {
-    color: var(--color-white)
-  }
+  color: var(--color-white);
 }
 
 .left {

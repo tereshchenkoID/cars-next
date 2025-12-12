@@ -29,11 +29,11 @@ import Skeleton from './Skeleton'
 import style from './index.module.scss'
 
 const VehicleCard = ({
-  data,
-  isProfile = false,
-  isLoading = true,
-  updateFavorites = () => {},
-}) => {
+                       data,
+                       isProfile = false,
+                       isLoading = true,
+                       updateFavorites = () => {},
+                     }) => {
   const t = useTranslations()
   const { auth } = useAuth()
   const [image, setImage] = useState(false)
@@ -153,7 +153,7 @@ const VehicleCard = ({
               size={'xs'}
               iconName={'road'}
               iconSize={18}
-              text={`${Number(data.mileage_data.mileage)} (${t(`filters.mileage.${data.mileage_data.mileage_unit.id}`)})`}
+              text={`${Number(data.mileage_data.mileage)} (${t(`filters.mileage_unit.${data.mileage_data.mileage_unit.id}`)})`}
             />
           </li>
           <li>
@@ -177,7 +177,7 @@ const VehicleCard = ({
               size={'xs'}
               iconName={'engine'}
               iconSize={18}
-              text={`${data.power_data.power} (${t(`filters.power.${data.power_data.power_unit.id}`)})`}
+              text={`${data.power_data.power} (${t(`filters.power_unit.${data.power_data.power_unit.id}`)})`}
             />
           </li>
           <li>
@@ -281,38 +281,38 @@ const VehicleCard = ({
         {
           data.status === '1'
             ?
-              data.price_data.discount &&
-              <div
-                className={
-                  classNames(
-                    style.label,
-                    style.discount
-                  )
-                }
-              >
-                <Discount
-                  size={'sm'}
-                  amount={getFormatPrice(auth?.account?.language?.code, auth?.account?.currency?.code, data.price_data.discount)}
-                />
-              </div>
+            data.price_data.discount &&
+            <div
+              className={
+                classNames(
+                  style.label,
+                  style.discount
+                )
+              }
+            >
+              <Discount
+                size={'sm'}
+                amount={getFormatPrice(auth?.account?.language?.code, auth?.account?.currency?.code, data.price_data.discount)}
+              />
+            </div>
             :
-              <div
-                className={
-                  classNames(
-                    style.label,
-                    style[CARD_STATUS[data.status]]
-                  )
-                }
-              >
-                <strong className={style.status}>
-                  <Icon
-                    iconName={'warning'}
-                    width={14}
-                    height={14}
-                  />
-                  <span>{t(CARD_STATUS[data.status])}</span>
-                </strong>
-              </div>
+            <div
+              className={
+                classNames(
+                  style.label,
+                  style[CARD_STATUS[data.status]]
+                )
+              }
+            >
+              <strong className={style.status}>
+                <Icon
+                  iconName={'warning'}
+                  width={14}
+                  height={14}
+                />
+                <span>{t(CARD_STATUS[data.status])}</span>
+              </strong>
+            </div>
         }
       </div>
     </div>

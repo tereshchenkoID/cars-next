@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import { useTranslations } from 'next-intl'
+import { useSearchParams } from 'next/navigation'
 
 import { DEFAULT, ACTIVE, NAVIGATION } from "constant/config"
 
@@ -17,14 +18,17 @@ import Container from "components/Container"
 import Checkbox from 'components/Checkbox'
 import Label from 'components/Label'
 import Field from 'components/Field'
-import Select from 'components/Select'
 import Brands from 'modules/Brands'
 import BrandsModal from 'modules/Modals/BrandsModal'
+import FiltersMultiSelect from 'modules/FiltersMultiSelect'
+import FiltersColorSelect from 'modules/FiltersColorSelect'
+import FiltersSelect from 'modules/FiltersSelect'
 
 import style from './index.module.scss'
 
 const SectionAdvancedSearch = ({ options }) => {
   const t = useTranslations()
+  const searchParams = useSearchParams()
   const { auth } = useAuth()
   const {
     handleChange,
@@ -64,7 +68,7 @@ const SectionAdvancedSearch = ({ options }) => {
               show={showBrand}
               setShow={setShowBrands}
               isLabel={true}
-              label={t('model')}
+              label={t('make_or_model')}
             />
 
             <div className={style.section}>
@@ -76,29 +80,18 @@ const SectionAdvancedSearch = ({ options }) => {
                   )
                 }
               >
-                <Select
-                  id={`select_state`}
-                  options={
-                    Object.entries(filters.state.options).map(([optionKey, optionValue]) => ({
-                      value: optionKey,
-                      label: optionKey === DEFAULT ? t('all') : (filters.translation === DEFAULT ? optionValue : t(`filters.state.${optionKey}`)),
-                    }))
-                  }
-                  data={search['state']?.value[0] || DEFAULT}
-                  onChange={(value) => handleChange(filters.state, 'state', value)}
+                <FiltersSelect
+                  placeholder={'state'}
+                  data={search?.state}
+                  onChange={(value) => handleChange(filters.state.type, 'state', value)}
                   isLabel={true}
                   label={t('filters.state.0')}
                 />
-                <Select
-                  id={`select_category`}
-                  options={
-                    Object.entries(filters.category.options).map(([optionKey, optionValue]) => ({
-                      value: optionKey,
-                      label: optionKey === DEFAULT ? t('all') : (filters.translation === DEFAULT ? optionValue : t(`filters.category.${optionKey}`)),
-                    }))
-                  }
-                  data={search['category']?.value[0] || DEFAULT}
-                  onChange={(value) => handleChange(filters.category, 'category', value)}
+                <FiltersMultiSelect
+                  placeholder={'category'}
+                  options={filters?.category?.options}
+                  data={search?.category}
+                  onChange={handleChange}
                   isLabel={true}
                   label={t('filters.category.0')}
                 />
@@ -154,29 +147,29 @@ const SectionAdvancedSearch = ({ options }) => {
                   )
                 }
               >
-                <Select
-                  id={`select_year_from`}
+                <FiltersSelect
+                  placeholder={'year_from'}
                   options={
                     getYears().map(year => ({
                       value: year === DEFAULT ? DEFAULT : year,
                       label: year === DEFAULT ? t('from') : year,
                     }))
                   }
-                  data={search['year_from']?.value[0] || DEFAULT}
-                  onChange={(value) => handleChange(filters.year_from, 'year_from', value)}
+                  data={search?.year_from}
+                  onChange={(value) => handleChange('select', 'year_from', value)}
                   isLabel={true}
                   label={t('filters.year.0')}
                 />
-                <Select
-                  id={`select_year_to`}
+                <FiltersSelect
+                  placeholder={'year_to'}
                   options={
                     getYears().map(year => ({
                       value: year === DEFAULT ? DEFAULT : year,
                       label: year === DEFAULT ? t('to') : year,
                     }))
                   }
-                  data={search['year_to']?.value[0] || DEFAULT}
-                  onChange={(value) => handleChange(filters.year_to, 'year_to', value)}
+                  data={search?.year_to}
+                  onChange={(value) => handleChange('select', 'year_to', value)}
                 />
               </div>
             </div>
@@ -216,27 +209,47 @@ const SectionAdvancedSearch = ({ options }) => {
               </div>
             </div>
             <div className={style.section}>
-              <Label data={t('filters.color.0')} />
-              <div className={style.colors}>
-                {
-                  Object.entries(filters.color.options).map(([optionKey, optionValue]) => (
-                    <button
-                      key={optionKey}
-                      type="button"
-                      aria-label={t(`filters.color.${optionKey}`)}
-                      style={{ backgroundColor: optionValue }}
-                      title={optionKey === DEFAULT ? t('all') : t(`filters.color.${optionKey}`)}
-                      className={
-                        classNames(
-                          style.color,
-                          search['color']?.value?.includes(optionKey) && style.active
-                        )
-                      }
-                      onClick={() => handleChange(filters.color.type, 'color', optionKey)}
-                    />
-                  ))
-                }
-              </div>
+              <FiltersColorSelect
+                placeholder={'color'}
+                options={filters?.color?.options}
+                data={search?.color}
+                onChange={handleChange}
+                isLabel={true}
+                label={t('filters.color.0')}
+              />
+            </div>
+            <div
+              className={
+                classNames(
+                  style.options,
+                  style.end
+                )
+              }
+            >
+              <FiltersMultiSelect
+                placeholder={'doors'}
+                options={filters?.doors?.options}
+                data={search?.doors}
+                onChange={handleChange}
+                isLabel={true}
+                label={t('filters.doors.0')}
+              />
+              <FiltersMultiSelect
+                placeholder={'seats'}
+                options={filters.seats?.options}
+                data={search?.seats}
+                onChange={handleChange}
+                isLabel={true}
+                label={t('filters.seats.0')}
+              />
+              <FiltersMultiSelect
+                placeholder={'interior_material'}
+                options={filters?.interior_material?.options}
+                data={search?.interior_material}
+                onChange={handleChange}
+                isLabel={true}
+                label={t('filters.interior_material.0')}
+              />
             </div>
           </div>
 
@@ -244,6 +257,7 @@ const SectionAdvancedSearch = ({ options }) => {
             <div className={style.head}>
               <h3 className={style.title}>{t('engine')}</h3>
             </div>
+
             <div className={style.section}>
               <Label data={t('filters.fuel_type.0')} />
               <div className={style.list}>
@@ -259,35 +273,52 @@ const SectionAdvancedSearch = ({ options }) => {
                 }
               </div>
             </div>
-            <div className={style.section}>
-              <Label data={t('filters.transmission.0')} />
-              <div className={style.list}>
-                {
-                  Object.entries(filters.transmission.options).map(([optionKey]) => (
-                    <Checkbox
-                      key={optionKey}
-                      placeholder={optionKey === DEFAULT ? t('all') : t(`filters.transmission.${optionKey}`)}
-                      data={search['transmission']?.value?.includes(optionKey) ? ACTIVE : DEFAULT}
-                      onChange={() => handleChange(filters.transmission.type, 'transmission', optionKey)}
-                    />
-                  ))
-                }
-              </div>
-            </div>
-            <div className={style.section}>
-              <Label data={t('filters.eco.0')} />
-              <div className={style.list}>
-                {
-                  Object.entries(filters.eco.options).map(([optionKey]) => (
-                    <Checkbox
-                      key={optionKey}
-                      placeholder={optionKey === DEFAULT ? t('all') : t(`filters.eco.${optionKey}`)}
-                      data={search['eco']?.value?.includes(optionKey) ? ACTIVE : DEFAULT}
-                      onChange={() => handleChange(filters.eco.type, 'eco', optionKey)}
-                    />
-                  ))
-                }
-              </div>
+            <div
+              className={
+                classNames(
+                  style.options,
+                  style.end
+                )
+              }
+            >
+              <Field
+                type={'number'}
+                placeholder={t('from')}
+                data={search?.engine_capacity_from?.value[0] !== DEFAULT ? search?.engine_capacity_from?.value[0] : ''}
+                onChange={(value) => handleChange(filters.engine_capacity_from.type, 'engine_capacity_from', value)}
+                isLabel={true}
+                label={t('filters.engine_capacity.0')}
+              />
+              <Field
+                type={'number'}
+                placeholder={t('to')}
+                data={search?.engine_capacity_to?.value[0] !== DEFAULT ? search?.engine_capacity_to?.value[0] : ''}
+                onChange={(value) => handleChange(filters.engine_capacity_to.type, 'engine_capacity_to', value)}
+              />
+              <FiltersMultiSelect
+                placeholder={'drive'}
+                options={filters?.drive?.options}
+                data={search?.drive}
+                onChange={handleChange}
+                isLabel={true}
+                label={t('filters.drive.0')}
+              />
+              <FiltersMultiSelect
+                placeholder={'transmission'}
+                options={filters?.transmission?.options}
+                data={search?.transmission}
+                onChange={handleChange}
+                isLabel={true}
+                label={t('filters.transmission.0')}
+              />
+              <FiltersMultiSelect
+                placeholder={'eco'}
+                options={filters?.eco?.options}
+                data={search?.eco}
+                onChange={handleChange}
+                isLabel={true}
+                label={t('filters.eco.0')}
+              />
             </div>
           </div>
 
@@ -328,7 +359,8 @@ const SectionAdvancedSearch = ({ options }) => {
             placeholder={(t('reset_filters'))}
             onChange={() => handleReset()}
           />
-          <Button
+          <Reference
+            link={`${NAVIGATION.buy.link}?${searchParams.toString()}`}
             classes={['primary', 'md']}
             placeholder={(t('search'))}
           />

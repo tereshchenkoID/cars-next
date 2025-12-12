@@ -102,6 +102,10 @@
   padding: var(--gap-8);
   cursor: pointer;
 
+  & > * {
+    width: 100%;
+  }
+
   @include hover {
     background-color: var(--color-grey-200);
   }

@@ -4,7 +4,7 @@ import { useTranslations } from 'next-intl'
 import { useFilterState } from 'hooks/useFilterState'
 import { useDispatch } from 'react-redux'
 
-import {getData, postData} from 'helpers/api'
+import { postData } from 'helpers/api'
 import { setToastify } from 'store/actions/toastifyAction'
 
 import Container from 'components/Container'
@@ -91,8 +91,18 @@ const INITIAL_FILTER = {
       id: "0",
       name: "All"
     },
-    number_of_seats: '',
-    number_of_doors: '',
+    seats: {
+      id: "0",
+      name: "All"
+    },
+    doors: {
+      id: "0",
+      name: "All"
+    },
+    interior_material: {
+      id: "0",
+      name: "All"
+    },
     features: []
   },
   contact: {

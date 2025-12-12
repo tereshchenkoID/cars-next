@@ -80,5 +80,6 @@
 .more {
   @include flex;
 
+  min-width: rem(100px);
   margin-inline: auto;
 }

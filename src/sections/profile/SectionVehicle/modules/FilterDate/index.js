@@ -23,7 +23,11 @@ const MONTH = [
   'december',
 ]
 
-const FilterDate = ({ filter, handlePropsChange, name }) => {
+const FilterDate = ({
+  filter,
+  handlePropsChange,
+  name
+}) => {
   const t = useTranslations()
   const date = new Date(Number(filter.date[name]))
   const month = date.getMonth()

@@ -29,7 +29,7 @@ const Filters = () => {
 
   const generateParams = () => {
     const params = new URLSearchParams();
-  
+
     Object.entries(search).forEach(([key, value]) => {
       if (value !== DEFAULT) {
         if (key === "make") {
@@ -61,7 +61,6 @@ const Filters = () => {
 
   return (
     <div className={style.block}>
-      {/* <pre className={style.pre}>{JSON.stringify(search, null, 2)}</pre> */}
       <div className={style.body}>
         <Select
           id={'select_make'}

@@ -10,6 +10,7 @@ import Checkbox from 'components/Checkbox'
 import Brands from 'modules/Brands'
 import FiltersMultiSelect from 'modules/FiltersMultiSelect'
 import FiltersColorSelect from 'modules/FiltersColorSelect'
+import FiltersSelect from 'modules/FiltersSelect'
 
 import style from './index.module.scss'
 
@@ -32,17 +33,11 @@ const All = ({
         setShow={setShowBrands}
         isWide={true}
         isLabel={true}
-        label={t('model')}
+        label={t('make_or_model')}
       />
-      <Select
-        id={'select_state'}
-        options={
-          Object.entries(filters.state.options).map(([optionKey, _]) => ({
-            value: optionKey,
-            label: optionKey === DEFAULT ? t('all') : t(`filters.state.${optionKey}`),
-          }))
-        }
-        data={search.state?.value[0] || DEFAULT}
+      <FiltersSelect
+        placeholder={'state'}
+        data={search?.state}
         onChange={(value) => handleChange('select', 'state', value)}
         isLabel={true}
         label={t('filters.state.0')}
@@ -51,16 +46,16 @@ const All = ({
         <Field
           type={'number'}
           placeholder={t('from')}
-          data={search.price_from?.value[0] !== DEFAULT ? search.price_from?.value[0] : ''}
-          onChange={(value) => handleChange('field', 'price_from', value)}
+          data={search?.mileage_from?.value[0] !== DEFAULT ? search?.mileage_from?.value[0] : ''}
+          onChange={(value) => handleChange(filters.mileage_from.type, 'mileage_from', value)}
           isLabel={true}
-          label={t('filters.price.0')}
+          label={t('filters.mileage.0')}
         />
         <Field
           type={'number'}
           placeholder={t('to')}
-          data={search.price_to?.value[0] !== DEFAULT ? search.price_to?.value[0] : ''}
-          onChange={(value) => handleChange('field', 'price_to', value)}
+          data={search?.mileage_to?.value[0] !== DEFAULT ? search?.mileage_to?.value[0] : ''}
+          onChange={(value) => handleChange(filters.mileage_to.type, 'mileage_to', value)}
         />
       </div>
       <Checkbox
@@ -106,28 +101,28 @@ const All = ({
         />
       </div>
       <div className={style.wrapper}>
-        <Select
-          id={'select_year_from'}
+        <FiltersSelect
+          placeholder={'year_from'}
           options={
             getYears().map(year => ({
               value: year === DEFAULT ? DEFAULT : year,
               label: year === DEFAULT ? t('from') : year,
             }))
           }
-          data={search.year_from?.value[0] || DEFAULT}
+          data={search?.year_from}
           onChange={(value) => handleChange('select', 'year_from', value)}
           isLabel={true}
           label={t('filters.year.0')}
         />
-        <Select
-          id={'select_year_to'}
+        <FiltersSelect
+          placeholder={'year_to'}
           options={
             getYears().map(year => ({
               value: year === DEFAULT ? DEFAULT : year,
               label: year === DEFAULT ? t('to') : year,
             }))
           }
-          data={search.year_to?.value[0] || DEFAULT}
+          data={search?.year_to}
           onChange={(value) => handleChange('select', 'year_to', value)}
         />
       </div>
@@ -138,6 +133,14 @@ const All = ({
         onChange={handleChange}
         isLabel={true}
         label={t('filters.fuel_type.0')}
+      />
+      <FiltersMultiSelect
+        placeholder={'drive'}
+        options={filters?.drive?.options}
+        data={search?.drive}
+        onChange={handleChange}
+        isLabel={true}
+        label={t('filters.drive.0')}
       />
       <FiltersMultiSelect
         placeholder={'transmission'}

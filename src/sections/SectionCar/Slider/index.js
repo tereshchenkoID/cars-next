@@ -48,13 +48,13 @@ const Slider = ({ data }) => {
                 className={style.show}
                 onClick={() => {
                   Fancybox.show(
-                    data.images.map((src, index) => ({
+                    data.images.map((src, _) => ({
                       src,
                       type: 'image',
-                      caption: `${t('image')} ${index + 1}`,
                     })),
                     {
                       groupAll: true,
+                      startIndex: idx,
                     }
                   );
                 }}

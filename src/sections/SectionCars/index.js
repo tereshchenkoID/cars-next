@@ -21,32 +21,22 @@ import Sort from './Sort'
 
 import style from './index.module.scss'
 
-const TYPE = {
-  state: 'select',
-  vat_reclaimable: 'select',
-  discount: 'select',
-  year_from: 'select',
-  year_to: 'select',
-  price_from: 'field',
-  price_to: 'field',
-  mileage_from: 'field',
-  mileage_to: 'field',
-  category: 'checkbox',
-  body: 'checkbox',
-  fuel_type: 'checkbox',
-  transmission: 'checkbox',
-  eco: 'checkbox',
-  color: 'color'
+const getLastPart = (key) => {
+  const parts = key.split('_')
+  return parts[parts.length - 1]
 }
 
 const formatPlaceholderText = (key, el, filters, t) => {
   let prefix = ''
 
-  if (key.includes('_to') || key.includes('_from')) {
-    prefix = `${t(`filters.${key.split('_')[0]}.0`)} ${t(key.split('_')[1])}: `
+  if (key.endsWith('_to') || key.endsWith('_from')) {
+    const base = key.split('_').slice(0, -1).join('_')
+    const last = getLastPart(key)
+
+    prefix = `${t(`filters.${base}.0`)} ${t(last)}: `
   }
 
-  if (key === 'page') {
+  if (key === 'page' || key === 'doors' || key === 'seats') {
     prefix = `${t(`filters.${key}.0`)}: `
   }
 
@@ -140,7 +130,7 @@ const SectionsCars = ({ initialData }) => {
                           classes={['blue', 'xs', 'reverse']}
                           icon="xmark"
                           placeholder={formatPlaceholderText(key, el, filters, t)}
-                          onChange={() => handleChange(TYPE[key], key, TYPES.includes(TYPE[key]) ? el : DEFAULT, true)}
+                          onChange={() => handleChange(filters[key].type, key, TYPES.includes(filters[key].type) ? el : DEFAULT, true)}
                         />
                       ))
                   )

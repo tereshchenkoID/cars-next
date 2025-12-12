@@ -40,9 +40,7 @@ const useFavorite = (initialData) => {
           results: json.results,
         })
 
-        setTimeout(() => {
-          setLoading(false)
-        }, 1000)
+        setTimeout(() => setLoading(false), 500)
       } else {
         dispatch(
           setToastify({

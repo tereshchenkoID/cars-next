@@ -1,6 +1,7 @@
 @use 'scss/config' as *;
 
 .block {
+  text-transform: capitalize;
 
   &.disabled {
     opacity: 0.5;

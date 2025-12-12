@@ -1,7 +1,7 @@
 import { types } from 'store/actionTypes'
 
 const initialState = {
-  filters: {},
+  filters: {}
 }
 
 const settingsReducer = (state = initialState, action) => {

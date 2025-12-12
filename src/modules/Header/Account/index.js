@@ -1,4 +1,5 @@
 import { useState, useRef } from 'react'
+import { useSelector } from 'react-redux'
 import { useTranslations } from 'next-intl'
 import { useParams } from 'next/navigation'
 
@@ -29,6 +30,7 @@ const Account = () => {
   const { showModal } = useModal()
   const { handleLogout } = useRequest()
   const { auth, isAuth } = useAuth()
+  const settings = useSelector((state) => state.settings)
   const [show, setShow] = useState(false)
   const language = params.locale
 
@@ -145,7 +147,7 @@ const Account = () => {
           }
           <div className={style.center}>
             {
-              MENU.map((el, idx) => (
+              MENU.map((el, idx) =>
                 isAuth
                   ?
                     <Reference
@@ -164,7 +166,7 @@ const Account = () => {
                       placeholder={t(el.text)}
                       onChange={() => openModal(0)}
                     />
-              ))
+              )
             }
           </div>
           <div className={style.bottom}>
@@ -204,7 +206,10 @@ const Account = () => {
             type="button"
             aria-label={t('modal.language')}
             className={style.language}
-            onClick={() => openModal(2)}
+            onClick={() => {
+              settings?.languages?.length > 1 &&
+              openModal(2)
+            }}
           >
             <span className={style.flag}>
               <Image
